@@ -71,6 +71,11 @@
   .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
   /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
   .grid2 > *, .grid3 > * { min-width:0; }
+  /* 评论卡瀑布流:多列排布,卡片高矮不一时不留行间空档(Pinterest 式) */
+  .masonry { column-count:3; column-gap:24px; }
+  .masonry2 { column-count:2; column-gap:24px; }
+  .masonry > *, .masonry2 > * { break-inside:avoid; -webkit-column-break-inside:avoid;
+      page-break-inside:avoid; display:inline-block; width:100%; margin:0 0 24px 0; }
   .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
   .tlrow { display:flex; gap:26px; }
   .tlrow > * { min-width:0; }
@@ -91,10 +96,13 @@
   @media (max-width: 900px) {
     body { font-size:16px; }
     .grid2, .grid3 { grid-template-columns:1fr; }
+    .masonry { column-count:2; }
+    .masonry2 { column-count:1; }
     .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .wrap { padding:0 20px; }
   }
   @media (max-width: 560px) {
+    .masonry { column-count:1; }
     .tlrow { gap:14px; }
     .sechead { margin-bottom:28px; }
   }
@@ -107,7 +115,7 @@
       <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../index.html" style="white-space:nowrap;">ホーム</a><a href="../archive/index.html" style="white-space:nowrap;">DSH インテル</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH プラグイン</a><a href="../guides.html" style="white-space:nowrap;">ガイド</a><a href="../voices.html" style="white-space:nowrap;">使った人の声</a><a class="mono" href="https://github.com/ai798-Lab/DSHwiki" target="_blank" rel="noopener" style="font-size:12px;border:1.5px solid #151515;padding:4px 12px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;white-space:nowrap;">ai798-Lab/DSHwiki &#8599;</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手書き</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">標準</button></span><details class="langpick"><summary>日本語 &#9662;</summary><div class="langmenu"><a href="../../archive/a039.html">English</a><a href="../../zh-CN/archive/a039.html">简体中文</a><a href="../../zh-TW/archive/a039.html">繁體中文</a><a href="../../ja/archive/a039.html" style="color:#8f2924;">日本語</a><a href="../../ko/archive/a039.html">한국어</a><a href="../../th/archive/a039.html">ไทย</a><a href="../../es/archive/a039.html">Español</a><a href="../../ar/archive/a039.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../index.html" style="white-space:nowrap;">ホーム</a><a href="../archive/index.html" style="white-space:nowrap;">DSH インテル</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH プラグイン</a><a href="../guides.html" style="white-space:nowrap;">ガイド</a><a href="../voices.html" style="white-space:nowrap;">DSH ユーザーの声</a><a href="../extension.html" style="white-space:nowrap;">dsh に入れる</a><a class="mono" href="https://github.com/ai798-Lab/DSHwiki" target="_blank" rel="noopener" style="font-size:12px;border:1.5px solid #151515;padding:4px 12px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;white-space:nowrap;">ai798-Lab/DSHwiki &#8599;</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手書き</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">標準</button></span><details class="langpick"><summary>日本語 &#9662;</summary><div class="langmenu"><a href="../../archive/a039.html">English</a><a href="../../zh-CN/archive/a039.html">简体中文</a><a href="../../zh-TW/archive/a039.html">繁體中文</a><a href="../../ja/archive/a039.html" style="color:#8f2924;">日本語</a><a href="../../ko/archive/a039.html">한국어</a><a href="../../th/archive/a039.html">ไทย</a><a href="../../es/archive/a039.html">Español</a><a href="../../ar/archive/a039.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>

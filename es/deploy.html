@@ -71,6 +71,11 @@
   .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
   /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
   .grid2 > *, .grid3 > * { min-width:0; }
+  /* 评论卡瀑布流:多列排布,卡片高矮不一时不留行间空档(Pinterest 式) */
+  .masonry { column-count:3; column-gap:24px; }
+  .masonry2 { column-count:2; column-gap:24px; }
+  .masonry > *, .masonry2 > * { break-inside:avoid; -webkit-column-break-inside:avoid;
+      page-break-inside:avoid; display:inline-block; width:100%; margin:0 0 24px 0; }
   .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
   .tlrow { display:flex; gap:26px; }
   .tlrow > * { min-width:0; }
@@ -91,10 +96,13 @@
   @media (max-width: 900px) {
     body { font-size:16px; }
     .grid2, .grid3 { grid-template-columns:1fr; }
+    .masonry { column-count:2; }
+    .masonry2 { column-count:1; }
     .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .wrap { padding:0 20px; }
   }
   @media (max-width: 560px) {
+    .masonry { column-count:1; }
     .tlrow { gap:14px; }
     .sechead { margin-bottom:28px; }
   }
@@ -107,13 +115,13 @@
       <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="index.html" style="white-space:nowrap;">Inicio</a><a href="archive/index.html" style="white-space:nowrap;">Intel</a><a href="plugins/index.html" style="white-space:nowrap;">Plugins DSH</a><a href="guides.html" style="white-space:nowrap;">Guías</a><a href="voices.html" style="white-space:nowrap;">Lo que dice la gente</a><a class="mono" href="https://github.com/ai798-Lab/DSHwiki" target="_blank" rel="noopener" style="font-size:12px;border:1.5px solid #151515;padding:4px 12px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;white-space:nowrap;">ai798-Lab/DSHwiki &#8599;</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Manuscrita</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Estándar</button></span><details class="langpick"><summary>Español &#9662;</summary><div class="langmenu"><a href="../deploy.html">English</a><a href="../zh-CN/deploy.html">简体中文</a><a href="../zh-TW/deploy.html">繁體中文</a><a href="../ja/deploy.html">日本語</a><a href="../ko/deploy.html">한국어</a><a href="../th/deploy.html">ไทย</a><a href="../es/deploy.html" style="color:#8f2924;">Español</a><a href="../ar/deploy.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="index.html" style="white-space:nowrap;">Inicio</a><a href="archive/index.html" style="white-space:nowrap;">Intel</a><a href="plugins/index.html" style="white-space:nowrap;">Plugins DSH</a><a href="guides.html" style="white-space:nowrap;">Guías</a><a href="voices.html" style="white-space:nowrap;">Lo que dicen los usuarios de DSH</a><a href="extension.html" style="white-space:nowrap;">Instalar el plugin</a><a class="mono" href="https://github.com/ai798-Lab/DSHwiki" target="_blank" rel="noopener" style="font-size:12px;border:1.5px solid #151515;padding:4px 12px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;white-space:nowrap;">ai798-Lab/DSHwiki &#8599;</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Manuscrita</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Estándar</button></span><details class="langpick"><summary>Español &#9662;</summary><div class="langmenu"><a href="../deploy.html">English</a><a href="../zh-CN/deploy.html">简体中文</a><a href="../zh-TW/deploy.html">繁體中文</a><a href="../ja/deploy.html">日本語</a><a href="../ko/deploy.html">한국어</a><a href="../th/deploy.html">ไทย</a><a href="../es/deploy.html" style="color:#8f2924;">Español</a><a href="../ar/deploy.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
-<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="index.html">Inicio</a> <span class="muted">/</span> <a href="guides.html">Guías</a> <span class="muted">/</span> <span class="muted">Puesta en marcha</span></div>
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">02 / DEPLOY</div><h2 class="stitle">Puesta en marcha</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">De cero a funcionando en cuatro pasos. Todos los comandos verificados uno a uno contra el README oficial.</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">DEPLOY</div><h2 class="stitle">Puesta en marcha</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">De cero a funcionando en cuatro pasos. Todos los comandos verificados uno a uno contra el README oficial.</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
   <div class="grid2" style="align-items:start;">
     <div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">01</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Instala el CLI</h3><div class="muted" style="font-size:15px;line-height:1.75;">Un solo comando con npx y listo; funciona en macOS / Linux / Windows, solo necesitas Node 22.19+.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">02</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Conecta un modelo</h3><div class="muted" style="font-size:15px;line-height:1.75;">Ingresa tu API key de DeepSeek, o conecta Ollama para usar el modelo que ya corres en local.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">03</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Arranca</h3><div class="muted" style="font-size:15px;line-height:1.75;">Trabaja directo desde la terminal; si no te gusta la línea de comandos, dsh web abre la interfaz en el navegador.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">04</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Instala tu primer plugin</h3><div class="muted" style="font-size:15px;line-height:1.75;">Elige uno de la lista destacada e instálalo: a partir de aquí, todo es un plugin.</div></div></div></div>
     <div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">

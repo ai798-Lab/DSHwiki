@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dsh에 설치 · DSH Wiki</title>
+<meta name="description" content="DSH Wiki는 ai798 Lab이 만든 DeepSeek Harness 생태계 사이트예요. dsh는 오픈소스로 풀린 뒤 149,851 star를 찍었고, 플러그인과 튜토리얼, 직접 써 본 후기와 말싸움이 GitHub, Reddit, X와 여러 매체에 흩어져 있어요 — 이 사이">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; --font-head:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; --font-head:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:26px; }
+  .filterbar button { font-family:var(--font-body); font-size:15px; color:#151515; cursor:pointer;
+                       background:transparent; border:1.5px solid #151515; padding:3px 14px;
+                       border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .panel[hidden] { display:none; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  /* 评论卡瀑布流:多列排布,卡片高矮不一时不留行间空档(Pinterest 式) */
+  .masonry { column-count:3; column-gap:24px; }
+  .masonry2 { column-count:2; column-gap:24px; }
+  .masonry > *, .masonry2 > * { break-inside:avoid; -webkit-column-break-inside:avoid;
+      page-break-inside:avoid; display:inline-block; width:100%; margin:0 0 24px 0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .masonry { column-count:2; }
+    .masonry2 { column-count:1; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .masonry { column-count:1; }
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../ko/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="index.html" style="white-space:nowrap;">홈</a><a href="archive/index.html" style="white-space:nowrap;">DSH 인텔</a><a href="plugins/index.html" style="white-space:nowrap;">DSH 플러그인</a><a href="guides.html" style="white-space:nowrap;">가이드</a><a href="voices.html" style="white-space:nowrap;">DSH 사용자의 말</a><a href="extension.html" style="white-space:nowrap;">dsh에 설치</a><a class="mono" href="https://github.com/ai798-Lab/DSHwiki" target="_blank" rel="noopener" style="font-size:12px;border:1.5px solid #151515;padding:4px 12px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;white-space:nowrap;">ai798-Lab/DSHwiki &#8599;</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">손글씨</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">기본</button></span><details class="langpick"><summary>한국어 &#9662;</summary><div class="langmenu"><a href="../extension.html">English</a><a href="../zh-CN/extension.html">简体中文</a><a href="../zh-TW/extension.html">繁體中文</a><a href="../ja/extension.html">日本語</a><a href="../ko/extension.html" style="color:#8f2924;">한국어</a><a href="../th/extension.html">ไทย</a><a href="../es/extension.html">Español</a><a href="../ar/extension.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="index.html">홈</a> <span class="muted">/</span> <span class="muted">dsh에 설치</span></div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">06 / PLUGIN</div><h2 class="stitle">dsh에 설치</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">이 위키를 dsh 사이드바에 넣으세요. 엄선한 플러그인 12 개, 설치 명령어 원클릭 복사, 8 개 언어 지원. 작업 화면을 벗어날 필요가 없습니다.</div></div><div style="font-size:16px;line-height:1.9;max-width:60ch;margin-bottom:30px;">이 위키를 dsh 사이드바에 넣으세요. 엄선한 플러그인 12 개, 설치 명령어 원클릭 복사, 8 개 언어 지원. 작업 화면을 벗어날 필요가 없습니다.</div><figure style="margin:0 0 34px 0;display:flex;flex-direction:column;gap:10px;"><img src="assets/plugin-panel.png" alt="설치 후 패널 모습" style="width:100%;max-width:620px;height:auto;display:block;border:1.7px solid #151515;border-radius:25px 225px 15px 255px / 255px 15px 225px 25px;transform:rotate(0.30deg);"><figcaption class="muted mono" style="font-size:12px;">설치 후 패널 모습</figcaption></figure><h3 style="font-size:21px;margin-bottom:18px;">네 단계</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.02deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">01</div>
+  <h3 style="font-size:19px;">먼저 dsh 준비</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh가 아직 없다면 배포 가이드를 먼저 따라 하세요. Node.js 22.19 이상이 필요합니다.</div>
+  <a href="deploy.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">설치와 실행 &#8594;</a>
+</div><div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.21deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">02</div>
+  <h3 style="font-size:19px;">설치하기</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">터미널에서 이 한 줄을 실행하세요. web 프로필에 설치됩니다.</div>
+  <div style="position:relative;margin-top:12px;"><div class="cmd" id="ext-install">dsh plugin --profile web add dsh-wiki</div><span data-copy="ext-install" class="copybtn">복사</span></div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.20deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">03</div>
+  <h3 style="font-size:19px;">화면 재시작</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh web을 다시 실행하세요. 플러그인은 시작할 때 로드됩니다.</div>
+  <div style="position:relative;margin-top:12px;"><div class="cmd" id="ext-restart">dsh web</div><span data-copy="ext-restart" class="copybtn">복사</span></div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">04</div>
+  <h3 style="font-size:19px;">패널 열기</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">사이드바 아래에 DSH Wiki 항목이 생깁니다. 누르면 엄선 플러그인 목록이 열립니다.</div>
+  
+</div></div><h3 style="font-size:21px;margin:44px 0 18px 0;">패널 구성</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.55deg); padding:20px 24px; background:rgba(250,247,239,0.55); font-size:14px;line-height:1.85;">엄선한 12 개 플러그인. 무엇을 하는지, 설치할 가치가 있는지, 함정은 무엇인지 하나씩.</div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.43deg); padding:20px 24px; background:rgba(250,247,239,0.55); font-size:14px;line-height:1.85;">설치 명령어는 원클릭으로 복사해 터미널에 바로 붙여 넣을 수 있습니다. 한 줄로 끝나지 않는 것은 상세 페이지로 연결됩니다.</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.25deg); padding:20px 24px; background:rgba(250,247,239,0.55); font-size:14px;line-height:1.85;">여덟 개 언어를 언제든 전환할 수 있고, 각 항목에서 본 사이트의 전체 내용으로 이동합니다.</div></div><h3 style="font-size:21px;margin:44px 0 18px 0;">알아둘 점</h3><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.01deg); padding:20px 24px; background:rgba(250,247,239,0.55); font-size:14px;line-height:1.85;margin-bottom:16px;">ERR_MODULE_NOT_FOUND가 나오면 pnpm 11이 배포 10 일 이내 버전을 막은 것입니다. profile의 pnpm-workspace.yaml에서 minimumReleaseAgeExclude에 이 패키지를 추가하세요.</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.40deg); padding:20px 24px; background:rgba(250,247,239,0.55); font-size:14px;line-height:1.85;">dsh는 아직 개발자 프리뷰이며 호환성이 깨지는 변경이 있다고 공식적으로 밝히고 있습니다. 이 플러그인은 dsh 릴리스를 따라갑니다. 삭제는 한 줄입니다:<div style="position:relative;margin-top:12px;"><div class="cmd" id="ext-remove">dsh plugin --profile web remove dsh-wiki</div><span data-copy="ext-remove" class="copybtn">복사</span></div></div><div style="margin-top:30px;"><a class="mono" href="https://github.com/ai798-Lab/dsh-wiki" target="_blank" rel="noopener" style="font-size:14px;border:1.7px solid #151515;padding:9px 20px;border-radius:225px 15px 255px 25px / 25px 255px 15px 225px;display:inline-block;">소스는 GitHub &#8599;</a></div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness 공식 사이트 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>실측 데이터</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  // 支持 #panelId 直达某个标签页
+  try{
+    var h=(location.hash||"").slice(1);
+    if(h){
+      var t0=document.querySelector('.tabbar button[data-panel="'+h+'"]');
+      if(t0){
+        t0.closest(".tabbar").querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===t0?"true":"false");});
+        document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==h; });
+      }
+    }
+  }catch(e){}
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var fb=ev.target.closest?ev.target.closest(".filterbar button"):null;
+    if(fb){
+      var barF=fb.closest(".filterbar"), want=fb.dataset.f;
+      barF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===fb?"true":"false");});
+      var listF=document.getElementById(barF.dataset.target);
+      if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
+        var tags=(it.dataset.tags||"").split("|").filter(Boolean);
+        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+      });
+      return;
+    }
+    var tb=ev.target.closest?ev.target.closest(".tabbar button"):null;
+    if(tb){
+      var barT=tb.closest(".tabbar");
+      barT.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===tb?"true":"false");});
+      document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==tb.dataset.panel; });
+      return;
+    }
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="복사됨";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
