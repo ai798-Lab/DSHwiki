@@ -10,3 +10,7 @@ config.json
 __pycache__/
 .DS_Store
 favorites.json
+# 2.0 改版工作目录（不随站点发布）
+_原型/
+_staging2/
+_staging/
