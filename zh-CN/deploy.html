@@ -65,6 +65,8 @@
   .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
           padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
           overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  /* 复制按钮浮在右上角,给首行让出位置,否则窄屏上会压住命令文字 */
+  .cmd:has(+ .copybtn), .cmd:has(+ button.copybtn) { padding-inline-end:104px; }
   .muted { color:#5f5b54; }
   .seal { color:#8f2924; }
   .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
