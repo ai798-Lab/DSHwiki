@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DSH 情报站 · DeepSeek Harness 插件推荐素材库</title>
+<title>DSH Wiki · DeepSeek Harness 生态站</title>
+<meta name="theme-color" content="#f5f1e8">
+<link rel="icon" type="image/svg+xml" href="assets/brand/dshwiki-mark-micro.svg">
+<link rel="apple-touch-icon" href="assets/brand/dshwiki-mark-180.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script>
@@ -79,15 +82,15 @@ tailwind.config = {
 <div x-data="app()" x-init="init()" x-cloak>
   <!-- Header -->
   <header class="border-b border-line bg-bg/95 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-8 py-5 flex items-center gap-8">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-lg bg-brand flex items-center justify-center text-white font-title text-sm">798</div>
-        <div>
-          <div class="font-title text-base">DSH 情报站</div>
-          <div class="text-xs text-sub mt-0.5">DeepSeek Harness 插件推荐素材库</div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 py-3 sm:py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8">
+      <a href="index.html" class="flex items-center gap-3 min-w-0" aria-label="DSH Wiki 首页">
+        <img src="assets/brand/dshwiki-mark.svg" alt="" aria-hidden="true" width="36" height="36" class="w-9 h-9 shrink-0">
+        <div class="min-w-0">
+          <div class="font-title text-base whitespace-nowrap">DSH Wiki</div>
+          <div class="text-xs text-sub mt-0.5 truncate">DSH 情报站 · DeepSeek Harness 生态站</div>
         </div>
-      </div>
-      <nav class="flex gap-1 ml-auto">
+      </a>
+      <nav class="flex gap-1 sm:ml-auto overflow-x-auto whitespace-nowrap -mx-1 px-1 pb-1 sm:mx-0 sm:px-0 sm:pb-0">
         <template x-for="t in tabs" :key="t.k">
           <button @click="tab=t.k" :class="tab===t.k ? 'nav-tab-active' : ''" class="nav-tab" x-text="t.n"></button>
         </template>
@@ -100,8 +103,8 @@ tailwind.config = {
     <!-- OVERVIEW -->
     <section x-show="tab==='overview'">
       <div class="mb-12">
-        <h1 class="font-title text-4xl mb-3">DSH 情报站</h1>
-        <p class="text-sub text-base leading-relaxed max-w-2xl">为「DSH 插件推荐」内容创作收集的 68 条一手素材：官方文档机制、GitHub 插件生态 top 30、Reddit/X 高赞讨论、中英文深度报道与视频教程。全部热度数字为 2026-08-18 实抓。</p>
+        <h1 class="font-title text-4xl mb-3">DSH Wiki</h1>
+        <p class="text-sub text-base leading-relaxed max-w-2xl">DSH 情报站为「DSH 插件推荐」内容创作收集了 68 条一手素材：官方文档机制、GitHub 插件生态 top 30、Reddit/X 高赞讨论、中英文深度报道与视频教程。全部热度数字为 2026-08-18 实抓。</p>
       </div>
 
       <!-- Stats -->
@@ -459,7 +462,7 @@ tailwind.config = {
   <div x-show="toast" x-transition.opacity class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-ink text-bg text-sm px-5 py-2.5 rounded-full shadow-lift z-50" x-text="toast"></div>
 
   <footer class="max-w-6xl mx-auto px-8 py-10 mt-16 border-t border-line/70 text-center text-xs text-sub">
-    DSH 情报站 · 为 ai798 Lab内部学习整理 · 数据更新于 <span x-text="updated"></span>
+    DSH Wiki · DSH 情报站 · by ai798 Lab · 数据更新于 <span x-text="updated"></span>
   </footer>
 </div>
 

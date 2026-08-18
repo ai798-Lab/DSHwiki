@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSH Wiki Logo Preview</title>
+  <style>
+    :root { --paper:#f5f1e8; --paper-deep:#ece4d5; --ink:#151515; --soft:#5f5b54; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.18; background-image:radial-gradient(rgba(21,21,21,.18) .45px,transparent .65px); background-size:5px 5px; }
+    main { width:min(1040px,calc(100% - 40px)); margin:0 auto; padding:64px 0 80px; position:relative; }
+    .eyebrow { display:inline-block; padding-bottom:5px; border-bottom:1.4px solid var(--ink); font-family:"HanziPen SC","Xingkai SC","STKaiti",cursive; font-size:17px; }
+    h1,h2,p { margin-top:0; }
+    h1 { max-width:760px; margin:34px 0 16px; font-family:"HanziPen SC","Xingkai SC","STKaiti",cursive; font-size:clamp(42px,7vw,76px); line-height:1.08; font-weight:600; }
+    .lead { max-width:680px; color:var(--soft); font-size:17px; line-height:1.8; }
+    .stage { margin-top:54px; padding:46px; border:1.7px solid var(--ink); border-radius:26px 31px 24px 29px; background:rgba(255,255,255,.18); }
+    .lockup { width:min(100%,620px); display:block; }
+    .rule { height:1px; margin:42px 0; background:rgba(21,21,21,.65); transform:rotate(-.15deg); }
+    .sizes { display:flex; align-items:end; gap:32px; flex-wrap:wrap; }
+    .size { display:grid; justify-items:center; gap:12px; color:var(--soft); font-size:12px; }
+    .size img { display:block; }
+    .micro { image-rendering:auto; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px; }
+    .tile { min-height:260px; display:grid; place-items:center; border:1px solid rgba(21,21,21,.65); border-radius:20px 23px 19px 25px; background:var(--paper-deep); }
+    .tile.dark { background:var(--ink); }
+    .tile img { width:156px; }
+    .note { margin-top:42px; display:grid; grid-template-columns:120px 1fr; gap:18px; padding-top:20px; border-top:1px dashed rgba(21,21,21,.6); }
+    .note strong { font-family:"HanziPen SC","Xingkai SC","STKaiti",cursive; font-size:20px; }
+    .note p { margin:0; color:var(--soft); line-height:1.75; }
+    @media (max-width:680px) { main{padding-top:36px}.stage{padding:26px}.grid{grid-template-columns:1fr}.note{grid-template-columns:1fr}.sizes{gap:22px} }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="eyebrow">DSH Wiki · 标志提案 01</span>
+    <h1>把散落的插件，连成一条能走的路。</h1>
+    <p class="lead">两张资料页是一座正在展开的 Wiki；中间的一笔连续墨线，是 Harness；三个空心节点代表可插接、可替换、可继续生长的插件生态。</p>
+
+    <section class="stage" aria-label="Logo 组合与尺寸预览">
+      <img class="lockup" src="dshwiki-lockup.svg" alt="DSH Wiki 横版 Logo">
+      <div class="rule"></div>
+      <div class="sizes">
+        <div class="size"><img class="micro" src="dshwiki-mark-micro.svg" width="16" height="16" alt=""><span>16 px</span></div>
+        <div class="size"><img class="micro" src="dshwiki-mark-micro.svg" width="24" height="24" alt=""><span>24 px</span></div>
+        <div class="size"><img src="dshwiki-mark.svg" width="36" height="36" alt=""><span>36 px</span></div>
+        <div class="size"><img src="dshwiki-mark.svg" width="64" height="64" alt=""><span>64 px</span></div>
+        <div class="size"><img src="dshwiki-mark.svg" width="128" height="128" alt=""><span>128 px</span></div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="明暗背景预览">
+      <div class="tile"><img src="dshwiki-mark.svg" alt="暖纸底图形标"></div>
+      <div class="tile dark"><img src="dshwiki-mark-reverse.svg" alt="深色底反白图形标"></div>
+    </section>
+
+    <section class="note">
+      <strong>使用边界</strong>
+      <p>主品牌固定写作“DSH Wiki”；“DSH 情报站”只作中文副标题；“by ai798 Lab”是出品署名。标志不使用 DeepSeek 鲸鱼、DeepSeek 蓝、AI 星芒、机器人或电路脑，避免被误认为官方站。</p>
+    </section>
+  </main>
+</body>
+</html>

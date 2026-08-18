@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 128" role="img" aria-labelledby="lockup-title lockup-desc">
+  <title id="lockup-title">DSH Wiki 横版 Logo</title>
+  <desc id="lockup-desc">DSH Wiki 图形标、英文主品牌与中文副标题。</desc>
+  <g transform="translate(8 16)" fill="none" stroke="#151515" stroke-width="5.35" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M45.8 26.4C36.5 19.5 27.4 15.8 20.3 16.8C15.3 17.5 13.6 21.1 13.7 27.1L13.9 67.5C14 75.2 17.8 78.4 25.4 79.2C36.6 80.4 46.2 76.5 46.9 70.1L47.1 59.1"/>
+    <path d="M49.7 30.5C52.4 34.2 51.3 37.1 46.1 40.4C39.9 44.2 37 47.3 38.4 51.4C39.4 54.4 42.5 56.1 47 56.8"/>
+    <path d="M51.1 56.5C57.7 57.8 62.3 60.3 64.2 64.4C65.8 67.9 64.1 70.9 59.9 73.4"/>
+    <path d="M61.2 77.1C66.3 80.3 73.3 82.1 78.1 81.2C82 80.5 83.8 77.1 83.7 71.3L83.4 41.4C83.3 35.5 80.7 32.8 76.5 33.2C68.5 33.9 59.6 37.8 54.1 42.1C50.9 44.7 49.8 48.5 50.4 53.7"/>
+    <circle cx="46.2" cy="27.4" r="5.15" fill="#F5F1E8"/>
+    <circle cx="48.1" cy="57.1" r="5.25" fill="#F5F1E8"/>
+    <circle cx="58.9" cy="74.4" r="5.15" fill="#F5F1E8"/>
+  </g>
+  <text x="124" y="62" fill="#151515" font-family="HanziPen SC, Xingkai SC, STKaiti, KaiTi, cursive" font-size="42" font-weight="600" letter-spacing="1">DSH Wiki</text>
+  <path d="M126 75C193 73 258 76 326 74" fill="none" stroke="#151515" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="126" y="101" fill="#5F5B54" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, sans-serif" font-size="14" letter-spacing="2.2">DSH 情报站 · BY AI798 LAB</text>
+</svg>
