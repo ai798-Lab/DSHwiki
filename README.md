@@ -35,6 +35,11 @@ python3 _build/scripts/build_v2.py         # 读数据 + 8 个语言包 → 生�
 
 源数据与语言包在仓库外的工作区（`_work/`、`_build/`），不随站点发布。
 
+## 图标
+
+界面图标来自 [sketchyicons](https://sketchyicons.com)（代码 MIT，图形派生自 [Lucide](https://lucide.dev)，ISC）。
+两份许可证在网页中使用均无需页面署名，此处仅作出处标注。GitHub 标志使用官方 mark 原样单色，未做改造。
+
 ## 声明
 
 素材版权归原作者所有，本站用于学习与研究，每条均标注来源并附原文链接。

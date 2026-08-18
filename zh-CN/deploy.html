@@ -310,16 +310,27 @@
       ev.preventDefault(); ev.stopPropagation();
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
-      var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制"; c.classList.add("done");
-        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
+      // 按钮里含图标,还原要用 innerHTML;用 textContent 会把图标永久抹掉
+      var text=code.innerText, old=c.innerHTML;
+      var flash=function(msg){
+        c.textContent=msg; c.classList.add("done");
+        setTimeout(function(){c.innerHTML=old;c.classList.remove("done");},1400);
+      };
+      // 剪贴板 API 可能存在但被拒(非安全上下文、无用户激活、权限策略),
+      // 所以失败也要退回 textarea,再不行给明确提示,不能静默。
+      var legacy=function(){
+        var t=document.createElement("textarea");
+        t.value=text; t.setAttribute("readonly","");
+        t.style.cssText="position:fixed;top:-9999px;opacity:0";
+        document.body.appendChild(t); t.select();
+        var ok=false;
+        try{ ok=document.execCommand("copy"); }catch(e){ ok=false; }
+        document.body.removeChild(t);
+        flash(ok?"已复制":"复制失败，请手动选中");
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done,function(){});
-      }else{
-        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
-        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
-      }
+        navigator.clipboard.writeText(text).then(function(){flash("已复制");}, legacy);
+      }else{ legacy(); }
     }
   });
 })();
