@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架 — DSH 情报站</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --panel: #f5f2ea;
+    --line: #e5e2d8;
+    --line-soft: #eeeae0;
+    --ink: #1a1a1a;
+    --ink-soft: #4a463d;
+    --sub: #8b8578;
+    --faint: #b8b3a5;
+    --brand: #111111;
+    --brand-tint: #f5e4d9;
+    --gold: #b8913f;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-serif { font-family: "Noto Serif SC", "Source Han Serif CN", ui-serif, Georgia, serif; }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(250, 249, 245, 0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: 1120px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .topbar-title { font-size: 13px; color: var(--sub); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .topbar a {
+    font-size: 13px; color: var(--sub); text-decoration: none;
+    padding: 6px 12px; border-radius: 6px;
+    transition: all 0.12s;
+  }
+  .topbar a:hover { background: var(--panel); color: var(--ink); }
+
+  .layout {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 720px) 220px;
+    gap: 40px;
+    padding: 0 32px 80px;
+  }
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc, .rightpad { display: none; }
+  }
+  .rightpad { }
+
+  .toc {
+    position: sticky; top: 72px; align-self: start;
+    padding-top: 40px;
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+  .toc-title { font-size: 11px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; font-weight: 600; }
+  .toc-list { list-style: none; margin: 0; padding: 0; }
+  .toc-list li { margin: 0; }
+  .toc-list a {
+    display: block;
+    padding: 4px 10px 4px 10px;
+    font-size: 12.5px;
+    color: var(--sub);
+    text-decoration: none;
+    border-left: 2px solid var(--line-soft);
+    transition: all 0.12s;
+    line-height: 1.5;
+  }
+  .toc-list a:hover { color: var(--brand); border-color: var(--brand); background: var(--brand-tint); }
+  .toc-list .lvl-3 a { padding-left: 22px; font-size: 12px; }
+
+  article { padding-top: 40px; min-width: 0; }
+
+  .hero { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .hero-meta { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--sub); margin-bottom: 14px; }
+  .hero-meta .rank { font-family: "Noto Serif SC", Georgia, serif; color: var(--brand); font-weight: 600; font-size: 14px; }
+  .hero h1 {
+    font-family: "Noto Serif SC", Georgia, serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+
+  .hero-stats {
+    display: flex; gap: 24px; padding: 16px 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 18px;
+  }
+  .hero-stats .s { font-size: 12px; color: var(--sub); }
+  .hero-stats .s .n { display: block; font-family: "Noto Serif SC", Georgia, serif; font-size: 20px; color: var(--ink); font-weight: 500; line-height: 1.2; margin-top: 2px; }
+
+  .ai-summary {
+    background: linear-gradient(135deg, #faf4ec 0%, #f5ebd9 100%);
+    border: 1px solid #e8dcc0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .ai-summary-label { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px; }
+  .ai-summary p { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+
+  /* Tag pills */
+  .tag { display: inline-flex; align-items: center; font-size: 11px; padding: 2px 9px; border-radius: 4px; line-height: 18px; font-weight: 500; }
+  .tag.t-插件推荐 { background:#f2f2f2; color:#111111; }
+  .tag.t-官方机制 { background:#ebebeb; color:#333333; }
+  .tag.t-上手教程 { background:#f7f7f7; color:#222222; }
+  .tag.t-社区实测 { background:#eeeeee; color:#2a2a2a; }
+  .tag.t-生态观察 { background:#f4f4f4; color:#1f1f1f; }
+  .tag.t-竞品对比 { background:#ededed; color:#303030; }
+  .tag.t-争议短板 { background:#e8e8e8; color:#3a3a3a; }
+  .tag.t-skill { background:#efece3; color:#5a5448; border:0.5px solid #e2ddd0; }
+  .tag.t-diff-入门 { background:#e6ede1; color:#4a6b4a; }
+  .tag.t-diff-进阶 { background:#f5ead1; color:#8a6a1d; }
+  .tag.t-diff-高级 { background:#f5dfd6; color:#994329; }
+/* Article typography */
+  .content { font-size: 16.5px; line-height: 1.85; color: var(--ink-soft); }
+  .content h1 { font-family: "Noto Serif SC", Georgia, serif; font-weight: 600; font-size: 26px; margin: 56px 0 18px; letter-spacing: -0.01em; color: var(--ink); }
+  .content h2 { font-family: "Noto Serif SC", Georgia, serif; font-weight: 600; font-size: 22px; margin: 48px 0 16px; letter-spacing: -0.005em; color: var(--ink); scroll-margin-top: 80px; padding-top: 4px; border-top: 1px solid var(--line-soft); padding-top: 32px; }
+  .content h3 { font-family: "Noto Serif SC", Georgia, serif; font-weight: 600; font-size: 18px; margin: 36px 0 12px; color: var(--ink); scroll-margin-top: 80px; }
+  .content h4 { font-weight: 600; font-size: 15.5px; margin: 28px 0 10px; color: var(--ink); }
+  .content p { margin: 1em 0; }
+  .content strong { color: var(--ink); font-weight: 600; }
+  .content em { font-style: normal; color: var(--brand); }
+  .content a { color: var(--brand); text-decoration: none; border-bottom: 1px solid rgba(201,100,66,0.3); }
+  .content a:hover { border-bottom-color: var(--brand); }
+  .content ul, .content ol { margin: 1em 0; padding-left: 1.4em; }
+  .content li { margin: 0.5em 0; }
+  .content ul li::marker { color: var(--faint); }
+  .content ol li::marker { color: var(--sub); font-weight: 600; }
+  .content blockquote {
+    margin: 1.4em 0;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--brand);
+    background: transparent;
+    color: var(--ink-soft);
+    font-style: normal;
+  }
+  .content blockquote p { margin: 0.4em 0; }
+  .content code {
+    background: var(--panel);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    color: #8a4428;
+  }
+  .content pre {
+    background: #2a2721;
+    color: #eae4d3;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 1.4em 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .content pre code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+  .content img {
+    max-width: 100%;
+    display: block;
+    margin: 2em auto;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 8px rgba(47,44,39,0.06);
+  }
+  .content hr { border: none; border-top: 1px solid var(--line); margin: 3em 0; }
+  .content table { width: 100%; border-collapse: collapse; margin: 1.6em 0; font-size: 14.5px; }
+  .content th, .content td { padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: left; }
+  .content th { background: var(--panel); font-weight: 600; color: var(--ink); font-size: 13.5px; }
+  .content tr:hover { background: var(--panel); }
+
+  /* Quotes section - embedded in reader */
+  .quotes-block {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+  .quotes-block-title {
+    font-family: "Noto Serif SC", serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--brand);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .quote-item {
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .quote-item:last-child { border-bottom: none; }
+  .quote-text {
+    font-family: "Noto Serif SC", Georgia, serif;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .quote-note { font-size: 12.5px; color: var(--sub); font-style: italic; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .bottom-nav a {
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.15s;
+  }
+  .bottom-nav a:hover { border-color: var(--brand); background: var(--brand-tint); }
+  .bottom-nav .dir { font-size: 11px; color: var(--sub); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .bottom-nav .t { font-family: "Noto Serif SC", serif; font-size: 14px; line-height: 1.4; }
+  .bottom-nav .next { text-align: right; }
+
+  footer { max-width: 1120px; margin: 40px auto 0; padding: 24px 32px; border-top: 1px solid var(--line); text-align: center; font-size: 12px; color: var(--sub); }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="../index.html">← 返回列表</a>
+      <div class="topbar-title">DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架</div>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank">生财原帖 ↗</a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div></div>
+    <article>
+      <header class="hero">
+        <div class="hero-meta">
+          <span class="rank">#01</span>
+          <span>·</span>
+          <span>deepseek-ai（DeepSeek 官方）</span>
+          <span>·</span>
+          <span>2026-08-13</span>
+        </div>
+        <h1>DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架</h1>
+        <div class="hero-tags"><span class="tag t-官方机制">官方机制</span><span class="tag t-生态观察">生态观察</span><span class="tag t-skill">数据实证</span><span class="tag t-skill">背景知识</span><span class="tag t-diff-入门">入门</span></div>
+        <div class="hero-stats">
+          <div class="s">点赞<span class="n">149,856</span></div>
+          <div class="s">收藏<span class="n">0</span></div>
+          <div class="s">评论<span class="n">0</span></div>
+          <div class="s">金句<span class="n">4</span></div>
+        </div>
+        <div class="ai-summary">
+          <div class="ai-summary-label">AI 摘要</div>
+          <p>DeepSeek 2026-08-13 开源的 agent harness，MIT 协议，一条命令 npx 就能在本机跑起 Web UI。核心理念「一切皆插件」：模型适配器、工具、会话存储、UI 甚至 agent 循环全部可替换，topic dsh-plugin 下 5 天冒出 6,716 个仓库。这是整篇插件推荐文的背景板：时间线、star 数、上手命令全是现成硬数字。</p>
+        </div>
+      </header>
+
+      <div class="content">
+        <h2 id="中文摘要">中文摘要</h2>
+<p>DeepSeek Harness（命令行名 <code>dsh</code>）是 DeepSeek 官方 2026-08-13 开源的 agent harness（智能体框架），MIT 协议，主语言 TypeScript，目前处于「开发者预览」阶段（官方明说未来会有破坏兼容的改动）。一句话理念：<strong>一切皆插件</strong>——模型适配器、工具、会话存储、UI、甚至 agent 循环本身，全都是可替换的插件。上手极简单：装好 Node.js 后一条命令 <code>npx @deepseek-ai/dsh web</code> 就能在本机 127.0.0.1:3080 打开 Web UI。开源 5 天即逼近 15 万 star，仓库自带官方中文 README、企微群和微信公众号入口，对中文社区非常友好。插件生态靠给仓库打 GitHub topic <code>dsh-plugin</code> 聚合，目前该 topic 下已有 6,716 个仓库。</p>
+<h2 id="原文要点-摘录">原文要点/摘录</h2>
+<ul>
+<li>仓库描述：&quot;DeepSeek Harness: Everything is a Plugin.&quot;（一切皆插件）</li>
+<li>底层框架：由 Cordis 驱动（vendored 进仓库），设计源自论文 <em>A Programming Paradigm for Spatiotemporal Composability</em></li>
+<li>运行方式：<code>npx @deepseek-ai/dsh web</code> 启动 Web UI；也可源码运行（pnpm install → build → <code>pnpm dsh web</code>）</li>
+<li>社区入口：GitHub Discussions 提反馈；插件仓库加 <code>dsh-plugin</code> topic 便于被发现；官方企微群 + 入群问卷 + 微信公众号（README 内嵌三个二维码）</li>
+<li>关键数字（2026-08-18 采集）：star 149,856，fork 15,364，topic <code>dsh-plugin</code> 下 6,716 个仓库</li>
+<li>许可证 MIT；仓库含 README.zh.md、CONTRIBUTING.zh.md 等成套中文文档</li>
+</ul>
+<h2 id="素材价值点">素材价值点</h2>
+<ol>
+<li>文章开头的「背景板」素材：时间线（8-13 开源）、star 数、一条命令上手，全是硬数字</li>
+<li>「一切皆插件」是全文的钩子——官方连 agent 循环都做成插件，直接解释了为什么值得写插件推荐</li>
+<li>官方主动运营中文社区（中文 README + 企微群 + 公众号），可作为「对中文用户友好」的论据</li>
+</ol>
+<h2 id="配图">配图</h2>
+<ul>
+<li><a href="https://avatars.githubusercontent.com/u/148330874?v=4">https://avatars.githubusercontent.com/u/148330874?v=4</a> （deepseek-ai 组织头像）</li>
+<li>仓库内社区二维码：assets/community-wecom-assistant.png、assets/community-wechat-official-account.png（相对路径，需从仓库 raw 下载）</li>
+</ul>
+
+      </div>
+
+      <section class="quotes-block"><div class="quotes-block-title">💎 金句精选</div><div class="quote-item"><p class="quote-text">「DeepSeek Harness: Everything is a Plugin.」</p><p class="quote-note">官方仓库描述原文，适合做文章标题副题或开头定调</p></div><div class="quote-item"><p class="quote-text">「模型适配器、工具、会话存储、UI、甚至 agent 循环本身，全都是可替换的插件」</p><p class="quote-note">一句话讲清「一切皆插件」到底彻底到什么程度，适合放在概念解释段</p></div><div class="quote-item"><p class="quote-text">「装好 Node.js 后一条命令 `npx @deepseek-ai/dsh web` 就能在本机 127.0.0.1:3080 打开 Web UI」</p><p class="quote-note">上手门槛低的实证，适合放「你也能跑起来」小节，降低非程序员读者畏难感</p></div><div class="quote-item"><p class="quote-text">「开源 5 天即逼近 15 万 star，仓库自带官方中文 README、企微群和微信公众号入口，对中文社区非常友好」</p><p class="quote-note">热度+中文友好双论据合一，适合做开头第二段或小红书数据卡文案</p></div></section>
+
+      <div class="bottom-nav"><div></div><a href="002_架构_一切皆插件.html" class="next"><div class="dir">下一篇 (#2) →</div><div class="t">官方架构文档——为什么说 dsh 没有「不可动的内核」</div></a></div>
+    </article>
+    <aside class="toc">
+      <div class="toc-title">目录</div>
+      <ul class="toc-list"><li class="lvl-2"><a href="#中文摘要">中文摘要</a></li><li class="lvl-2"><a href="#原文要点-摘录">原文要点/摘录</a></li><li class="lvl-2"><a href="#素材价值点">素材价值点</a></li><li class="lvl-2"><a href="#配图">配图</a></li></ul>
+    </aside>
+  </div>
+
+  <footer>
+    DSH 情报站 · DeepSeek Harness 插件推荐素材库 · 仅限社群内部学习
+  </footer>
+
+  <script>// ============================================================
+//  DSH 情报站 · 收藏系统（服务器 + 本地双模）
+//  优先写 favorites.json（启用 serve.py 时），否则回退 localStorage
+// ============================================================
+(function (global) {
+  const FAV_KEY = 'scys_favorites_v1';
+  const API = '/api/favorites';
+  let USE_SERVER = false;   // 首次 probe 后确定
+  let CACHE = [];           // 内存缓存，UI 直接读
+
+  // 自动分类关键词库（按优先级匹配）
+  const CATEGORIES = [
+    { id: "plugin", name: "插件选品", icon: "🧩", kw: ["插件", "plugin", "必装", "anchored-standard", "open-design", "OpenViking", "EverOS", "modlens", "smooth-stream", "token-anxiety", "better-sidebar", "dsh-at-file", "ModLens", "oh-my-dsh", "Engram"] },
+    { id: "mechanism", name: "机制原理", icon: "⚙️", kw: ["架构", "一切皆插件", "apply 函数", "seam", "Cordis", "PTC", "Minimal", "内核", "运行时", "事件溯源", "轨迹", "Trajectory"] },
+    { id: "howto", name: "教程步骤", icon: "🚀", kw: ["安装", "npx", "上手", "入门", "配置", "步骤", "教程", "命令", "启动", "Web UI"] },
+    { id: "quote", name: "金句观点", icon: "✨", kw: ["比喻", "安卓", "iPhone", "马鞍", "自进化", "护城河", "开源红利", "第一公民"] },
+    { id: "data", name: "数据实证", icon: "📊", kw: ["star", "基准分", "播放量", "10 万", "149", "对照", "实验", "缓存命中", "91", "98", "99"] },
+    { id: "pain", name: "痛点吐槽", icon: "🕳", kw: ["吐槽", "崩", "坑", "短板", "涨价", "刷星", "质疑", "缺", "翻车", "单点故障"] },
+    { id: "versus", name: "对比论据", icon: "⚔️", kw: ["Claude Code", "Codex", "OpenCode", "对比", "横评", "打平", "更强", "竞品"] },
+    { id: "eco", name: "生态动向", icon: "🌱", kw: ["生态", "社区", "awesome", "目录站", "Discussions", "里程碑", "中文社区", "Plugin Store"] },
+    { id: "golden", name: "金句语录", icon: "💬", kw: null },
+    { id: "other", name: "其他", icon: "📝", kw: null }
+  ];
+
+  function classify(text) {
+    const t = String(text || '');
+    for (const cat of CATEGORIES) {
+      if (!cat.kw) continue;
+      if (cat.kw.some(k => t.includes(k))) return cat.id;
+    }
+    if (t.length <= 60) return 'golden';
+    return 'other';
+  }
+  function catInfo(id) { return CATEGORIES.find(c => c.id === id) || CATEGORIES[CATEGORIES.length-1]; }
+
+  // ---------- Storage backends ----------
+  async function probeServer() {
+    if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+      USE_SERVER = false;
+      return false;
+    }
+    try {
+      const r = await fetch(API, { method: 'GET', cache: 'no-store' });
+      if (r.ok) {
+        const json = await r.json();
+        USE_SERVER = true;
+        const items = json.items || [];
+        // Merge localStorage (if any) into server
+        const local = readLocal();
+        const serverIds = new Set(items.map(x => x.id));
+        const localTexts = new Set(items.map(x => x.text));
+        const toMerge = local.filter(x => !serverIds.has(x.id) && !localTexts.has(x.text));
+        if (toMerge.length) {
+          const merged = [...toMerge, ...items];
+          await putServer(merged);
+          CACHE = merged;
+          // clear local backup after successful migration
+          try { localStorage.removeItem(FAV_KEY); } catch {}
+        } else {
+          CACHE = items;
+        }
+        return true;
+      }
+    } catch (e) { /* no server */ }
+    USE_SERVER = false;
+    CACHE = readLocal();
+    return false;
+  }
+
+  function readLocal() {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch { return []; }
+  }
+  function writeLocal(items) {
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(items)); } catch {}
+  }
+  async function putServer(items) {
+    try {
+      const r = await fetch(API, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ items }),
+      });
+      return r.ok;
+    } catch { return false; }
+  }
+
+  async function persist(items) {
+    CACHE = items;
+    if (USE_SERVER) {
+      const ok = await putServer(items);
+      if (!ok) writeLocal(items);     // 服务端写失败也在本地留一份
+    } else {
+      writeLocal(items);
+    }
+    try { global.dispatchEvent(new CustomEvent('favs-updated', { detail: items })); } catch {}
+  }
+
+  // ---------- Public API ----------
+  function load() { return CACHE.slice(); }
+
+  async function add(text, ctx) {
+    text = String(text || '').trim();
+    if (!text) return { ok: false, reason: 'empty' };
+    if (CACHE.some(x => x.text === text)) return { ok: false, reason: 'duplicate' };
+    const item = {
+      id: 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      text,
+      author: ctx.author || '',
+      title: ctx.title || '',
+      rank: ctx.rank || 0,
+      source_url: ctx.source_url || location.href,
+      origin_url: ctx.origin_url || '',
+      tracks: ctx.tracks || [],
+      category: classify(text),
+      created_at: Date.now(),
+    };
+    const next = [item, ...CACHE];
+    await persist(next);
+    return { ok: true, item, storage: USE_SERVER ? 'server' : 'local' };
+  }
+
+  async function remove(id) {
+    await persist(CACHE.filter(x => x.id !== id));
+  }
+  async function clear() { await persist([]); }
+  async function changeCategory(id, cat) {
+    const next = CACHE.map(x => x.id === id ? {...x, category: cat} : x);
+    await persist(next);
+  }
+
+  // ---------- UI: toast ----------
+  function toast(msg, ms = 2200) {
+    let el = document.getElementById('_scys_toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = '_scys_toast';
+      el.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#ffffff;padding:10px 22px;border-radius:999px;font-size:13px;z-index:10000;box-shadow:0 4px 16px rgba(47,44,39,0.2);opacity:0;transition:all .2s;pointer-events:none;font-family:inherit;';
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translateX(-50%) translateY(0)'; });
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(-50%) translateY(20px)'; }, ms);
+  }
+
+  // ---------- UI: selection popup button ----------
+  function initSelectionFav(getContext) {
+    const btn = document.createElement('button');
+    btn.id = '_scys_fav_btn';
+    btn.innerHTML = '⭐ 收藏这段';
+    btn.style.cssText = 'position:fixed;z-index:9998;background:#111111;color:#fff;border:none;padding:8px 14px;border-radius:7px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(201,100,66,0.35);display:none;font-family:inherit;font-weight:500;letter-spacing:0.02em;';
+    btn.onmouseenter = () => { btn.style.background = '#b85634'; };
+    btn.onmouseleave = () => { btn.style.background = '#111111'; };
+    document.body.appendChild(btn);
+
+    let selText = '';
+    function hide() { btn.style.display = 'none'; selText = ''; }
+
+    document.addEventListener('mouseup', e => {
+      if (e.target === btn) return;
+      setTimeout(() => {
+        const sel = global.getSelection();
+        const text = sel ? sel.toString().trim() : '';
+        if (text.length < 4 || text.length > 600) { hide(); return; }
+        const range = sel.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        if (!rect || rect.width === 0) { hide(); return; }
+        selText = text;
+        let top = rect.bottom + 8;
+        let left = rect.left + rect.width / 2 - 55;
+        top = Math.max(8, Math.min(window.innerHeight - 44, top));
+        left = Math.max(8, Math.min(window.innerWidth - 130, left));
+        btn.style.top = top + 'px';
+        btn.style.left = left + 'px';
+        btn.style.display = 'block';
+      }, 10);
+    });
+    document.addEventListener('mousedown', e => { if (e.target !== btn) hide(); });
+    document.addEventListener('scroll', hide, { passive: true });
+
+    btn.addEventListener('click', async e => {
+      e.preventDefault(); e.stopPropagation();
+      if (!selText) return;
+      const ctx = getContext ? getContext() : {};
+      const r = await add(selText, ctx);
+      if (r.ok) {
+        const c = catInfo(r.item.category);
+        const where = r.storage === 'server' ? 'favorites.json' : '浏览器本地';
+        toast(`已收藏到「${c.icon} ${c.name}」· 已写入 ${where}`);
+      } else if (r.reason === 'duplicate') {
+        toast('已收藏过这段，未重复添加');
+      } else {
+        toast('未能收藏');
+      }
+      hide();
+      try { global.getSelection().removeAllRanges(); } catch {}
+    });
+  }
+
+  // ---------- UI: floating entry for reader pages ----------
+  function initFloatingEntry(href) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.innerHTML = '⭐ 我的收藏 <span id="_scys_fav_count" style="opacity:.8;margin-left:4px"></span>';
+    a.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#1a1a1a;color:#ffffff;padding:10px 16px;border-radius:999px;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(47,44,39,0.25);z-index:40;font-family:inherit;transition:all .15s;';
+    a.onmouseenter = () => { a.style.background = '#111111'; a.style.transform = 'scale(1.04)'; };
+    a.onmouseleave = () => { a.style.background = '#1a1a1a'; a.style.transform = 'scale(1)'; };
+    document.body.appendChild(a);
+    const refresh = () => {
+      const n = CACHE.length;
+      document.getElementById('_scys_fav_count').textContent = n ? '· ' + n : '';
+    };
+    refresh();
+    window.addEventListener('favs-updated', refresh);
+  }
+
+  // ---------- Export ----------
+  function exportMarkdown() {
+    const list = CACHE;
+    if (!list.length) return '';
+    const groups = {};
+    list.forEach(x => { (groups[x.category] ||= []).push(x); });
+    const lines = [`# 我的收藏（${list.length} 条）`, '', `> 来源：DSH 情报站 · AI798 社群知识库`, ''];
+    CATEGORIES.forEach(cat => {
+      const arr = groups[cat.id];
+      if (!arr || !arr.length) return;
+      lines.push(`## ${cat.icon} ${cat.name}（${arr.length}）`, '');
+      arr.forEach(x => {
+        lines.push(`> ${x.text}`);
+        const ts = new Date(x.created_at).toISOString().slice(0, 10);
+        lines.push(`>> —— #${String(x.rank).padStart(3,'0')} ${x.author}《${x.title}》  · ${ts}`);
+        lines.push('');
+      });
+    });
+    return lines.join('\n');
+  }
+  function exportJSON() { return JSON.stringify({ exported_at: new Date().toISOString(), items: CACHE }, null, 2); }
+  function download(filename, content, mime) {
+    const blob = new Blob([content], { type: mime || 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 100);
+  }
+
+  function storageMode() { return USE_SERVER ? 'server' : 'local'; }
+
+  // ---------- Init (async) ----------
+  const ready = probeServer();
+
+  global.ScysFav = {
+    CATEGORIES, catInfo, classify,
+    ready,
+    load, add, remove, clear, changeCategory,
+    toast, initSelectionFav, initFloatingEntry,
+    exportMarkdown, exportJSON, download,
+    storageMode,
+  };
+})(window);
+</script>
+  <script>
+    ScysFav.ready.then(function() {
+      ScysFav.initSelectionFav(function() {
+        return {
+          rank: 1,
+          title: "DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架",
+          author: "deepseek-ai（DeepSeek 官方）",
+          source_url: location.href,
+          origin_url: "https://github.com/deepseek-ai/deepseek-harness",
+          tracks: ["官方机制", "生态观察"],
+        };
+      });
+      ScysFav.initFloatingEntry('../index.html#favorites');
+    });
+  </script>
+</body>
+</html>

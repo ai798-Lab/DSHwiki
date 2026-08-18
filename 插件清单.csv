@@ -1,0 +1,31 @@
+名称,功能,star,链接,作者,分类
+deepseek-harness,DeepSeek 官方 agent 框架本体：一切皆插件,149851,https://github.com/deepseek-ai/deepseek-harness,deepseek-ai,官方框架
+open-design,开源版 Claude Design：本地优先桌面设计应用，可把 dsh 接入当设计引擎,88304,https://github.com/nexu-io/open-design,nexu-io,设计
+reactive-resume,注重隐私的开源简历生成器（2020 年老项目，蹭 dsh-plugin topic，关联度低）,40835,https://github.com/amruthpillai/reactive-resume,amruthpillai,弱相关
+DeepSeek-Reasonix,DeepSeek 原生终端编码 Agent，围绕前缀缓存稳定性设计、可长期挂机,34683,https://github.com/esengine/DeepSeek-Reasonix,esengine,终端Agent/CLI
+OpenViking,火山引擎开源的 Agent 上下文数据库：统一记忆、知识 RAG 与 Skills,28891,https://github.com/volcengine/OpenViking,volcengine,记忆/存储
+colleague-skill,把离职同事/前辈的资料做成「会像 TA 一样干活」的 AI Skill（数字生命 1.0）,23139,https://github.com/titanwings/colleague-skill,titanwings,skill
+voyager,Gemini/Claude/ChatGPT 等网页增强套件 + 通用提示词管理器，已支持 dsh,19593,https://github.com/Nagi-ovo/voyager,Nagi-ovo,工具/浏览器增强
+archify,画架构图/流程图/时序图的 agent skill，产出自包含 HTML 带动效可导出,13847,https://github.com/tt-a1i/archify,tt-a1i,skill
+EverOS,便携记忆层：本地优先、Markdown 原生、跨 agent 应用共用一份自进化记忆,12081,https://github.com/EverMind-AI/EverOS,EverMind-AI,记忆/存储
+learn-harness-engineering,Harness 工程入门教程：从 0 到 1 学 harness 工程（15 种语言）,11852,https://github.com/walkinglabs/learn-harness-engineering,walkinglabs,教程
+deepseek-harness-desktop,社区版 dsh 桌面客户端（Win/macOS）：桌面本身也是插件,11626,https://github.com/anywhere-labs/deepseek-harness-desktop,anywhere-labs,UI/客户端
+awesome-gpt-image-2,GPT-Image2 提示词模板库（蹭 dsh-plugin topic，关联度低）,11076,https://github.com/freestylefly/awesome-gpt-image-2,freestylefly,弱相关
+yao,多设备 agent 工作台/任务看板（2021 年老项目，后加 dsh-plugin topic）,7664,https://github.com/YaoApp/yao,YaoApp,工作台/编排
+awesome-dsh-plugin,dsh 插件精选列表：每条收录前人工核验源码，配套插件市场 dsh-market,7572,https://github.com/awesome-dsh-plugin/awesome-dsh-plugin,awesome-dsh-plugin,目录/清单
+ouroboros,Agent OS：让 agent 自我变强，评分命令与预期结果不进成功契约,5508,https://github.com/Q00/ouroboros,Q00,编排/自进化
+openpencil,开源 AI 原生矢量设计工具，首个支持并发 Agent Teams、Design-as-Code,5241,https://github.com/ZSeven-W/openpencil,ZSeven-W,设计
+iPolloWork,源码可用的 AI 工作区：自进化 agent 运行时，覆盖代码/设计/PPT/网站/视频,4114,https://github.com/Devin-AXIS/iPolloWork,Devin-AXIS,工作台/编排
+dsh-web-ui,dsh Web UI 插件合集：任务看板、Git 图、右侧面板、手机远程、宠物、皮肤中心,4097,https://github.com/zhu1090093659/dsh-web-ui,zhu1090093659,UI
+petdex,给 Codex/Claude Code/dsh 等终端 agent 用的动画宠物公共图鉴,3877,https://github.com/crafter-station/petdex,crafter-station,趣味/UI
+mirage,号称全球首个 AI Agent 统一虚拟文件系统,3499,https://github.com/strukto-ai/mirage,strukto-ai,存储/文件系统
+dsh-anchored-standard,两阶段 dsh 预设：先按极简模式引导再切换标准工具全集,3423,https://github.com/xiaobright/dsh-anchored-standard,xiaobright,配置/preset
+EchoBird,一键安装+模型切换：统一管理 Claude Code/Codex/dsh/Kimi Code 等 CLI,3063,https://github.com/edison7009/EchoBird,edison7009,工具/安装器
+Vibe-Skills,通用 Skill：自动路由本地 Skills 并智能编排 harness 工作流,2873,https://github.com/foryourhealth111-pixel/Vibe-Skills,foryourhealth111-pixel,skill/编排
+OpenBiliClaw,本地私有的自进化跨平台内容发现 Agent（B站/小红书/抖音等），支持 dsh 插件,2839,https://github.com/whiteguo233/OpenBiliClaw,whiteguo233,内容发现Agent
+zhuzhiliao,竹知了传统玩具网页模拟版（蹭 dsh-plugin topic，与 dsh 无关）,2830,https://github.com/imsai-sh/zhuzhiliao,imsai-sh,蹭topic
+modlens,dsh 首个视觉插件：纯文本模型「开天眼」，贴图直接出结构化 JSON 证据,2789,https://github.com/liustack/modlens,liustack,视觉/多模态
+dashi-taskboard,dsh 任务看板插件（仓库无描述，按名称归类）,2289,https://github.com/chuspeeism/dashi-taskboard,chuspeeism,UI
+DSH-better-sidebar,开放侧边栏底座：文件/终端/Git/子代理页面，支持三方注册新页面,1944,https://github.com/omdsh-dev/DSH-better-sidebar,omdsh-dev,UI
+dsh-TUI,Claude Code 风格 TUI 补位插件：鲸鱼顶栏/流式思考/双击 Esc 回滚,1812,https://github.com/ccch1mneyyy/dsh-TUI,ccch1mneyyy,UI/终端
+BitFun,Rust 高性能 agent 运行时 + 桌面应用，Code Agent 深度与通用场景结合,1770,https://github.com/GCWing/BitFun,GCWing,客户端/运行时

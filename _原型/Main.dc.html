@@ -1,0 +1,532 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+  <style>
+    body { margin: 0; background: #ffffff; font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #111111; text-decoration: none; }
+    a:hover { color: #555555; }
+    ::selection { background: #111111; color: #ffffff; }
+  </style>
+</helmet>
+<div style="width: 100%; background: #ffffff; color: #1a1a1a;">
+
+  <!-- ══════════ 顶栏 ══════════ -->
+  <div style="border-bottom: 1px solid #111111;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 34px; height: 34px; background: #111111; color: #ffffff; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;">798</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 900;">DSH 情报站</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #6b6b6b; padding-top: 3px;">by ai798 Lab</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 28px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;">
+        <a href="#">大事记</a>
+        <a href="#">插件精选</a>
+        <a href="#">GitHub</a>
+        <a href="#">排行榜</a>
+        <a href="#">评论墙</a>
+        <a href="#" style="border: 1px solid #111111; padding: 7px 14px;">资料库</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 原型提示条 -->
+  <div style="background: #f5f5f5; border-bottom: 1px solid #e6e6e6;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 8px 32px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: #6b6b6b;">原型稿 v0.1 · 布局与版式供确认 · 标注「示意」处,正式版将替换为实抓数据</div>
+  </div>
+
+  <!-- ══════════ Hero ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 88px 32px 72px 32px; display: flex; flex-direction: column; gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #6b6b6b;">DEEPSEEK HARNESS · 生态全记录</div>
+      <div style="font-family: 'Noto Serif SC', serif; font-size: 76px; font-weight: 900; line-height: 1.2; letter-spacing: 0.02em;">一切皆插件。</div>
+      <div style="font-size: 16px; line-height: 1.9; color: #444444; max-width: 640px;">DeepSeek Harness 开源六天,从 0 到 149,851 star。这里按时间轴记录它的每一步:大事记、插件教程、GitHub 动态、排行榜,以及全球社区的真实声音。</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0px; border-top: 1px solid #111111; border-bottom: 1px solid #e6e6e6;">
+      <div style="padding: 28px 24px 28px 0px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 38px; font-weight: 600;">149,851</div>
+        <div style="font-size: 13px; color: #6b6b6b;">官方 repo GitHub star</div>
+      </div>
+      <div style="padding: 28px 24px; border-left: 1px solid #e6e6e6; display: flex; flex-direction: column; gap: 8px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 38px; font-weight: 600;">30</div>
+        <div style="font-size: 13px; color: #6b6b6b;">收录生态插件</div>
+      </div>
+      <div style="padding: 28px 24px; border-left: 1px solid #e6e6e6; display: flex; flex-direction: column; gap: 8px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 38px; font-weight: 600;">12</div>
+        <div style="font-size: 13px; color: #6b6b6b;">精选插件深评</div>
+      </div>
+      <div style="padding: 28px 0px 28px 24px; border-left: 1px solid #e6e6e6; display: flex; flex-direction: column; gap: 8px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 38px; font-weight: 600;">68</div>
+        <div style="font-size: 13px; color: #6b6b6b;">一手素材精读</div>
+      </div>
+    </div>
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: #9a9a9a;">数据实抓 · 截至 2026-08-18 09:00</div>
+  </div>
+
+  <!-- ══════════ 01 大事记 ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 48px 32px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid #111111; padding-top: 24px; margin-bottom: 56px; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #6b6b6b;">01 / TIMELINE</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900;">大事记</div>
+      </div>
+      <div style="font-size: 13px; color: #6b6b6b; padding-bottom: 6px;">六天,从发布到 149,851 star——插件、评论与数据,都挂在它们发生的那一天。</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+
+      <!-- 08.13 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.13</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+          <div style="width: 1px; flex-grow: 1; background: #dcdcdc;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">「一切皆插件」发布日</div>
+          <div style="font-size: 14px; line-height: 1.9; color: #444444; max-width: 640px;">DeepSeek 随 V4-Pro 同步开源 agent 框架 deepseek-harness,进入 Developer Preview。核心设计只有一句话:Everything is a Plugin——连内核能力也是插件。</div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div style="border: 1px solid #111111; padding: 7px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">deepseek-ai/deepseek-harness</div>
+            <div style="border: 1px solid #e6e6e6; padding: 7px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6b6b;">Developer Preview</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08.14 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.14</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+          <div style="width: 1px; flex-grow: 1; background: #dcdcdc;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">社区首日反应</div>
+          <div style="font-size: 14px; line-height: 1.9; color: #444444; max-width: 640px;">Reddit 发布帖冲上热榜,英文圈连夜出横评;中文社区当晚就放出第一批上手实测。</div>
+          <div style="border: 1px solid #e6e6e6; padding: 18px 22px; max-width: 560px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #111111; padding: 4px 10px;">Reddit · r/DeepSeek</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">高赞讨论 · 示意</div>
+            </div>
+            <div style="font-size: 14px; line-height: 1.8; color: #1a1a1a;">"The plugin system is what other harnesses should have shipped a year ago."</div>
+            <div style="font-size: 13px; color: #6b6b6b;">这套插件系统,是别家 harness 一年前就该做出来的东西。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08.15 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.15</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+          <div style="width: 1px; flex-grow: 1; background: #dcdcdc;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">插件生态开闸</div>
+          <div style="font-size: 14px; line-height: 1.9; color: #444444; max-width: 640px;">dsh-plugin topic 出现,目录站 awesome-dsh-plugin 上线——每条收录前人工核验源码;dsh-web-ui 等首批社区插件同日走红。</div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div style="border: 1px solid #111111; padding: 7px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">awesome-dsh-plugin · 7,572 star</div>
+            <div style="border: 1px solid #111111; padding: 7px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">dsh-web-ui · 4,097 star</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08.16 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.16</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+          <div style="width: 1px; flex-grow: 1; background: #dcdcdc;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">对照实验刷屏</div>
+          <div style="font-size: 14px; line-height: 1.9; color: #444444; max-width: 640px;">社区用 dsh-anchored-standard 跑出对照实验:同一批任务,基准分从 91 拉到 98。「预设即性能」开始成为共识。</div>
+          <div style="border: 1px solid #e6e6e6; padding: 20px 24px; max-width: 360px; display: flex; align-items: baseline; gap: 16px;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 34px; font-weight: 600;">91 &#8594; 98</div>
+            <div style="font-size: 12px; color: #6b6b6b;">社区基准分 · 对照实验</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08.17 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.17</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+          <div style="width: 1px; flex-grow: 1; background: #dcdcdc;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 56px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">争议与冷思考</div>
+          <div style="font-size: 14px; line-height: 1.9; color: #444444; max-width: 640px;">星数涨得太快,刷星质疑出现;插件系统单点故障的吐槽同步发酵。中文圈开始讨论 harness 的边界在哪。</div>
+          <div style="border: 1px solid #e6e6e6; padding: 18px 22px; max-width: 560px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #111111; padding: 4px 10px;">X · @cli_notes</div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">争议观点 · 示意</div>
+            </div>
+            <div style="font-size: 14px; line-height: 1.8; color: #1a1a1a;">"Star velocity like this always raises eyebrows. But the plugin API is genuinely good."</div>
+            <div style="font-size: 13px; color: #6b6b6b;">星数涨成这样总让人起疑,但这套插件 API 是真的好。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08.18 -->
+      <div style="display: flex; gap: 28px;">
+        <div style="width: 96px; flex-shrink: 0; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; padding-top: 4px;">08.18</div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 16px; flex-shrink: 0; gap: 6px;">
+          <div style="width: 9px; height: 9px; background: #111111; margin-top: 7px;"></div>
+        </div>
+        <div style="flex-grow: 1; padding-bottom: 8px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="background: #111111; color: #ffffff; padding: 30px 34px; max-width: 640px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-family: 'Noto Serif SC', serif; font-size: 23px; font-weight: 700;">149,851,仍在涨</div>
+            <div style="font-size: 14px; line-height: 1.9; color: #cccccc;">开源史上最快逼近 15 万 star 的项目。今天,DSH 情报站上线。</div>
+            <a href="#" style="color: #ffffff; font-family: 'IBM Plex Mono', monospace; font-size: 13px; border-bottom: 1px solid #ffffff; align-self: flex-start; padding-bottom: 2px;">进入完整时间轴 &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ 02 插件精选 ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 72px 32px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid #111111; padding-top: 24px; margin-bottom: 48px; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #6b6b6b;">02 / PLUGINS</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900;">插件精选</div>
+      </div>
+      <div style="font-size: 13px; color: #6b6b6b; padding-bottom: 6px;">12 个值得装的插件,每个都有安装命令、用法与真实口碑。安装命令为示意,正式版逐条与 README 核对。</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+
+      <div style="border: 1px solid #111111; padding: 28px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">dsh-anchored-standard</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6b6b;">3,423 star</div>
+        </div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700;">先极简引导,再全集火力。</div>
+        <div style="font-size: 13px; line-height: 1.8; color: #555555;">两阶段 preset:任务前段用极简模式压低噪音,中段自动切换标准工具全集。社区对照实验把基准分从 91 拉到 98。</div>
+        <div style="background: #111111; color: #ffffff; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; padding: 12px 16px;">$ dsh plugin add anchored-standard</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="border: 1px solid #e6e6e6; padding: 4px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6b6b;">配置 / preset</div>
+          <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">教程与评论 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 28px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">open-design</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6b6b;">88,304 star</div>
+        </div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700;">把 dsh 当你的设计引擎。</div>
+        <div style="font-size: 13px; line-height: 1.8; color: #555555;">开源版 Claude Design,本地优先桌面应用。接入 dsh 之后,文字改稿变成实时出图,设计师不用碰代码。</div>
+        <div style="background: #111111; color: #ffffff; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; padding: 12px 16px;">$ npx open-design init</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="border: 1px solid #e6e6e6; padding: 4px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6b6b;">设计 / 桌面应用</div>
+          <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">教程与评论 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 28px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">colleague-skill</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6b6b;">23,139 star</div>
+        </div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700;">离职同事,数字返聘。</div>
+        <div style="font-size: 13px; line-height: 1.8; color: #555555;">把前辈的文档、代码风格和口头禅做成「会像 TA 一样干活」的 Skill——所谓数字生命 1.0,全生态话题度最高的项目。</div>
+        <div style="background: #111111; color: #ffffff; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; padding: 12px 16px;">$ dsh skill add colleague</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="border: 1px solid #e6e6e6; padding: 4px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6b6b;">skill / 知识复刻</div>
+          <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">教程与评论 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 28px 30px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">modlens</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6b6b;">2,789 star</div>
+        </div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700;">给纯文本模型开天眼。</div>
+        <div style="font-size: 13px; line-height: 1.8; color: #555555;">dsh 首个视觉插件:贴一张图,直接返回结构化 JSON 证据。截图审稿、UI 走查一步到位。</div>
+        <div style="background: #111111; color: #ffffff; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; padding: 12px 16px;">$ dsh plugin add modlens</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="border: 1px solid #e6e6e6; padding: 4px 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6b6b;">视觉 / 多模态</div>
+          <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">教程与评论 &#8594;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#" style="display: flex; justify-content: center; align-items: center; border: 1px solid #111111; margin-top: 24px; padding: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em;">查看全部 12 个精选插件 &#8594;</a>
+  </div>
+
+  <!-- ══════════ 03 GitHub 观察 ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 72px 32px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid #111111; padding-top: 24px; margin-bottom: 48px; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #6b6b6b;">03 / GITHUB</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900;">GitHub 观察</div>
+      </div>
+      <div style="font-size: 13px; color: #6b6b6b; padding-bottom: 6px;">官方仓库的星数、Release 与社区讨论动态。Release 内容为示意。</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+
+      <div style="border: 1px solid #e6e6e6; padding: 26px 28px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #6b6b6b;">STAR 增长</div>
+        <svg viewBox="0 0 280 120" style="width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="10,110 60,48 110,30 160,22 210,16 268,12" fill="none" stroke="#111111" stroke-width="2.5"></polyline>
+          <rect x="264" y="8" width="8" height="8" fill="#111111"></rect>
+        </svg>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>08.13 · 0</div>
+          <div>08.18 · 149,851</div>
+        </div>
+        <div style="font-size: 13px; line-height: 1.7; color: #555555;">六天冲到 15 万边缘,单日最高涨幅出现在发布次日。</div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 26px 28px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #6b6b6b;">最新 RELEASE · 示意</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600;">v0.4.2</div>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; line-height: 1.7; color: #555555;">
+          <div style="border-left: 2px solid #111111; padding-left: 12px;">插件热重载稳定性修复</div>
+          <div style="border-left: 2px solid #111111; padding-left: 12px;">preset 切换 API 进入稳定通道</div>
+        </div>
+        <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; margin-top: auto;">全部 Release &#8594;</a>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 26px 28px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: #6b6b6b;">热门 DISCUSSION</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 19px; font-weight: 700; line-height: 1.6;">官方 preset 用中文书写,Discussions 全中文</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #555555;">「把中文开发者当第一公民」成为英文圈都在转的话题——这也是 DSH 与其他 harness 最不同的一点。</div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a; margin-top: auto;">热帖 · 回复 300+ · 示意</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ 04 排行榜 ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 72px 32px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid #111111; padding-top: 24px; margin-bottom: 48px; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #6b6b6b;">04 / RANKING</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900;">排行榜</div>
+      </div>
+      <div style="font-size: 13px; color: #6b6b6b; padding-bottom: 6px;">生态插件按 star 排序,已剔除蹭 topic 的弱相关项目。star 数为 2026-08-18 实抓。</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">01</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">open-design</div>
+          <div style="font-size: 12px; color: #9a9a9a;">设计</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 100%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">88,304</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">02</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">DeepSeek-Reasonix</div>
+          <div style="font-size: 12px; color: #9a9a9a;">终端 Agent / CLI</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 39%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">34,683</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">03</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">OpenViking</div>
+          <div style="font-size: 12px; color: #9a9a9a;">记忆 / 存储</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 33%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">28,891</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">04</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">colleague-skill</div>
+          <div style="font-size: 12px; color: #9a9a9a;">skill</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 26%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">23,139</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">05</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">voyager</div>
+          <div style="font-size: 12px; color: #9a9a9a;">工具 / 浏览器增强</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 22%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">19,593</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">06</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">archify</div>
+          <div style="font-size: 12px; color: #9a9a9a;">skill / 架构图</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 16%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">13,847</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">07</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">EverOS</div>
+          <div style="font-size: 12px; color: #9a9a9a;">记忆 / 存储</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 14%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">12,081</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0px; border-bottom: 1px solid #e6e6e6;">
+        <div style="width: 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">08</div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 3px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600;">learn-harness-engineering</div>
+          <div style="font-size: 12px; color: #9a9a9a;">教程</div>
+        </div>
+        <div style="flex-grow: 1; height: 14px; background: #f2f2f2;"><div style="width: 13%; height: 14px; background: #111111;"></div></div>
+        <div style="width: 90px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">11,852</div>
+      </div>
+
+    </div>
+
+    <a href="#" style="display: flex; justify-content: center; align-items: center; border: 1px solid #111111; margin-top: 24px; padding: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em;">完整 30 个插件排行 &#8594;</a>
+  </div>
+
+  <!-- ══════════ 05 评论墙 ══════════ -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 80px 32px;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid #111111; padding-top: 24px; margin-bottom: 48px; gap: 24px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #6b6b6b;">05 / VOICES</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900;">评论墙</div>
+      </div>
+      <div style="font-size: 13px; color: #6b6b6b; padding-bottom: 6px;">X 与 Reddit 上关于 DSH 和各插件的真实声音,每条带原文链接。此处为版式示意。</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start;">
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; background: #111111; color: #ffffff; padding: 4px 10px;">X</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">@builder_log · 08.15</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">"Installed anchored-standard and my task success rate visibly jumped. Benchmarks don't lie."</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #6b6b6b;">装上 anchored-standard 之后,任务成功率肉眼可见地上去了。基准分不会说谎。</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>1.2k likes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #111111; padding: 4px 10px;">Reddit</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">r/LocalLLaMA · 08.16</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">"Ran dsh against my local models overnight. Hot-swapping plugins is way more stable than I expected."</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #6b6b6b;">拿本地模型跑了一整晚 dsh,插件热插拔比我预期稳得多。</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>856 upvotes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; background: #111111; color: #ffffff; padding: 4px 10px;">X</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">@设计师小周 · 08.17</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">「DeepSeek 把中文开发者当第一公民,官方 preset 全中文书写,这事儿在国外圈子都传开了。」</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>2.3k likes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #111111; padding: 4px 10px;">Reddit</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">r/DeepSeek · 08.17</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">"Spent the weekend porting my Claude Code skills over. Took an afternoon, most things just worked."</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #6b6b6b;">周末把我的 Claude Code skills 迁了过去,一个下午搞定,大部分直接能用。</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>1.1k upvotes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; background: #111111; color: #ffffff; padding: 4px 10px;">X</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">@kaito_ships · 08.16</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">"anchored-standard is the first config file I've ever seen trend on GitHub. A preset, trending. Think about that."</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #6b6b6b;">anchored-standard 是我见过第一个冲上 GitHub 趋势榜的配置文件。一个 preset,上趋势榜,细品。</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>890 likes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #e6e6e6; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #111111; padding: 4px 10px;">Reddit</div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">r/DeepSeek · 08.16</div>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8;">"modlens giving a text-only model 'eyes' via structured JSON is the cleverest hack I've seen this year."</div>
+        <div style="font-size: 13px; line-height: 1.7; color: #6b6b6b;">modlens 用结构化 JSON 给纯文本模型「开眼」,是我今年见过最聪明的 hack。</div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9a9a9a;">
+          <div>733 upvotes</div>
+          <a href="#" style="color: #9a9a9a;">原文 &#8594;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ 资料库入口 ══════════ -->
+  <div style="background: #111111; color: #ffffff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 32px; display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap;">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #999999;">06 / ARCHIVE</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-size: 34px; font-weight: 900; line-height: 1.4;">68 条一手素材,全部可精读</div>
+        <div style="font-size: 14px; line-height: 1.9; color: #bbbbbb;">官方文档、深度报道、社区讨论与视频教程——每条素材都有摘要、金句与数据标注,是这个站所有内容的底仓。</div>
+      </div>
+      <a href="#" style="color: #ffffff; border: 1px solid #ffffff; padding: 18px 36px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.06em; flex-shrink: 0;">进入资料库 &#8594;</a>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div style="border-top: 1px solid #222222; background: #111111;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: #777777;">
+      <div>DSH 情报站 · ai798 Lab 出品</div>
+      <div>数据实抓 · 截至 2026-08-18</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":5800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

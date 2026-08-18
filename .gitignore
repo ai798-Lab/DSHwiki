@@ -1,0 +1,12 @@
+# 本地素材原料（站点不引用，不发布）
+media/
+attachments/
+# 构建工具与内部文件
+_scripts/
+templates/
+config.json
+启动.command
+会话纪要.md
+__pycache__/
+.DS_Store
+favorites.json
