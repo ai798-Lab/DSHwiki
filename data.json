@@ -8,7 +8,7 @@
   "articles": [
     {
       "rank": 1,
-      "file": "001_官方仓库总览.md",
+      "file": "archive/001_官方仓库总览.md",
       "title": "DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架",
       "author": "deepseek-ai（DeepSeek 官方）",
       "published": "2026-08-13",
@@ -61,7 +61,7 @@
     },
     {
       "rank": 2,
-      "file": "002_架构_一切皆插件.md",
+      "file": "archive/002_架构_一切皆插件.md",
       "title": "官方架构文档——为什么说 dsh 没有「不可动的内核」",
       "author": "deepseek-ai",
       "published": "2026-08-13",
@@ -112,7 +112,7 @@
     },
     {
       "rank": 3,
-      "file": "003_插件开发与发布机制.md",
+      "file": "archive/003_插件开发与发布机制.md",
       "title": "官方插件开发教程——一个 apply 函数就是一个插件",
       "author": "deepseek-ai",
       "published": "2026-08-13",
@@ -165,7 +165,7 @@
     },
     {
       "rank": 4,
-      "file": "004_WebUI指南与运行入口.md",
+      "file": "archive/004_WebUI指南与运行入口.md",
       "title": "Web UI 使用指南与 CLI 入口——三步跑起第一个任务",
       "author": "deepseek-ai",
       "published": "2026-08-13",
@@ -217,7 +217,7 @@
     },
     {
       "rank": 5,
-      "file": "005_四种运行模式.md",
+      "file": "archive/005_四种运行模式.md",
       "title": "四种官方运行模式——标准/PTC/极简/创造，官方定义全是中文",
       "author": "deepseek-ai",
       "published": "2026-08-13",
@@ -269,7 +269,7 @@
     },
     {
       "rank": 6,
-      "file": "006_skill机制.md",
+      "file": "archive/006_skill机制.md",
       "title": "dsh 的 Skill 机制——技能目录也是插件，本地远程随便换",
       "author": "deepseek-ai",
       "published": "2026-08-13",
@@ -319,7 +319,7 @@
     },
     {
       "rank": 7,
-      "file": "007_插件生态盘点汇总.md",
+      "file": "archive/007_插件生态盘点汇总.md",
       "title": "dsh-plugin 生态盘点——topic 下 6,716 仓库，top 30 全景（配 CSV）",
       "author": "社区（多作者）",
       "published": "2026-08-18",
@@ -378,7 +378,7 @@
     },
     {
       "rank": 8,
-      "file": "008_open-design设计插件.md",
+      "file": "archive/008_open-design设计插件.md",
       "title": "Open Design——生态最大插件（88k star），开源版 Claude Design",
       "author": "nexu-io",
       "published": "2026-04-28",
@@ -430,7 +430,7 @@
     },
     {
       "rank": 9,
-      "file": "009_dsh桌面客户端.md",
+      "file": "archive/009_dsh桌面客户端.md",
       "title": "DSH Desktop——「桌面本身也是插件」的社区桌面客户端",
       "author": "anywhere-labs",
       "published": "2026-08-13",
@@ -483,7 +483,7 @@
     },
     {
       "rank": 10,
-      "file": "010_WebUI补位插件群.md",
+      "file": "archive/010_WebUI补位插件群.md",
       "title": "Web UI 补位插件群——看板、侧边栏、TUI，把官方界面改成你想要的样子",
       "author": "zhu1090093659 / omdsh-dev / ccch1mneyyy",
       "published": "2026-08-07~08-13",
@@ -535,7 +535,7 @@
     },
     {
       "rank": 11,
-      "file": "011_记忆类插件_OpenViking_EverOS.md",
+      "file": "archive/011_记忆类插件_OpenViking_EverOS.md",
       "title": "记忆与上下文插件——火山引擎 OpenViking 与 EverOS",
       "author": "volcengine（火山引擎，字节跳动云）/ EverMind-AI",
       "published": "2026-01-05",
@@ -588,7 +588,7 @@
     },
     {
       "rank": 12,
-      "file": "012_modlens视觉插件.md",
+      "file": "archive/012_modlens视觉插件.md",
       "title": "ModLens——给纯文本模型「开天眼」的 dsh 首个视觉插件",
       "author": "liustack（独立开发者）",
       "published": "2026-02-22",
@@ -641,7 +641,7 @@
     },
     {
       "rank": 13,
-      "file": "013_colleague-skill数字生命.md",
+      "file": "archive/013_colleague-skill数字生命.md",
       "title": "colleague.skill——把离职同事做成 AI Skill 的「数字生命 1.0」",
       "author": "titanwings",
       "published": "2026-03-30",
@@ -695,7 +695,7 @@
     },
     {
       "rank": 14,
-      "file": "014_learn-harness-engineering教程.md",
+      "file": "archive/014_learn-harness-engineering教程.md",
       "title": "Learn Harness Engineering——从 0 到 1 的 harness 工程教程（15 种语言）",
       "author": "walkinglabs",
       "published": "2026-03-29",
@@ -747,7 +747,7 @@
     },
     {
       "rank": 15,
-      "file": "015_awesome-dsh-plugin清单.md",
+      "file": "archive/015_awesome-dsh-plugin清单.md",
       "title": "awesome-dsh-plugin——每条人工验货的插件精选清单（配套插件市场）",
       "author": "awesome-dsh-plugin（社区组织）",
       "published": "2026-08-13",
@@ -801,7 +801,7 @@
     },
     {
       "rank": 16,
-      "file": "016_awesome列表生态全景.md",
+      "file": "archive/016_awesome列表生态全景.md",
       "title": "awesome 列表混战——一周冒出 20+ 个 awesome-deepseek-harness",
       "author": "0xsline 等多位社区作者",
       "published": "2026-08-11~08-14",
@@ -854,7 +854,7 @@
     },
     {
       "rank": 17,
-      "file": "017_目录站dshplugins.md",
+      "file": "archive/017_目录站dshplugins.md",
       "title": "dshplugins.xyz——按「使用意图」分五类的第三方插件地图",
       "author": "不详（非官方社区站）",
       "published": null,
@@ -907,7 +907,7 @@
     },
     {
       "rank": 18,
-      "file": "018_目录站deepseek-code.md",
+      "file": "archive/018_目录站deepseek-code.md",
       "title": "deepseek-code.com——316 插件、8 分类的目录站（长尾插件宝库）",
       "author": "不详（非官方站，普通抓取返回 403，本素材用浏览器 UA 抓取成功）",
       "published": null,
@@ -961,7 +961,7 @@
     },
     {
       "rank": 19,
-      "file": "019_discussions社区热议.md",
+      "file": "archive/019_discussions社区热议.md",
       "title": "GitHub Discussions 热帖——社区最想要什么，插件就长什么样",
       "author": "dsh 社区用户（多人）",
       "published": "2026-08-13",
@@ -1020,7 +1020,7 @@
     },
     {
       "rank": 20,
-      "file": "020_star增长里程碑.md",
+      "file": "archive/020_star增长里程碑.md",
       "title": "star 增长里程碑——1.5 小时 2.2 万、48 小时破 10 万的速度神话与水分",
       "author": "ℏεsam（@Hesamation）等；GitHub 数据为一手采集",
       "published": "2026-08-13~08-18",
@@ -1074,7 +1074,7 @@
     },
     {
       "rank": 21,
-      "file": "021_LocalLLaMA发布公告帖.md",
+      "file": "archive/021_LocalLLaMA发布公告帖.md",
       "title": "LocalLLaMA 发布公告帖：「Deepseek Harness 上线了！」",
       "author": "u/Fun-Doctor6855",
       "published": "2026-08-13",
@@ -1131,7 +1131,7 @@
     },
     {
       "rank": 22,
-      "file": "022_rDeepSeek发布帖_社区首日反应.md",
+      "file": "archive/022_rDeepSeek发布帖_社区首日反应.md",
       "title": "r/DeepSeek 发布帖：「DeepSeek Harness 发布了！」——官方社区首日反应",
       "author": "u/214d",
       "published": "2026-08-13",
@@ -1189,7 +1189,7 @@
     },
     {
       "rank": 23,
-      "file": "023_100k星数现象帖.md",
+      "file": "archive/023_100k星数现象帖.md",
       "title": "「两天 10 万星」：DSH 打破 GitHub 增星纪录引发的真假之争",
       "author": "u/Current-Guide5944",
       "published": "2026-08-15",
@@ -1246,7 +1246,7 @@
     },
     {
       "rank": 24,
-      "file": "024_上手好评_不同级别体验.md",
+      "file": "archive/024_上手好评_不同级别体验.md",
       "title": "「DSH 完全是另一个级别」——首批上手好评与 100% 缓存命中率之谜",
       "author": "u/VEHICOULE_",
       "published": "2026-08-13",
@@ -1304,7 +1304,7 @@
     },
     {
       "rank": 25,
-      "file": "025_First_Impressions实测报告.md",
+      "file": "archive/025_First_Impressions实测报告.md",
       "title": "「我的 DSH 第一印象」：慢、费 token、但把 DeepSeek 榨到极限",
       "author": "u/LaxederBR",
       "published": "2026-08-13",
@@ -1364,7 +1364,7 @@
     },
     {
       "rank": 26,
-      "file": "026_八大harness横评.md",
+      "file": "archive/026_八大harness横评.md",
       "title": "8 大 agent harness 横评：DeepSeek V4 Flash 与 Pi 是「天作之合」",
       "author": "u/LimpComedian1317",
       "published": "2026-08-11",
@@ -1422,7 +1422,7 @@
     },
     {
       "rank": 27,
-      "file": "027_harness对决_CC_OpenCode_Pi.md",
+      "file": "archive/027_harness对决_CC_OpenCode_Pi.md",
       "title": "Harness 对决：Claude Code vs OpenCode vs Pi——质量相同，路径悬殊",
       "author": "u/xquarx",
       "published": "2026-07-26",
@@ -1480,7 +1480,7 @@
     },
     {
       "rank": 28,
-      "file": "028_选harness求助楼_生态众生相.md",
+      "file": "archive/028_选harness求助楼_生态众生相.md",
       "title": "「帮我给 DeepSeek V4 Flash 选个最好的 harness」——154 楼求助楼里的生态众生相",
       "author": "u/WilbertRs",
       "published": "2026-08-09",
@@ -1538,7 +1538,7 @@
     },
     {
       "rank": 29,
-      "file": "029_调校harness梗图帖.md",
+      "file": "archive/029_调校harness梗图帖.md",
       "title": "833 赞梗图：「把 harness 调到飞起，用便宜的 Flash 跟开大模型的人赛跑」",
       "author": "u/binladen0069",
       "published": "2026-08-11",
@@ -1596,7 +1596,7 @@
     },
     {
       "rank": 30,
-      "file": "030_Qwen配DSH实测.md",
+      "file": "archive/030_Qwen配DSH实测.md",
       "title": "「Qwen 3.8 27b 配 DSH 太惊艳了」——DSH 跑第三方模型的 10 小时实测",
       "author": "u/cviperr33",
       "published": "2026-08-16",
@@ -1650,7 +1650,7 @@
     },
     {
       "rank": 31,
-      "file": "031_V4Pro多版本疑云与DSH_minimal模式.md",
+      "file": "archive/031_V4Pro多版本疑云与DSH_minimal模式.md",
       "title": "「掉进 V4-Pro 的兔子洞」：单一 API 背后疑似多版本，与 DSH Minimal 模式的玄学",
       "author": "u/HeavyPanzerPlus1s",
       "published": "2026-08-15",
@@ -1710,7 +1710,7 @@
     },
     {
       "rank": 32,
-      "file": "032_anchored_standard插件突破.md",
+      "file": "archive/032_anchored_standard插件突破.md",
       "title": "开源一天后的社区突破：dsh-anchored-standard 插件把基准分从 91 拉到 98+",
       "author": "u/stealthispost",
       "published": "2026-08-15",
@@ -1763,7 +1763,7 @@
     },
     {
       "rank": 33,
-      "file": "033_缓存追问楼_插件实证集中营.md",
+      "file": "archive/033_缓存追问楼_插件实证集中营.md",
       "title": "「DSH 的缓存命中率真有那么神吗？」——追问楼变成插件实证集中营",
       "author": "u/awahidanon",
       "published": "2026-08-16",
@@ -1821,7 +1821,7 @@
     },
     {
       "rank": 34,
-      "file": "034_token_anxiety成本插件.md",
+      "file": "archive/034_token_anxiety成本插件.md",
       "title": "dsh-token-anxiety：给「token 焦虑症」做的成本透视插件（附省钱结论）",
       "author": "u/Snoo_57113",
       "published": "2026-08-15",
@@ -1874,7 +1874,7 @@
     },
     {
       "rank": 35,
-      "file": "035_中文插件_smooth_stream.md",
+      "file": "archive/035_中文插件_smooth_stream.md",
       "title": "中文社区插件：dsh-smooth-stream「无级丝滑渲染」",
       "author": "u/Electronic_Trash_385",
       "published": "2026-08-15",
@@ -1922,7 +1922,7 @@
     },
     {
       "rank": 36,
-      "file": "036_吐槽帖_插件系统单点故障.md",
+      "file": "archive/036_吐槽帖_插件系统单点故障.md",
       "title": "【反面素材】吐槽帖：一个坏插件能带崩整个插件系统",
       "author": "u/Potential_Back_4398",
       "published": "2026-08-17",
@@ -1970,7 +1970,7 @@
     },
     {
       "rank": 37,
-      "file": "037_必装插件清单帖.md",
+      "file": "archive/037_必装插件清单帖.md",
       "title": "「DSH 必装插件清单」：社区第一份 curated 插件/skills/MCP 索引",
       "author": "u/chvmnaveen",
       "published": "2026-08-17",
@@ -2020,7 +2020,7 @@
     },
     {
       "rank": 38,
-      "file": "038_官方发布推文.md",
+      "file": "archive/038_官方发布推文.md",
       "title": "DeepSeek 官方宣布 Harness v0.1 开发者预览版开源",
       "author": "@deepseek_ai",
       "published": "2026-08-13",
@@ -2074,7 +2074,7 @@
     },
     {
       "rank": 39,
-      "file": "039_Tianyi_Cui内测招募帖.md",
+      "file": "archive/039_Tianyi_Cui内测招募帖.md",
       "title": "DeepSeek 团队成员 Tianyi Cui 发帖招募 Harness 内测开发者",
       "author": "@tianyi（Tianyi Cui）",
       "published": "2026-08-01",
@@ -2122,7 +2122,7 @@
     },
     {
       "rank": 40,
-      "file": "040_elie技术解读.md",
+      "file": "archive/040_elie技术解读.md",
       "title": "Hugging Face 工程师 elie：DSH 能把 Claude Code 和 Codex 当子 agent 调用",
       "author": "@eliebakouch（elie，Hugging Face 研究工程师）",
       "published": "2026-08-13",
@@ -2171,7 +2171,7 @@
     },
     {
       "rank": 41,
-      "file": "041_Ollama官方支持.md",
+      "file": "archive/041_Ollama官方支持.md",
       "title": "Ollama 官方宣布支持 DeepSeek Harness（ollama launch dsh）",
       "author": "@ollama（Ollama 官方）",
       "published": "2026-08-14",
@@ -2222,7 +2222,7 @@
     },
     {
       "rank": 42,
-      "file": "042_Akshay架构解读thread.md",
+      "file": "archive/042_Akshay架构解读thread.md",
       "title": "Akshay：几小时破 35k star，「一切皆插件」到底是什么意思",
       "author": "@akshay_pachaar（Akshay，AI 领域科普大 V）",
       "published": "2026-08-13",
@@ -2272,7 +2272,7 @@
     },
     {
       "rank": 43,
-      "file": "043_MaxForAI北大论文解读.md",
+      "file": "archive/043_MaxForAI北大论文解读.md",
       "title": "MaxForAI：DSH 随附的北大合作论文——Agent 改自己的 Harness 怎么不把自己改死",
       "author": "@MaxForAI（Max For AI）",
       "published": "2026-08-13",
@@ -2320,7 +2320,7 @@
     },
     {
       "rank": 44,
-      "file": "044_Chubby快讯转发.md",
+      "file": "archive/044_Chubby快讯转发.md",
       "title": "英文 AI 快讯大 V Chubby 第一时间转发 DSH 开源消息",
       "author": "@kimmonismus（Chubby♨️，英文 AI 快讯大 V）",
       "published": "2026-08-13",
@@ -2367,7 +2367,7 @@
     },
     {
       "rank": 45,
-      "file": "045_hqmank本地运行演示视频.md",
+      "file": "archive/045_hqmank本地运行演示视频.md",
       "title": "Kai：本地跑通 DeepSeek Harness 的首批上手演示视频",
       "author": "@hqmank（Kai）",
       "published": "2026-08-13",
@@ -2414,7 +2414,7 @@
     },
     {
       "rank": 46,
-      "file": "046_JenZhu架构好评.md",
+      "file": "archive/046_JenZhu架构好评.md",
       "title": "Jen Zhu：DSH 是我见过最干净的 agent 架构表达之一",
       "author": "@jenzhuscott（Jen Zhu）",
       "published": "2026-08-13",
@@ -2462,7 +2462,7 @@
     },
     {
       "rank": 47,
-      "file": "047_Maziyar护城河热评.md",
+      "file": "archive/047_Maziyar护城河热评.md",
       "title": "Maziyar Panahi：DeepSeek 一周之内摧毁了前沿实验室仅剩的护城河",
       "author": "@MaziyarPanahi（Maziyar Panahi，开源 LLM 社区活跃研究者）",
       "published": "2026-08-13",
@@ -2508,7 +2508,7 @@
     },
     {
       "rank": 48,
-      "file": "048_geekbb桌面端插件生态推荐.md",
+      "file": "archive/048_geekbb桌面端插件生态推荐.md",
       "title": "Geek：一批为 DSH 生态打造的桌面端体验与 Web UI 插件合集",
       "author": "@geekbb（Geek）",
       "published": "2026-08-15",
@@ -2557,7 +2557,7 @@
     },
     {
       "rank": 49,
-      "file": "049_天机阁中文入门教程.md",
+      "file": "archive/049_天机阁中文入门教程.md",
       "title": "天机阁 X Article：DeepSeek Harness 一文入门，附小白安装教程",
       "author": "@tun2049（天机阁）",
       "published": "2026-08-13",
@@ -2604,7 +2604,7 @@
     },
     {
       "rank": 50,
-      "file": "050_艾略特harness冷思考.md",
+      "file": "archive/050_艾略特harness冷思考.md",
       "title": "艾略特：Harness 不是万能放大器——前提是环境能把结果反馈给 Agent",
       "author": "@elliotchen100（Elliot 艾略特）",
       "published": "2026-08-02",
@@ -2656,7 +2656,7 @@
     },
     {
       "rank": 51,
-      "file": "051_thenewstack_一切皆插件报道.md",
+      "file": "archive/051_thenewstack_一切皆插件报道.md",
       "title": "The New Stack：DeepSeek 开源 agent harness，一切皆插件",
       "author": "Frederic Lardinois",
       "published": "2026-08-13",
@@ -2704,7 +2704,7 @@
     },
     {
       "rank": 52,
-      "file": "052_theregister_中间件分析.md",
+      "file": "archive/052_theregister_中间件分析.md",
       "title": "The Register：DeepSeek 的创新 harness 把一切都当插件",
       "author": "Thomas Claburn（AI 与软件条线记者）",
       "published": "2026-08-14",
@@ -2762,7 +2762,7 @@
     },
     {
       "rank": 53,
-      "file": "053_marktechpost_开发者预览详解.md",
+      "file": "archive/053_marktechpost_开发者预览详解.md",
       "title": "MarkTechPost：DeepSeek Harness 开发者预览版技术详解",
       "author": "Asif Razzaq",
       "published": "2026-08-17",
@@ -2815,7 +2815,7 @@
     },
     {
       "rank": 54,
-      "file": "054_deepseek官方_harness页面.md",
+      "file": "archive/054_deepseek官方_harness页面.md",
       "title": "DeepSeek Harness 官方英文页面（第一手权威信息）",
       "author": "DeepSeek 官方",
       "published": "2026-08-13",
@@ -2868,7 +2868,7 @@
     },
     {
       "rank": 55,
-      "file": "055_hackernews_高分讨论.md",
+      "file": "archive/055_hackernews_高分讨论.md",
       "title": "Hacker News 736 分头条讨论：开发者社区怎么看 dsh",
       "author": "社区讨论（提交者及数百位评论者）",
       "published": "2026-08-13",
@@ -2925,7 +2925,7 @@
     },
     {
       "rank": 56,
-      "file": "056_mindstudio_插件化实测解读.md",
+      "file": "archive/056_mindstudio_插件化实测解读.md",
       "title": "MindStudio：什么是 DeepSeek Harness？插件化编码 agent 解读 + 实测",
       "author": "Luis Chavez-Mattos（Director of Product）",
       "published": "2026-08-14",
@@ -2978,7 +2978,7 @@
     },
     {
       "rank": 57,
-      "file": "057_机器之心_震撼开源.md",
+      "file": "archive/057_机器之心_震撼开源.md",
       "title": "机器之心：刚刚，DeepSeek Harness 震撼开源——一切皆插件",
       "author": "机器之心",
       "published": "2026-08-13",
@@ -3028,7 +3028,7 @@
     },
     {
       "rank": 58,
-      "file": "058_量子位_深度体验.md",
+      "file": "archive/058_量子位_深度体验.md",
       "title": "量子位：深度体验 DeepSeek Harness，我原谅它涨价了",
       "author": "Jay",
       "published": "2026-08-14",
@@ -3088,7 +3088,7 @@
     },
     {
       "rank": 59,
-      "file": "059_infoq_全是插件.md",
+      "file": "archive/059_infoq_全是插件.md",
       "title": "InfoQ 中文：DeepSeek 把 Harness 开源了——模型、工具、Agent Loop 全是插件",
       "author": "Tina",
       "published": "2026-08-14",
@@ -3142,7 +3142,7 @@
     },
     {
       "rank": 60,
-      "file": "060_36kr_战略分析_不再只做模型.md",
+      "file": "archive/060_36kr_战略分析_不再只做模型.md",
       "title": "36氪：Harness 正式浮出水面，DeepSeek 不再只做模型",
       "author": "凌风（大咖科技 Tech Chic）",
       "published": "2026-08-12",
@@ -3193,7 +3193,7 @@
     },
     {
       "rank": 61,
-      "file": "061_知乎_社区评价汇总.md",
+      "file": "archive/061_知乎_社区评价汇总.md",
       "title": "知乎社区对 DeepSeek Harness 的评价汇总（问题 + 高热专栏）",
       "author": "知乎多位答主/专栏作者",
       "published": "2026-08-13",
@@ -3248,7 +3248,7 @@
     },
     {
       "rank": 62,
-      "file": "062_youtube_视频总览与下载推荐.md",
+      "file": "archive/062_youtube_视频总览与下载推荐.md",
       "title": "YouTube「DeepSeek Harness」视频总览与下载推荐清单",
       "author": "多频道汇总",
       "published": "2026-08-13 ~ 2026-08-17",
@@ -3303,7 +3303,7 @@
     },
     {
       "rank": 63,
-      "file": "063_yt_neuralnine_终结claudecode.md",
+      "file": "archive/063_yt_neuralnine_终结claudecode.md",
       "title": "NeuralNine：DeepSeek Harness——Claude Code 的终结者？",
       "author": "NeuralNine（48.1 万订阅，Python/ML 教学头部频道）",
       "published": "2026-08-14",
@@ -3354,7 +3354,7 @@
     },
     {
       "rank": 64,
-      "file": "064_yt_零度解说_发布实测.md",
+      "file": "archive/064_yt_零度解说_发布实测.md",
       "title": "零度解说：DeepSeek Harness 正式发布！开源一天狂揽 6.8 万星",
       "author": "零度解说（112 万订阅，中文科技科普头部频道）",
       "published": "2026-08-14",
@@ -3405,7 +3405,7 @@
     },
     {
       "rank": 65,
-      "file": "065_yt_cloudcodes_架构拆解.md",
+      "file": "archive/065_yt_cloudcodes_架构拆解.md",
       "title": "Cloud Codes：DeepSeek Harness 架构拆解——背后疯狂的软件工程",
       "author": "Cloud Codes（3.53 万订阅，系统设计频道）",
       "published": "2026-08-15",
@@ -3459,7 +3459,7 @@
     },
     {
       "rank": 66,
-      "file": "066_yt_ai超元域_全功能实测.md",
+      "file": "archive/066_yt_ai超元域_全功能实测.md",
       "title": "AI超元域：实测 DeepSeek Harness 从基础到高级——插件系统、轨迹、分支全覆盖",
       "author": "AI超元域（7.51 万订阅，开源项目 github.com/win4r）",
       "published": "2026-08-14",
@@ -3513,7 +3513,7 @@
     },
     {
       "rank": 67,
-      "file": "067_yt_灵姐说ai_对比拆解.md",
+      "file": "archive/067_yt_灵姐说ai_对比拆解.md",
       "title": "灵姐说AI：一切皆插件！dsh 解读、安装、远程、实测全拆解（对标 Codex）",
       "author": "灵姐说AI | Ling Talk AI（2.87 万订阅）",
       "published": "2026-08-16",
@@ -3573,7 +3573,7 @@
     },
     {
       "rank": 68,
-      "file": "068_yt_傅云飞飞_三大必装插件.md",
+      "file": "archive/068_yt_傅云飞飞_三大必装插件.md",
       "title": "傅云飞飞：从 0 快速上手 dsh + 三大必装插件分享（含配套图文全教程）",
       "author": "傅云飞飞（1.43 万订阅）",
       "published": "2026-08-15",

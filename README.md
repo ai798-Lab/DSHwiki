@@ -9,7 +9,7 @@
 ## 怎么用
 
 - **交互检索** → 双击 `启动.command` 启动本地服务器（端口 8788），浏览器自动打开
-- **直接看 MD** → 每篇 `001_xxx.md` 是源文件，含 YAML frontmatter
+- **直接看 MD** → 每篇 `archive/001_xxx.md` 是源文件，含 YAML frontmatter
 - **精读版** → `reader/xxx.html`，Claude 风格排版，支持划选收藏
 - **金句素材** → `index.html` 金句墙页签
 

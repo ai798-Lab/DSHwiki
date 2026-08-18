@@ -1,16 +1,4 @@
-# 本地素材原料（站点不引用，不发布）
-media/
-attachments/
-# 构建工具与内部文件
-_scripts/
-templates/
-config.json
-启动.command
-会话纪要.md
-__pycache__/
 .DS_Store
 favorites.json
-# 2.0 改版工作目录（不随站点发布）
-_原型/
-_staging2/
-_staging/
+favorites.json.bak*
+__pycache__/
