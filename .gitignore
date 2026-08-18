@@ -3,5 +3,3 @@ favorites.json
 favorites.json.bak*
 __pycache__/
 
-# 资料库含他人文章全文，仅本地保留，不对外发布
-archive/
