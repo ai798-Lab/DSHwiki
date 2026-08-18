@@ -321,7 +321,6 @@ The joke landed</div>
     });
   }
   apply(root.dataset.font||"hand");
-  // 支持 #panelId 直达某个标签页
   try{
     var h=(location.hash||"").slice(1);
     if(h){
@@ -372,14 +371,11 @@ The joke landed</div>
       ev.preventDefault(); ev.stopPropagation();
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
-      // 按钮里含图标,还原要用 innerHTML;用 textContent 会把图标永久抹掉
       var text=code.innerText, old=c.innerHTML;
       var flash=function(msg){
         c.textContent=msg; c.classList.add("done");
         setTimeout(function(){c.innerHTML=old;c.classList.remove("done");},1400);
       };
-      // 剪贴板 API 可能存在但被拒(非安全上下文、无用户激活、权限策略),
-      // 所以失败也要退回 textarea,再不行给明确提示,不能静默。
       var legacy=function(){
         var t=document.createElement("textarea");
         t.value=text; t.setAttribute("readonly","");
