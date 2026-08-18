@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -147,7 +183,9 @@
     <span class="mono" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.50deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">0 star</span>
     <span class="mono" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.04deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v0.1</span>
     <span style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.22deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">비용 / 과금</span>
-    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/mov-eax-eax/dsh-token-anxiety" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/mov-eax-eax/dsh-token-anxiety" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div>
 <div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,2.3 C80,2.3 160,3.9 240,3.9 C320,3.9 400,2.0 480,2.0 C560,2.0 640,6.1 720,6.1 C800,6.1 880,3.6 960,3.6 C1040,3.6 1120,2.5 1200,2.5" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
@@ -155,8 +193,12 @@
   <div class="grid2" style="align-items:start;">
     <div style="display:flex;flex-direction:column;gap:14px;">
       <h3 style="font-size:21px;">설치</h3>
-      <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.30deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">DeepSeek Harness의 web profile, Node.js 22+. 알려진 제약(README 자체 기재): 루트 세션 작업만 집계하며 subagent 세션은 widget에 나타나지 않음(projection fold가 세션 단위로 접힘). Explain은 host 직결 라우트이고 agent 턴이 아니어서 분석 결과가 세션 로그에 남지 않고 페이지를 새로고침하면 사라짐. 내장 가격표는 「코드에 박혀 있고 시간이 지나면 낡는」 형태라 수동으로 동기화해야 함.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">dsh 플러그인: profile에 설치한 뒤 dsh web을 재시작하면 적용됩니다.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm에서</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-0">dsh plugin --profile web add dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-0" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">로컬 체크아웃</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-1">dsh plugin --profile web add /path/to/dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-1" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm 직접 사용</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-2">npm install dsh-token-anxiety
-npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-token-anxiety-2" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">가격표 수동 동기화</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-3">curl -X POST http://127.0.0.1:3080/token-anxiety/pricing-sync -H &quot;Content-Type: application/json&quot; -d &#x27;{}&#x27;</div><button type="button" data-copy="c-token-anxiety-3" class="copybtn">복사</button></div></div></div>
+      <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.30deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">DeepSeek Harness의 web profile, Node.js 22+. 알려진 제약(README 자체 기재): 루트 세션 작업만 집계하며 subagent 세션은 widget에 나타나지 않음(projection fold가 세션 단위로 접힘). Explain은 host 직결 라우트이고 agent 턴이 아니어서 분석 결과가 세션 로그에 남지 않고 페이지를 새로고침하면 사라짐. 내장 가격표는 「코드에 박혀 있고 시간이 지나면 낡는」 형태라 수동으로 동기화해야 함.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">dsh 플러그인: profile에 설치한 뒤 dsh web을 재시작하면 적용됩니다.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm에서</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-0">dsh plugin --profile web add dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-0" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> 복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">로컬 체크아웃</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-1">dsh plugin --profile web add /path/to/dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-1" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> 복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm 직접 사용</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-2">npm install dsh-token-anxiety
+npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-token-anxiety-2" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> 복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">가격표 수동 동기화</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-3">curl -X POST http://127.0.0.1:3080/token-anxiety/pricing-sync -H &quot;Content-Type: application/json&quot; -d &#x27;{}&#x27;</div><button type="button" data-copy="c-token-anxiety-3" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> 복사</button></div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;">
       <h3 style="font-size:21px;">전체 사용 가이드</h3>
@@ -179,7 +221,9 @@ npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-toke
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness 0.1용 플러그인(Token anxiety)을 만들었어요. 작업별 비용, 피크 시간대, 가격 인상 후 같은 작업이 얼마가 될지를 보여줘요… 요금을 줄이는 팁을 찾아보니, 열린 리서치 질문, 오타, 구체적이지 않은 프롬프트, 도구 호출 버그가 전체 token의 50% 이상을 차지하더라고요.</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">11 업보트</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">원문 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">원문 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div></div>
   </div>
@@ -190,8 +234,12 @@ npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-toke
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness 공식 사이트 &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness 공식 사이트 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>실측 데이터</div>
   </div>
@@ -228,7 +276,9 @@ npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-toke
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -257,8 +307,8 @@ npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-toke
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="복사됨";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="복사됨"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

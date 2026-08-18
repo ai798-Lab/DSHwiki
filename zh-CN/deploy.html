@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -139,7 +175,10 @@
 </div>
 
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">DEPLOY</div><h2 class="stitle">部署上手</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">从零到跑起来，四步。全部命令与官方 README 逐条核对。</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">DEPLOY</div><h2 class="stitle" style="display:flex;align-items:center;gap:12px;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;opacity:0.9;"><path d="M12.42 15.13Q12.13 17.5 11.98 19.55C12.29 19.65 14.93 19.49 15.82 18.45C16.94 16.68 16.28 12.92 15.92 13.34" />
+  <path d="M4.35 16.71C3.56 17.07 2.42 21.73 2.06 20.95C2.79 21.34 5.97 21.86 7.15 18.97C7.99 18.72 7.83 17.49 7.46 17.06C6.26 16.45 5.14 16.53 4.79 16.91" />
+  <path d="M8.71 11.69C8.97 10.74 9.52 9.75 11.16 8.2C13.82 3.98 17.3 1.52 21.96 1.61C21.4 5.56 22.14 9.51 15.55 12.83C14.96 14.6 13.2 14.46 11.76 15.4Q10.61 13.39 8.76 11.76" />
+  <path d="M9.02 12.43Q6.5 11.96 3.93 11.88C4.53 12.39 4.7 9.5 5.49 8.52C7.78 6.56 10.48 7.83 11.28 8.49" /></svg>部署上手</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">从零到跑起来，四步。全部命令与官方 README 逐条核对。</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
   <div class="grid2" style="align-items:start;">
     <div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">01</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">安装 CLI</h3><div class="muted" style="font-size:15px;line-height:1.75;">npx 一条命令直接跑，macOS / Linux / Windows 都行，Node 22.19+ 即可。</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">02</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">接入模型</h3><div class="muted" style="font-size:15px;line-height:1.75;">填 DeepSeek API key，或者接 Ollama 直接用你本地跑的模型。</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">03</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">启动</h3><div class="muted" style="font-size:15px;line-height:1.75;">终端里直接开工；不爱看命令行，dsh web 启动浏览器界面。</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">04</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">装第一个插件</h3><div class="muted" style="font-size:15px;line-height:1.75;">从精选清单挑一个装上——从这里开始，一切皆插件。</div></div></div></div>
     <div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
@@ -150,19 +189,27 @@
   <div class="grid2" style="align-items:start;"><div id="m0" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.55deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">npx 直接运行（官方 README 首选）</h3><span class="mono seal" style="font-size:11px;border:1.5px solid #8f2924;padding:2px 9px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">★</span>
-  </div><div class="cmd" style="margin-bottom:9px;">npx @deepseek-ai/dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">npx @deepseek-ai/dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m1" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.14deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">源码运行(pnpm)</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">git clone https://github.com/deepseek-ai/deepseek-harness.git</div><div class="cmd" style="margin-bottom:9px;">cd deepseek-harness</div><div class="cmd" style="margin-bottom:9px;">pnpm install</div><div class="cmd" style="margin-bottom:9px;">pnpm run build</div><div class="cmd" style="margin-bottom:9px;">pnpm dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">git clone https://github.com/deepseek-ai/deepseek-harness.git</div><div class="cmd" style="margin-bottom:9px;">cd deepseek-harness</div><div class="cmd" style="margin-bottom:9px;">pnpm install</div><div class="cmd" style="margin-bottom:9px;">pnpm run build</div><div class="cmd" style="margin-bottom:9px;">pnpm dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m2" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.31deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">Ollama 集成（本地/私有化）</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">ollama launch dsh</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">ollama launch dsh</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m3" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.31deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">npm 全局安装（社区用法，官方 README 未列）</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">npm install -g @deepseek-ai/dsh</div><div class="cmd" style="margin-bottom:9px;">dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">npm install -g @deepseek-ai/dsh</div><div class="cmd" style="margin-bottom:9px;">dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div></div>
   <div class="grid2" style="align-items:start;">
     <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.48deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><h3 style="font-size:21px;">MODEL</h3>
@@ -173,7 +220,17 @@
   <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">UPGRADE / UNINSTALL</h3>
     <div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;">note</div><div style="font-size:14.5px;line-height:1.8;">README、apps/cli/README.md、docs 用户指南均未提供升级/卸载命令（逐一核对为 ABSENT)；社区讨论中出现过清 npx 缓存的做法(rm -rf ~/.npm/_npx，见 #49/#897)，属排障手段非官方升级流程</div></div></div>
   <div style="display:flex;flex-direction:column;gap:16px;"><h3 style="font-size:21px;">ISSUES</h3>
-    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.47deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1772" target="_blank" rel="noopener">npx 无法安装 | npm 也无法安装 (#1772，已解答） &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">楼主自答(2026-08-16):Debian 未装 build-essential 导致 node-pty 原生模块编译失败；apt 安装 build-essential 后安装成功</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.31deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/49" target="_blank" rel="noopener">在ArchLinux上无法安装 (#49,18 评论） &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">高赞解法：① pacman -Syu base-devel 装编译工具；② 改用 Bun:bun add --global @deepseek-ai/dsh(node-pty 在 Bun 白名单内）;③ 坚持 npm 则清缓存后放行构建脚本：rm -rf ~/.npm/_npx &amp;&amp; npx --allow-scripts=node-pty @deepseek-ai/dsh@0.1.0-rc.6 web；另一方案：npm config set allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs --location=user</div></div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/897" target="_blank" rel="noopener">命令行方式安装不成功 (#897,10 评论） &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">社区诊断：系统默认 g++ 9.4.0 不支持 -std=gnu++20（需 GCC 10+)；解法：先清 npx 缓存，再 CC=gcc-11 CXX=g++-11 npm install -g @deepseek-ai/dsh 后 dsh web</div></div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.09deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">npm 全局安装后 dsh web 启动失败：node-pty 原生模块 pty.node 缺失 (#1219) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">根因：node-pty v1.1.0 无 Linux x64 (Node 24/ABI 137) 预编译产物，npm 安装脚本静默失败；手工绕过：进入 node-pty 目录执行 npx node-gyp rebuild 生成缺失的 pty.node；帖内无官方回复(0 回复）</div></div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.39deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/2230" target="_blank" rel="noopener">dsh安装插件时报错 Ignored build scripts (#2230) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">未抓取到解法详情(1 评论，未深入核对）；现象与 pnpm 默认忽略依赖构建脚本的安全策略相关，可与 #49 的 allow-scripts 方案互参——此条解法待补</div></div></div></div>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.47deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1772" target="_blank" rel="noopener">npx 无法安装 | npm 也无法安装 (#1772，已解答） <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">楼主自答(2026-08-16):Debian 未装 build-essential 导致 node-pty 原生模块编译失败；apt 安装 build-essential 后安装成功</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.31deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/49" target="_blank" rel="noopener">在ArchLinux上无法安装 (#49,18 评论） <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">高赞解法：① pacman -Syu base-devel 装编译工具；② 改用 Bun:bun add --global @deepseek-ai/dsh(node-pty 在 Bun 白名单内）;③ 坚持 npm 则清缓存后放行构建脚本：rm -rf ~/.npm/_npx &amp;&amp; npx --allow-scripts=node-pty @deepseek-ai/dsh@0.1.0-rc.6 web；另一方案：npm config set allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs --location=user</div></div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/897" target="_blank" rel="noopener">命令行方式安装不成功 (#897,10 评论） <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">社区诊断：系统默认 g++ 9.4.0 不支持 -std=gnu++20（需 GCC 10+)；解法：先清 npx 缓存，再 CC=gcc-11 CXX=g++-11 npm install -g @deepseek-ai/dsh 后 dsh web</div></div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.09deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">npm 全局安装后 dsh web 启动失败：node-pty 原生模块 pty.node 缺失 (#1219) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">根因：node-pty v1.1.0 无 Linux x64 (Node 24/ABI 137) 预编译产物，npm 安装脚本静默失败；手工绕过：进入 node-pty 目录执行 npx node-gyp rebuild 生成缺失的 pty.node；帖内无官方回复(0 回复）</div></div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.39deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/2230" target="_blank" rel="noopener">dsh安装插件时报错 Ignored build scripts (#2230) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">未抓取到解法详情(1 评论，未深入核对）；现象与 pnpm 默认忽略依赖构建脚本的安全策略相关，可与 #49 的 allow-scripts 方案互参——此条解法待补</div></div></div></div>
 </div></div>
 
 <div style="margin-top:24px;">
@@ -181,8 +238,12 @@
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>数据实抓</div>
   </div>
@@ -219,7 +280,9 @@
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -248,8 +311,8 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="已复制"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

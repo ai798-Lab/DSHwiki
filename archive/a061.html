@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -145,7 +181,9 @@
   <div class="mono muted" style="font-size:12.5px;">知乎多位答主/专栏作者 · 2026-08-13 · 入门</div>
   <div style="display:flex;gap:9px;flex-wrap:wrap;"><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;">生态观察</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;">争议短板</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;">观点金句</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;">数据实证</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">背景知识</span></div>
   <div style="display:flex;gap:18px;flex-wrap:wrap;">
-    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://www.zhihu.com/question/2071335529577239335" target="_blank" rel="noopener">Source &#8599;</a>
+    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://www.zhihu.com/question/2071335529577239335" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     
   </div>
 </div>
@@ -162,8 +200,12 @@
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>Live-scraped data</div>
   </div>
@@ -200,7 +242,9 @@
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -229,8 +273,8 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="Copied";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="Copied"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

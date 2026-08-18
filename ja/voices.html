@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -139,7 +175,8 @@
 </div>
 
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">VOICES</div><h2 class="stitle">DSH ユーザーの声</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">X と Reddit に投稿された DSH と各プラグインへの生の声。すべて原文リンク付き。</div></div><div class="masonry"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">VOICES</div><h2 class="stitle" style="display:flex;align-items:center;gap:12px;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;opacity:0.9;"><path d="M16.57 9.74C15.33 11.54 15.13 12.28 13.99 12.34Q10.41 11.46 7.02 12.08C6.02 12.03 5.65 12.29 5.69 12.96Q3.93 13.3 3.17 14.81C3.19 14.89 2.66 15.29 2.27 14.84C2.13 14.91 2 14.43 1.91 14.2Q1.77 9.14 2.28 3.41C1.76 2.18 2.36 2.01 3.9 1.6Q9 0.86 14.57 2.29C14.84 1.25 15.98 2.79 16 4.03Q15.57 7 16.01 9.36" />
+  <path d="M19.64 8.46C21.06 9.21 21.96 10.41 21.74 11.34Q22.29 16.14 22.2 21.13C21.86 21.51 21.69 21.62 21.65 21.78C21.13 22.05 20.9 21.72 20.67 21.79Q19.67 20.7 18.8 19.45C18.59 18.77 17.82 18.99 17.01 19.33Q13.59 19.49 9.42 18.69C9 19.04 8.3 17.64 7.91 16.76Q8.15 16.5 7.86 15.97" /></svg>DSH ユーザーの声</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">X と Reddit に投稿された DSH と各プラグインへの生の声。すべて原文リンク付き。</div></div><div class="masonry"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
     <span class="mono muted" style="font-size:11px;">u/stealthispost · 2026-08-15</span>
@@ -148,7 +185,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">Anchored Standard(xiaobright/dsh-anchored-standard)は巧妙なハイブリッドをやっている。1. 最初のモデルリクエストでは、V4 Pro に Minimal と実質同じ環境を提示……2. 最初の本当のツール呼び出し/返答が発生した瞬間、完全な Standard ツールセットを解放……作者の発見によれば、その初回リクエストの tool schema が決定的な変数のようだ。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">47 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -159,7 +198,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">一番刺さったのは anchored standard の結果だ。初回呼び出しの後にフルのツールセットを返しても 98/99 が出るなら、一番ありそうな対抗仮説だった「ツールが少ない=ミスが少ない」説は死ぬ。つまり本当に、モデルが初期化時に何を見るかがすべてなんだ。まあ RL のストーリーとは辻褄が合う。特定の足場の中で訓練されたモデルは、その足場の中で最高の挙動をする。最初のメッセージも例外じゃない。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">4 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.45deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -170,7 +211,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">昨日 dsh-anchored-standard プラグインを見かけて、この盛り上がりと謳っている効果を見て、このアプローチを Pi の拡張に移植してみることにした。あの harness が本当に好きで、DeepSeek 専用の harness を別に抱えたくないからだ。動いた。全部を再現できた。すべての思考が「We ...」で始まる——xiaobright が、より強いバージョンの DeepSeek v4 Pro の痕跡だと指摘していた通りに。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">9 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.33deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -181,7 +224,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">これは過学習したモデル相手のガチャだ。Bilibili での実験を見たことがある。ミニマルなプロンプト、システムプロンプトなし、それでも minimal ですら「let me」をよく落とす。モデルが訓練された語彙はあまりに多く、時々もとの思考連鎖とは違う独特なパターンを出し始めるのは避けられない——それがエントロピーだ。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -192,7 +237,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">すばらしい。正直、まず ChatGPT に解説してもらう必要があったが、ここで何が議論されているのか大まかに分かった今……実に面白い。自分の AI 開発への熱意の多くは、フロンティア企業が出す囲い込まれた製品ではなく、オープンソースコミュニティがそれをどう使えるかにある。だから、よりオープンソースフレンドリーな面白い可能性が見られるのは嬉しい。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.18deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -211,7 +258,9 @@ the biggest advantage = how</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">笑った、もう誰かが Claude Design をオープンソース化してた。名前は Open Design、GitHub star はすでに 78,000+。ローカルアプリは無料で自分の PC で動く。キャンバスは claude code、codex、cursor、gemini など 20 以上のコーディング agent で駆動できる。最大の強みは——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">249 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/itsolelehmann/status/2077172643946725647" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/itsolelehmann/status/2077172643946725647" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -228,7 +277,9 @@ Here is the full story of what happened — and why it matters.</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">誰かが Claude Design をオープンソース化した。名前は Open Design。6 日で GitHub star 20,000 を突破。何が起きたのか、なぜ重要なのか——その全貌を語ろう。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">151 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/iam_elias1/status/2055639752997851490" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/iam_elias1/status/2055639752997851490" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.29deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -245,7 +296,9 @@ Claude Designのオープンソース版が公開されました。名前は Ope
   
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">95 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/so_ainsight/status/2050062774802563425" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/so_ainsight/status/2050062774802563425" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.54deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -262,7 +315,9 @@ nexu-io/open-design——一个本地跑的 Claude Design 开源替代。
   <div class="muted" style="font-size:14px;line-height:1.75;">無料でオープンソースのデザイン素材の神ツール、5 月の GitHub 月間成長率 1 位:nexu-io/open-design——ローカルで動く Claude Design のオープンソース代替。5 月だけで 16,804 star 増。その立ち位置は:どの coding agent にでもデザイン要件を投げれば、agent が Open Design を呼び出して直接アウトプットを出す——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">12 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/KKaWSB/status/2055641921033294248" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/KKaWSB/status/2055641921033294248" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.59deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -277,7 +332,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek-Reasonix——これこそ応援できる harness だ!貧乏 API ユーザーのために作られ、すべてがキャッシュヒット中心。しかも GUI(ラッパー)までもうある。@victor207755822 アイデアを拝借するかコラボするか、どうだろう。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">151 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/teortaxesTex/status/2058413941689041219" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/teortaxesTex/status/2058413941689041219" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.12deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -288,7 +345,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">Reasonix は本当に優秀。プロジェクト名(DeepSeek-Reasonix)に惑わされないで。中継サービスが OpenAI-compatible に対応してさえいれば使える……改めておすすめする。特に skill、記憶、Hooks、MCP などの機能がどれも使いやすい……私は OpenCode の置き換えとして使っている。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">102 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/huangjinbo/status/2066787187191058697" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/huangjinbo/status/2066787187191058697" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.25deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -299,7 +358,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">reasonx が入ってない。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">67 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.08deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -310,7 +371,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">2 日ほど前に追加された tui プラグインと一緒に使っている(DSH のこと)。reasonix と比べると格段にいい。権限の扱いがずっとうまいし、出力も全体的に簡潔で、明らかに安定している。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">7 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.40deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -321,7 +384,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">これって reasonx のボット?3 件とも同じ 1 分以内に投稿されてて、みんな karma が低い。しかも正直、reasonx なんて今の今まで聞いたこともなかったんだが(笑)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.02deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -336,7 +401,9 @@ It&#x27;s exploding in popularity and could</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">この GitHub プロジェクトを見つけた。OpenViking が急騰中。@openclaw にとって最高のメモリマネージャーになるかもしれない!OpenViking(volcengine/OpenViking)は ByteDance のクラウド部門 Volcengine が公開したオープンソースプロジェクト。人気が爆発していて——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">940 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.04deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -353,7 +420,9 @@ OpenViking manages everything an always-on agent needs to function at a high lev
   <div class="muted" style="font-size:14px;line-height:1.75;">速報:ByteDance が、AI agent エコシステムが長らく必要としてきたものをオープンソース化した。agent 専用に作られた本格的なコンテキストデータベースだ。OpenViking は常時稼働の agent が高いレベルで働くために必要なすべてを管理する:→ セッションをまたいで持続・進化する記憶——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">222 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.48deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -366,7 +435,9 @@ This is very promising and I think for one of my projects I will switch from RAG
   <div class="muted" style="font-size:14px;line-height:1.75;">アイデアが進化していく様子を見るのは実に面白い。これはかなり有望で、自分のプロジェクトのひとつは RAG から OpenViking に切り替えようと思う。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -387,7 +458,9 @@ GitHub 9,000スター超え。</div>
   
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">2121 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.43deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -399,7 +472,9 @@ GitHub 9,000スター超え。</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">同事.Skill(Colleague.skill):同僚を Skill に蒸留する。同僚のスキルと性格を AI Skill に蒸留して、本人の代わりに働かせる。いっそ「同事Kill」に改名してはどうか。Skill になったら Kill できるわけだし。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">500 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -412,7 +487,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">中国でバズった GitHub プロジェクト「同事.skill」(Colleague.skill)は、退職する同僚のチャットログ、ドキュメント、メールを、その人の働き方を真似る AI skill に変える。派生プロジェクトが一夜にして出現:Boss.skill、Mentor.skill、Crush.skill、果ては Immortality.skill まで。このネタは見事に刺さった。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">62 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -423,7 +500,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">ロールプレイ→コーディング/実用→またロールプレイと、一周回った感がある。自分の経験だと(いまだに 2023 年のノリで SillyTavern を使っている)、AI にペルソナを演じさせながらコーダーもやらせるのは、タスクの上にタスクを積むことになって、どちらも下手になる。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">5 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -434,7 +513,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">まず調べてみるといい。これは厳密にはロールプレイではなく、役に立つことをやっている。あの GitHub を見てほしい。開発者もほのめかしている。「同僚が退職して、メンテされないドキュメントの山が残された?」……つまり実務に使う話だ。要するに、一緒に実務をこなせる同僚のデジタルツインが手に入るということだから。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">0 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -451,7 +532,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">おめでとう!EverMind が長らく磨き込んできたスーパーアップデートがついに公開!ワンストップの Agent 作成・テスト・統合プラットフォーム EverOS + 新ベンチマーク EvoAgentBench がすべてオープンソースに!1. EverOS:新しいワンストップのオープンソースライブラリ。複数の Methods、Benchmarks、Usecases を内蔵し、既成コンポーネントをいじるだけで自分の Agent を作れる 2. EvoAgentBench:オープンで中立なベンチマーク、専門は——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">55 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -464,7 +547,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">AI Agent の記憶はたいていブラックボックスだ——何を覚えたのか、どこに保存されているのか、直接書き換えられるのか分からない。EverOS(10,300 star)はこれを、自分で開ける .md ファイルの束にした。ローカルで動き、ホスティングサービスに一切依存しない。一言で言えば:AI Agent にローカルファーストの永続メモリ層を付けるもので、保存されるのは Markdown ファイル。読める、書き換えられる、git diff もできる。pip のコマンド 1 本で入る。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -478,7 +563,9 @@ cc @tianyi</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness awesome plugins · プラグイン厳選リスト #DeepSeek #DeepSeekHarness cc @tianyi</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">3 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/fkysly/status/2087904592189378865" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/fkysly/status/2087904592189378865" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.15deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -493,7 +580,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">プラグイン推薦:DeepSeek Harness に必須!高 star 実用プラグイン 10 選(GitHub Star 順)。DeepSeek がオープンソース化したばかりの Harness エコシステムが離陸中!画面がダサい?ビジョンがない?移行が面倒?このプラグインたちが全部解決!GitHub Star で厳選、データは本日時点、そのまま真似して OK。1️⃣ dsh-web-ui ⭐1312——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">278 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/NFT_Chen/status/2088551277408247867" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/NFT_Chen/status/2088551277408247867" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -508,7 +597,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness エコシステム向けに作られたモダンなデスクトップ体験の数々。DSH ユーザーにより快適なローカル操作画面を届ける。1⃣ DeepSeek Harness エコシステム向けのモダンなデスクトップ体験……2⃣ DeepSeek Harness Web UI のプラグインとスキン集。タスクパネル、Git——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">84 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.51deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -521,7 +612,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">思考を自動展開、なめらかな文字送り、なめらかなスクロール。新版では deep diving を固定済み。インストール方法:pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream。いいね・フォロー・star 歓迎[バラ]</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">19 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -532,7 +625,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness 0.1 用のプラグイン(Token anxiety)を作った。タスクごとのコスト、ピーク時間帯、値上げ後に同じタスクがいくらになるかを表示する……請求額を減らすコツとして分かったのは、オープンな調査系の質問、タイポ、曖昧なプロンプト、ツール呼び出しのバグで token の 50% 以上を食っているということ。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">11 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.07deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -547,7 +642,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">skill ひとつで DeepSeek に視覚を与えた。npx -y skills add liustack/modlens リポジトリのリンクはこちら👇</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">411 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/hqmank/status/2084998933731008639" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/hqmank/status/2084998933731008639" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.21deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -562,7 +659,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">EchoBird はオープンソースのデスクトップツールで、AI Agent の導入ハードルをひたすら下げることに特化している。売りは 3 つの「ワンクリック」:Claude Code / OpenClaw などの Agent のインストール、Agent ごとのモデル切り替え、GGUF / HuggingFace モデルのローカルデプロイ。Windows、macOS、Linux すべてにパッケージがあり、MIT で無料。すでに Codex、Cursor、Claude を使っている人に——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">5 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -573,7 +672,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">ユーザーの 60% はセットアップで脱落する。EchoBird は Claude Code、Codex、Aider、OpenClaw などをインストール・実行できる GUI——モデル設定は 1 回だけ、どこでも使える。ターミナル不要、設定地獄なし。オープンソースでクロスプラットフォーム。うますぎる話?#Claude #Codex #OpenClaw #EchoBird</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">0 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -588,7 +689,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness はいまや GitHub 最速成長リポジトリだ。48 時間足らずで 10 万 star を突破し、OpenClaw より速い。コミュニティの反応は非常にポジティブ:&gt; ツール、セッションログ、agent ループ、サブ agent がすべて差し替え可能なプラグインという、異例なほどよく設計されたアーキテクチャ &gt; UI——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">2338 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -601,7 +704,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">見事なリリースだ。複数の harness を内包した Web UI で、SDK 経由で claude code や codex の agent を spawn できる。「deepseek harness」はデフォルトで複数の「モード」(それぞれが harness)をサポートする:プログラマティックなツール呼び出し(TypeScript)の code mode、bash+edit——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1250 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.44deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -612,7 +717,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness v0.1 の Cordis ベースの設計は、これまで見てきた agent アーキテクチャの中でも最もクリーンな表現のひとつだろう。あらゆる能力——モデルアダプター、ツールレジストリ、セッションログ、サンドボックス、オーケストレーションループ、そして UI までもが、型付きサービスを備えた一級市民のプラグインで——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">386 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -629,7 +736,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">最近の DeepSeek と K3 のリリースで、みんな Agent benchmark の裏にある harness を真剣に見始めた。Karpathy のこの投稿はちょうど残り半分を補っている:harness は、prompt とツールを取り替えればモデルを無限に増幅できるものではない。前提は、環境が結果を Agent にフィードバックできること。コードを書くなら compiler、tests、logs がある。だが動的な 3D 世界では、Opus 5——(本文はここで途切れている)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">55 いいね</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -640,7 +749,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">最高すぎる、気に入った。もう 3 つプラグインを作った(セッションの自動タイトル付け、git worktree でワークスペースを切る、セッションコストと残高のリアルタイム表示)。速い(こっちは 2017 年の MacBook Pro だ)、信頼できる、完全にカスタマイズ可能、キャッシュヒット 95-99%、UI はきれいでミニマル。客観的に見て、Reasonix や Pi よりずっといいと思う。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">16 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.13deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -651,7 +762,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">この harness は本当にいい。他の harness と違って、止まってユーザー入力を待ちっぱなしにならないし、実行時のエラーも全部拾って、自分でアプリを止めてデバッグすると判断する。続行には承認ボタンを押すよう求めてもくる。難点は、モデルがかなり悪いこと。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">35 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.52deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -662,7 +775,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">上の記事の内容の多くは、コミュニティの分析が進む中で実はもう時代遅れになっている。答えはそんなに複雑じゃない……本当の答えは「DeepSeek v4 pro GA は DSH の minimal モードに過学習した」だ。内部の人間もこれを認めている。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">35 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -673,7 +788,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness にプラグイン(dsh-deepseek-vision)を追加しようとしたら、こんなエラーに遭遇した:「Failed to load plugins... keyed slot &#x27;settings.plugin.item&#x27; requires options.key」。それ以降、プラグインシステム全体がまともに動かない。気になるのはアーキテクチャだ。すべてがプラグインシステムに依存しているように見えるため、1 つのプラグインの失敗が事実上エコシステム全体を壊しうる……不正または非互換のプラグインは隔離・無効化されるべきで、残りのプラグインシステムの読み込みまで妨げるべきではない。Hermes と Claude Code を使ってきたが、あちらではこの種の故障モードは経験したことがない。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 アップボート</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div></div></div>
 
@@ -682,8 +799,12 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · DSH情報局 · ai798 Lab 制作</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness 公式サイト &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness 公式サイト <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>データは実測取得</div>
   </div>
@@ -720,7 +841,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -749,8 +872,8 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="コピーしました";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="コピーしました"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

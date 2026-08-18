@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -139,7 +175,10 @@
 </div>
 
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">DEPLOY</div><h2 class="stitle">Puesta en marcha</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">De cero a funcionando en cuatro pasos. Todos los comandos verificados uno a uno contra el README oficial.</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">DEPLOY</div><h2 class="stitle" style="display:flex;align-items:center;gap:12px;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;opacity:0.9;"><path d="M12.42 15.13Q12.13 17.5 11.98 19.55C12.29 19.65 14.93 19.49 15.82 18.45C16.94 16.68 16.28 12.92 15.92 13.34" />
+  <path d="M4.35 16.71C3.56 17.07 2.42 21.73 2.06 20.95C2.79 21.34 5.97 21.86 7.15 18.97C7.99 18.72 7.83 17.49 7.46 17.06C6.26 16.45 5.14 16.53 4.79 16.91" />
+  <path d="M8.71 11.69C8.97 10.74 9.52 9.75 11.16 8.2C13.82 3.98 17.3 1.52 21.96 1.61C21.4 5.56 22.14 9.51 15.55 12.83C14.96 14.6 13.2 14.46 11.76 15.4Q10.61 13.39 8.76 11.76" />
+  <path d="M9.02 12.43Q6.5 11.96 3.93 11.88C4.53 12.39 4.7 9.5 5.49 8.52C7.78 6.56 10.48 7.83 11.28 8.49" /></svg>Puesta en marcha</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">De cero a funcionando en cuatro pasos. Todos los comandos verificados uno a uno contra el README oficial.</div></div><div id="guide" style="display:flex;flex-direction:column;gap:40px;">
   <div class="grid2" style="align-items:start;">
     <div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">01</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Instala el CLI</h3><div class="muted" style="font-size:15px;line-height:1.75;">Un solo comando con npx y listo; funciona en macOS / Linux / Windows, solo necesitas Node 22.19+.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">02</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Conecta un modelo</h3><div class="muted" style="font-size:15px;line-height:1.75;">Ingresa tu API key de DeepSeek, o conecta Ollama para usar el modelo que ya corres en local.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">03</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Arranca</h3><div class="muted" style="font-size:15px;line-height:1.75;">Trabaja directo desde la terminal; si no te gusta la línea de comandos, dsh web abre la interfaz en el navegador.</div></div></div><div style="display:flex;gap:20px;padding:16px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">04</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">Instala tu primer plugin</h3><div class="muted" style="font-size:15px;line-height:1.75;">Elige uno de la lista destacada e instálalo: a partir de aquí, todo es un plugin.</div></div></div></div>
     <div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
@@ -150,19 +189,27 @@
   <div class="grid2" style="align-items:start;"><div id="m0" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.55deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">Ejecución directa con npx (opción preferida en el README oficial)</h3><span class="mono seal" style="font-size:11px;border:1.5px solid #8f2924;padding:2px 9px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">★</span>
-  </div><div class="cmd" style="margin-bottom:9px;">npx @deepseek-ai/dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">Fuente original &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">npx @deepseek-ai/dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">Fuente original <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m1" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.14deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">Ejecución desde código fuente (pnpm)</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">git clone https://github.com/deepseek-ai/deepseek-harness.git</div><div class="cmd" style="margin-bottom:9px;">cd deepseek-harness</div><div class="cmd" style="margin-bottom:9px;">pnpm install</div><div class="cmd" style="margin-bottom:9px;">pnpm run build</div><div class="cmd" style="margin-bottom:9px;">pnpm dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">Fuente original &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">git clone https://github.com/deepseek-ai/deepseek-harness.git</div><div class="cmd" style="margin-bottom:9px;">cd deepseek-harness</div><div class="cmd" style="margin-bottom:9px;">pnpm install</div><div class="cmd" style="margin-bottom:9px;">pnpm run build</div><div class="cmd" style="margin-bottom:9px;">pnpm dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness#run" target="_blank" rel="noopener">Fuente original <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m2" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.31deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">Integración con Ollama (local/privada)</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">ollama launch dsh</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">Fuente original &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">ollama launch dsh</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">Fuente original <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div><div id="m3" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.31deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <h3 style="font-size:20px;">Instalación global con npm (uso de la comunidad, no aparece en el README oficial)</h3>
-  </div><div class="cmd" style="margin-bottom:9px;">npm install -g @deepseek-ai/dsh</div><div class="cmd" style="margin-bottom:9px;">dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">Fuente original &#8599;</a>
+  </div><div class="cmd" style="margin-bottom:9px;">npm install -g @deepseek-ai/dsh</div><div class="cmd" style="margin-bottom:9px;">dsh web</div><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">Fuente original <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
 </div></div>
   <div class="grid2" style="align-items:start;">
     <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.48deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><h3 style="font-size:21px;">MODEL</h3>
@@ -173,7 +220,17 @@
   <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">UPGRADE / UNINSTALL</h3>
     <div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;">note</div><div style="font-size:14.5px;line-height:1.8;">Ni el README, ni apps/cli/README.md, ni la guía de usuario de docs incluyen comandos de actualización o desinstalación (verificado uno por uno: ABSENT); en las discusiones de la comunidad aparece la práctica de limpiar la caché de npx (rm -rf ~/.npm/_npx, ver #49/#897), que es una técnica de diagnóstico y no un procedimiento oficial de actualización</div></div></div>
   <div style="display:flex;flex-direction:column;gap:16px;"><h3 style="font-size:21px;">ISSUES</h3>
-    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.47deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1772" target="_blank" rel="noopener">npx no logra instalar | npm tampoco (#1772, resuelto) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">Respuesta del propio autor del hilo (2026-08-16): en Debian, no tener instalado build-essential hacía fallar la compilación del módulo nativo node-pty; tras instalar build-essential con apt, la instalación funcionó</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.31deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/49" target="_blank" rel="noopener">No se puede instalar en ArchLinux (#49, 18 comentarios) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">Soluciones más votadas: ① instalar las herramientas de compilación con pacman -Syu base-devel; ② cambiar a Bun: bun add --global @deepseek-ai/dsh (node-pty está en la lista blanca de Bun); ③ si se insiste con npm, limpiar la caché y permitir los scripts de compilación: rm -rf ~/.npm/_npx &amp;&amp; npx --allow-scripts=node-pty @deepseek-ai/dsh@0.1.0-rc.6 web; otra alternativa: npm config set allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs --location=user</div></div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/897" target="_blank" rel="noopener">La instalación por línea de comandos no funciona (#897, 10 comentarios) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">Diagnóstico de la comunidad: el g++ 9.4.0 que trae el sistema no admite -std=gnu++20 (hace falta GCC 10+); solución: limpiar primero la caché de npx y luego CC=gcc-11 CXX=g++-11 npm install -g @deepseek-ai/dsh, seguido de dsh web</div></div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.09deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">Tras la instalación global con npm, dsh web no arranca: falta pty.node, el módulo nativo de node-pty (#1219) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">Causa raíz: node-pty v1.1.0 no trae binarios precompilados para Linux x64 (Node 24/ABI 137) y el script de instalación de npm falla en silencio; solución manual: entrar al directorio de node-pty y ejecutar npx node-gyp rebuild para generar el pty.node faltante; el hilo no tiene respuesta oficial (0 respuestas)</div></div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.39deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/2230" target="_blank" rel="noopener">Error Ignored build scripts al instalar plugins con dsh (#2230) &#8599;</a><div class="muted" style="font-size:14px;line-height:1.75;">No se obtuvieron los detalles de la solución (1 comentario, sin verificación a fondo); el síntoma se relaciona con la política de seguridad de pnpm que ignora por defecto los scripts de compilación de las dependencias, y puede cruzarse con la solución allow-scripts de #49; esta solución queda pendiente de completar</div></div></div></div>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.47deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1772" target="_blank" rel="noopener">npx no logra instalar | npm tampoco (#1772, resuelto) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">Respuesta del propio autor del hilo (2026-08-16): en Debian, no tener instalado build-essential hacía fallar la compilación del módulo nativo node-pty; tras instalar build-essential con apt, la instalación funcionó</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.31deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/49" target="_blank" rel="noopener">No se puede instalar en ArchLinux (#49, 18 comentarios) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">Soluciones más votadas: ① instalar las herramientas de compilación con pacman -Syu base-devel; ② cambiar a Bun: bun add --global @deepseek-ai/dsh (node-pty está en la lista blanca de Bun); ③ si se insiste con npm, limpiar la caché y permitir los scripts de compilación: rm -rf ~/.npm/_npx &amp;&amp; npx --allow-scripts=node-pty @deepseek-ai/dsh@0.1.0-rc.6 web; otra alternativa: npm config set allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs --location=user</div></div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/897" target="_blank" rel="noopener">La instalación por línea de comandos no funciona (#897, 10 comentarios) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">Diagnóstico de la comunidad: el g++ 9.4.0 que trae el sistema no admite -std=gnu++20 (hace falta GCC 10+); solución: limpiar primero la caché de npx y luego CC=gcc-11 CXX=g++-11 npm install -g @deepseek-ai/dsh, seguido de dsh web</div></div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.09deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/1219" target="_blank" rel="noopener">Tras la instalación global con npm, dsh web no arranca: falta pty.node, el módulo nativo de node-pty (#1219) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">Causa raíz: node-pty v1.1.0 no trae binarios precompilados para Linux x64 (Node 24/ABI 137) y el script de instalación de npm falla en silencio; solución manual: entrar al directorio de node-pty y ejecutar npx node-gyp rebuild para generar el pty.node faltante; el hilo no tiene respuesta oficial (0 respuestas)</div></div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.39deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:8px;"><a style="font-size:16px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/2230" target="_blank" rel="noopener">Error Ignored build scripts al instalar plugins con dsh (#2230) <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a><div class="muted" style="font-size:14px;line-height:1.75;">No se obtuvieron los detalles de la solución (1 comentario, sin verificación a fondo); el síntoma se relaciona con la política de seguridad de pnpm que ignora por defecto los scripts de compilación de las dependencias, y puede cruzarse con la solución allow-scripts de #49; esta solución queda pendiente de completar</div></div></div></div>
 </div></div>
 
 <div style="margin-top:24px;">
@@ -181,8 +238,12 @@
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · El radar de DSH · Un proyecto de ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/en/" class="muted">Sitio oficial de DeepSeek Harness &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">Sitio oficial de DeepSeek Harness <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>Datos recopilados de primera mano</div>
   </div>
@@ -219,7 +280,9 @@
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -248,8 +311,8 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="Copiado";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="Copiado"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

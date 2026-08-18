@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -147,7 +183,9 @@
     <span class="mono" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.49deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">28,891 star</span>
     <span class="mono" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.05deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v0.4.14</span>
     <span style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.47deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">Memory / storage</span>
-    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div>
 <div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,5.0 C80,5.0 160,2.3 240,2.3 C320,2.3 400,5.2 480,5.2 C560,5.2 640,1.9 720,1.9 C800,1.9 880,1.4 960,1.4 C1040,1.4 1120,4.6 1200,4.6" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
@@ -155,11 +193,14 @@
   <div class="grid2" style="align-items:start;">
     <div style="display:flex;flex-direction:column;gap:14px;">
       <h3 style="font-size:21px;">Install</h3>
-      <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.53deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.10+. License note: the main project is AGPLv3, while the CLI and examples are Apache 2.0.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">A Python package: install with pip or uv, then run the command it ships.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-OpenViking-0">pip install openviking --upgrade</div><button type="button" data-copy="c-OpenViking-0" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-OpenViking-1">openviking-server init      # 交互式配置向导
+      <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.53deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.10+. License note: the main project is AGPLv3, while the CLI and examples are Apache 2.0.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">A Python package: install with pip or uv, then run the command it ships.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-OpenViking-0">pip install openviking --upgrade</div><button type="button" data-copy="c-OpenViking-0" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-OpenViking-1">openviking-server init      # 交互式配置向导
 openviking-server doctor    # 校验配置
-openviking-server           # 启动服务</div><button type="button" data-copy="c-OpenViking-1" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Optional VikingBot</span></div><div style="position:relative;"><div class="cmd" id="c-OpenViking-2">pip install &quot;openviking[bot]&quot;
+openviking-server           # 启动服务</div><button type="button" data-copy="c-OpenViking-1" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Optional VikingBot</span></div><div style="position:relative;"><div class="cmd" id="c-OpenViking-2">pip install &quot;openviking[bot]&quot;
 openviking-server --with-bot
-ov chat</div><button type="button" data-copy="c-OpenViking-2" class="copybtn">Copy</button></div></div></div>
+ov chat</div><button type="button" data-copy="c-OpenViking-2" class="copybtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M9.84 7.55Q15 6.54 20.16 8.29C21.91 7.43 22.64 8.35 21.44 9.58Q20.83 15 22.08 20.39C21.3 21.61 20.64 21.24 20.48 22.34Q15 21.16 9.8 22.48C8.49 22.52 7.95 21.49 8.12 19.74Q8.16 15 7.46 10.51C8.3 9.1 8.56 8.23 9.95 8.19Q9.85 7.82 10 8.01" />
+  <path d="M3.42 16.27C2.64 16.19 1.38 15.14 1.79 13.5Q1.01 9 2.17 3.79C1.6 2.18 2.45 2.33 4.53 1.76Q9 0.75 13.78 2.03C15.03 1.46 15.9 2.58 15.72 4.3" /></svg> Copy</button></div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;">
       <h3 style="font-size:21px;">Full tutorial</h3>
@@ -186,7 +227,9 @@ It&#x27;s exploding in popularity and could</div>
   
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">940 likes</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">Source &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.04deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -203,7 +246,9 @@ OpenViking manages everything an always-on agent needs to function at a high lev
   
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">222 likes</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">Source &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.48deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -216,7 +261,9 @@ This is very promising and I think for one of my projects I will switch from RAG
   
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 likes</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">Source &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div></div>
   </div>
@@ -227,8 +274,12 @@ This is very promising and I think for one of my projects I will switch from RAG
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>Live-scraped data</div>
   </div>
@@ -265,7 +316,9 @@ This is very promising and I think for one of my projects I will switch from RAG
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -294,8 +347,8 @@ This is very promising and I think for one of my projects I will switch from RAG
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="Copied";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="Copied"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

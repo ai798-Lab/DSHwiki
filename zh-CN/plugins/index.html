@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -139,7 +175,7 @@
 </div>
 
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">PLUGINS</div><h2 class="stitle">DSH 插件</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">12 个值得装的插件，每个都有安装命令、用法与真实口碑。</div></div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.40deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;margin-bottom:32px;"><h3 style="font-size:21px;">怎么装一个 dsh 插件</h3><div style="font-size:15px;line-height:1.85;">dsh 原生插件是一行命令装进 profile，装完重启 dsh web 才生效：</div><div style="position:relative;"><div class="cmd" id="howto-cmd">dsh plugin --profile web add &lt;plugin&gt;</div><span data-copy="howto-cmd" class="copybtn">复制</span></div><div class="muted" style="font-size:14px;line-height:1.8;">下面清单里不少项目并不是 dsh 原生插件，而是独立工具：npm 包、Python 包、桌面应用，或者要复制到目录里的 preset。装法各不相同——点进每个插件页有按系统分好的完整命令。</div></div><div class="tabbar"><button type="button" data-panel="pk" aria-pressed="true">插件精选</button><button type="button" data-panel="rank" aria-pressed="false">插件排行榜</button><button type="button" data-panel="mo" aria-pressed="false">更多插件</button></div><div class="panel" id="pk"><div class="grid2"><a href="dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.37deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">PLUGINS</div><h2 class="stitle" style="display:flex;align-items:center;gap:12px;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;opacity:0.9;"><path d="M15.62 4.2C15.7 4.35 16.27 4.49 16.53 4.6C16.86 4.2 16.98 4.37 17 3.91C17.8 3.22 18.38 1.53 19.94 1.45C20.73 2.01 21.91 2.92 22.12 4.24C21.79 5.44 20.73 6.67 20.18 6.79C19.64 7.2 19.34 7.64 19.49 7.69C19.4 7.84 19.41 8.32 19.44 8.65Q20.63 9.27 21.37 10.41C21.63 10.83 21.7 11.23 22.01 12.18C21.98 12.51 22.32 12.94 21.56 14.02Q20.89 14.98 19.54 15.22C19.25 15.73 18.89 15.89 18.4 15.57C18.46 15.56 18.16 15.19 18.07 14.85C17.49 14.15 16.07 12.52 14.89 12.74C13.81 12.68 13.53 14.36 12.45 15.54C13.14 16.38 14.1 17.69 14.92 18.07C15.23 18.08 15.53 17.93 15.47 18.62C15.75 18.98 15.8 19.25 15.44 19.45Q14.24 20.14 13.96 21.45C13.52 21.27 12.53 21.94 11.86 21.9C10.99 22.1 10.72 21.51 10.19 20.92Q9.81 20.09 8.54 19.84C8.4 19.5 7.92 19.52 7.45 19.25C7.48 19.49 7.05 19.61 6.83 20.14C6.12 21.2 5.83 22.41 4.74 22.2C2.63 21.74 2.61 20.44 2.27 20.27C2.11 18.59 2.7 17.36 3.9 17.21C4.31 16.83 4.49 16.41 4.72 16.22C4.78 15.81 4.9 15.52 4.2 15.21Q3.37 14.73 3.03 13.86C2.48 13.15 2.1 13.17 1.94 12.26C2.42 11.44 2.71 11.23 2.86 9.99Q3.21 9.11 4.53 8.69C4.38 8.1 4.75 8.15 5.49 8.43C5.86 8.48 6.11 8.98 6.14 9.08C6.7 9.54 7.47 11.06 9.11 11.35C9.87 10.72 10.89 10.03 10.93 9.06C11.35 6.99 10.78 6.24 9.21 6.26C8.65 5.91 8.2 5.79 8.44 5.21C8.34 5.23 8.44 4.55 8.62 4.6Q9.73 3.83 9.96 2.43C10.49 2.18 11.46 1.66 12.24 1.56C12.74 1.92 13.07 2.18 13.45 2.71Q14.16 3.94 15.48 4.5" /></svg>DSH 插件</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">12 个值得装的插件，每个都有安装命令、用法与真实口碑。</div></div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.40deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;margin-bottom:32px;"><h3 style="font-size:21px;">怎么装一个 dsh 插件</h3><div style="font-size:15px;line-height:1.85;">dsh 原生插件是一行命令装进 profile，装完重启 dsh web 才生效：</div><div style="position:relative;"><div class="cmd" id="howto-cmd">dsh plugin --profile web add &lt;plugin&gt;</div><span data-copy="howto-cmd" class="copybtn">复制</span></div><div class="muted" style="font-size:14px;line-height:1.8;">下面清单里不少项目并不是 dsh 原生插件，而是独立工具：npm 包、Python 包、桌面应用，或者要复制到目录里的 preset。装法各不相同——点进每个插件页有按系统分好的完整命令。</div></div><div class="tabbar"><div class="tabgroup"><button type="button" data-panel="pk" aria-pressed="true">插件精选</button><button type="button" data-panel="mo" aria-pressed="false">更多插件</button></div><button type="button" class="ranklink" data-panel="rank" aria-pressed="false"><svg width="18" height="16" viewBox="0 0 18 16" fill="none" aria-hidden="true"><path d="M2.6 15 L2.3 9.3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M9 15.1 L9.3 2.6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M15.4 14.9 L15.1 6.8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>插件排行榜</span></button></div><div class="panel" id="pk"><div class="grid2"><a href="dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.37deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <span class="mono" style="font-size:14.5px;">dsh-anchored-standard</span>
     <span class="mono muted" style="font-size:12px;">3,423 star</span>
@@ -147,8 +183,7 @@
   <h3 style="font-size:20px;">先极简引导，再全集火力。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">两阶段 preset：前段极简模式压低噪音，中段自动切换标准工具全集，社区对照实验把基准分从 91 拉到 98。注意：作者已停止积极开发。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-dsh-anchored-standard" style="font-size:12.5px;">dsh_home=&quot;${DSH_HOME:-$HOME/.dsh}&quot;</div>
-    <span data-copy="l-dsh-anchored-standard" class="copybtn">复制</span>
+    <div class="muted" style="font-size:13.5px;line-height:1.7;">装法不止一行，点进详情页看完整命令 →</div>
   </div>
 </a><a href="open-design.html" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.29deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -158,8 +193,7 @@
   <h3 style="font-size:20px;">把 dsh 当你的设计引擎。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">开源版 Claude Design，本地优先桌面应用。接上 dsh 之后文字改稿实时出图，是生态里最大的项目。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-open-design" style="font-size:12.5px;">od mcp install &lt;agent&gt;</div>
-    <span data-copy="l-open-design" class="copybtn">复制</span>
+    <div class="cmd" id="l-open-design" style="font-size:12.5px;">od agent setup deepseek-harness</div><span data-copy="l-open-design" class="copybtn">复制</span>
   </div>
 </a><a href="DeepSeek-Reasonix.html" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.56deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -169,8 +203,7 @@
   <h3 style="font-size:20px;">DeepSeek 原生的终端编码 Agent。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">围绕前缀缓存稳定性设计，可长期挂机跑任务。npm TypeScript 线已是 legacy，主力开发转向 Go。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-DeepSeek-Reasonix" style="font-size:12.5px;">npm i -g reasonix</div>
-    <span data-copy="l-DeepSeek-Reasonix" class="copybtn">复制</span>
+    <div class="cmd" id="l-DeepSeek-Reasonix" style="font-size:12.5px;">npm i -g reasonix</div><span data-copy="l-DeepSeek-Reasonix" class="copybtn">复制</span>
   </div>
 </a><a href="OpenViking.html" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.11deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -180,8 +213,7 @@
   <h3 style="font-size:20px;">火山引擎出的 Agent 上下文数据库。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">记忆、知识 RAG 与 Skills 统一管理，L0/L1/L2 三层检索省 token，大厂背书。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-OpenViking" style="font-size:12.5px;">pip install openviking --upgrade</div>
-    <span data-copy="l-OpenViking" class="copybtn">复制</span>
+    <div class="cmd" id="l-OpenViking" style="font-size:12.5px;">pip install openviking --upgrade</div><span data-copy="l-OpenViking" class="copybtn">复制</span>
   </div>
 </a><a href="colleague-skill.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.01deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -191,8 +223,7 @@
   <h3 style="font-size:20px;">离职同事，数字返聘。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">把前辈的文档、代码风格和口头禅做成“会像 TA 一样干活”的 Skill——所谓数字生命 1.0，全生态话题度最高的项目。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-colleague-skill" style="font-size:12.5px;">Install the dot-skill skill for me: https://github.com/titanwings/colleague-skill</div>
-    <span data-copy="l-colleague-skill" class="copybtn">复制</span>
+    <div class="muted" style="font-size:13.5px;line-height:1.7;">装法不止一行，点进详情页看完整命令 →</div>
   </div>
 </a><a href="EverOS.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.46deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -202,8 +233,7 @@
   <h3 style="font-size:20px;">一份记忆，处处通用。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">便携记忆层：本地优先、Markdown 原生，跨 agent 应用共用一份自进化记忆。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-EverOS" style="font-size:12.5px;">uv pip install everos</div>
-    <span data-copy="l-EverOS" class="copybtn">复制</span>
+    <div class="cmd" id="l-EverOS" style="font-size:12.5px;">uv pip install everos</div><span data-copy="l-EverOS" class="copybtn">复制</span>
   </div>
 </a><a href="awesome-dsh-plugin.html" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.52deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -213,8 +243,7 @@
   <h3 style="font-size:20px;">找插件，从这里开始。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">人工核验源码的插件精选目录，约 800+ 插件 20 个类目，配套插件市场 dshmarket。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-awesome-dsh-plugin" style="font-size:12.5px;">dsh plugin add &lt;插件名&gt;</div>
-    <span data-copy="l-awesome-dsh-plugin" class="copybtn">复制</span>
+    <div class="muted" style="font-size:13.5px;line-height:1.7;">装法不止一行，点进详情页看完整命令 →</div>
   </div>
 </a><a href="dsh-web-ui.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.52deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -224,8 +253,7 @@
   <h3 style="font-size:20px;">给 dsh 一张脸。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">Web UI 插件全家桶：任务看板、Git 图、手机远程、皮肤中心——想要图形界面，装这个。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-dsh-web-ui" style="font-size:12.5px;">dsh plugin --profile web add @linxin666/dsh-web-ui-all</div>
-    <span data-copy="l-dsh-web-ui" class="copybtn">复制</span>
+    <div class="cmd" id="l-dsh-web-ui" style="font-size:12.5px;">dsh plugin --profile web add @linxin666/dsh-web-ui-all</div><span data-copy="l-dsh-web-ui" class="copybtn">复制</span>
   </div>
 </a><a href="smooth-stream.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.05deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -235,8 +263,7 @@
   <h3 style="font-size:20px;">中文社区出品的流式输出插件。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">cordis.patch.yml 三档 preset 可调，星数不大，中文圈讨论度不小。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-smooth-stream" style="font-size:12.5px;">pnpm dsh plugin --profile web add dsh-smooth-stream</div>
-    <span data-copy="l-smooth-stream" class="copybtn">复制</span>
+    <div class="cmd" id="l-smooth-stream" style="font-size:12.5px;">pnpm dsh plugin --profile web add dsh-smooth-stream</div><span data-copy="l-smooth-stream" class="copybtn">复制</span>
   </div>
 </a><a href="token-anxiety.html" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.04deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -246,8 +273,7 @@
   <h3 style="font-size:20px;">成本焦虑，当场缓解。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">实时算钱，Explain 命令解释每一笔 token 去向，价格表可一条 curl 同步。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-token-anxiety" style="font-size:12.5px;">dsh plugin --profile web add dsh-token-anxiety</div>
-    <span data-copy="l-token-anxiety" class="copybtn">复制</span>
+    <div class="cmd" id="l-token-anxiety" style="font-size:12.5px;">dsh plugin --profile web add dsh-token-anxiety</div><span data-copy="l-token-anxiety" class="copybtn">复制</span>
   </div>
 </a><a href="modlens.html" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.00deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -257,8 +283,7 @@
   <h3 style="font-size:20px;">给纯文本模型开天眼。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">dsh 首个视觉插件：贴一张图，直接返回结构化 JSON 证据，10 路引擎故障转移。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-modlens" style="font-size:12.5px;">npx -y @deepseek-ai/dsh plugin --profile web add @liustack/modlens@3.18.3</div>
-    <span data-copy="l-modlens" class="copybtn">复制</span>
+    <div class="cmd" id="l-modlens" style="font-size:12.5px;">npx -y @deepseek-ai/dsh plugin --profile web add @liustack/modlens@3.18.3</div><span data-copy="l-modlens" class="copybtn">复制</span>
   </div>
 </a><a href="EchoBird.html" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.00deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
@@ -268,13 +293,14 @@
   <h3 style="font-size:20px;">一键安装与模型切换器。</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">统一管理 Claude Code、Codex、dsh 等 CLI 的安装与切换——非程序员上手首选。</div>
   <div style="position:relative;">
-    <div class="cmd" id="l-EchoBird" style="font-size:12.5px;">irm https://echobird.ai/install.ps1 | iex</div>
-    <span data-copy="l-EchoBird" class="copybtn">复制</span>
+    <div class="cmd" id="l-EchoBird" style="font-size:12.5px;">curl -fsSL https://echobird.ai/install.sh | sh</div><span data-copy="l-EchoBird" class="copybtn">复制</span>
   </div>
 </a></div></div><div class="panel" id="rank" hidden><div class="muted" style="font-size:14px;line-height:1.8;margin-bottom:18px;">生态插件按 star 排序，已剔除蹭 topic 的弱相关项目。star 数为 2026-08-18 实抓。</div><div class="filterbar" data-target="alllist"><button type="button" data-f="all" aria-pressed="true">全部 <span>25</span></button><button type="button" data-f="UI" aria-pressed="false">UI <span>3</span></button><button type="button" data-f="设计" aria-pressed="false">设计 <span>2</span></button><button type="button" data-f="记忆/存储" aria-pressed="false">记忆/存储 <span>2</span></button><button type="button" data-f="skill" aria-pressed="false">skill <span>2</span></button><button type="button" data-f="其他" aria-pressed="false">其他 <span>16</span></button></div><div id="alllist"><div class="fitem rkrow" data-tags="设计">
   <div class="mono rknum" style="font-size:14px;">01</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">open-design &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">open-design <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">设计 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.9 C30.0,7.1 70.0,6.9 100.0,7.1" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -282,7 +308,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">02</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">DeepSeek-Reasonix &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">DeepSeek-Reasonix <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">终端Agent/CLI · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.4 C11.8,6.6 27.5,7.4 39.3,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -290,7 +318,9 @@
 </div><div class="fitem rkrow" data-tags="记忆/存储">
   <div class="mono rknum" style="font-size:14px;">03</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">OpenViking &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">OpenViking <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">记忆/存储 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.5 C9.8,6.6 22.9,7.5 32.7,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -298,7 +328,9 @@
 </div><div class="fitem rkrow" data-tags="skill">
   <div class="mono rknum" style="font-size:14px;">04</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">colleague-skill &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">colleague-skill <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">skill · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.2 C7.9,6.8 18.3,7.2 26.2,6.8" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -306,7 +338,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">05</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Nagi-ovo/voyager" target="_blank" rel="noopener">voyager &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Nagi-ovo/voyager" target="_blank" rel="noopener">voyager <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">工具/浏览器增强</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.0 C6.7,7.0 15.5,7.0 22.2,7.0" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -314,7 +348,9 @@
 </div><div class="fitem rkrow" data-tags="skill">
   <div class="mono rknum" style="font-size:14px;">06</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">archify &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">archify <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">skill</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.4 C4.7,7.5 11.0,6.4 15.7,7.5" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -322,7 +358,9 @@
 </div><div class="fitem rkrow" data-tags="记忆/存储">
   <div class="mono rknum" style="font-size:14px;">07</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">EverOS &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">EverOS <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">记忆/存储 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.7 C4.1,7.2 9.6,6.7 13.7,7.2" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -330,7 +368,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">08</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">learn-harness-engineering &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">learn-harness-engineering <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">教程</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.3 C4.0,6.7 9.4,7.3 13.4,6.7" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -338,7 +378,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">09</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">deepseek-harness-desktop &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">deepseek-harness-desktop <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">UI/客户端</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.9 C3.9,7.1 9.2,6.9 13.2,7.1" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -346,7 +388,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">10</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">awesome-dsh-plugin &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">awesome-dsh-plugin <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">目录/清单 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.0 C2.6,7.0 6.0,7.0 8.6,7.0" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -354,7 +398,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">11</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Q00/ouroboros" target="_blank" rel="noopener">ouroboros &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Q00/ouroboros" target="_blank" rel="noopener">ouroboros <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">编排/自进化</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.4 C1.9,6.6 4.4,7.4 6.2,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -362,7 +408,9 @@
 </div><div class="fitem rkrow" data-tags="设计">
   <div class="mono rknum" style="font-size:14px;">12</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ZSeven-W/openpencil" target="_blank" rel="noopener">openpencil &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ZSeven-W/openpencil" target="_blank" rel="noopener">openpencil <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">设计</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.7 C1.8,7.3 4.2,6.7 5.9,7.3" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -370,7 +418,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">13</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Devin-AXIS/iPolloWork" target="_blank" rel="noopener">iPolloWork &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Devin-AXIS/iPolloWork" target="_blank" rel="noopener">iPolloWork <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">工作台/编排</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.7 C1.4,7.3 3.3,6.7 4.7,7.3" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -378,7 +428,9 @@
 </div><div class="fitem rkrow" data-tags="UI">
   <div class="mono rknum" style="font-size:14px;">14</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/zhu1090093659/dsh-web-ui" target="_blank" rel="noopener">dsh-web-ui &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/zhu1090093659/dsh-web-ui" target="_blank" rel="noopener">dsh-web-ui <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">UI · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.2 C1.4,7.7 3.2,6.2 4.6,7.7" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -386,7 +438,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">15</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/crafter-station/petdex" target="_blank" rel="noopener">petdex &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/crafter-station/petdex" target="_blank" rel="noopener">petdex <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">趣味/UI</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.9 C1.3,7.1 3.1,6.9 4.4,7.1" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -394,7 +448,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">16</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/strukto-ai/mirage" target="_blank" rel="noopener">mirage &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/strukto-ai/mirage" target="_blank" rel="noopener">mirage <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">存储/文件系统</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.6 C1.2,7.3 2.8,6.6 4.0,7.3" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -402,7 +458,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">17</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/xiaobright/dsh-anchored-standard" target="_blank" rel="noopener">dsh-anchored-standard &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/xiaobright/dsh-anchored-standard" target="_blank" rel="noopener">dsh-anchored-standard <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">配置/preset · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.6 C1.2,6.5 2.7,7.6 3.9,6.5" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -410,7 +468,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">18</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/edison7009/EchoBird" target="_blank" rel="noopener">EchoBird &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/edison7009/EchoBird" target="_blank" rel="noopener">EchoBird <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">工具/安装器 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.4 C1.0,6.7 2.4,7.4 3.5,6.7" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -418,7 +478,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">19</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/foryourhealth111-pixel/Vibe-Skills" target="_blank" rel="noopener">Vibe-Skills &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/foryourhealth111-pixel/Vibe-Skills" target="_blank" rel="noopener">Vibe-Skills <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">skill/编排</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.8 C1.0,7.2 2.3,6.8 3.3,7.2" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -426,7 +488,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">20</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/whiteguo233/OpenBiliClaw" target="_blank" rel="noopener">OpenBiliClaw &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/whiteguo233/OpenBiliClaw" target="_blank" rel="noopener">OpenBiliClaw <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">内容发现Agent</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.3 C1.0,6.7 2.3,7.3 3.2,6.7" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -434,7 +498,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">21</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/liustack/modlens" target="_blank" rel="noopener">modlens &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/liustack/modlens" target="_blank" rel="noopener">modlens <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">视觉/多模态 · </span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.8 C0.9,7.2 2.2,6.8 3.2,7.2" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -442,7 +508,9 @@
 </div><div class="fitem rkrow" data-tags="UI">
   <div class="mono rknum" style="font-size:14px;">22</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/chuspeeism/dashi-taskboard" target="_blank" rel="noopener">dashi-taskboard &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/chuspeeism/dashi-taskboard" target="_blank" rel="noopener">dashi-taskboard <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">UI</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.5 C0.8,7.4 1.8,6.5 2.6,7.4" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -450,7 +518,9 @@
 </div><div class="fitem rkrow" data-tags="UI">
   <div class="mono rknum" style="font-size:14px;">23</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/omdsh-dev/DSH-better-sidebar" target="_blank" rel="noopener">DSH-better-sidebar &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/omdsh-dev/DSH-better-sidebar" target="_blank" rel="noopener">DSH-better-sidebar <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">UI</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.5 C0.7,6.6 1.5,7.5 2.2,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -458,7 +528,9 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">24</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">UI/终端</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.9 C0.6,7.1 1.4,6.9 2.1,7.1" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
@@ -466,32 +538,42 @@
 </div><div class="fitem rkrow" data-tags="其他">
   <div class="mono rknum" style="font-size:14px;">25</div>
   <div class="rkname">
-    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/GCWing/BitFun" target="_blank" rel="noopener">BitFun &#8599;</a>
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/GCWing/BitFun" target="_blank" rel="noopener">BitFun <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     <span class="muted" style="font-size:12px;">客户端/运行时</span>
   </div>
   <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.3 C0.6,7.6 1.4,6.3 2.0,7.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
   <div class="mono rkstar" style="font-size:13px;">1,770</div>
 </div></div></div><div class="panel" id="mo" hidden><h3 style="font-size:20px;margin-bottom:18px;">去这些地方翻更多</h3><div class="grid2" style="align-items:start;"><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.25deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
-    <span class="mono" style="font-size:14.5px;">awesome-dsh-plugin &#8599;</span>
+    <span class="mono" style="font-size:14.5px;">awesome-dsh-plugin <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></span>
     <span class="mono muted" style="font-size:12px;white-space:nowrap;">7,572 star</span>
   </div>
   <div class="muted" style="font-size:14px;line-height:1.8;">每条收录前人工对照源码验货，20 个分类，配套可视化插件市场</div>
 </a><a href="https://dshplugins.xyz/en" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.51deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
-    <span class="mono" style="font-size:14.5px;">dshplugins.xyz &#8599;</span>
+    <span class="mono" style="font-size:14.5px;">dshplugins.xyz <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></span>
     <span class="mono muted" style="font-size:12px;white-space:nowrap;">300+ 插件</span>
   </div>
   <div class="muted" style="font-size:14px;line-height:1.8;">第三方目录站，按「使用意图」分五类，周榜按 README 质量而非 star 排序</div>
 </a><a href="https://deepseek-code.com/plugins" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.46deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
-    <span class="mono" style="font-size:14.5px;">deepseek-code.com &#8599;</span>
+    <span class="mono" style="font-size:14.5px;">deepseek-code.com <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></span>
     <span class="mono muted" style="font-size:12px;white-space:nowrap;">316 插件</span>
   </div>
   <div class="muted" style="font-size:14px;line-height:1.8;">8 个分类，价值在长尾：迁移、笔记、余额监控这类刁钻小工具都在这露头</div>
 </a><a href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.06deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
-    <span class="mono" style="font-size:14.5px;">GitHub topic: dsh-plugin &#8599;</span>
+    <span class="mono" style="font-size:14.5px;">GitHub topic: dsh-plugin <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></span>
     <span class="mono muted" style="font-size:12px;white-space:nowrap;">6,716 仓库</span>
   </div>
   <div class="muted" style="font-size:14px;line-height:1.8;">生态的原始聚合口，新插件都会打这个 topic</div>
@@ -502,8 +584,12 @@
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>数据实抓</div>
   </div>
@@ -540,7 +626,9 @@
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -569,8 +657,8 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="已复制"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});

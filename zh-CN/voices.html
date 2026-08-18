@@ -51,10 +51,13 @@
   .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                  background:transparent; border:1.5px solid #151515; padding:3px 12px; }
   .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
-  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
-              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
-              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
-  .copybtn:hover { opacity:1; }
+  /* 描边式，与站内其他按钮同一套语言；因为浮在深色命令块上，描边取纸色 */
+  .copybtn { position:absolute; inset-inline-end:10px; inset-block-start:9px; font-family:var(--font-body);
+              font-size:13px; line-height:1.5; padding:2px 12px; cursor:pointer;
+              background:transparent; color:#f5f1e8; border:1.5px solid rgba(245,241,232,0.45);
+              border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; transition:background .15s, color .15s, border-color .15s; }
+  .copybtn:hover { background:#f5f1e8; color:#151515; border-color:#f5f1e8; }
+  .copybtn.done { background:#f5f1e8; color:#8f2924; border-color:#f5f1e8; }
   .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
   .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
@@ -66,12 +69,45 @@
                        border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
   .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
-  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
-                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
-                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
-  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .tabbar { display:flex; justify-content:space-between; align-items:center;
+             gap:12px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabgroup { display:flex; gap:10px; flex-wrap:wrap; }
+  .tabgroup button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                      background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                      border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabgroup button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  /* 排行榜是次级入口：图标加文字，不做成按钮 */
+  .ranklink { display:inline-flex; align-items:center; gap:8px; background:transparent;
+               border:none; padding:4px 0; cursor:pointer; color:#151515;
+               font-family:var(--font-head); font-size:19px; }
+  .ranklink svg { flex-shrink:0; }
+  .ranklink:hover { color:#8f2924; }
+  .ranklink[aria-pressed="true"] { color:#8f2924; }
+  .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
+
+  /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
+     不会和卡片内联的 transform:rotate() 打架 */
+  @media (prefers-reduced-motion: no-preference) {
+    .fsw button, .ostabs button, .tabbar button, .filterbar button, .copybtn,
+    .langpick > summary, .mainnav a, .tools a {
+      transition: background-color .18s ease, color .18s ease, translate .18s ease,
+                  scale .12s ease, rotate .12s ease; }
+    .fsw button:hover, .ostabs button:hover, .tabbar button:hover,
+    .filterbar button:hover, .langpick > summary:hover { translate: 0 -2px; }
+    .fsw button:active, .ostabs button:active, .tabbar button:active,
+    .filterbar button:active, .copybtn:active, .langpick > summary:active {
+      scale: .94; rotate: -1.2deg; }
+    .mainnav a:hover { translate: 0 -2px; }
+    .tools a:hover { translate: 0 -2px; }
+    .copybtn:hover { scale: 1.05; }
+    .copybtn.done { scale: 1.1; rotate: 1.5deg; }
+    .fitem, .insblock { transition: translate .2s ease; }
+    .fitem:hover { translate: 0 -3px; }
+    .panel:not([hidden]) { animation: dsh-in .3s ease both; }
+    .fitem.reveal { animation: dsh-in .32s ease both; }
+    @keyframes dsh-in { from { opacity: 0; translate: 0 7px; } to { opacity: 1; translate: 0 0; } }
+  }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -139,7 +175,8 @@
 </div>
 
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">VOICES</div><h2 class="stitle">DSH 用户说</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">X 与 Reddit 上关于 DSH 和各插件的真实声音，每条带原文链接。</div></div><div class="masonry"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">VOICES</div><h2 class="stitle" style="display:flex;align-items:center;gap:12px;"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;opacity:0.9;"><path d="M16.57 9.74C15.33 11.54 15.13 12.28 13.99 12.34Q10.41 11.46 7.02 12.08C6.02 12.03 5.65 12.29 5.69 12.96Q3.93 13.3 3.17 14.81C3.19 14.89 2.66 15.29 2.27 14.84C2.13 14.91 2 14.43 1.91 14.2Q1.77 9.14 2.28 3.41C1.76 2.18 2.36 2.01 3.9 1.6Q9 0.86 14.57 2.29C14.84 1.25 15.98 2.79 16 4.03Q15.57 7 16.01 9.36" />
+  <path d="M19.64 8.46C21.06 9.21 21.96 10.41 21.74 11.34Q22.29 16.14 22.2 21.13C21.86 21.51 21.69 21.62 21.65 21.78C21.13 22.05 20.9 21.72 20.67 21.79Q19.67 20.7 18.8 19.45C18.59 18.77 17.82 18.99 17.01 19.33Q13.59 19.49 9.42 18.69C9 19.04 8.3 17.64 7.91 16.76Q8.15 16.5 7.86 15.97" /></svg>DSH 用户说</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">X 与 Reddit 上关于 DSH 和各插件的真实声音，每条带原文链接。</div></div><div class="masonry"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
     <span class="mono muted" style="font-size:11px;">u/stealthispost · 2026-08-15</span>
@@ -148,7 +185,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">Anchored Standard(xiaobright/dsh-anchored-standard)做了一个聪明的混合方案：1. 第一次模型请求时，给 V4 Pro 呈现与 Minimal 基本相同的环境……2. 一旦发生第一次真实工具调用/回复，就解锁完整的 Standard 工具集……作者发现，第一次请求携带的工具 schema 似乎是决定性变量。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">47 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -159,7 +198,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">最让我震撼的就是 anchored standard 的结果。第一次调用之后就把完整工具集还回去，居然还能拿到 98/99 分，这直接干掉了‘工具越少=错误越少’这个最顺手的解释。所以关键真的就在于模型初始化时看到了什么。这也符合 RL（强化学习）的逻辑：模型在某个特定脚手架里训练出来，它就会在那个脚手架里表现最好，第一条消息也不例外。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">4 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.45deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -170,7 +211,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">我昨天看到了 dsh-anchored-standard 插件，看它的热度和承诺的效果，决定把这套思路移植成 Pi 扩展试试，因为我很喜欢那个 harness，不想为 DeepSeek 单独养一个。它有效，我完整复现了整件事。所有思考都以‘We ...’开头——正如 xiaobright 标记的那样，这是某个更强版本 DeepSeek V4 Pro 的痕迹。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">9 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.33deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -181,7 +224,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">这就是在跟一个过拟合的模型抽卡。我看过 Bilibili 上的实验：极简提示词、无系统提示词，即使在 minimal 下它也经常丢掉‘let me’开头。模型训练过的语料实在太多，时不时输出一些不同于原始思维链的独特模式是不可避免的——这就是熵。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -192,7 +237,9 @@
   <div class="muted" style="font-size:14px;line-height:1.75;">太棒了。说实话我得先让 ChatGPT 给我讲解一遍，不过现在大概明白这里在讨论什么了……非常有意思。我对 AI 发展的热情很大一部分就在于开源社区能怎么用它，而不是前沿厂商那些封得死死的产品，所以看到这种对开源更友好的潜力真的很好。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.18deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -211,7 +258,9 @@ the biggest advantage = how</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">笑死，已经有人把 Claude Design 开源了。它叫 Open Design,GitHub 星数已经 78,000+。本地应用免费，跑在你自己的电脑上。画布可以用 claude code、codex、cursor、gemini 或 20 多个其他编码 agent 来驱动。最大的优势 = 用量的计算方式……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">249 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/itsolelehmann/status/2077172643946725647" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/itsolelehmann/status/2077172643946725647" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -228,7 +277,9 @@ Here is the full story of what happened — and why it matters.</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">有人刚把 Claude Design 开源了。他们叫它 Open Design。6 天之内破了 20,000 GitHub star。以下是事情的完整经过——以及它为什么重要。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">151 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/iam_elias1/status/2055639752997851490" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/iam_elias1/status/2055639752997851490" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.29deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -245,7 +296,9 @@ Claude Designのオープンソース版が公開されました。名前は Ope
   <div class="muted" style="font-size:14px;line-height:1.75;">这是神作。Claude Design 的开源版发布了，名字叫 Open Design。GitHub 上已超过 8,000 星，而且不被 Anthropic 的订阅绑死。・一句话文本自动生成 UI 原型 ・内置 Linear / Stripe / Vercel / Notion 等 71 套品牌级设计系统</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">95 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/so_ainsight/status/2050062774802563425" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/so_ainsight/status/2050062774802563425" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.54deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -262,7 +315,9 @@ nexu-io/open-design——一个本地跑的 Claude Design 开源替代。
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）免费开源的设计物料神器，5 月 GitHub 单月增速第一：nexu-io/open-design——一个本地跑的 Claude Design 开源替代。5 月单月涨 16,804 颗 star。它的定位是：你给任何一个 coding agent 一个设计需求，agent 调用 Open Design 直接产出——（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">12 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/KKaWSB/status/2055641921033294248" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/KKaWSB/status/2055641921033294248" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.59deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -277,7 +332,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek-Reasonix——这才是我能支持的那种 harness！为穷 API 用户打造，一切围绕缓存命中，甚至已经有 GUI（壳）了。@victor207755822 要不要取取经或者合作一下。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">151 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/teortaxesTex/status/2058413941689041219" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/teortaxesTex/status/2058413941689041219" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.12deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -288,7 +345,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）Reasonix 真的很优秀，不要被它的项目名字(DeepSeek-Reasonix)所误导了，只要中转站支持 OpenAI-compatible 都可以支持……再次推荐。主要是它的技能、记忆、Hooks、MCP 等功能都很好用……它被我用于替代 OpenCode 了</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">102 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/huangjinbo/status/2066787187191058697" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/huangjinbo/status/2066787187191058697" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.25deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -299,7 +358,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">缺了 reasonx。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">67 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.08deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -310,7 +371,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">我在用两天前左右刚加的 tui 插件（指 DSH)。跟 reasonix 比好太多了：权限处理好得多，输出整体也更简洁、明显更稳定。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">7 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.40deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -321,7 +384,9 @@ even has a GUI (wrapper) already
   <div class="muted" style="font-size:14px;line-height:1.75;">这些是 reasonx 的机器人吗？三条评论同一分钟发出，karma 都很低，而且说真的，我在这之前从没听说过 reasonx，哈哈。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.02deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -336,7 +401,9 @@ It&#x27;s exploding in popularity and could</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">刚看到这个 GitHub 项目：OpenViking 正在暴涨。它可能是 @openclaw 最好的记忆管理器！OpenViking(volcengine/OpenViking)是字节跳动云部门火山引擎发布的开源项目。它的人气正在爆发……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">940 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.04deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -353,7 +420,9 @@ OpenViking manages everything an always-on agent needs to function at a high lev
   <div class="muted" style="font-size:14px;line-height:1.75;">突发：字节跳动开源了一个 AI agent 生态早就需要的东西——一个专为 agent 打造的正经上下文数据库。OpenViking 管理一个常驻 agent 高水平运转所需的一切：→ 跨会话持久并自进化的记忆……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">222 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.48deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -366,7 +435,9 @@ This is very promising and I think for one of my projects I will switch from RAG
   <div class="muted" style="font-size:14px;line-height:1.75;">看着这些想法演化真的很有意思。这个项目非常有前景，我打算把我其中一个项目从 RAG 切换到 OpenViking。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -387,7 +458,9 @@ GitHub 9,000スター超え。</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">中国 AI 圈，水平完全不在一个次元。‘把同事蒸馏进 AI 的工具’火了……一个叫 colleague.skill 的开源项目：收集同事的聊天记录、业务文档、邮件，让 AI 学会那个人的工作方式。也就是说，就算人离职了，‘数字同事’会一直留下来。GitHub 星数已超 9,000，发布才一周。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">2121 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.43deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -399,7 +472,9 @@ GitHub 9,000スター超え。</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）同事.Skill：把你的同事蒸馏成 Skill。把同事的技能与性格蒸馏成 AI Skill，让它替他工作。建议改名叫‘同事Kill’，成为 Skill 后就可以 Kill 掉了。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">500 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -412,7 +487,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">中国一个爆火的 GitHub 项目‘同事.skill’，能把离职同事的聊天记录、文档和邮件变成一个模仿其工作方式的 AI skill。衍生项目一夜之间冒出来：老板.skill、导师.skill、暗恋对象.skill，甚至永生.skill。这个梗成了。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">62 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -423,7 +500,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">看来我们绕了一整圈：从角色扮演→写代码/干正事→又回到角色扮演。以我的经验（我到现在还在用 SillyTavern，跟 2023 年一样），让 AI 一边扮演人设一边写代码，等于把任务叠在一起，两头都会变差。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">5 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -434,7 +513,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">建议先了解一下。这不完全是角色扮演，它是在干有用的事。看看那个 GitHub 仓库，开发者也点到了：‘你的同事离职了，留下一座没人维护的文档山？’……这就是用它干实事，它实际上给了你一个可以一起干活的同事数字分身。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">0 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -451,7 +532,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）恭喜！EverMind 打磨已久的超级更新终于上线！一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源！1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent 2. EvoAgentBench：开源中立基准……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">55 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -464,7 +547,9 @@ The joke landed</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS,10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff,pip 一条命令装好。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">6 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -478,7 +563,9 @@ cc @tianyi</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中英混排）DeepSeek Harness awesome plugins·插件精选列表 #DeepSeek #DeepSeekHarness cc @tianyi</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">3 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/fkysly/status/2087904592189378865" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/fkysly/status/2087904592189378865" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.15deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -493,7 +580,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）插件推荐：DeepSeek Harness 必装！10 大高星实用插件盘点（按 GitHub Star 排序）。DeepSeek 刚开源的 Harness 生态起飞了！界面丑？没视觉？迁移麻烦？这些插件全给你解决！按 GitHub Star 精选，数据截至今天，直接抄作业。1️⃣ dsh-web-ui ⭐1312……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">278 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/NFT_Chen/status/2088551277408247867" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/NFT_Chen/status/2088551277408247867" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -508,7 +597,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）一堆为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。……2⃣ DeepSeek Harness Web UI 的插件与皮肤合集，涵盖任务面板、Git……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">84 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.51deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -521,7 +612,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）自动展开思考，丝滑吐字，丝滑滚动，新版已固定 deep diving。安装方式：pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream。欢迎点赞关注或 star[玫瑰R]</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">19 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -532,7 +625,9 @@ DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻�
   <div class="muted" style="font-size:14px;line-height:1.75;">我给 DeepSeek Harness 0.1 做了个插件(Token anxiety)：显示每任务成本、峰值时段、涨价后同任务要花多少钱……省钱心得：开放式研究问题、打错字、prompt 不具体、工具调用 bug，加起来占了 50% 以上的 token。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">11 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.07deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -547,7 +642,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">用一个 skill 就给 DeepSeek 装上了视觉。npx -y skills add liustack/modlens 仓库链接👇</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">411 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/hqmank/status/2084998933731008639" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/hqmank/status/2084998933731008639" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.21deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -562,7 +659,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）EchoBird 是一个开源桌面工具，专门把 AI Agent 的部署门槛往下压。它主打三个‘一键’：安装 Claude Code / OpenClaw 等 Agent、给不同 Agent 切换模型、在本地部署 GGUF / HuggingFace 模型。Windows、macOS、Linux 都有包，MIT 免费。适合已经在用 Codex、Cursor、Claude……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">5 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -573,7 +672,9 @@ Repo link 👇</div>
   <div class="muted" style="font-size:14px;line-height:1.75;">60% 的用户倒在安装配置这一步。EchoBird 是一个 GUI，能安装并运行 Claude Code、Codex、Aider、OpenClaw 等——模型配置一次，到处能用。不用终端，没有配置地狱。开源、跨平台。好得不像真的？</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">0 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -588,7 +689,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness 现在是增长最快的 GitHub 仓库，不到 48 小时破 10 万星，比 OpenClaw 还快。社区反响非常正面：&gt; 架构设计出奇地好——工具、会话日志、agent 循环、子 agent 全都是可替换的插件 &gt; UI……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">2338 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -601,7 +704,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">非常出色的发布。它是一个内嵌多个 harness 的 Web UI，你可以通过 SDK 生成(spawn)Claude Code 和 Codex agent。DeepSeek Harness 默认支持多种‘模式’（本质就是不同的 harness)：带程序化工具调用(TypeScript)的 code mode、bash+edit……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1250 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.44deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -612,7 +717,9 @@ very positive community reaction:
   <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness v0.1 基于 Cordis 的设计，可能是我见过的 agent 架构中最干净的表达之一：每一项能力——模型适配器、工具注册表、会话日志、沙箱、编排循环、甚至 UI——都是带类型化服务(typed services)的一等公民插件……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">386 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -629,7 +736,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）最近 DeepSeek 和 K3 的发布，让大家开始认真看 Agent benchmark 后面的 harness。Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和工具，就能无限放大模型。前提是环境能够把结果反馈给 Agent。写代码有 compiler、tests 和 logs。但在动态的 3D 世界里，Opus 5……（正文被接口截断）</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">55 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -640,7 +749,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">太好用了，我爱了。我已经写了 3 个插件（会话自动命名、git worktree 开工作区、实时显示会话成本和余额）。快（我用的是 2017 款 MacBook Pro)、可靠、完全可定制、95-99% 缓存命中、UI 又好看又极简。客观说，我觉得它比 Reasonix 和 Pi 好得多。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">16 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.13deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -651,7 +762,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">这个 harness 是真的好：不像别的 harness，它不会停下来干等用户输入，运行时的错误它全能接住，还会自己决定停掉应用去 debug，也会让我点确认按钮才继续。缺点是（配套的）模型很差。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">35 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.52deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -662,7 +775,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">上文很多内容在社区的分析过程中其实已经过时了。答案没那么复杂……真正的答案是：‘DeepSeek V4 Pro GA 在 DSH 的 minimal 模式上过拟合了’。内部员工也承认了这一点。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">35 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -673,7 +788,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="muted" style="font-size:14px;line-height:1.75;">我给 DeepSeek Harness 装 dsh-deepseek-vision 插件时报错：‘Failed to load plugins... keyed slot &quot;settings.plugin.item&quot; requires options.key’，之后整个插件系统都不正常了。让我难受的是架构：一切似乎都依赖插件系统，一个插件出错就能实际上搞垮整个生态……格式错误或不兼容的插件应该被隔离禁用，而不是阻断其余插件加载。我用过 Hermes 和 Claude Code，从没碰到过这种失败模式。</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono muted" style="font-size:11px;">1 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
   </div>
 </div></div></div>
 
@@ -682,8 +799,12 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
     <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 &#8599;</a>
-      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek Harness 官网 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-0.18em;flex-shrink:0;"><path d="M14.99 2.98Q18 2.73 20.96 3.06Q20.45 6 21.18 8.99" />
+  <path d="M10.18 14.18Q15.84 8.84 20.96 3.02" />
+  <path d="M17.79 13.2Q18.31 16 17.46 18.67C17.79 20.24 17.36 20.39 15.61 20.57Q10.5 22.66 5.41 20.92C4.53 20.38 2.98 20.35 2.56 19.39Q3.1 13.5 3.32 8.52C2.49 6.51 3.89 6.2 5.05 6.33Q8 6.05 11.39 5.44" /></svg></a>
     </div>
     <div>数据实抓</div>
   </div>
@@ -720,7 +841,9 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
       var listF=document.getElementById(barF.dataset.target);
       if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
         var tags=(it.dataset.tags||"").split("|").filter(Boolean);
-        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+        var show = want==="all"||tags.indexOf(want)>=0;
+        it.hidden = !show;
+        if(show){ it.classList.remove("reveal"); void it.offsetWidth; it.classList.add("reveal"); }
       });
       return;
     }
@@ -749,8 +872,8 @@ Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和�
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
-        setTimeout(function(){c.textContent=old;},1400);
+        var old=c.textContent; c.textContent="已复制"; c.classList.add("done");
+        setTimeout(function(){c.textContent=old;c.classList.remove("done");},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
         navigator.clipboard.writeText(text).then(done,function(){});
