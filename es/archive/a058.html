@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>量子位：深度体验 DeepSeek Harness，我原谅它涨价了 · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness pasó de 0 a 149,851 stars en seis días de código abierto. Aquí registramos cada paso en orden cronológico: hitos, tutoriales de plugi">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:26px; }
+  .filterbar button { font-family:var(--font-body); font-size:15px; color:#151515; cursor:pointer;
+                       background:transparent; border:1.5px solid #151515; padding:3px 14px;
+                       border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .panel[hidden] { display:none; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../es/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">Cronología</a><a href="../guides.html" style="white-space:nowrap;">Guías</a><a href="../plugins/index.html" style="white-space:nowrap;">Plugins DSH</a><a href="../ranking.html" style="white-space:nowrap;">Ranking</a><a href="../voices.html" style="white-space:nowrap;">Comentarios</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archivo</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Manuscrita</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Estándar</button></span><details class="langpick"><summary>Español &#9662;</summary><div class="langmenu"><a href="../../en/archive/a058.html">English</a><a href="../../archive/a058.html">简体中文</a><a href="../../zh-TW/archive/a058.html">繁體中文</a><a href="../../ja/archive/a058.html">日本語</a><a href="../../ko/archive/a058.html">한국어</a><a href="../../th/archive/a058.html">ไทย</a><a href="../../es/archive/a058.html" style="color:#8f2924;">Español</a><a href="../../ar/archive/a058.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:52px;padding-bottom:22px;display:flex;flex-direction:column;gap:16px;">
+  <a class="mono muted" style="font-size:12px;" href="index.html">&#8592; Archivo</a>
+  <div class="mono muted" style="font-size:12px;">058</div>
+  <h1 style="font-size:33px;line-height:1.4;">量子位：深度体验 DeepSeek Harness，我原谅它涨价了</h1>
+  <div class="mono muted" style="font-size:12.5px;">Jay · 2026-08-14 · 入门</div>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;"><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;">社区实测</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;">插件推荐</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">竞品对比</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">选品素材</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">数据实证</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;">观点金句</span></div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;">
+    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://www.qbitai.com/2026/08/472208.html" target="_blank" rel="noopener">Fuente &#8599;</a>
+    
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,6.5 C80,6.5 160,3.9 240,3.9 C320,3.9 400,6.1 480,6.1 C560,6.1 640,4.6 720,4.6 C800,4.6 880,6.5 960,6.5 C1040,6.5 1120,5.9 1200,5.9" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:32px;padding-bottom:56px;display:flex;flex-direction:column;gap:38px;">
+  <div style="font-size:16px;line-height:1.95;max-width:720px;">量子位的深度实测文，对插件推荐文章价值最大的一篇中文素材。
+核心信息：dsh 是「Agent 时代的安卓」对比 Codex 的 iPhone 式封闭；官方已内置 100+ 插件、预留 Plugin Store，点名 dsh-code-review 等四个官方 Skills；实测复杂长程任务明显强于 Codex，社区最长连跑 10 小时。
+对写文章的启发：官方 Skills 点名和 100+ 插件数字是直接选品来源，短板清单（无侧栏预览、V4 看不了图）正好接社区插件补位逻辑。</div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">Puntos clave</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">「Agent 时代的安卓 vs Codex 的 iPhone」是全库最好的定调比喻，可注明出处借用</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">官方内置 100+ 插件、Plugin Store 入口已预留，点名 dsh-code-review 等 4 个官方 Skills，是直接选品来源</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">短板清单（右栏无文件预览、V4 多模态弱、8·17 API 涨价）恰好对应社区插件的补位方向，可做「痛点→插件」推荐线</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">Cifras clave</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">官方内置 100+ 插件，Plugin Store 入口已预留</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">社区记录的最长连续运行时间达 10 小时</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">Token 统计显示缓存命中率可达 99%+</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">猪八戒 3D 白模实测：dsh 多轮返工 20 分钟、效果显著好于 Codex</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">8 月 17 日 API 涨价（尤其缓存），标题「原谅涨价」由此而来</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:14px;"><h3 style="font-size:20px;">Frases citables</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.25deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">这简直是套彻头彻尾为『自进化』和『DIY』而生的马鞍</div><div class="muted" style="font-size:13px;">作者的核心定性金句，适合插件推荐文章开头或结尾定调</div></div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">dsh 是「Agent 时代的安卓」——对比 Codex 的 iPhone 式封闭</div><div class="muted" style="font-size:13px;">全库传播力最强的比喻，公众号标题、小红书封面都能用（注明量子位出处）</div></div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.12deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">DSH 驾驭下，模型的长程任务能力会强非常非常多</div><div class="muted" style="font-size:13px;">实测结论句，配 10 小时连跑记录使用，是「为什么值得装」的核心论据</div></div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.54deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">普通用户也能参与 AI 的自进化</div><div class="muted" style="font-size:13px;">把插件生态和非程序员读者连起来的关键句，适合面向设计师/创作者受众的转译段</div></div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.15deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">FPS 游戏 dsh 自主补齐下蹲/换弹/瞄准/NPC，「啥 prompt 没给」</div><div class="muted" style="font-size:13px;">最有画面感的实测细节，适合案例演示段或小红书实测卡</div></div></div></div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/archive/a058.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/archive/a058.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · El radar de DSH · Un proyecto de ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://deepseek.com/harness/en/" class="muted">Sitio oficial de DeepSeek &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>Datos recopilados de primera mano · al 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var fb=ev.target.closest?ev.target.closest(".filterbar button"):null;
+    if(fb){
+      var barF=fb.closest(".filterbar"), want=fb.dataset.f;
+      barF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===fb?"true":"false");});
+      var listF=document.getElementById(barF.dataset.target);
+      if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
+        var tags=(it.dataset.tags||"").split("|").filter(Boolean);
+        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+      });
+      return;
+    }
+    var tb=ev.target.closest?ev.target.closest(".tabbar button"):null;
+    if(tb){
+      var barT=tb.closest(".tabbar");
+      barT.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===tb?"true":"false");});
+      document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==tb.dataset.panel; });
+      return;
+    }
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="Copiado";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

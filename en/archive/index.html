@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archive · DSH Wiki</title>
+<meta name="description" content="Six days after going open source, DeepSeek Harness rocketed from 0 to 149,851 stars. This site tracks every step of it on a timeline: milestones, plug">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:26px; }
+  .filterbar button { font-family:var(--font-body); font-size:15px; color:#151515; cursor:pointer;
+                       background:transparent; border:1.5px solid #151515; padding:3px 14px;
+                       border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .panel[hidden] { display:none; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../en/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">Timeline</a><a href="../guides.html" style="white-space:nowrap;">Guides</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH Plugins</a><a href="../ranking.html" style="white-space:nowrap;">Leaderboard</a><a href="../voices.html" style="white-space:nowrap;">Voices</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archive</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Hand</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Clean</button></span><details class="langpick"><summary>English &#9662;</summary><div class="langmenu"><a href="../../en/archive/index.html" style="color:#8f2924;">English</a><a href="../../archive/index.html">简体中文</a><a href="../../zh-TW/archive/index.html">繁體中文</a><a href="../../ja/archive/index.html">日本語</a><a href="../../ko/archive/index.html">한국어</a><a href="../../th/archive/index.html">ไทย</a><a href="../../es/archive/index.html">Español</a><a href="../../ar/archive/index.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">07 / ARCHIVE</div><h2 class="stitle">Archive</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">Official docs, in-depth reporting, community threads, and video tutorials — each annotated with a summary, key quotes, and data points. This is the raw material behind everything on this site.</div></div><div class="mono muted" style="font-size:12px;letter-spacing:0.05em;margin-bottom:20px;">Last updated 2026-08-18 · 68 items</div><div class="filterbar" data-target="arclist"><button type="button" data-f="all" aria-pressed="true">All <span>68</span></button><button type="button" data-f="生态观察" aria-pressed="false">生态观察 <span>43</span></button><button type="button" data-f="插件推荐" aria-pressed="false">插件推荐 <span>23</span></button><button type="button" data-f="官方机制" aria-pressed="false">官方机制 <span>21</span></button><button type="button" data-f="社区实测" aria-pressed="false">社区实测 <span>17</span></button><button type="button" data-f="争议短板" aria-pressed="false">争议短板 <span>14</span></button><button type="button" data-f="上手教程" aria-pressed="false">上手教程 <span>12</span></button><button type="button" data-f="竞品对比" aria-pressed="false">竞品对比 <span>8</span></button></div><div id="arclist" class="grid2" style="align-items:start;"><div class="fitem" data-tags="官方机制|生态观察" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.16deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">001</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">DeepSeek Harness 官方仓库总览——5 天 15 万 star 的「一切皆插件」框架</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DeepSeek 官方开源 agent 框架 dsh，5 天近 15 万 star，理念是一切皆插件</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a001.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.26deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">002</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">官方架构文档——为什么说 dsh 没有「不可动的内核」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官方架构文档：dsh 无特权内核，插件树按层组合，任意一行配置可替换</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a002.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|上手教程" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.39deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">003</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">官方插件开发教程——一个 apply 函数就是一个插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官方教程：十几行代码写出第一个 dsh 插件，发布到被发现全流程有闭环</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a003.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.zh.md" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|上手教程" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.53deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">004</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Web UI 使用指南与 CLI 入口——三步跑起第一个任务</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官方使用指南：填 key、选目录、发任务三步上手，默认形态是本机 Web UI</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a004.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.00deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">005</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">四种官方运行模式——标准/PTC/极简/创造，官方定义全是中文</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 内置四种 agent 预设模式，官方定义文件直接用中文写</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a005.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/tree/master/apps/cli/config/agent-presets" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.11deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">006</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">dsh 的 Skill 机制——技能目录也是插件，本地远程随便换</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 的 Skill 与 Claude Code 同源但完全插件化，技能来源可换、社区可自建商店</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a006.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察|争议短板" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.41deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">007</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-18 · 6,716</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">dsh-plugin 生态盘点——topic 下 6,716 仓库，top 30 全景（配 CSV）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">topic dsh-plugin 前 30 名盘点：真插件分四层，头部混着蹭流量项目</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a007.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.05deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">008</span>
+    <span class="mono muted" style="font-size:11px;">2026-04-28 · 88,304</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Open Design——生态最大插件（88k star），开源版 Claude Design</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">88k star 的开源设计应用，把 dsh 当原生运行时接入，生态第三方第一名</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a008.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.29deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">009</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 11,626</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">DSH Desktop——「桌面本身也是插件」的社区桌面客户端</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">与 dsh 同日创建的社区桌面客户端，5 天 1.16 万 star，补齐官方没做的客户端</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a009.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.26deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">010</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-07~08-13 · 4,097</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Web UI 补位插件群——看板、侧边栏、TUI，把官方界面改成你想要的样子</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">三个界面补位插件：dsh-web-ui 美化、better-sidebar 底座、dsh-TUI 终端党</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a010.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/zhu1090093659/dsh-web-ui" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.33deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">011</span>
+    <span class="mono muted" style="font-size:11px;">2026-01-05 · 28,891</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">记忆与上下文插件——火山引擎 OpenViking 与 EverOS</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">记忆赛道两大头部方案：字节系 OpenViking（2.9 万 star）与轻量本地派 EverOS（1.2 万 star）。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a011.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.03deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">012</span>
+    <span class="mono muted" style="font-size:11px;">2026-02-22 · 2,789</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">ModLens——给纯文本模型「开天眼」的 dsh 首个视觉插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DeepSeek 看不了图？ModLens 插件把粘贴的图片转成 JSON 证据喂回纯文本模型。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a012.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/liustack/modlens" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.56deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">013</span>
+    <span class="mono muted" style="font-size:11px;">2026-03-30 · 23,139</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">colleague.skill——把离职同事做成 AI Skill 的「数字生命 1.0」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">把离职同事的聊天记录和文档喂成一个「干活像 TA」的 AI Skill，skill 赛道最出圈项目。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a013.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="上手教程|生态观察" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.50deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">014</span>
+    <span class="mono muted" style="font-size:11px;">2026-03-29 · 11,852</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Learn Harness Engineering——从 0 到 1 的 harness 工程教程（15 种语言）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">「harness 工程」概念最系统的免费教程，比 dsh 开源早 4 个月，已译成 15 种语言。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">上手教程</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a014.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.01deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">015</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 7,572</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">awesome-dsh-plugin——每条人工验货的插件精选清单（配套插件市场）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">生态最权威插件清单：每条人工对照源码验货，20 个分类，还配了可视化插件市场。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a015.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.10deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">016</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-11~08-14 · 688</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">awesome 列表混战——一周冒出 20+ 个 awesome-deepseek-harness</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 开源前后 72 小时内社区冒出 20 个 awesome 列表，打响卡位战。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a016.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/0xsline/awesome-deepseek-harness" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|插件推荐" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.44deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">017</span>
+    <span class="mono muted" style="font-size:11px;"></span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">dshplugins.xyz——按「使用意图」分五类的第三方插件地图</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">收录 300+ 插件的第三方目录站，按使用意图分五类，周榜按 README 质量而非 star 排序。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a017.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://dshplugins.xyz/en" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.52deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">018</span>
+    <span class="mono muted" style="font-size:11px;"></span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">deepseek-code.com——316 插件、8 分类的目录站（长尾插件宝库）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">收录 316 个插件的目录站，价值在长尾：迁移、笔记、余额监控等刁钻小工具都在这露头。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a018.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://deepseek-code.com/plugins" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.44deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">019</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 166</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">GitHub Discussions 热帖——社区最想要什么，插件就长什么样</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官方 Discussions 热帖赞数画出插件生态需求地图：客户端、插件市场、TUI、降价。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a019.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/discussions?discussions_q=sort%3Atop" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.46deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">020</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13~08-18 · 149,856</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">star 增长里程碑——1.5 小时 2.2 万、48 小时破 10 万的速度神话与水分</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 的 star 增长时间线：1.5 小时 2.2 万、48 小时破 10 万、5 天近 15 万——附水分提醒。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a020.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">021</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 311</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">LocalLLaMA 发布公告帖：「Deepseek Harness 上线了！」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DSH 开源当天 r/LocalLLaMA 第一波发布帖，社区好奇与怀疑并存的原始现场。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a021.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1vnb66j/deepseek_harness_is_up/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.04deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">022</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 232</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">r/DeepSeek 发布帖：「DeepSeek Harness 发布了！」——官方社区首日反应</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">r/DeepSeek 首日头条帖，评论区被 API 涨价争议带偏，呈现 DSH 发布的复杂大环境。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a022.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vna4mj/deepseek_harness_is_out/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.10deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">023</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 369</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「两天 10 万星」：DSH 打破 GitHub 增星纪录引发的真假之争</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DSH 两天破 10 万星打破 OpenClaw 纪录，帖子同时是热度钩子和星数掺水争议现场。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a023.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/tech_x/comments/1vpbjvk/100k_github_stars_in_just_2_days_deepseek_harness/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|争议短板" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.17deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">024</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 208</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「DSH 完全是另一个级别」——首批上手好评与 100% 缓存命中率之谜</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">首批上手好评帖：code mode 惊艳、sub agents 翻车、100% 缓存命中率成最大梗。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a024.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/deepseek_harness_is_on_whole_different_level/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|插件推荐|争议短板" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.38deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">025</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 87</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「我的 DSH 第一印象」：慢、费 token、但把 DeepSeek 榨到极限</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">发布当天最扎实的一手实测：坑点清单齐全，评论区诞生「一句话让模型给自己写插件」玩法。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a025.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/my_first_impressions_of_deepseek_harness/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="竞品对比|社区实测" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.30deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">026</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-11 · 307</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">8 大 agent harness 横评：DeepSeek V4 Flash 与 Pi 是「天作之合」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">25 个真实任务测 8 个 harness：同一模型通过率差 20 个百分点、成本差 7 倍。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a026.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/i_ran_deepseek_v4_flash_on_8_agent_harnesses_and/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="竞品对比|社区实测" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.19deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">027</span>
+    <span class="mono muted" style="font-size:11px;">2026-07-26 · 283</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Harness 对决：Claude Code vs OpenCode vs Pi——质量相同，路径悬殊</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">控制变量实验：三个 harness 产出相同代码 diff，但耗时和 token 消耗差近 4 倍。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a027.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1v7d8px/harness_showdown_claude_code_vs_opencode_vs_pi/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|竞品对比" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.31deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">028</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-09 · 95</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「帮我给 DeepSeek V4 Flash 选个最好的 harness」——154 楼求助楼里的生态众生相</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DSH 发布前 4 天的 154 楼求助楼，暴露 DeepSeek 用户「选择瘫痪+缓存焦虑」的真实痛点。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">竞品对比</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a028.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vjkstg/can_you_help_me_find_the_best_ai_harness_for_the/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|上手教程" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.02deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">029</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-11 · 833</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">833 赞梗图：「把 harness 调到飞起，用便宜的 Flash 跟开大模型的人赛跑」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">本次收集赞数最高的梗图帖，评论区意外变成「什么是 harness tuning」的科普课。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a029.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vl9s4y/what_it_feels_like_when_youre_racing_with_people/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|官方机制" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.11deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">030</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-16 · 139</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「Qwen 3.8 27b 配 DSH 太惊艳了」——DSH 跑第三方模型的 10 小时实测</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">单张 3090 用 DSH 跑本地 Qwen 连续 10 小时不出错，证明 DSH 不锁定 DeepSeek 模型。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a030.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1vpv12b/qwen_38_27b_with_dshdeepseek_harness_is_amazing/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|社区实测|争议短板" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.11deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">031</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 157</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「掉进 V4-Pro 的兔子洞」：单一 API 背后疑似多版本，与 DSH Minimal 模式的玄学</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">Reddit 技术悬案帖：V4-Pro 疑藏三个版本，最强的那个是从 DSH Minimal 模式里挖出来的</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a031.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/down_the_rabbit_hole_of_deepseekv4pro0813/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|社区实测" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">032</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 47</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">开源一天后的社区突破：dsh-anchored-standard 插件把基准分从 91 拉到 98+</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">社区插件 dsh-anchored-standard 用「首轮伪装成 Minimal」的混合思路把基准分从 91 拉到 98/99</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a032.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|插件推荐" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.35deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">033</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-16 · 14</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「DSH 的缓存命中率真有那么神吗？」——追问楼变成插件实证集中营</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">一条缓存追问帖的评论区，密集晒出 deepseek-peak、tui 插件等实证与 96-100% 缓存命中数据</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a033.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/deepseek_harness/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|社区实测" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.11deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">034</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 11</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">dsh-token-anxiety：给「token 焦虑症」做的成本透视插件（附省钱结论）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">成本可视化插件 dsh-token-anxiety：看每任务花多少钱，附「四大 token 浪费源占 50%+」省钱结论</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a034.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.36deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">035</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 19</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">中文社区插件：dsh-smooth-stream「无级丝滑渲染」</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中国开发者用纯中文在 Reddit 发布 UI 体验插件 dsh-smooth-stream：自动展开思考+丝滑流式渲染</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a035.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="争议短板" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.42deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">036</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-17 · 1</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">【反面素材】吐槽帖：一个坏插件能带崩整个插件系统</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">Reddit 首条架构级批评：装一个坏插件让整个插件系统瘫痪，「万物皆插件」的阴暗面实录</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a036.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.14deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">037</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-17 · 1</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">「DSH 必装插件清单」：社区第一份 curated 插件/skills/MCP 索引</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">DSH 发布第 4 天出现的第一份「必装插件」策展帖，附插件/skills/MCP 三层清单仓库</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a037.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeekHarness/comments/1vr43w5/must_have_deepseek_harness_plugins/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|生态观察" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.53deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">038</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 19,800</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">DeepSeek 官方宣布 Harness v0.1 开发者预览版开源</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">整个事件的起点帖：DeepSeek 官宣 Harness v0.1 开源，MIT 协议，核心理念 Everything is a Plugin</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a038.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/deepseek_ai/status/2087887408440164663" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|官方机制" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.48deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">039</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-01 · 3,100</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">DeepSeek 团队成员 Tianyi Cui 发帖招募 Harness 内测开发者</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">开源前 12 天，DeepSeek 团队成员用中文发内测招募帖，1210 条回复成开源 agent 作者自报家门大会</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a039.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/tianyi/status/2083519855203078320" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|竞品对比|生态观察" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.05deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">040</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 1,300</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Hugging Face 工程师 elie：DSH 能把 Claude Code 和 Codex 当子 agent 调用</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">Hugging Face 工程师官宣 1 小时后的解读：DSH 是能吞下 Claude Code/Codex 当子 agent 的容器</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a040.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|插件推荐|上手教程" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.27deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">041</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14 · 1,000</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Ollama 官方宣布支持 DeepSeek Harness（ollama launch dsh）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">开源次日 Ollama 官宣一条命令本地跑 DSH，预装联网搜索插件并带轨迹视图。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a041.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|生态观察" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.46deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">042</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 977</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Akshay：几小时破 35k star，「一切皆插件」到底是什么意思</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">科普大 V 用大白话拆解「一切皆插件」：适配器、注册表、日志、主循环全是插件。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a042.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/akshay_pachaar/status/2087968793637343514" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|生态观察" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.45deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">043</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 787</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">MaxForAI：DSH 随附的北大合作论文——Agent 改自己的 Harness 怎么不把自己改死</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中文帖聚焦 DSH 随附的北大合作 Cordis 论文：Agent 自改 Harness 的安全性问题。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a043.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/MaxForAI/status/2087899312462430468" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.51deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">044</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 687</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">英文 AI 快讯大 V Chubby 第一时间转发 DSH 开源消息</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官宣 8 分钟后英文快讯大 V 即转发，是 DSH 消息破圈传播链的第二环样本。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a044.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/kimmonismus/status/2087889503520251964" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|上手教程" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.12deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">045</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 513</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Kai：本地跑通 DeepSeek Harness 的首批上手演示视频</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官宣 25 分钟后开发者发布首批本地跑通 DSH 的 4K 实录演示视频。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a045.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/hqmank/status/2087893677083672917" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|生态观察" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.19deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">046</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 386</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Jen Zhu：DSH 是我见过最干净的 agent 架构表达之一</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">科技评论人从架构审美角度盛赞：DSH 是最干净的 agent 架构表达之一。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a046.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.49deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">047</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 162</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Maziyar Panahi：DeepSeek 一周之内摧毁了前沿实验室仅剩的护城河</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官宣 3 分钟后的行业热评：DeepSeek 一周拆光前沿实验室仅剩的护城河。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a047.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/MaziyarPanahi/status/2087888312346316881" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.07deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">048</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 84</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Geek：一批为 DSH 生态打造的桌面端体验与 Web UI 插件合集</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">开源第三天的中文盘点帖：DSH 桌面客户端与 Web UI 插件皮肤合集。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a048.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="上手教程|生态观察" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.26deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">049</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 6</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">天机阁 X Article：DeepSeek Harness 一文入门，附小白安装教程</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">发布当晚中文圈最早的 X 原生长文入门教程，附小白安装步骤（正文需补采）。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">上手教程</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a049.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/tun2049/article/2087921332004835775" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="争议短板|生态观察" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.20deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">050</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-02 · 55</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">艾略特：Harness 不是万能放大器——前提是环境能把结果反馈给 Agent</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">开源前 11 天的冷静视角：harness 有效的前提是环境有反馈回路。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">争议短板</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a050.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|官方机制" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.31deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">051</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">The New Stack：DeepSeek 开源 agent harness，一切皆插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">The New Stack 开源当天首发报道：DeepSeek 以 MIT 协议开源「一切皆插件」的 agent harness</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a051.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://thenewstack.io/deepseek-harness-open-source-plugins/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|竞品对比|官方机制" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.11deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">052</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">The Register：DeepSeek 的创新 harness 把一切都当插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">The Register 把 harness 讲成「AI 的中间件层」，用 200 vs 10000 token 对比说清 harness 有多重要</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a052.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.theregister.com/ai-and-ml/2026/08/14/deepseeks-innovative-harness-treats-everything-as-a-plug-in/5288095" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|上手教程" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.04deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">053</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-17</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">MarkTechPost：DeepSeek Harness 开发者预览版技术详解</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">发布四天后的「冷静版」规格盘点：九大插件类别、四种运行模式、多模型服务商支持最全清单</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a053.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.marktechpost.com/2026/08/17/deepseek-ai-releases-deepseek-harness-in-developer-preview/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|插件推荐" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.15deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">054</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 736</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">DeepSeek Harness 官方英文页面（第一手权威信息）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">官方落地页：一切表述的最终查证来源，并给出 dsh-plugin 标签这个官方插件发现入口</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a054.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://deepseek.com/harness/en/" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板|社区实测" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">055</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 · 736</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Hacker News 736 分头条讨论：开发者社区怎么看 dsh</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 发布当天冲上 HN 头条（736 分/309 评论），正反两面社区真实态度的最佳样本</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">争议短板</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a055.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://news.ycombinator.com/item?id=49285244" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|生态观察" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.55deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">056</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">MindStudio：什么是 DeepSeek Harness？插件化编码 agent 解读 + 实测</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">英文侧少见的实测文：35 分钟 2000 万 token 全命中缓存，还验证了让 Claude Code 当子 agent 打工</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a056.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.mindstudio.ai/blog/deepseek-harness-agentic-coding" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|插件推荐|生态观察" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.01deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">057</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">机器之心：刚刚，DeepSeek Harness 震撼开源——一切皆插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中文圈传播最广的首发长文，附官方内置能力包（packages）原始清单，被至少 5 家平台转载</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a057.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.36kr.com/p/3937964598590855" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|插件推荐|竞品对比" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.44deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">058</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">量子位：深度体验 DeepSeek Harness，我原谅它涨价了</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中文圈质量最高的深度实测：「Agent 时代的安卓」比喻 + 100+ 内置插件 + 四个官方 Skills 点名</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">竞品对比</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a058.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.qbitai.com/2026/08/472208.html" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制|争议短板|生态观察" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.53deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">059</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">InfoQ 中文：DeepSeek 把 Harness 开源了——模型、工具、Agent Loop 全是插件</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">工程视角的冷静评估：讲全 Spawn/Fork/Pipeline/Ralph Loop 四种编排范式，也直说 v0.1 的风险</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">官方机制</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">争议短板</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a059.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.25deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">060</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-12</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">36氪：Harness 正式浮出水面，DeepSeek 不再只做模型</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">发布前一天的战略前瞻：DeepSeek 为什么做 harness——从模型供应商转向全链路 AI 工作流构建者</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a060.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.36kr.com/p/3935871461916035" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|争议短板" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.52deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">061</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">知乎社区对 DeepSeek Harness 的评价汇总（问题 + 高热专栏）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">知乎两大问题+多篇专栏对 dsh 的两极评价汇总：从「夯爆了」到「没有惊喜」，含 695 插件等中文侧独家数据。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">争议短板</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a061.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.zhihu.com/question/2071335529577239335" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="生态观察|插件推荐" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.50deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">062</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-13 ~ 2026-08-17</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">YouTube「DeepSeek Harness」视频总览与下载推荐清单</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">yt-dlp 实抓的 23 条 dsh 视频播放量总表，附「最值得下载的 5 条」推荐及理由。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">生态观察</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">插件推荐</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a062.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/results?search_query=deepseek+harness" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="社区实测|竞品对比|生态观察" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.50deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">063</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14 · 164,616</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">NeuralNine：DeepSeek Harness——Claude Code 的终结者？</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">全网播放最高的 dsh 视频（16 万+），48 万订阅英文教学大号直接打「Claude Code 终结者」标题。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a063.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=qg9EyGOZd9U" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="上手教程|社区实测|生态观察" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.07deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">064</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14 · 72,170</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">零度解说：DeepSeek Harness 正式发布！开源一天狂揽 6.8 万星</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中文区播放最高的 dsh 视频（7.2 万+），112 万订阅科普大号面向小白的新闻+部署+实测三合一。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">生态观察</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a064.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="官方机制" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.25deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">065</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 43,600</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">Cloud Codes：DeepSeek Harness 架构拆解——背后疯狂的软件工程</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">全网技术含金量最高的 dsh 视频：21 分钟专讲架构，核心是「改历史消息成本翻 120 倍」的黄金法则。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">官方机制</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a065.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=1NyOG9z9RT0" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="上手教程|社区实测" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.49deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">066</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-14 · 41,525</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">AI超元域：实测 DeepSeek Harness 从基础到高级——插件系统、轨迹、分支全覆盖</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">中文区功能覆盖最全的实测：12 分 54 秒十项内容，含插件系统演示和「Codex 反向调用 dsh」名场面。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">社区实测</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a066.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=Aqn7EP8shJw" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="竞品对比|社区实测|上手教程" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.37deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">067</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-16 · 6,293</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">灵姐说AI：一切皆插件！dsh 解读、安装、远程、实测全拆解（对标 Codex）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">方法论最严谨的中文实测：同题任务对比 Codex，含复用 Codex Skills 和安全提醒两个独家实用点。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">竞品对比</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">社区实测</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a067.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=2NP1NNMrIf4" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div><div class="fitem" data-tags="插件推荐|上手教程" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.07deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:10px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono muted" style="font-size:12px;">068</span>
+    <span class="mono muted" style="font-size:11px;">2026-08-15 · 5,778</span>
+  </div>
+  <h3 style="font-size:19px;line-height:1.5;">傅云飞飞：从 0 快速上手 dsh + 三大必装插件分享（含配套图文全教程）</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">唯一把「必装插件」逐个讲透的中文教程：at-file、ModLens、better-sidebar 三件套，命令可复制。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">插件推荐</span><span class="muted" style="font-size:12.5px;border:1.3px solid #5f5b54;padding:1px 9px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">上手教程</span></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;padding-top:2px;">
+    <a href="a068.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=LAOLbK_KH9g" target="_blank" rel="noopener">Source &#8599;</a>
+  </div>
+</div></div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/archive/index.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/archive/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Official Site &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>Live-scraped data · as of 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var fb=ev.target.closest?ev.target.closest(".filterbar button"):null;
+    if(fb){
+      var barF=fb.closest(".filterbar"), want=fb.dataset.f;
+      barF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===fb?"true":"false");});
+      var listF=document.getElementById(barF.dataset.target);
+      if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
+        var tags=(it.dataset.tags||"").split("|").filter(Boolean);
+        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+      });
+      return;
+    }
+    var tb=ev.target.closest?ev.target.closest(".tabbar button"):null;
+    if(tb){
+      var barT=tb.closest(".tabbar");
+      barT.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===tb?"true":"false");});
+      document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==tb.dataset.panel; });
+      return;
+    }
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="Copied";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

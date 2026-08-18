@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="th" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>机器之心：刚刚，DeepSeek Harness 震撼开源——一切皆插件 · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness เปิดซอร์สได้ 6 วัน จาก 0 พุ่งถึง 149,851 star ที่นี่บันทึกทุกก้าวของมันไว้บนไทม์ไลน์: เหตุการณ์สำคัญ คู่มือปลั๊กอิน ความเคลื่อนไหวบน ">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&family=Noto+Sans+Thai:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Itim", "Mali", "Thonburi", cursive; --font-head:"Itim", "Mali", "Thonburi", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; --font-head:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:26px; }
+  .filterbar button { font-family:var(--font-body); font-size:15px; color:#151515; cursor:pointer;
+                       background:transparent; border:1.5px solid #151515; padding:3px 14px;
+                       border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .panel[hidden] { display:none; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../th/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">ไทม์ไลน์</a><a href="../guides.html" style="white-space:nowrap;">คู่มือ</a><a href="../plugins/index.html" style="white-space:nowrap;">ปลั๊กอิน DSH</a><a href="../ranking.html" style="white-space:nowrap;">อันดับ</a><a href="../voices.html" style="white-space:nowrap;">เสียงจากชุมชน</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">คลังข้อมูล</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">ลายมือ</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">มาตรฐาน</button></span><details class="langpick"><summary>ไทย &#9662;</summary><div class="langmenu"><a href="../../en/archive/a057.html">English</a><a href="../../archive/a057.html">简体中文</a><a href="../../zh-TW/archive/a057.html">繁體中文</a><a href="../../ja/archive/a057.html">日本語</a><a href="../../ko/archive/a057.html">한국어</a><a href="../../th/archive/a057.html" style="color:#8f2924;">ไทย</a><a href="../../es/archive/a057.html">Español</a><a href="../../ar/archive/a057.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:52px;padding-bottom:22px;display:flex;flex-direction:column;gap:16px;">
+  <a class="mono muted" style="font-size:12px;" href="index.html">&#8592; คลังข้อมูล</a>
+  <div class="mono muted" style="font-size:12px;">057</div>
+  <h1 style="font-size:33px;line-height:1.4;">机器之心：刚刚，DeepSeek Harness 震撼开源——一切皆插件</h1>
+  <div class="mono muted" style="font-size:12.5px;">机器之心 · 2026-08-13 · 进阶</div>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;"><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">官方机制</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;">插件推荐</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;">生态观察</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">选品素材</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;">观点金句</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;">背景知识</span></div>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;">
+    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://www.36kr.com/p/3937964598590855" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+    
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.9 C80,1.9 160,4.4 240,4.4 C320,4.4 400,2.8 480,2.8 C560,2.8 640,2.4 720,2.4 C800,2.4 880,3.2 960,3.2 C1040,3.2 1120,1.5 1200,1.5" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:32px;padding-bottom:56px;display:flex;flex-direction:column;gap:38px;">
+  <div style="font-size:16px;line-height:1.95;max-width:720px;">机器之心首发长文，被新浪、腾讯、网易、知乎等至少 5 家平台全文转载，是中文圈传播最广的一篇。
+核心信息：dsh 是构建智能体的 SDK 框架而不只是编程助手，四大支柱之外最值钱的是按源码目录列出的官方内置能力包清单（llm/shell/fs/lsp/web/skill/subagent 等）。
+对写文章的启发：packages 清单就是「官方内置插件盘点」的权威底稿，「模型提出行动，Harness 决定能否发生」是最佳中文金句。</div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">ประเด็นสำคัญ</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">packages/ 目录清单即官方内置插件的原始名单，是「官方插件盘点」一节的权威底稿</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">dsh 定位是构建和运行智能体的 SDK 框架：可替换能力接口、事件驱动生命周期、权威会话日志、声明式组合四大支柱</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">交互形态齐全：Web UI / TUI / Headless / SDK 四种用法，配安全隔离策略</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">ตัวเลขสำคัญ</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">同文被至少 5 家平台转载：新浪科技、腾讯新闻、网易科技、知乎、MarsBit</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">官方能力包清单共 10 个：llm、shell、subprocess、terminal、fs、lsp、web、skill、subagent、workflow</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">4 种运行模式 + 4 种交互方式（Web UI/TUI/Headless/SDK）</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:14px;"><h3 style="font-size:20px;">ประโยคน่าอ้างอิง</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.37deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">模型可以提出行动，真正决定行动能否发生的，仍然是 Harness</div><div class="muted" style="font-size:13px;">给非程序员讲 harness 是什么的最佳中文金句，适合文章开头定调</div></div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">Agent 不应该是一段越来越臃肿的循环，而应该是一组可以组合、观察和替换的能力</div><div class="muted" style="font-size:13px;">解释「一切皆插件」设计哲学的金句，放在架构解读段</div></div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.21deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">可替换的能力接口、事件驱动生命周期、权威会话日志、声明式组合机制四大支柱</div><div class="muted" style="font-size:13px;">dsh 架构四大支柱的标准概括，可做信息图四宫格脚本</div></div></div></div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/archive/a057.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/archive/a057.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · ศูนย์ข่าวกรอง DSH · ผลิตโดย ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://deepseek.com/harness/en/" class="muted">เว็บไซต์ทางการ DeepSeek &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>ข้อมูลเก็บจริง · ณ วันที่ 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var fb=ev.target.closest?ev.target.closest(".filterbar button"):null;
+    if(fb){
+      var barF=fb.closest(".filterbar"), want=fb.dataset.f;
+      barF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===fb?"true":"false");});
+      var listF=document.getElementById(barF.dataset.target);
+      if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
+        var tags=(it.dataset.tags||"").split("|").filter(Boolean);
+        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+      });
+      return;
+    }
+    var tb=ev.target.closest?ev.target.closest(".tabbar button"):null;
+    if(tb){
+      var barT=tb.closest(".tabbar");
+      barT.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===tb?"true":"false");});
+      document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==tb.dataset.panel; });
+      return;
+    }
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="คัดลอกแล้ว";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

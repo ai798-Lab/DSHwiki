@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ปลั๊กอินคัดสรร · DSH Wiki</title>
+<title>ปลั๊กอิน DSH · DSH Wiki</title>
 <meta name="description" content="DeepSeek Harness เปิดซอร์สได้ 6 วัน จาก 0 พุ่งถึง 149,851 star ที่นี่บันทึกทุกก้าวของมันไว้บนไทม์ไลน์: เหตุการณ์สำคัญ คู่มือปลั๊กอิน ความเคลื่อนไหวบน ">
 <link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
@@ -45,6 +45,18 @@
                     background:transparent; border:1.5px solid #151515; padding:3px 13px;
                     border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
   .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:26px; }
+  .filterbar button { font-family:var(--font-body); font-size:15px; color:#151515; cursor:pointer;
+                       background:transparent; border:1.5px solid #151515; padding:3px 14px;
+                       border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .filterbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .filterbar button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .tabbar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tabbar button { font-family:var(--font-head); font-size:20px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.7px solid #151515; padding:5px 20px;
+                    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; }
+  .tabbar button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .panel[hidden] { display:none; }
   a { color:#151515; text-decoration:none; }
   a:hover { color:#8f2924; }
   ::selection { background:#151515; color:#f5f1e8; }
@@ -95,12 +107,12 @@
       <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">ไทม์ไลน์</a><a href="../deploy.html" style="white-space:nowrap;">ติดตั้ง</a><a href="../plugins/index.html" style="white-space:nowrap;">ปลั๊กอินคัดสรร</a><a href="../ranking.html" style="white-space:nowrap;">อันดับ</a><a href="../voices.html" style="white-space:nowrap;">เสียงจากชุมชน</a><a href="../../archive/" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">คลังข้อมูล</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">ลายมือ</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">มาตรฐาน</button></span><details class="langpick"><summary>ไทย &#9662;</summary><div class="langmenu"><a href="../../en/plugins/index.html">English</a><a href="../../plugins/index.html">简体中文</a><a href="../../zh-TW/plugins/index.html">繁體中文</a><a href="../../ja/plugins/index.html">日本語</a><a href="../../ko/plugins/index.html">한국어</a><a href="../../th/plugins/index.html" style="color:#8f2924;">ไทย</a><a href="../../es/plugins/index.html">Español</a><a href="../../ar/plugins/index.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">ไทม์ไลน์</a><a href="../guides.html" style="white-space:nowrap;">คู่มือ</a><a href="../plugins/index.html" style="white-space:nowrap;">ปลั๊กอิน DSH</a><a href="../ranking.html" style="white-space:nowrap;">อันดับ</a><a href="../voices.html" style="white-space:nowrap;">เสียงจากชุมชน</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">คลังข้อมูล</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">ลายมือ</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">มาตรฐาน</button></span><details class="langpick"><summary>ไทย &#9662;</summary><div class="langmenu"><a href="../../en/plugins/index.html">English</a><a href="../../plugins/index.html">简体中文</a><a href="../../zh-TW/plugins/index.html">繁體中文</a><a href="../../ja/plugins/index.html">日本語</a><a href="../../ko/plugins/index.html">한국어</a><a href="../../th/plugins/index.html" style="color:#8f2924;">ไทย</a><a href="../../es/plugins/index.html">Español</a><a href="../../ar/plugins/index.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">03 / PLUGINS</div><h2 class="stitle">ปลั๊กอินคัดสรร</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">12 ปลั๊กอินที่ควรติดตั้ง แต่ละตัวมีคำสั่งติดตั้ง วิธีใช้ และเสียงตอบรับจริง</div></div><div class="grid2"><a href="dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.37deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">03 / PLUGINS</div><h2 class="stitle">ปลั๊กอิน DSH</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">12 ปลั๊กอินที่ควรติดตั้ง แต่ละตัวมีคำสั่งติดตั้ง วิธีใช้ และเสียงตอบรับจริง</div></div><div class="tabbar"><button type="button" data-panel="pk" aria-pressed="true">คัดมาแล้ว</button><button type="button" data-panel="al" aria-pressed="false">ทั้งหมด</button><button type="button" data-panel="mo" aria-pressed="false">ค้นเพิ่ม</button></div><div class="panel" id="pk"><div class="grid2"><a href="dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.37deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
     <span class="mono" style="font-size:14.5px;">dsh-anchored-standard</span>
     <span class="mono muted" style="font-size:12px;">3,423 star</span>
@@ -232,7 +244,231 @@
     <div class="cmd" id="l-EchoBird" style="font-size:12.5px;">irm https://echobird.ai/install.ps1 | iex</div>
     <span data-copy="l-EchoBird" class="copybtn">คัดลอก</span>
   </div>
-</a></div></div>
+</a></div></div><div class="panel" id="al" hidden><div class="filterbar" data-target="alllist"><button type="button" data-f="all" aria-pressed="true">ทั้งหมด <span>25</span></button><button type="button" data-f="UI" aria-pressed="false">UI <span>3</span></button><button type="button" data-f="ดีไซน์" aria-pressed="false">ดีไซน์ <span>2</span></button><button type="button" data-f="หน่วยความจำ/ที่จัดเก็บ" aria-pressed="false">หน่วยความจำ/ที่จัดเก็บ <span>2</span></button><button type="button" data-f="skill" aria-pressed="false">skill <span>2</span></button><button type="button" data-f="อื่น ๆ" aria-pressed="false">อื่น ๆ <span>16</span></button></div><div id="alllist" class="grid2" style="align-items:start;"><div class="fitem" data-tags="ดีไซน์" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.52deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">open-design &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">88,304 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ดีไซน์</span><a class="seal" style="font-size:13px;" href="open-design.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">DeepSeek-Reasonix &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">34,683 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">Agent เทอร์มินัล/CLI</span><a class="seal" style="font-size:13px;" href="DeepSeek-Reasonix.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="หน่วยความจำ/ที่จัดเก็บ" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.46deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">OpenViking &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">28,891 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">หน่วยความจำ/ที่จัดเก็บ</span><a class="seal" style="font-size:13px;" href="OpenViking.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="skill" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">colleague-skill &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">23,139 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">skill</span><a class="seal" style="font-size:13px;" href="colleague-skill.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.54deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Nagi-ovo/voyager" target="_blank" rel="noopener">voyager &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">19,593 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">เครื่องมือ/ส่วนเสริมเบราว์เซอร์</span>
+  </div>
+</div><div class="fitem" data-tags="skill" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.25deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">archify &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">13,847 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">skill</span>
+  </div>
+</div><div class="fitem" data-tags="หน่วยความจำ/ที่จัดเก็บ" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.56deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">EverOS &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">12,081 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">หน่วยความจำ/ที่จัดเก็บ</span><a class="seal" style="font-size:13px;" href="EverOS.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.49deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">learn-harness-engineering &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">11,852 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">บทเรียนสอนใช้งาน</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.13deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">deepseek-harness-desktop &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">11,626 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">UI/ไคลเอนต์</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.04deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">awesome-dsh-plugin &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">7,572 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ไดเรกทอรี/รายการรวม</span><a class="seal" style="font-size:13px;" href="awesome-dsh-plugin.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.27deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Q00/ouroboros" target="_blank" rel="noopener">ouroboros &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">5,508 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ออร์เคสเตรชัน/พัฒนาตัวเอง</span>
+  </div>
+</div><div class="fitem" data-tags="ดีไซน์" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.05deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ZSeven-W/openpencil" target="_blank" rel="noopener">openpencil &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">5,241 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ดีไซน์</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.28deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Devin-AXIS/iPolloWork" target="_blank" rel="noopener">iPolloWork &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">4,114 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">เวิร์กเบนช์/ออร์เคสเตรชัน</span>
+  </div>
+</div><div class="fitem" data-tags="UI" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.31deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/zhu1090093659/dsh-web-ui" target="_blank" rel="noopener">dsh-web-ui &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">4,097 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">UI</span><a class="seal" style="font-size:13px;" href="dsh-web-ui.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/crafter-station/petdex" target="_blank" rel="noopener">petdex &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">3,877 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ความสนุก/UI</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.24deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/strukto-ai/mirage" target="_blank" rel="noopener">mirage &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">3,499 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ที่จัดเก็บ/ระบบไฟล์</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.19deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/xiaobright/dsh-anchored-standard" target="_blank" rel="noopener">dsh-anchored-standard &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">3,423 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">การตั้งค่า/preset</span><a class="seal" style="font-size:13px;" href="dsh-anchored-standard.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/edison7009/EchoBird" target="_blank" rel="noopener">EchoBird &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">3,063 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">เครื่องมือ/ตัวติดตั้ง</span><a class="seal" style="font-size:13px;" href="EchoBird.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.37deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/foryourhealth111-pixel/Vibe-Skills" target="_blank" rel="noopener">Vibe-Skills &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">2,873 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">skill/ออร์เคสเตรชัน</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.53deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/whiteguo233/OpenBiliClaw" target="_blank" rel="noopener">OpenBiliClaw &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">2,839 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">Agent ค้นหาคอนเทนต์</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.20deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/liustack/modlens" target="_blank" rel="noopener">modlens &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">2,789 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">วิชวล/มัลติโมดัล</span><a class="seal" style="font-size:13px;" href="modlens.html">บรรณาธิการแนะนำ &#8594;</a>
+  </div>
+</div><div class="fitem" data-tags="UI" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.28deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/chuspeeism/dashi-taskboard" target="_blank" rel="noopener">dashi-taskboard &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">2,289 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">UI</span>
+  </div>
+</div><div class="fitem" data-tags="UI" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.26deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/omdsh-dev/DSH-better-sidebar" target="_blank" rel="noopener">DSH-better-sidebar &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">1,944 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">UI</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.19deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">1,812 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">UI/เทอร์มินัล</span>
+  </div>
+</div><div class="fitem" data-tags="อื่น ๆ" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.19deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/GCWing/BitFun" target="_blank" rel="noopener">BitFun &#8599;</a>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">1,770 star</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="muted" style="font-size:13px;">ไคลเอนต์/รันไทม์</span>
+  </div>
+</div></div></div><div class="panel" id="mo" hidden><h3 style="font-size:20px;margin-bottom:18px;">แหล่งค้นเพิ่มเติม</h3><div class="grid2" style="align-items:start;"><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.25deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">awesome-dsh-plugin &#8599;</span>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">7,572 star</span>
+  </div>
+  <div class="muted" style="font-size:14px;line-height:1.8;">每条收录前人工对照源码验货，20 个分类，配套可视化插件市场</div>
+</a><a href="https://dshplugins.xyz/en" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.51deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">dshplugins.xyz &#8599;</span>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">300+ 插件</span>
+  </div>
+  <div class="muted" style="font-size:14px;line-height:1.8;">第三方目录站，按「使用意图」分五类，周榜按 README 质量而非 star 排序</div>
+</a><a href="https://deepseek-code.com/plugins" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.46deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">deepseek-code.com &#8599;</span>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">316 插件</span>
+  </div>
+  <div class="muted" style="font-size:14px;line-height:1.8;">8 个分类，价值在长尾：迁移、笔记、余额监控这类刁钻小工具都在这露头</div>
+</a><a href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.06deg); padding:22px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">GitHub topic: dsh-plugin &#8599;</span>
+    <span class="mono muted" style="font-size:12px;white-space:nowrap;">6,716 仓库</span>
+  </div>
+  <div class="muted" style="font-size:14px;line-height:1.8;">生态的原始聚合口，新插件都会打这个 topic</div>
+</a></div></div></div>
 
 <div style="margin-top:24px;">
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
@@ -260,6 +496,24 @@
   document.addEventListener("click",function(ev){
     var b=ev.target.closest?ev.target.closest(".fsw button"):null;
     if(b){apply(b.dataset.font);return;}
+    var fb=ev.target.closest?ev.target.closest(".filterbar button"):null;
+    if(fb){
+      var barF=fb.closest(".filterbar"), want=fb.dataset.f;
+      barF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===fb?"true":"false");});
+      var listF=document.getElementById(barF.dataset.target);
+      if(listF) listF.querySelectorAll(".fitem").forEach(function(it){
+        var tags=(it.dataset.tags||"").split("|").filter(Boolean);
+        it.hidden = !(want==="all"||tags.indexOf(want)>=0);
+      });
+      return;
+    }
+    var tb=ev.target.closest?ev.target.closest(".tabbar button"):null;
+    if(tb){
+      var barT=tb.closest(".tabbar");
+      barT.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed", x===tb?"true":"false");});
+      document.querySelectorAll(".panel").forEach(function(pn){ pn.hidden = pn.id!==tb.dataset.panel; });
+      return;
+    }
     var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
     if(o){
       var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
