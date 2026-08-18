@@ -1,6 +1,6 @@
-# DSH 情报站
+# DSH Wiki · DSH 情报站
 
-> DeepSeek Harness 插件推荐素材库
+> DeepSeek Harness 生态站 · by ai798 Lab · [dshwiki.com](https://dshwiki.com)
 
 为「DSH 插件推荐」内容创作收集的 68 条一手素材：官方文档机制、GitHub 插件生态 top 30、Reddit/X 高赞讨论、中英文深度报道与视频教程。全部热度数字为 2026-08-18 实抓。
 
