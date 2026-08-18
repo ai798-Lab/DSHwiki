@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EverOS · DSH Wiki</title>
-<meta name="description" content="DeepSeek Harness 开源六天，从 0 到 149,851 star。这里按时间轴记录它的每一步：大事记、插件教程、GitHub 动态、排行榜，以及全球社区的真实声音。">
+<meta name="description" content="DSH Wiki is the DeepSeek Harness ecosystem site built by ai798 Lab. dsh shot to 149,851 stars after going open source, and the plugins, tutorials, hands-on">
 <link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Long+Cang&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
 <style>
   * { box-sizing: border-box; }
-  :root { --font-body:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; --font-head:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
   /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
-  html[data-font="clean"] { --font-body:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; --font-head:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
   body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
          color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
   html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
@@ -107,20 +107,20 @@
       <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">时间轴</a><a href="../guides.html" style="white-space:nowrap;">教程</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH 插件</a><a href="../ranking.html" style="white-space:nowrap;">排行榜</a><a href="../voices.html" style="white-space:nowrap;">评论墙</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">资料库</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手写</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">易读</button></span><details class="langpick"><summary>简体中文 &#9662;</summary><div class="langmenu"><a href="../en/plugins/EverOS.html">English</a><a href="../plugins/EverOS.html" style="color:#8f2924;">简体中文</a><a href="../zh-TW/plugins/EverOS.html">繁體中文</a><a href="../ja/plugins/EverOS.html">日本語</a><a href="../ko/plugins/EverOS.html">한국어</a><a href="../th/plugins/EverOS.html">ไทย</a><a href="../es/plugins/EverOS.html">Español</a><a href="../ar/plugins/EverOS.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../guides.html" style="white-space:nowrap;">Guides</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH Plugins</a><a href="../ranking.html" style="white-space:nowrap;">Plugin leaderboard</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archive</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Hand</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Clean</button></span><details class="langpick"><summary>English &#9662;</summary><div class="langmenu"><a href="../plugins/EverOS.html" style="color:#8f2924;">English</a><a href="../zh-CN/plugins/EverOS.html">简体中文</a><a href="../zh-TW/plugins/EverOS.html">繁體中文</a><a href="../ja/plugins/EverOS.html">日本語</a><a href="../ko/plugins/EverOS.html">한국어</a><a href="../th/plugins/EverOS.html">ไทย</a><a href="../es/plugins/EverOS.html">Español</a><a href="../ar/plugins/EverOS.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
+<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="../index.html">Home</a> <span class="muted">/</span> <a href="index.html">DSH Plugins</a> <span class="muted">/</span> <span class="muted">EverOS</span></div>
 
 <div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
-  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; 插件精选</a>
   <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">EverOS</h1>
-  <h2 style="font-size:28px;">一份记忆，处处通用。</h2>
-  <div style="font-size:16px;line-height:1.95;max-width:680px;">便携记忆层：本地优先、Markdown 原生，跨 agent 应用共用一份自进化记忆。</div>
+  <h2 style="font-size:28px;">One memory, usable everywhere.</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">A portable memory layer: local-first, Markdown-native, one self-evolving memory shared across agent apps.</div>
   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
     <span class="mono" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.09deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">12,081 star</span>
     <span class="mono" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v1.2.3</span>
-    <span style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.50deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">记忆 / 存储</span>
+    <span style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.50deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">Memory / storage</span>
     <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">GitHub &#8599;</a>
   </div>
 </div>
@@ -128,14 +128,14 @@
 <div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
   <div class="grid2" style="align-items:start;">
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <h3 style="font-size:21px;">安装</h3>
-      <div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.54deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.12+；一个 OpenRouter API key。已知坑：混合检索需要 embedding provider，一键最简配置只能用 &quot;method&quot;: &quot;keyword&quot;；Office 文档摄取依赖系统安装 LibreOffice；/api/v1 是遗留别名、将来会移除；缺可选能力时接口返回 HTTP 422；v1.2.3 起后台循环失败会 SIGTERM 退出进程，需 systemd/Docker/K8s 等外部重启机制。</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">Python 包：用 pip 或 uv 安装，然后运行它自带的命令。</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-EverOS-0">uv pip install everos
-# or: pip install everos</div><button type="button" data-copy="c-EverOS-0" class="copybtn">复制</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">多模态可选</span></div><div style="position:relative;"><div class="cmd" id="c-EverOS-1">uv pip install &#x27;everos[multimodal]&#x27;
-# or: pip install &#x27;everos[multimodal]&#x27;</div><button type="button" data-copy="c-EverOS-1" class="copybtn">复制</button></div></div></div>
+      <h3 style="font-size:21px;">Install</h3>
+      <div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.54deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.12+; an OpenRouter API key. Known pitfalls: hybrid retrieval needs an embedding provider, so the one-click minimal configuration can only use &quot;method&quot;: &quot;keyword&quot;; ingesting Office documents requires LibreOffice installed on the system; /api/v1 is a legacy alias and will be removed; endpoints return HTTP 422 when an optional capability is missing; since v1.2.3 a failed background loop SIGTERMs the process, so an external restart mechanism such as systemd/Docker/K8s is needed.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">A Python package: install with pip or uv, then run the command it ships.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-EverOS-0">uv pip install everos
+# or: pip install everos</div><button type="button" data-copy="c-EverOS-0" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Multimodal, optional</span></div><div style="position:relative;"><div class="cmd" id="c-EverOS-1">uv pip install &#x27;everos[multimodal]&#x27;
+# or: pip install &#x27;everos[multimodal]&#x27;</div><button type="button" data-copy="c-EverOS-1" class="copybtn">Copy</button></div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <h3 style="font-size:21px;">完整使用教程</h3>
-      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">everos demo 先跑演示（不需要 API key）</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">everos init 生成 ~/.everos/everos.toml 和 ~/.everos/ome.toml</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">把 OpenRouter API key 填进 everos.toml</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">everos server start 启动服务，curl http://127.0.0.1:8000/health 验证</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">05</span><span style="font-size:15px;line-height:1.8;">通过 /api/v2/memory/add、/api/v2/memory/flush、/api/v2/memory/search 写入、落盘、检索记忆</span></div>
+      <h3 style="font-size:21px;">Full tutorial</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">Run everos demo first to see the demo (no API key needed)</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">everos init generates ~/.everos/everos.toml and ~/.everos/ome.toml</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">Put your OpenRouter API key into everos.toml</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">everos server start launches the service; verify with curl http://127.0.0.1:8000/health</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">05</span><span style="font-size:15px;line-height:1.8;">Write, persist, and search memory through /api/v2/memory/add, /api/v2/memory/flush, and /api/v2/memory/search</span></div>
     </div>
   </div>
   <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">config</h3><div class="cmd"># everos.toml
@@ -144,11 +144,11 @@ model = &quot;openai/gpt-4.1-mini&quot;
 api_key = &quot;&lt;OPENROUTER_API_KEY&gt;&quot;
 base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
   <div style="display:flex;flex-direction:column;gap:12px;">
-    <h3 style="font-size:21px;">特色功能</h3>
-    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Markdown 记忆文件 + Git 版本化，本地 SQLite + LanceDB 索引，无外部数据库依赖</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">关键词 + 向量混合检索，支持 user/agent/app/project/session 多维正交检索</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">会话间记忆反思（reflection）自进化；可选多模态摄取（图片/PDF/音频/文档）；生态含 Claude Code 插件、EverMem Sync 等</span></div>
+    <h3 style="font-size:21px;">Features</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Markdown memory files versioned with Git, local SQLite + LanceDB indexes, no external database dependency</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Hybrid keyword + vector retrieval, with orthogonal multi-dimensional search across user/agent/app/project/session</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Self-evolving memory through cross-session reflection; optional multimodal ingestion (images/PDF/audio/documents); the ecosystem includes a Claude Code plugin, EverMem Sync and more</span></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:18px;">
-    <h3 style="font-size:21px;">评论墙</h3>
+    <h3 style="font-size:21px;">Voices</h3>
     <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
@@ -161,10 +161,10 @@ base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
 1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent
 
 2. EvoAgentBench：开源中立基准，专测</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）恭喜！EverMind 打磨已久的超级更新终于上线！一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源！1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent 2. EvoAgentBench：开源中立基准……（正文被接口截断）</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">Congratulations! EverMind&#x27;s long-polished mega update is finally live! EverOS, the one-stop platform for building, testing, and integrating agents, plus the new EvoAgentBench benchmark — all open source! 1. EverOS: a brand-new one-stop open-source library with multiple Methods, Benchmarks, and Usecases built in, so users can remix ready-made components into an agent of their own. 2. EvoAgentBench: an open, neutral benchmark built to test (post truncated at source)</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">55 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">55 likes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -174,10 +174,10 @@ base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
   <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS，10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。
 
 一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff，pip 一条命令装好。</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS,10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff,pip 一条命令装好。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">An AI agent&#x27;s memory is usually a black box — you don&#x27;t know what it remembered, where it&#x27;s stored, or whether you can edit it directly. EverOS, 10,300 stars, turns all of that into a pile of .md files you can open, running locally with no hosted service required. In one line: a local-first persistent memory layer for AI agents, stored as Markdown files you can read, edit, and git diff — installed with a single pip command.</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">6 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">6 likes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div></div>
   </div>
@@ -185,14 +185,14 @@ base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
 
 <div style="margin-top:24px;">
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
-  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../plugins/EverOS.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../plugins/EverOS.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">English</a><a href="../zh-CN/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
-    <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
+    <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek 官网 &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
       <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
     </div>
-    <div>数据实抓 · 截至 2026-08-18</div>
+    <div>Live-scraped data</div>
   </div>
 </div>
 <script>
@@ -245,7 +245,7 @@ base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
+        var old=c.textContent; c.textContent="Copied";
         setTimeout(function(){c.textContent=old;},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){

@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Geek：一批为 DSH 生态打造的桌面端体验与 Web UI 插件合集 · DSH Wiki</title>
-<meta name="description" content="DeepSeek Harness 开源六天，从 0 到 149,851 star。这里按时间轴记录它的每一步：大事记、插件教程、GitHub 动态、排行榜，以及全球社区的真实声音。">
+<meta name="description" content="DSH Wiki is the DeepSeek Harness ecosystem site built by ai798 Lab. dsh shot to 149,851 stars after going open source, and the plugins, tutorials, hands-on">
 <link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Long+Cang&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
 <style>
   * { box-sizing: border-box; }
-  :root { --font-body:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; --font-head:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
   /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
-  html[data-font="clean"] { --font-body:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; --font-head:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
   body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
          color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
   html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
@@ -107,20 +107,20 @@
       <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">时间轴</a><a href="../guides.html" style="white-space:nowrap;">教程</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH 插件</a><a href="../ranking.html" style="white-space:nowrap;">排行榜</a><a href="../voices.html" style="white-space:nowrap;">评论墙</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">资料库</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手写</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">易读</button></span><details class="langpick"><summary>简体中文 &#9662;</summary><div class="langmenu"><a href="../en/archive/a048.html">English</a><a href="../archive/a048.html" style="color:#8f2924;">简体中文</a><a href="../zh-TW/archive/a048.html">繁體中文</a><a href="../ja/archive/a048.html">日本語</a><a href="../ko/archive/a048.html">한국어</a><a href="../th/archive/a048.html">ไทย</a><a href="../es/archive/a048.html">Español</a><a href="../ar/archive/a048.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../guides.html" style="white-space:nowrap;">Guides</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH Plugins</a><a href="../ranking.html" style="white-space:nowrap;">Plugin leaderboard</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archive</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Hand</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Clean</button></span><details class="langpick"><summary>English &#9662;</summary><div class="langmenu"><a href="../archive/a048.html" style="color:#8f2924;">English</a><a href="../zh-CN/archive/a048.html">简体中文</a><a href="../zh-TW/archive/a048.html">繁體中文</a><a href="../ja/archive/a048.html">日本語</a><a href="../ko/archive/a048.html">한국어</a><a href="../th/archive/a048.html">ไทย</a><a href="../es/archive/a048.html">Español</a><a href="../ar/archive/a048.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
+<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="../index.html">Home</a> <span class="muted">/</span> <a href="index.html">Archive</a> <span class="muted">/</span> <span class="muted">048</span></div>
 
 <div class="wrap" style="padding-top:52px;padding-bottom:22px;display:flex;flex-direction:column;gap:16px;">
-  <a class="mono muted" style="font-size:12px;" href="index.html">&#8592; 资料库</a>
   <div class="mono muted" style="font-size:12px;">048</div>
   <h1 style="font-size:33px;line-height:1.4;">Geek：一批为 DSH 生态打造的桌面端体验与 Web UI 插件合集</h1>
   <div class="mono muted" style="font-size:12.5px;">@geekbb（Geek） · 2026-08-15 · 84 · 入门</div>
   <div style="display:flex;gap:9px;flex-wrap:wrap;"><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;">插件推荐</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;">生态观察</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;">选品素材</span><span class="muted" style="font-size:13px;border:1.3px solid #5f5b54;padding:1px 10px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;">案例演示</span></div>
   <div style="display:flex;gap:18px;flex-wrap:wrap;">
-    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 &#8599;</a>
-    <a class="muted" style="font-size:14px;" href="../archive/048_geekbb桌面端插件生态推荐.md">MD &#8594;</a>
+    <a style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">Source &#8599;</a>
+    
   </div>
 </div>
 <div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.6 C80,3.6 160,3.0 240,3.0 C320,3.0 400,5.8 480,5.8 C560,5.8 640,3.3 720,3.3 C800,3.3 880,5.3 960,5.3 C1040,5.3 1120,3.8 1200,3.8" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
@@ -128,21 +128,21 @@
   <div style="font-size:16px;line-height:1.95;max-width:720px;">开源第三天，中文数码博主 Geek 发布 DSH 生态工具盘点：现代化桌面客户端 + Web UI 插件与皮肤合集。
 涵盖任务面板、Git 集成等方向，附 4 张产品截图，具体项目链接在帖内待展开。
 热度不高但与「插件推荐」文章最对口，是 48 小时内社区插件生态成型的直接见证。</div>
-  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">要点</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">盘点方向与插件推荐文章直接对口：桌面客户端、Web UI 插件与皮肤、任务面板、Git 集成</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">发布 48 小时内社区插件/周边生态即开始成型，本帖是直接见证</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">帖内各项目链接可顺藤摸瓜补采，4 张截图可作文章配图（需注明来源）</span></div></div>
-  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">关键数据</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">开源第三天（2026-08-15）发布盘点</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">84 赞 / 13 回复（采集于 2026-08-18）</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">附 4 张产品截图可作配图</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">发布 48 小时内社区插件生态开始成型</span></div></div>
-  <div style="display:flex;flex-direction:column;gap:14px;"><h3 style="font-size:20px;">可引用金句</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.49deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">一堆为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。</div><div class="muted" style="font-size:13px;">中文博主对桌面端生态的原生表述，介绍桌面客户端类目时引用</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">DeepSeek Harness Web UI 的插件与皮肤合集，涵盖任务面板、Git</div><div class="muted" style="font-size:13px;">点出 Web UI 插件的具体方向（任务面板、Git），选品分类时可引</div></div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.32deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">属于发布 48 小时内社区插件/周边生态开始成型的直接见证</div><div class="muted" style="font-size:13px;">给生态速度定性的证据句，写「生态有多快」段落时用</div></div></div></div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">Takeaways</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">盘点方向与插件推荐文章直接对口：桌面客户端、Web UI 插件与皮肤、任务面板、Git 集成</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">发布 48 小时内社区插件/周边生态即开始成型，本帖是直接见证</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">帖内各项目链接可顺藤摸瓜补采，4 张截图可作文章配图（需注明来源）</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:11px;"><h3 style="font-size:20px;">Key numbers</h3><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">开源第三天（2026-08-15）发布盘点</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">84 赞 / 13 回复（采集于 2026-08-18）</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">附 4 张产品截图可作配图</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.85;">发布 48 小时内社区插件生态开始成型</span></div></div>
+  <div style="display:flex;flex-direction:column;gap:14px;"><h3 style="font-size:20px;">Quotable lines</h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.49deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">一堆为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。</div><div class="muted" style="font-size:13px;">中文博主对桌面端生态的原生表述，介绍桌面客户端类目时引用</div></div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.50deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">DeepSeek Harness Web UI 的插件与皮肤合集，涵盖任务面板、Git</div><div class="muted" style="font-size:13px;">点出 Web UI 插件的具体方向（任务面板、Git），选品分类时可引</div></div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.32deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:7px;"><div style="font-size:15.5px;line-height:1.85;">属于发布 48 小时内社区插件/周边生态开始成型的直接见证</div><div class="muted" style="font-size:13px;">给生态速度定性的证据句，写「生态有多快」段落时用</div></div></div></div>
 </div>
 
 <div style="margin-top:24px;">
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
-  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../archive/a048.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../archive/a048.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">English</a><a href="../zh-CN/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/archive/a048.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
-    <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
+    <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek 官网 &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
       <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
     </div>
-    <div>数据实抓 · 截至 2026-08-18</div>
+    <div>Live-scraped data</div>
   </div>
 </div>
 <script>
@@ -195,7 +195,7 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
+        var old=c.textContent; c.textContent="Copied";
         setTimeout(function(){c.textContent=old;},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){

@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>colleague-skill · DSH Wiki</title>
-<meta name="description" content="DeepSeek Harness 开源六天，从 0 到 149,851 star。这里按时间轴记录它的每一步：大事记、插件教程、GitHub 动态、排行榜，以及全球社区的真实声音。">
+<meta name="description" content="DSH Wiki is the DeepSeek Harness ecosystem site built by ai798 Lab. dsh shot to 149,851 stars after going open source, and the plugins, tutorials, hands-on">
 <link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Long+Cang&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
 <style>
   * { box-sizing: border-box; }
-  :root { --font-body:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; --font-head:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
   /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
-  html[data-font="clean"] { --font-body:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; --font-head:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
   body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
          color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
   html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
@@ -107,20 +107,20 @@
       <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">时间轴</a><a href="../guides.html" style="white-space:nowrap;">教程</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH 插件</a><a href="../ranking.html" style="white-space:nowrap;">排行榜</a><a href="../voices.html" style="white-space:nowrap;">评论墙</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">资料库</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手写</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">易读</button></span><details class="langpick"><summary>简体中文 &#9662;</summary><div class="langmenu"><a href="../en/plugins/colleague-skill.html">English</a><a href="../plugins/colleague-skill.html" style="color:#8f2924;">简体中文</a><a href="../zh-TW/plugins/colleague-skill.html">繁體中文</a><a href="../ja/plugins/colleague-skill.html">日本語</a><a href="../ko/plugins/colleague-skill.html">한국어</a><a href="../th/plugins/colleague-skill.html">ไทย</a><a href="../es/plugins/colleague-skill.html">Español</a><a href="../ar/plugins/colleague-skill.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../guides.html" style="white-space:nowrap;">Guides</a><a href="../plugins/index.html" style="white-space:nowrap;">DSH Plugins</a><a href="../ranking.html" style="white-space:nowrap;">Plugin leaderboard</a><a href="../archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archive</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Hand</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Clean</button></span><details class="langpick"><summary>English &#9662;</summary><div class="langmenu"><a href="../plugins/colleague-skill.html" style="color:#8f2924;">English</a><a href="../zh-CN/plugins/colleague-skill.html">简体中文</a><a href="../zh-TW/plugins/colleague-skill.html">繁體中文</a><a href="../ja/plugins/colleague-skill.html">日本語</a><a href="../ko/plugins/colleague-skill.html">한국어</a><a href="../th/plugins/colleague-skill.html">ไทย</a><a href="../es/plugins/colleague-skill.html">Español</a><a href="../ar/plugins/colleague-skill.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
+<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="../index.html">Home</a> <span class="muted">/</span> <a href="index.html">DSH Plugins</a> <span class="muted">/</span> <span class="muted">colleague-skill</span></div>
 
 <div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
-  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; 插件精选</a>
   <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">colleague-skill</h1>
-  <h2 style="font-size:28px;">离职同事，数字返聘。</h2>
-  <div style="font-size:16px;line-height:1.95;max-width:680px;">把前辈的文档、代码风格和口头禅做成“会像 TA 一样干活”的 Skill——所谓数字生命 1.0，全生态话题度最高的项目。</div>
+  <h2 style="font-size:28px;">Your departed coworker, digitally rehired.</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">Turns a predecessor&#x27;s docs, coding style, and pet phrases into a Skill that works the way they did — &#x27;digital life 1.0&#x27;, and the most talked-about project in the whole ecosystem.</div>
   <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
     <span class="mono" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.01deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">23,139 star</span>
     <span class="mono" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.29deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v0.01（Pre-release，标注 demo）</span>
-    <span style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">skill / 知识复刻</span>
+    <span style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">skill / knowledge cloning</span>
     <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">GitHub &#8599;</a>
   </div>
 </div>
@@ -128,22 +128,22 @@
 <div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
   <div class="grid2" style="align-items:start;">
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <h3 style="font-size:21px;">安装</h3>
-      <div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.52deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.9+；一个兼容宿主（Claude Code / OpenClaw / Codex / DeepSeek Harness 等）。已知坑（README 自述）：微信数据源目前不稳定（建议用开源工具）；Slack 免费版只能取 90 天记录；钉钉 API 不支持拉历史消息；整体仍是 beta；素材质量直接决定 Skill 质量。</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">Skill：把仓库克隆到宿主 agent 的 skills 目录，重启后即可调用。</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">自然语言安装（对任意宿主 agent 说）</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-0">Install the dot-skill skill for me: https://github.com/titanwings/colleague-skill</div><button type="button" data-copy="c-colleague-skill-0" class="copybtn">复制</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Claude Code 项目级</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-1">mkdir -p .claude/skills
-git clone https://github.com/titanwings/colleague-skill .claude/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-1" class="copybtn">复制</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Claude Code 全局</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-2">git clone https://github.com/titanwings/colleague-skill ~/.claude/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-2" class="copybtn">复制</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">OpenClaw</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-3">git clone https://github.com/titanwings/colleague-skill ~/.openclaw/workspace/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-3" class="copybtn">复制</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">其他宿主手动目录：Codex ~/.codex/skills/dot-skill；DeepSeek Harness ~/.dsh/skills/dot-skill</span></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">依赖</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-5">pip3 install -r requirements.txt</div><button type="button" data-copy="c-colleague-skill-5" class="copybtn">复制</button></div></div></div>
+      <h3 style="font-size:21px;">Install</h3>
+      <div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.52deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.9+; a compatible host (Claude Code / OpenClaw / Codex / DeepSeek Harness and others). Known pitfalls (stated in the README): the WeChat data source is currently unstable (an open-source tool is recommended); the free Slack tier only exposes 90 days of history; the DingTalk API cannot pull historical messages; the whole thing is still beta; the quality of the input material directly determines the quality of the Skill.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">A Skill: clone the repo into your host agent&#x27;s skills folder, then restart.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Natural-language install (say this to any host agent)</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-0">Install the dot-skill skill for me: https://github.com/titanwings/colleague-skill</div><button type="button" data-copy="c-colleague-skill-0" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Claude Code, project level</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-1">mkdir -p .claude/skills
+git clone https://github.com/titanwings/colleague-skill .claude/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-1" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Claude Code, global</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-2">git clone https://github.com/titanwings/colleague-skill ~/.claude/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-2" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">OpenClaw</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-3">git clone https://github.com/titanwings/colleague-skill ~/.openclaw/workspace/skills/create-colleague</div><button type="button" data-copy="c-colleague-skill-3" class="copybtn">Copy</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Manual directories for other hosts: Codex ~/.codex/skills/dot-skill; DeepSeek Harness ~/.dsh/skills/dot-skill</span></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Dependencies</span></div><div style="position:relative;"><div class="cmd" id="c-colleague-skill-5">pip3 install -r requirements.txt</div><button type="button" data-copy="c-colleague-skill-5" class="copybtn">Copy</button></div></div></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <h3 style="font-size:21px;">完整使用教程</h3>
-      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">在宿主 agent 里输入 /create-colleague（或 /dot-skill）启动</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">选角色族（同事/关系/名人），输入别名、公司层级、性格标签</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">选择数据源（飞书/钉钉/Slack/微信/邮件/PDF 等）导入资料</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">生成后用 /{slug} 命令直接调用这个“数字同事”</span></div>
+      <h3 style="font-size:21px;">Full tutorial</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">Type /create-colleague (or /dot-skill) in the host agent to start</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">Pick a character family (colleague/relationship/celebrity) and enter the alias, company hierarchy level, and personality tags</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">Choose data sources (Feishu/DingTalk/Slack/WeChat/email/PDF and so on) and import the material</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">Once generated, call this &quot;digital colleague&quot; directly with the /{slug} command</span></div>
     </div>
   </div>
   
   <div style="display:flex;flex-direction:column;gap:12px;">
-    <h3 style="font-size:21px;">特色功能</h3>
-    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">三大角色族：colleague（同事）/ relationship（关系）/ celebrity（名人），名人线配字幕处理研究工具链</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">多源数据整合：飞书、钉钉、Slack、微信、邮件、PDF</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">生成的 Skill 支持版本控制与回滚，跨 5 类宿主平台通用</span></div>
+    <h3 style="font-size:21px;">Features</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Three character families: colleague / relationship / celebrity, with the celebrity track shipping a subtitle-processing research toolchain</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Multi-source data integration: Feishu, DingTalk, Slack, WeChat, email, PDF</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Generated Skills support version control and rollback and work across 5 kinds of host platform</span></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:18px;">
-    <h3 style="font-size:21px;">评论墙</h3>
+    <h3 style="font-size:21px;">Voices</h3>
     <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
     <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
@@ -160,10 +160,10 @@ AIにその人の仕事のやり方を学習させる。
 「デジタルな同僚」が残り続ける。
 
 GitHub 9,000スター超え。</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">中国 AI 圈，水平完全不在一个次元。‘把同事蒸馏进 AI 的工具’火了……一个叫 colleague.skill 的开源项目：收集同事的聊天记录、业务文档、邮件，让 AI 学会那个人的工作方式。也就是说，就算人离职了，‘数字同事’会一直留下来。GitHub 星数已超 9,000，发布才一周。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">China&#x27;s AI scene is on a whole other level. A &#x27;tool that distills your coworker into an AI&#x27; is going viral... It&#x27;s an OSS project called colleague.skill: it collects a coworker&#x27;s chat history, work documents, and emails, and teaches an AI how that person works. Meaning even after they resign, a &#x27;digital coworker&#x27; stays behind. Over 9,000 stars on GitHub.</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">2121 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">2121 likes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.43deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -172,10 +172,10 @@ GitHub 9,000スター超え。</div>
   </div>
   <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">同事.Skill：把你的同事蒸馏成Skill
 把同事的技能与性格蒸馏成 AI Skill，让它替他工作。建议改名叫“同事Kill”，成为Skill后就可以Kill掉了。</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">（原文即中文）同事.Skill：把你的同事蒸馏成 Skill。把同事的技能与性格蒸馏成 AI Skill，让它替他工作。建议改名叫‘同事Kill’，成为 Skill 后就可以 Kill 掉了。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">Colleague.Skill: distill your coworker into a Skill. It distills a coworker&#x27;s skills and personality into an AI Skill that does their job for them. Suggested rename: &#x27;Colleague.Kill&#x27; — once they&#x27;ve become a Skill, you&#x27;re free to kill the position.</div>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">500 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">500 likes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -185,10 +185,10 @@ GitHub 9,000スター超え。</div>
   <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">A viral GitHub project in China called &quot;同事.skill&quot; (Colleague.skill) turns a departing coworker&#x27;s chat logs, docs, and emails into an AI skill that mimics how they work. Spinoffs appeared overnight: Boss.skill, Mentor.skill, Crush.skill, even Immortality.skill.
 
 The joke landed</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">中国一个爆火的 GitHub 项目‘同事.skill’，能把离职同事的聊天记录、文档和邮件变成一个模仿其工作方式的 AI skill。衍生项目一夜之间冒出来：老板.skill、导师.skill、暗恋对象.skill，甚至永生.skill。这个梗成了。</div>
+  
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">62 赞</span>
-    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">62 likes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -196,10 +196,10 @@ The joke landed</div>
     <span class="mono muted" style="font-size:11px;">u/Kwigg · 2026-04-22</span>
   </div>
   <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Looks like we&#x27;ve gone full circle from roleplaying -&gt; coding/useful stuff -&gt; roleplaying again. From my experience, (I still use SillyTavern like it&#x27;s 2023) making the ai do a persona while also trying to be a coder/etc. is stacking tasks on top of each other which makes it worse at both.</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">看来我们绕了一整圈：从角色扮演→写代码/干正事→又回到角色扮演。以我的经验（我到现在还在用 SillyTavern，跟 2023 年一样），让 AI 一边扮演人设一边写代码，等于把任务叠在一起，两头都会变差。</div>
+  
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">5 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">5 upvotes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
@@ -207,10 +207,10 @@ The joke landed</div>
     <span class="mono muted" style="font-size:11px;">u/fallingdowndizzyvr · 2026-04-22</span>
   </div>
   <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I would read up on this. It&#x27;s not roleplaying per se. It is doing something useful. Check out that github and the dev alludes to it. &quot;Your colleague quit, leaving behind a mountain of unmaintained docs?&quot; ... That&#x27;s using this to do useful stuff. Since it effectively gives you a digital twin of your coworker to do useful stuff with.</div>
-  <div class="muted" style="font-size:14px;line-height:1.75;">建议先了解一下。这不完全是角色扮演，它是在干有用的事。看看那个 GitHub 仓库，开发者也点到了：‘你的同事离职了，留下一座没人维护的文档山？’……这就是用它干实事，它实际上给了你一个可以一起干活的同事数字分身。</div>
+  
   <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-    <span class="mono muted" style="font-size:11px;">0 赞同</span>
-    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <span class="mono muted" style="font-size:11px;">0 upvotes</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div></div>
   </div>
@@ -218,14 +218,14 @@ The joke landed</div>
 
 <div style="margin-top:24px;">
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
-  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../plugins/colleague-skill.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../plugins/colleague-skill.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">English</a><a href="../zh-CN/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/plugins/colleague-skill.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
-    <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
+    <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek 官网 &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
       <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
     </div>
-    <div>数据实抓 · 截至 2026-08-18</div>
+    <div>Live-scraped data</div>
   </div>
 </div>
 <script>
@@ -278,7 +278,7 @@ The joke landed</div>
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
+        var old=c.textContent; c.textContent="Copied";
         setTimeout(function(){c.textContent=old;},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){

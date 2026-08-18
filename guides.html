@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>教程 · DSH Wiki</title>
-<meta name="description" content="DeepSeek Harness 开源六天，从 0 到 149,851 star。这里按时间轴记录它的每一步：大事记、插件教程、GitHub 动态、排行榜，以及全球社区的真实声音。">
+<title>Guides · DSH Wiki</title>
+<meta name="description" content="DSH Wiki is the DeepSeek Harness ecosystem site built by ai798 Lab. dsh shot to 149,851 stars after going open source, and the plugins, tutorials, hands-on">
 <link rel="icon" type="image/svg+xml" href="assets/brand/dshwiki-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/dshwiki-mark-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/brand/dshwiki-mark-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Long+Cang&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
 <style>
   * { box-sizing: border-box; }
-  :root { --font-body:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; --font-head:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; }
+  :root { --font-body:"Caveat", "Bradley Hand", "Segoe Print", cursive; --font-head:"Caveat", "Bradley Hand", "Segoe Print", cursive; }
   /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
-  html[data-font="clean"] { --font-body:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; --font-head:"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+  html[data-font="clean"] { --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-head:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
   body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
          color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
   html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
@@ -107,125 +107,126 @@
       <img src="assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
       <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
     </a>
-    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="timeline.html" style="white-space:nowrap;">时间轴</a><a href="guides.html" style="white-space:nowrap;">教程</a><a href="plugins/index.html" style="white-space:nowrap;">DSH 插件</a><a href="ranking.html" style="white-space:nowrap;">排行榜</a><a href="voices.html" style="white-space:nowrap;">评论墙</a><a href="archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">资料库</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手写</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">易读</button></span><details class="langpick"><summary>简体中文 &#9662;</summary><div class="langmenu"><a href="en/guides.html">English</a><a href="guides.html" style="color:#8f2924;">简体中文</a><a href="zh-TW/guides.html">繁體中文</a><a href="ja/guides.html">日本語</a><a href="ko/guides.html">한국어</a><a href="th/guides.html">ไทย</a><a href="es/guides.html">Español</a><a href="ar/guides.html">العربية</a></div></details></div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="guides.html" style="white-space:nowrap;">Guides</a><a href="plugins/index.html" style="white-space:nowrap;">DSH Plugins</a><a href="ranking.html" style="white-space:nowrap;">Plugin leaderboard</a><a href="archive/index.html" style="border:1.6px solid #151515;padding:5px 16px;border-radius:35px 225px 25px 255px / 255px 25px 225px 35px;transform:rotate(-0.44deg);white-space:nowrap;">Archive</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">Hand</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">Clean</button></span><details class="langpick"><summary>English &#9662;</summary><div class="langmenu"><a href="guides.html" style="color:#8f2924;">English</a><a href="zh-CN/guides.html">简体中文</a><a href="zh-TW/guides.html">繁體中文</a><a href="ja/guides.html">日本語</a><a href="ko/guides.html">한국어</a><a href="th/guides.html">ไทย</a><a href="es/guides.html">Español</a><a href="ar/guides.html">العربية</a></div></details></div>
   </div>
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
 </div>
+<div class="wrap mono" style="padding-top:14px;font-size:12px;letter-spacing:0.05em;"><a href="index.html">Home</a> <span class="muted">/</span> <span class="muted">Guides</span></div>
 
-<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">02 / GUIDES</div><h2 class="stitle">教程</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">从零到跑起来，四步。全部命令与官方 README 逐条核对。</div></div><h3 style="font-size:21px;margin-bottom:18px;">我们写的上手路径</h3><div class="grid2"><a href="deploy.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.22deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
-  <h3 style="font-size:21px;">部署上手 &#8594;</h3>
-  <div class="muted" style="font-size:14px;line-height:1.8;">从零到跑起来，四步。全部命令与官方 README 逐条核对。</div>
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;scroll-margin-top:96px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">02 / GUIDES</div><h2 class="stitle">Guides</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">From zero to a running instance in four steps. Every command checked line by line against the official README.</div></div><h3 style="font-size:21px;margin-bottom:18px;">Our own walkthroughs</h3><div class="grid2"><a href="deploy.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.22deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <h3 style="font-size:21px;">Get It Running &#8594;</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">From zero to a running instance in four steps. Every command checked line by line against the official README.</div>
 </a><a href="plugins/index.html" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.55deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
-  <h3 style="font-size:21px;">DSH 插件 &#8594;</h3>
-  <div class="muted" style="font-size:14px;line-height:1.8;">12 个值得装的插件，每个都有安装命令、用法与真实口碑。</div>
-</a></div><h3 style="font-size:21px;margin:44px 0 18px 0;">社区教程 <span class="mono muted" style="font-size:13px;">12</span></h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.39deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
+  <h3 style="font-size:21px;">DSH Plugins &#8594;</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">12 plugins worth installing — each with install commands, usage notes, and real word of mouth.</div>
+</a></div><h3 style="font-size:21px;margin:44px 0 18px 0;">Community tutorials <span class="mono muted" style="font-size:13px;">12</span></h3><div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.39deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-13 · 149,856 · 进阶</div>
   <h3 style="font-size:18px;line-height:1.5;">官方插件开发教程——一个 apply 函数就是一个插件</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">官方教程：十几行代码写出第一个 dsh 插件，发布到被发现全流程有闭环</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a003.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.zh.md" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a003.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/index.zh.md" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.47deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-13 · 149,856 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">Web UI 使用指南与 CLI 入口——三步跑起第一个任务</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">官方使用指南：填 key、选目录、发任务三步上手，默认形态是本机 Web UI</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a004.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a004.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.25deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-03-29 · 11,852 · 进阶</div>
   <h3 style="font-size:18px;line-height:1.5;">Learn Harness Engineering——从 0 到 1 的 harness 工程教程（15 种语言）</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">「harness 工程」概念最系统的免费教程，比 dsh 开源早 4 个月，已译成 15 种语言。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a014.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a014.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.52deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-11 · 833 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">833 赞梗图：「把 harness 调到飞起，用便宜的 Flash 跟开大模型的人赛跑」</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">本次收集赞数最高的梗图帖，评论区意外变成「什么是 harness tuning」的科普课。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a029.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vl9s4y/what_it_feels_like_when_youre_racing_with_people/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a029.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.reddit.com/r/DeepSeek/comments/1vl9s4y/what_it_feels_like_when_youre_racing_with_people/" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.06deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-14 · 1,000 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">Ollama 官方宣布支持 DeepSeek Harness（ollama launch dsh）</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">开源次日 Ollama 官宣一条命令本地跑 DSH，预装联网搜索插件并带轨迹视图。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a041.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a041.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.39deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-13 · 513 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">Kai：本地跑通 DeepSeek Harness 的首批上手演示视频</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">官宣 25 分钟后开发者发布首批本地跑通 DSH 的 4K 实录演示视频。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a045.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://x.com/hqmank/status/2087893677083672917" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a045.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/hqmank/status/2087893677083672917" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.47deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-13 · 6 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">天机阁 X Article：DeepSeek Harness 一文入门，附小白安装教程</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">发布当晚中文圈最早的 X 原生长文入门教程，附小白安装步骤（正文需补采）。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a049.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://x.com/tun2049/article/2087921332004835775" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a049.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://x.com/tun2049/article/2087921332004835775" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.58deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-17 · 进阶</div>
   <h3 style="font-size:18px;line-height:1.5;">MarkTechPost：DeepSeek Harness 开发者预览版技术详解</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">发布四天后的「冷静版」规格盘点：九大插件类别、四种运行模式、多模型服务商支持最全清单</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a053.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.marktechpost.com/2026/08/17/deepseek-ai-releases-deepseek-harness-in-developer-preview/" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a053.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.marktechpost.com/2026/08/17/deepseek-ai-releases-deepseek-harness-in-developer-preview/" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.50deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-14 · 72,170 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">零度解说：DeepSeek Harness 正式发布！开源一天狂揽 6.8 万星</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">中文区播放最高的 dsh 视频（7.2 万+），112 万订阅科普大号面向小白的新闻+部署+实测三合一。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a064.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a064.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.41deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-14 · 41,525 · 进阶</div>
   <h3 style="font-size:18px;line-height:1.5;">AI超元域：实测 DeepSeek Harness 从基础到高级——插件系统、轨迹、分支全覆盖</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">中文区功能覆盖最全的实测：12 分 54 秒十项内容，含插件系统演示和「Codex 反向调用 dsh」名场面。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a066.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=Aqn7EP8shJw" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a066.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=Aqn7EP8shJw" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.51deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-16 · 6,293 · 进阶</div>
   <h3 style="font-size:18px;line-height:1.5;">灵姐说AI：一切皆插件！dsh 解读、安装、远程、实测全拆解（对标 Codex）</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">方法论最严谨的中文实测：同题任务对比 Codex，含复用 Codex Skills 和安全提醒两个独家实用点。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a067.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=2NP1NNMrIf4" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a067.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=2NP1NNMrIf4" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:9px;">
   <div class="mono muted" style="font-size:11px;">2026-08-15 · 5,778 · 入门</div>
   <h3 style="font-size:18px;line-height:1.5;">傅云飞飞：从 0 快速上手 dsh + 三大必装插件分享（含配套图文全教程）</h3>
   <div class="muted" style="font-size:14px;line-height:1.8;">唯一把「必装插件」逐个讲透的中文教程：at-file、ModLens、better-sidebar 三件套，命令可复制。</div>
   <div style="display:flex;gap:16px;flex-wrap:wrap;">
-    <a href="archive/a068.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">精读 &#8594;</a>
-    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=LAOLbK_KH9g" target="_blank" rel="noopener">原文 &#8599;</a>
+    <a href="archive/a068.html" style="font-size:14px;border-bottom:1.5px solid #151515;padding-bottom:1px;">Read &#8594;</a>
+    <a class="muted" style="font-size:14px;" href="https://www.youtube.com/watch?v=LAOLbK_KH9g" target="_blank" rel="noopener">Source &#8599;</a>
   </div>
 </div></div></div>
 
 <div style="margin-top:24px;">
   <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
-  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="en/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="guides.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="zh-TW/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="ja/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="ko/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="th/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="es/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="ar/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="guides.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">English</a><a href="zh-CN/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="zh-TW/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="ja/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="ko/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="th/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="es/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="ar/guides.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
   <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
-    <div>DSH Wiki · DSH 情报站 · ai798 Lab 出品</div>
+    <div>DSH Wiki · The DSH Intel Hub · By ai798 Lab</div>
     <div style="display:flex;gap:18px;">
-      <a href="https://deepseek.com/harness/zh/" class="muted">DeepSeek 官网 &#8599;</a>
+      <a href="https://deepseek.com/harness/en/" class="muted">DeepSeek Harness site &#8599;</a>
       <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
     </div>
-    <div>数据实抓 · 截至 2026-08-18</div>
+    <div>Live-scraped data</div>
   </div>
 </div>
 <script>
@@ -278,7 +279,7 @@
       var code=document.getElementById(c.dataset.copy);
       if(!code)return;
       var text=code.innerText, done=function(){
-        var old=c.textContent; c.textContent="已复制";
+        var old=c.textContent; c.textContent="Copied";
         setTimeout(function(){c.textContent=old;},1400);
       };
       if(navigator.clipboard&&navigator.clipboard.writeText){
