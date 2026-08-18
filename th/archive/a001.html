@@ -86,6 +86,42 @@
   .ranklink[aria-pressed="true"] span { border-bottom:1.8px solid #8f2924; padding-bottom:2px; }
   .panel[hidden] { display:none; }
 
+  /* 「更多插件」全目录:搜索/排序/语言控制条 + 500+ 行的紧凑列表 */
+  .plctl { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:20px 0 14px; }
+  .plq { flex:1 1 240px; min-width:0; font-family:var(--font-body); font-size:15px; color:#151515;
+          background:transparent; border:1.6px solid #151515; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;
+          padding:5px 14px; }
+  .plq::placeholder { color:#5f5b54; opacity:1; }
+  /* 默认的蓝色聚焦环和纸墨风打架,换成墨色描边(仍保留可见的键盘焦点) */
+  .plq:focus-visible, .plsel:focus-visible { outline:2px solid #151515; outline-offset:2px; }
+  .plq:focus { outline:none; }
+  .plsort { display:flex; gap:8px; }
+  .plsort button, .plsel { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+          background:transparent; border:1.5px solid #151515; padding:4px 13px;
+          border-radius:225px 12px 255px 22px / 22px 255px 12px 225px; }
+  .plsort button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .plfilter { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:16px; }
+  .plfilter button { font-family:var(--font-body); font-size:14.5px; color:#151515; cursor:pointer;
+          background:transparent; border:1.5px solid #151515; padding:2px 13px;
+          border-radius:225px 12px 255px 22px / 22px 255px 12px 225px; }
+  .plfilter button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .plfilter button span { font-family:'IBM Plex Mono', monospace; font-size:11px; opacity:0.62; margin-inline-start:5px; }
+  .plrow { display:flex; gap:20px; align-items:baseline; padding:12px 2px;
+            border-top:1.2px solid rgba(21,21,21,0.13); }
+  .plrow[hidden] { display:none; }
+  .plmain { flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:3px; }
+  /* 仓库描述里常有 a/b/c/d 这类超长不可断词,窄屏会顶破整页 */
+  .plmain > div { overflow-wrap:anywhere; }
+  .plhead { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .plcat { font-size:12.5px; border:1.3px solid #5f5b54; padding:0 9px;
+            border-radius:225px 10px 255px 20px / 20px 255px 10px 225px; white-space:nowrap; }
+  .plmeta { flex:0 0 auto; display:flex; flex-direction:column; gap:1px;
+             text-align:end; font-size:12.5px; }
+  @media (max-width: 700px) {
+    .plrow { flex-direction:column; gap:5px; }
+    .plmeta { flex-direction:row; gap:14px; text-align:start; }
+  }
+
   /* ── 微交互 ── 用 translate/scale/rotate 这几个独立属性,
      不会和卡片内联的 transform:rotate() 打架 */
   @media (prefers-reduced-motion: no-preference) {
