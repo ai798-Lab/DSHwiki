@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>token-anxiety · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness、オープンソース化から 6 日で 0 から 149,851 star へ。その一歩一歩をタイムラインで記録する。重要な出来事、プラグイン解説、GitHub の動向、ランキング、そして世界中のコミュニティの生の声。">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yomogi&family=Klee+One:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Yomogi", "Klee One", "Hiragino Maru Gothic ProN", cursive; --font-head:"Yomogi", "Klee One", "Hiragino Maru Gothic ProN", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; --font-head:"Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../ja/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">タイムライン</a><a href="../deploy.html" style="white-space:nowrap;">導入</a><a href="../plugins/index.html" style="white-space:nowrap;">厳選プラグイン</a><a href="../ranking.html" style="white-space:nowrap;">ランキング</a><a href="../voices.html" style="white-space:nowrap;">コメントウォール</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手書き</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">標準</button></span><details class="langpick"><summary>日本語 &#9662;</summary><div class="langmenu"><a href="../../en/plugins/token-anxiety.html">English</a><a href="../../plugins/token-anxiety.html">简体中文</a><a href="../../zh-TW/plugins/token-anxiety.html">繁體中文</a><a href="../../ja/plugins/token-anxiety.html" style="color:#8f2924;">日本語</a><a href="../../ko/plugins/token-anxiety.html">한국어</a><a href="../../th/plugins/token-anxiety.html">ไทย</a><a href="../../es/plugins/token-anxiety.html">Español</a><a href="../../ar/plugins/token-anxiety.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
+  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; 厳選プラグイン</a>
+  <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">token-anxiety</h1>
+  <h2 style="font-size:28px;">コスト不安、その場で解消。</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">リアルタイムでコストを計算。Explain コマンドが token の使い道を 1 件ずつ説明し、価格表は curl 1 本で同期できる。</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+    <span class="mono" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.50deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">0 star</span>
+    <span class="mono" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.04deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v0.1</span>
+    <span style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.22deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">コスト / 課金</span>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/mov-eax-eax/dsh-token-anxiety" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,2.3 C80,2.3 160,3.9 240,3.9 C320,3.9 400,2.0 480,2.0 C560,2.0 640,6.1 720,6.1 C800,6.1 880,3.6 960,3.6 C1040,3.6 1120,2.5 1200,2.5" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
+  <div class="grid2" style="align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">インストール</h3>
+      <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.30deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">DeepSeek Harness の web profile、Node.js 22+。既知の制限（README の自己申告）：集計するのはルートセッションのタスクのみで、subagent のセッションは widget に出ない（projection fold はセッション単位で同期的に畳み込まれる）。Explain は host の直結ルートであり agent のターンではないため、分析結果はセッションログに残らず、ページを更新すると消える。内蔵の価格表は「埋め込みであり、いずれ古くなる」ため、手動での同期が必要。</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">dsh プラグイン：profile に入れて dsh web を再起動すると有効になります。</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm から</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-0">dsh plugin --profile web add dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-0" class="copybtn">コピー</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">ローカルチェックアウト</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-1">dsh plugin --profile web add /path/to/dsh-token-anxiety</div><button type="button" data-copy="c-token-anxiety-1" class="copybtn">コピー</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">npm を直接使用</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-2">npm install dsh-token-anxiety
+npm install dsh-token-anxiety@0.1.0</div><button type="button" data-copy="c-token-anxiety-2" class="copybtn">コピー</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">価格表を手動で同期</span></div><div style="position:relative;"><div class="cmd" id="c-token-anxiety-3">curl -X POST http://127.0.0.1:3080/token-anxiety/pricing-sync -H &quot;Content-Type: application/json&quot; -d &#x27;{}&#x27;</div><button type="button" data-copy="c-token-anxiety-3" class="copybtn">コピー</button></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">完全チュートリアル</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">インストール後に dsh web を再起動し、ページを更新する</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">チャットの入力エリア（composer band）でコスト widget を見つけ、hover するかクリックして展開する</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">Overview（ピーク/オフピーク料金の状態）、Tasks（ソート可能なタスク別コスト表）、Explain（どのタスクがコストを食っているかをワンクリックで要因分析）を見る</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">価格表が古くなったら pricing-sync のエンドポイントで手動同期する</span></div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">config</h3><div class="cmd">默认货币 COP/USD/CNY（支持约 40 种，带地区格式化）；语言跟随 harness locale；价格数据经 host 侧 pricing-sync 接口刷新（curl 命令见安装区），重启后覆盖值合并进默认表。README 未给出配置文件片段原文。</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:21px;">特徴</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">ピーク/オフピーク料金の状態をリアルタイム表示（ローカルのタイムゾーンで peak/valley の時間帯を表示）。どの時間帯にタスクを流すと安いかが一目で分かる</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">タスクごとのコストをソート可能な表で表示 + ワンクリックの Explain による要因分析（どのタスクがコストを食っているか、その理由）</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">約 40 種類の通貨、ライト/ダークテーマ、中国語と英語の二言語に対応。外部依存ゼロでバンドル</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <h3 style="font-size:21px;">コメントウォール</h3>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Snoo_57113 · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I made a plugin (Token anxiety) for the deepseek harness 0.1 that shows the cost per task, the peak hours and how much a task would cost after the hike... As tips to reduce your bill I found that open research questions, typos, not being specific in the prompts and bugs in toolcalling make up 50%+ of the tokens.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness 0.1 用のプラグイン(Token anxiety)を作った。タスクごとのコスト、ピーク時間帯、値上げ後に同じタスクがいくらになるかを表示する……請求額を減らすコツとして分かったのは、オープンな調査系の質問、タイポ、曖昧なプロンプト、ツール呼び出しのバグで token の 50% 以上を食っているということ。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">11 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/token-anxiety.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/token-anxiety.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH情報局 · ai798 Lab 制作</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 公式サイト &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>データは実測取得 · 2026-08-18 時点</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="コピーしました";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

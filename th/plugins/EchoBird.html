@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="th" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EchoBird · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness เปิดซอร์สได้ 6 วัน จาก 0 พุ่งถึง 149,851 star ที่นี่บันทึกทุกก้าวของมันไว้บนไทม์ไลน์: เหตุการณ์สำคัญ คู่มือปลั๊กอิน ความเคลื่อนไหวบน ">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&family=Noto+Sans+Thai:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Itim", "Mali", "Thonburi", cursive; --font-head:"Itim", "Mali", "Thonburi", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; --font-head:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../th/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">ไทม์ไลน์</a><a href="../deploy.html" style="white-space:nowrap;">ติดตั้ง</a><a href="../plugins/index.html" style="white-space:nowrap;">ปลั๊กอินคัดสรร</a><a href="../ranking.html" style="white-space:nowrap;">อันดับ</a><a href="../voices.html" style="white-space:nowrap;">เสียงจากชุมชน</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">ลายมือ</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">มาตรฐาน</button></span><details class="langpick"><summary>ไทย &#9662;</summary><div class="langmenu"><a href="../../en/plugins/EchoBird.html">English</a><a href="../../plugins/EchoBird.html">简体中文</a><a href="../../zh-TW/plugins/EchoBird.html">繁體中文</a><a href="../../ja/plugins/EchoBird.html">日本語</a><a href="../../ko/plugins/EchoBird.html">한국어</a><a href="../../th/plugins/EchoBird.html" style="color:#8f2924;">ไทย</a><a href="../../es/plugins/EchoBird.html">Español</a><a href="../../ar/plugins/EchoBird.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
+  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; ปลั๊กอินคัดสรร</a>
+  <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">EchoBird</h1>
+  <h2 style="font-size:28px;">ตัวติดตั้งและสลับโมเดลในคลิกเดียว</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">จัดการการติดตั้งและสลับใช้ CLI อย่าง Claude Code, Codex, dsh ฯลฯ ไว้ที่เดียว — ตัวเลือกแรกสำหรับคนที่ไม่ได้เขียนโปรแกรม</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+    <span class="mono" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.09deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">3,063 star</span>
+    <span class="mono" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.15deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v5.6.5</span>
+    <span style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.22deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">เครื่องมือ / ตัวติดตั้ง</span>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/edison7009/EchoBird" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.2 C80,3.2 160,4.2 240,4.2 C320,4.2 400,4.6 480,4.6 C560,4.6 640,5.6 720,5.6 C800,5.6 880,5.9 960,5.9 C1040,5.9 1120,5.9 1200,5.9" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
+  <div class="grid2" style="align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">การติดตั้ง</h3>
+      <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.26deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Windows / macOS / Linux (x64+arm64) บิลด์ด้วย Tauri + Rust ข้อควรทราบเรื่องไลเซนส์: v5.0.0+ เป็น MIT ส่วนเวอร์ชันก่อนหน้ายังเป็น AGPL-3.0-or-later; มีนโยบายเรื่องเครื่องหมายการค้า/รูปลักษณ์ทางการค้า (trade dress) หากนำไปแจกจ่ายต่อต้องระวัง</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">แอปเดสก์ท็อป: ดาวน์โหลดตัวติดตั้งสำหรับระบบของคุณจากเว็บไซต์หรือ GitHub Releases</div><div class="ostabs"><button type="button" data-os="all" aria-pressed="true">ทั้งหมด</button><button type="button" data-os="Windows" aria-pressed="false">Windows</button><button type="button" data-os="macOS" aria-pressed="false">macOS</button><button type="button" data-os="Linux" aria-pressed="false">Linux</button></div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="Windows" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Windows (PowerShell)</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">Windows</span></div><div style="position:relative;"><div class="cmd" id="c-EchoBird-0">irm https://echobird.ai/install.ps1 | iex</div><button type="button" data-copy="c-EchoBird-0" class="copybtn">คัดลอก</button></div></div><div class="insblock" data-os="macOS Linux" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">macOS / Linux</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">macOS</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">Linux</span></div><div style="position:relative;"><div class="cmd" id="c-EchoBird-1">curl -fsSL https://echobird.ai/install.sh | sh</div><button type="button" data-copy="c-EchoBird-1" class="copybtn">คัดลอก</button></div></div><div class="insblock" data-os="Windows macOS Linux" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">ดาวน์โหลดด้วยตนเอง</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">Windows</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:225px 10px 255px 20px / 20px 255px 10px 225px;white-space:nowrap;">macOS</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:20px 225px 10px 255px / 255px 10px 225px 20px;white-space:nowrap;">Linux</span></div><div style="position:relative;"><div class="cmd" id="c-EchoBird-2">https://github.com/edison7009/EchoBird/releases/latest（Windows x64 / macOS arm64 / Linux x64+arm64，deb 和 fedora 格式）</div><button type="button" data-copy="c-EchoBird-2" class="copybtn">คัดลอก</button></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">คู่มือใช้งานฉบับเต็ม</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">รันสคริปต์ติดตั้งบรรทัดเดียวของแพลตฟอร์มนั้น ๆ (หรือดาวน์โหลดตัวติดตั้งเองจากหน้า releases)</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">เปิด EchoBird แล้วติดตั้ง CLI ที่ต้องการด้วยคลิกเดียวจากรายการเครื่องมือ (รวมถึง DeepSeek Harness: ติดตั้ง + สลับโมเดล + เปิดใช้งานด้วยคลิกเดียว, เซอร์วิสเบื้องหลัง + UI บนเบราว์เซอร์)</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">ตั้งค่าโมเดลแบบรวมศูนย์ใน Model Nexus (OpenAI/Anthropic/LLM ในเครื่อง/ตัวจัดเส้นทาง API) เวลาสลับ ระบบจะเขียนทับไฟล์ตั้งค่าเนทีฟของแต่ละเครื่องมือให้เอง</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">ถ้าต้องใช้โมเดลในเครื่อง ให้ใช้รันไทม์ vLLM/SGLang/llama.cpp ที่มีมาให้</span></div>
+    </div>
+  </div>
+  
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:21px;">คุณสมบัติ</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Model Nexus ศูนย์กลางตั้งค่าโมเดลแบบรวมศูนย์: ตั้งที่เดียว ระบบจะเขียนทับไฟล์ตั้งค่าเนทีฟของเครื่องมือ 20+ ตัวให้สลับตาม</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">ติดตั้ง DeepSeek Harness + สลับโมเดล + เปิดใช้งาน ด้วยคลิกเดียว (เซอร์วิสเบื้องหลัง + UI บนเบราว์เซอร์) เพิ่มเข้ามาใน v5.6.5</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">มีรันไทม์ LLM ในเครื่องมาให้ (vLLM/SGLang/llama.cpp) + Agent ซ่อมการติดตั้งที่ขับเคลื่อนด้วย AI</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <h3 style="font-size:21px;">กำแพงความเห็น</h3>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.21deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@wefoundcc · 2026-05-21</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">EchoBird 是一个开源桌面工具，专门把 AI Agent 的部署门槛往下压。
+
+它主打三个“一键”：安装 Claude Code / OpenClaw 等 Agent、给不同 Agent 切换模型、在本地部署 GGUF / HuggingFace 模型。Windows、macOS、Linux 都有包，MIT 免费。
+
+适合已经在用 Codex、Cursor、Claude</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">EchoBird เป็นเครื่องมือเดสก์ท็อปโอเพนซอร์สที่ตั้งใจกดกำแพงการติดตั้งใช้งาน AI Agent ให้ต่ำลง มันชูสาม “คลิกเดียว”: ติดตั้ง Agent อย่าง Claude Code / OpenClaw, สลับโมเดลให้ Agent แต่ละตัว และติดตั้งโมเดล GGUF / HuggingFace ในเครื่อง มีแพ็กเกจครบทั้ง Windows, macOS, Linux ใช้ฟรีภายใต้ MIT เหมาะกับคนที่ใช้ Codex, Cursor, Claude อยู่แล้ว (โพสต์ถูกตัดที่ต้นทาง)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">5 ไลก์</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@dlimeng192048 · 2026-06-18</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">60% of users quit at setup. EchoBird is a GUI that installs &amp; runs Claude Code, Codex, Aider, OpenClaw, and more—configure models once, use everywhere. No terminal, no config hell. Open-source, cross-platform. Too good to be true? #Claude #Codex #OpenClaw #EchoBird</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">60% ของผู้ใช้ถอดใจตั้งแต่ขั้นตอนติดตั้ง EchoBird คือ GUI ที่ติดตั้งและรัน Claude Code, Codex, Aider, OpenClaw และอื่น ๆ ให้ — ตั้งค่าโมเดลครั้งเดียว ใช้ได้ทุกที่ ไม่ต้องแตะเทอร์มินัล ไม่ต้องเจอนรกการตั้งค่า โอเพนซอร์ส ข้ามแพลตฟอร์ม ดีเกินจริงไปไหม? #Claude #Codex #OpenClaw #EchoBird</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">0 ไลก์</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/EchoBird.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/EchoBird.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · ศูนย์ข่าวกรอง DSH · ผลิตโดย ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">เว็บไซต์ทางการ DeepSeek &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>ข้อมูลเก็บจริง · ณ วันที่ 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="คัดลอกแล้ว";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

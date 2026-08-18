@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>コメントウォール · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness、オープンソース化から 6 日で 0 から 149,851 star へ。その一歩一歩をタイムラインで記録する。重要な出来事、プラグイン解説、GitHub の動向、ランキング、そして世界中のコミュニティの生の声。">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yomogi&family=Klee+One:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Yomogi", "Klee One", "Hiragino Maru Gothic ProN", cursive; --font-head:"Yomogi", "Klee One", "Hiragino Maru Gothic ProN", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; --font-head:"Hiragino Sans", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../ja/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="timeline.html" style="white-space:nowrap;">タイムライン</a><a href="deploy.html" style="white-space:nowrap;">導入</a><a href="plugins/index.html" style="white-space:nowrap;">厳選プラグイン</a><a href="ranking.html" style="white-space:nowrap;">ランキング</a><a href="voices.html" style="white-space:nowrap;">コメントウォール</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手書き</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">標準</button></span><details class="langpick"><summary>日本語 &#9662;</summary><div class="langmenu"><a href="../en/voices.html">English</a><a href="../voices.html">简体中文</a><a href="../zh-TW/voices.html">繁體中文</a><a href="../ja/voices.html" style="color:#8f2924;">日本語</a><a href="../ko/voices.html">한국어</a><a href="../th/voices.html">ไทย</a><a href="../es/voices.html">Español</a><a href="../ar/voices.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">06 / VOICES</div><h2 class="stitle">コメントウォール</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">X と Reddit に投稿された DSH と各プラグインへの生の声。すべて原文リンク付き。</div></div><div class="grid3" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/stealthispost · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">**Anchored Standard** (xiaobright/dsh-anchored-standard) does a clever hybrid: 1. First model request: presents V4 Pro with essentially the same environment as Minimal... 2. As soon as it makes its first real tool call/reply, it unlocks the full Standard toolset... The author found that the tool schema on that first request appears to be the decisive variable.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">Anchored Standard(xiaobright/dsh-anchored-standard)は巧妙なハイブリッドをやっている。1. 最初のモデルリクエストでは、V4 Pro に Minimal と実質同じ環境を提示……2. 最初の本当のツール呼び出し/返答が発生した瞬間、完全な Standard ツールセットを解放……作者の発見によれば、その初回リクエストの tool schema が決定的な変数のようだ。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">47 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/for4f · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">the anchored standard result is the one that got me. 98/99 with the full toolset handed back after the first call kills the &#x27;fewer tools = fewer mistakes&#x27; explanation, which was the obvious alternative. so it really does come down to what the model sees at init. kinda fits the RL story though. train a model inside one specific scaffold and it&#x27;ll behave best inside that scaffold, first message included.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">一番刺さったのは anchored standard の結果だ。初回呼び出しの後にフルのツールセットを返しても 98/99 が出るなら、一番ありそうな対抗仮説だった「ツールが少ない=ミスが少ない」説は死ぬ。つまり本当に、モデルが初期化時に何を見るかがすべてなんだ。まあ RL のストーリーとは辻褄が合う。特定の足場の中で訓練されたモデルは、その足場の中で最高の挙動をする。最初のメッセージも例外じゃない。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">4 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.45deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/somerussianbear · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I saw the dsh-anchored-standard plugin yesterday, the popularity of this thing and what it promised, and decided to give it a try on porting the approach to a Pi extension, cause I really like that harness and wouldn&#x27;t like to have a harness just for DeepSeek. It works, I managed to replicate the whole thing. All thinking uses &quot;We ...&quot;, as flagged by xiaobright as being the trace of a superior version of DeepSeek v4 Pro.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">昨日 dsh-anchored-standard プラグインを見かけて、この盛り上がりと謳っている効果を見て、このアプローチを Pi の拡張に移植してみることにした。あの harness が本当に好きで、DeepSeek 専用の harness を別に抱えたくないからだ。動いた。全部を再現できた。すべての思考が「We ...」で始まる——xiaobright が、より強いバージョンの DeepSeek v4 Pro の痕跡だと指摘していた通りに。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">9 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.33deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/ZveirX · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">It&#x27;s a gacha with the model as it is overfit to it. I have seen Bilibili experiments with it, minimal prompt, no system prompt, and even in minimal it often drops the &quot;let me&quot;. There is just so many vocabulary the model has been trained on that it&#x27;s inevitable that at times it begins to output distinctive patterns not akin to its original chain of thought—that&#x27;s Entropy.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">これは過学習したモデル相手のガチャだ。Bilibili での実験を見たことがある。ミニマルなプロンプト、システムプロンプトなし、それでも minimal ですら「let me」をよく落とす。モデルが訓練された語彙はあまりに多く、時々もとの思考連鎖とは違う独特なパターンを出し始めるのは避けられない——それがエントロピーだ。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/PolychromeMan · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Awesome. To be honest, I had to get ChatGpt to give me an explainer on this, but now that I have vague idea of what is discussed here...very interesting. A lot of my enthusiasm for AI development involves how the open-source community can use it, as opposed to more sealed off products released by frontier developers, so it&#x27;s neat to see interesting potential that is more open-source friendly.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">すばらしい。正直、まず ChatGPT に解説してもらう必要があったが、ここで何が議論されているのか大まかに分かった今……実に面白い。自分の AI 開発への熱意の多くは、フロンティア企業が出す囲い込まれた製品ではなく、オープンソースコミュニティがそれをどう使えるかにある。だから、よりオープンソースフレンドリーな面白い可能性が見られるのは嬉しい。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.18deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@itsolelehmann · 2026-07-14</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">lol someone already open-sourced Claude Design
+
+it&#x27;s called Open Design, already has 78,000+ github stars.
+
+the local app is free and runs on your computer.
+
+you can power its canvas with claude code, codex, cursor, gemini, or 20+ other coding agents.
+
+the biggest advantage = how</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">笑った、もう誰かが Claude Design をオープンソース化してた。名前は Open Design、GitHub star はすでに 78,000+。ローカルアプリは無料で自分の PC で動く。キャンバスは claude code、codex、cursor、gemini など 20 以上のコーディング agent で駆動できる。最大の強みは——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">249 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/itsolelehmann/status/2077172643946725647" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@iam_elias1 · 2026-05-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Someone just open sourced Claude Design.
+
+They called it Open Design.
+
+It crossed 20,000 GitHub stars in 6 days.
+
+Here is the full story of what happened — and why it matters.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">誰かが Claude Design をオープンソース化した。名前は Open Design。6 日で GitHub star 20,000 を突破。何が起きたのか、なぜ重要なのか——その全貌を語ろう。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">151 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/iam_elias1/status/2055639752997851490" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.29deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@so_ainsight · 2026-05-01</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">これは神。
+
+Claude Designのオープンソース版が公開されました。名前は Open Design。
+すでに、GitHubで8,000スター超え。Anthropicのサブスクにも縛られません。
+
+・テキストひと言でUIプロトタイプを自動生成
+・Linear / Stripe / Vercel / Notion など71種のブランド級デザインシステム同梱</div>
+  
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">95 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/so_ainsight/status/2050062774802563425" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.54deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@KKaWSB · 2026-05-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">免费开源的设计物料神器，5 月 GitHub 单月增速第一：
+
+nexu-io/open-design——一个本地跑的 Claude Design 开源替代。
+
+5 月单月涨 16,804 颗 star。
+
+它的定位是：你给任何一个 coding agent 一个设计需求，agent 调用 Open Design 直接产出——</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">無料でオープンソースのデザイン素材の神ツール、5 月の GitHub 月間成長率 1 位:nexu-io/open-design——ローカルで動く Claude Design のオープンソース代替。5 月だけで 16,804 star 増。その立ち位置は:どの coding agent にでもデザイン要件を投げれば、agent が Open Design を呼び出して直接アウトプットを出す——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">12 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/KKaWSB/status/2055641921033294248" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.59deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@teortaxesTex · 2026-05-24</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek-Reasonix
+Now this is the kind of harness I can get behind!
+Built for the poor API users, all around cache hits
+even has a GUI (wrapper) already
+@victor207755822 take ideas or collaborate idk</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek-Reasonix——これこそ応援できる harness だ!貧乏 API ユーザーのために作られ、すべてがキャッシュヒット中心。しかも GUI(ラッパー)までもうある。@victor207755822 アイデアを拝借するかコラボするか、どうだろう。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">151 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/teortaxesTex/status/2058413941689041219" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.12deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@huangjinbo · 2026-06-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Reasonix 真的很优秀，不要被它的项目名字（DeepSeek-Reasonix）所误导了，只要中转站支持 OpenAI-compatible 都可以支持...再次推荐。主要是它的技能、记忆、Hooks、MCP等功能都很好用...它被我用于替代OpenCode 了</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">Reasonix は本当に優秀。プロジェクト名(DeepSeek-Reasonix)に惑わされないで。中継サービスが OpenAI-compatible に対応してさえいれば使える……改めておすすめする。特に skill、記憶、Hooks、MCP などの機能がどれも使いやすい……私は OpenCode の置き換えとして使っている。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">102 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/huangjinbo/status/2066787187191058697" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.25deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Lucifer812 · 2026-08-11</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Missing reasonx</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">reasonx が入ってない。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">67 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.08deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/cheddarboiii · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I am using it with the tui plugin which was added 2 days ago or so. It is great comparing to reasonix as it handles permissions much better and in general output seems to be more concise and def more consistent.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">2 日ほど前に追加された tui プラグインと一緒に使っている(DSH のこと)。reasonix と比べると格段にいい。権限の扱いがずっとうまいし、出力も全体的に簡潔で、明らかに安定している。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">7 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.40deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Cold_Tree190 · 2026-08-11</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Are these reasonx bots? All 3 posted in the same minute, all have low karma, and I&#x27;ve genuinely never heard of reasonx before now lol</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">これって reasonx のボット?3 件とも同じ 1 分以内に投稿されてて、みんな karma が低い。しかも正直、reasonx なんて今の今まで聞いたこともなかったんだが(笑)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">6 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.02deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@TeksEdge · 2026-03-19</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Just saw this GitHub project 🛡️ OpenViking is skyrocketing 📈. This could be the best memory manager for @openclaw! 👀
+
+✅ OpenViking (volcengine/OpenViking) is an open-source project released by ByteDance&#x27;s cloud division, Volcengine.
+
+It&#x27;s exploding in popularity and could</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">この GitHub プロジェクトを見つけた。OpenViking が急騰中。@openclaw にとって最高のメモリマネージャーになるかもしれない!OpenViking(volcengine/OpenViking)は ByteDance のクラウド部門 Volcengine が公開したオープンソースプロジェクト。人気が爆発していて——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">940 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/TeksEdge/status/2034672484059095263" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.04deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@socialwithaayan · 2026-03-14</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">BREAKING: ByteDance open-sourced something the AI agent ecosystem has needed for a long time.
+
+A proper context database built specifically for agents.
+
+OpenViking manages everything an always-on agent needs to function at a high level:
+
+→ Memory that persists and evolves across</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">速報:ByteDance が、AI agent エコシステムが長らく必要としてきたものをオープンソース化した。agent 専用に作られた本格的なコンテキストデータベースだ。OpenViking は常時稼働の agent が高いレベルで働くために必要なすべてを管理する:→ セッションをまたいで持続・進化する記憶——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">222 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/socialwithaayan/status/2032855096518914411" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.48deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@filippkowalski · 2026-03-19</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">It&#x27;s fascinating to watch how ideas evolve 
+
+This is very promising and I think for one of my projects I will switch from RAG to OpenViking</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">アイデアが進化していく様子を見るのは実に面白い。これはかなり有望で、自分のプロジェクトのひとつは RAG から OpenViking に切り替えようと思う。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">6 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/filippkowalski/status/2034726026555642210" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@SuguruKun_ai · 2026-04-12</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">中国のAI界隈、レベルが違いすぎた。
+「同僚をAIに蒸留するツール」がバズってる、、、
+
+colleague.skill っていうOSSで
+同僚のチャット履歴、業務文書、メールを集めて
+AIにその人の仕事のやり方を学習させる。
+
+つまり退職しても
+「デジタルな同僚」が残り続ける。
+
+GitHub 9,000スター超え。</div>
+  
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">2121 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/SuguruKun_ai/status/2043312353404743756" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.43deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@Gorden_Sun · 2026-03-30</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">同事.Skill：把你的同事蒸馏成Skill
+把同事的技能与性格蒸馏成 AI Skill，让它替他工作。建议改名叫“同事Kill”，成为Skill后就可以Kill掉了。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">同事.Skill(Colleague.skill):同僚を Skill に蒸留する。同僚のスキルと性格を AI Skill に蒸留して、本人の代わりに働かせる。いっそ「同事Kill」に改名してはどうか。Skill になったら Kill できるわけだし。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">500 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Gorden_Sun/status/2038607975804514442" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@poezhao0605 · 2026-04-07</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">A viral GitHub project in China called &quot;同事.skill&quot; (Colleague.skill) turns a departing coworker&#x27;s chat logs, docs, and emails into an AI skill that mimics how they work. Spinoffs appeared overnight: Boss.skill, Mentor.skill, Crush.skill, even Immortality.skill.
+
+The joke landed</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">中国でバズった GitHub プロジェクト「同事.skill」(Colleague.skill)は、退職する同僚のチャットログ、ドキュメント、メールを、その人の働き方を真似る AI skill に変える。派生プロジェクトが一夜にして出現:Boss.skill、Mentor.skill、Crush.skill、果ては Immortality.skill まで。このネタは見事に刺さった。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">62 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/poezhao0605/status/2041377478808379439" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.49deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Kwigg · 2026-04-22</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Looks like we&#x27;ve gone full circle from roleplaying -&gt; coding/useful stuff -&gt; roleplaying again. From my experience, (I still use SillyTavern like it&#x27;s 2023) making the ai do a persona while also trying to be a coder/etc. is stacking tasks on top of each other which makes it worse at both.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">ロールプレイ→コーディング/実用→またロールプレイと、一周回った感がある。自分の経験だと(いまだに 2023 年のノリで SillyTavern を使っている)、AI にペルソナを演じさせながらコーダーもやらせるのは、タスクの上にタスクを積むことになって、どちらも下手になる。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">5 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/fallingdowndizzyvr · 2026-04-22</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I would read up on this. It&#x27;s not roleplaying per se. It is doing something useful. Check out that github and the dev alludes to it. &quot;Your colleague quit, leaving behind a mountain of unmaintained docs?&quot; ... That&#x27;s using this to do useful stuff. Since it effectively gives you a digital twin of your coworker to do useful stuff with.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">まず調べてみるといい。これは厳密にはロールプレイではなく、役に立つことをやっている。あの GitHub を見てほしい。開発者もほのめかしている。「同僚が退職して、メンテされないドキュメントの山が残された?」……つまり実務に使う話だ。要するに、一緒に実務をこなせる同僚のデジタルツインが手に入るということだから。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">0 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@berryxia · 2026-04-14</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">恭喜！EverMind 打磨已久的超级更新终于上线！
+
+一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源！
+
+1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent
+
+2. EvoAgentBench：开源中立基准，专测</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">おめでとう!EverMind が長らく磨き込んできたスーパーアップデートがついに公開!ワンストップの Agent 作成・テスト・統合プラットフォーム EverOS + 新ベンチマーク EvoAgentBench がすべてオープンソースに!1. EverOS:新しいワンストップのオープンソースライブラリ。複数の Methods、Benchmarks、Usecases を内蔵し、既成コンポーネントをいじるだけで自分の Agent を作れる 2. EvoAgentBench:オープンで中立なベンチマーク、専門は——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">55 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@yhslgg · 2026-07-07</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS，10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。
+
+一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff，pip 一条命令装好。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">AI Agent の記憶はたいていブラックボックスだ——何を覚えたのか、どこに保存されているのか、直接書き換えられるのか分からない。EverOS(10,300 star)はこれを、自分で開ける .md ファイルの束にした。ローカルで動き、ホスティングサービスに一切依存しない。一言で言えば:AI Agent にローカルファーストの永続メモリ層を付けるもので、保存されるのは Markdown ファイル。読める、書き換えられる、git diff もできる。pip のコマンド 1 本で入る。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">6 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@fkysly · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek Harness awesome plugins · 插件精选列表
+#DeepSeek #DeepSeekHarness
+
+cc @tianyi</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness awesome plugins · プラグイン厳選リスト #DeepSeek #DeepSeekHarness cc @tianyi</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">3 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/fkysly/status/2087904592189378865" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.15deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@NFT_Chen · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">🔥插件推荐：DeepSeek Harness必装！10大高星实用插件盘点（按GitHub Star排序）
+
+DeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻烦？这些插件全给你解决！按GitHub Star精选，数据截至今天，直接抄作业👇
+
+1️⃣dsh-web-ui ⭐1312</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">プラグイン推薦:DeepSeek Harness に必須!高 star 実用プラグイン 10 選(GitHub Star 順)。DeepSeek がオープンソース化したばかりの Harness エコシステムが離陸中!画面がダサい?ビジョンがない?移行が面倒?このプラグインたちが全部解決!GitHub Star で厳選、データは本日時点、そのまま真似して OK。1️⃣ dsh-web-ui ⭐1312——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">278 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/NFT_Chen/status/2088551277408247867" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@geekbb · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">一堆为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。
+
+1⃣ 为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。
+
+2⃣ DeepSeek Harness Web UI 的插件与皮肤合集，涵盖任务面板、Git</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness エコシステム向けに作られたモダンなデスクトップ体験の数々。DSH ユーザーにより快適なローカル操作画面を届ける。1⃣ DeepSeek Harness エコシステム向けのモダンなデスクトップ体験……2⃣ DeepSeek Harness Web UI のプラグインとスキン集。タスクパネル、Git——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">84 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/geekbb/status/2088467402082414731" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.51deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Electronic_Trash_385 · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">自动展开思考，丝滑吐字，丝滑滚动，新版已固定 deep diving
+安装方式：pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream
+欢迎点赞关注或star[玫瑰R]</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">思考を自動展開、なめらかな文字送り、なめらかなスクロール。新版では deep diving を固定済み。インストール方法:pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream。いいね・フォロー・star 歓迎[バラ]</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">19 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.19deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Snoo_57113 · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I made a plugin (Token anxiety) for the deepseek harness 0.1 that shows the cost per task, the peak hours and how much a task would cost after the hike... As tips to reduce your bill I found that open research questions, typos, not being specific in the prompts and bugs in toolcalling make up 50%+ of the tokens.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness 0.1 用のプラグイン(Token anxiety)を作った。タスクごとのコスト、ピーク時間帯、値上げ後に同じタスクがいくらになるかを表示する……請求額を減らすコツとして分かったのは、オープンな調査系の質問、タイポ、曖昧なプロンプト、ツール呼び出しのバグで token の 50% 以上を食っているということ。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">11 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.07deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@hqmank · 2026-08-05</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Gave DeepSeek vision with one skill.
+
+npx -y skills add liustack/modlens
+
+Repo link 👇</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">skill ひとつで DeepSeek に視覚を与えた。npx -y skills add liustack/modlens リポジトリのリンクはこちら👇</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">411 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/hqmank/status/2084998933731008639" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.21deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@wefoundcc · 2026-05-21</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">EchoBird 是一个开源桌面工具，专门把 AI Agent 的部署门槛往下压。
+
+它主打三个“一键”：安装 Claude Code / OpenClaw 等 Agent、给不同 Agent 切换模型、在本地部署 GGUF / HuggingFace 模型。Windows、macOS、Linux 都有包，MIT 免费。
+
+适合已经在用 Codex、Cursor、Claude</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">EchoBird はオープンソースのデスクトップツールで、AI Agent の導入ハードルをひたすら下げることに特化している。売りは 3 つの「ワンクリック」:Claude Code / OpenClaw などの Agent のインストール、Agent ごとのモデル切り替え、GGUF / HuggingFace モデルのローカルデプロイ。Windows、macOS、Linux すべてにパッケージがあり、MIT で無料。すでに Codex、Cursor、Claude を使っている人に——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">5 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/wefoundcc/status/2057447819447795996" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@dlimeng192048 · 2026-06-18</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">60% of users quit at setup. EchoBird is a GUI that installs &amp; runs Claude Code, Codex, Aider, OpenClaw, and more—configure models once, use everywhere. No terminal, no config hell. Open-source, cross-platform. Too good to be true? #Claude #Codex #OpenClaw #EchoBird</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">ユーザーの 60% はセットアップで脱落する。EchoBird は Claude Code、Codex、Aider、OpenClaw などをインストール・実行できる GUI——モデル設定は 1 回だけ、どこでも使える。ターミナル不要、設定地獄なし。オープンソースでクロスプラットフォーム。うますぎる話?#Claude #Codex #OpenClaw #EchoBird</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">0 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/dlimeng192048/status/2067517409519378683" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@Hesamation · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek Harness is now the fastest growing GitHub repo, passing 100K stars in under 48 hours, even faster than OpenClaw.
+
+very positive community reaction:
+&gt; unusually well designed architecture with tools, session log, agent loop, subagents, all being replaceable plugins
+&gt; UI</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness はいまや GitHub 最速成長リポジトリだ。48 時間足らずで 10 万 star を突破し、OpenClaw より速い。コミュニティの反応は非常にポジティブ:&gt; ツール、セッションログ、agent ループ、サブ agent がすべて差し替え可能なプラグインという、異例なほどよく設計されたアーキテクチャ &gt; UI——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">2338 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@eliebakouch · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">amazing release. it&#x27;s a web UI with multiple harnesses inside it, you can spawn claude code and codex agent through their SDK
+
+&quot;deepseek harness&quot; supports different &quot;modes&quot; by default (which are harnesses): code mode with programmatic tool calling (in typescript), bash+edit</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">見事なリリースだ。複数の harness を内包した Web UI で、SDK 経由で claude code や codex の agent を spawn できる。「deepseek harness」はデフォルトで複数の「モード」(それぞれが harness)をサポートする:プログラマティックなツール呼び出し(TypeScript)の code mode、bash+edit——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1250 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.44deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@jenzhuscott · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek Harness v0.1&#x27;s Cordis-powered design is probably one of the cleanest expressions of agent architecture I&#x27;ve seen: every capability - model adapters, tool registries, session logs, sandboxes, orchestration loops, and even the UI a is a 1st class plugin w typed services,</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness v0.1 の Cordis ベースの設計は、これまで見てきた agent アーキテクチャの中でも最もクリーンな表現のひとつだろう。あらゆる能力——モデルアダプター、ツールレジストリ、セッションログ、サンドボックス、オーケストレーションループ、そして UI までもが、型付きサービスを備えた一級市民のプラグインで——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">386 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@elliotchen100 · 2026-08-02</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">最近 DeepSeek 和 K3 的发布，让大家开始认真看 Agent benchmark 后面的 harness。
+
+Karpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和工具，就能无限放大模型。前提是环境能够把结果反馈给 Agent。
+
+写代码有 compiler、tests 和 logs。
+
+但在动态的 3D 世界里，Opus 5</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">最近の DeepSeek と K3 のリリースで、みんな Agent benchmark の裏にある harness を真剣に見始めた。Karpathy のこの投稿はちょうど残り半分を補っている:harness は、prompt とツールを取り替えればモデルを無限に増幅できるものではない。前提は、環境が結果を Agent にフィードバックできること。コードを書くなら compiler、tests、logs がある。だが動的な 3D 世界では、Opus 5——(本文はここで途切れている)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">55 いいね</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/elliotchen100/status/2083761260932559112" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.46deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/214d · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">It&#x27;s so awesome, I love it. I&#x27;ve already created 3 plugins (auto title sessions, git worktree a workspace, show session cost and balance in real time). Fast (I am on a 2017 MacBook Pro), reliable, fully customizable, 95-99% cache hit, really nice and minimalist UI). I objectively think it&#x27;s way better than Reasonix and Pi</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">最高すぎる、気に入った。もう 3 つプラグインを作った(セッションの自動タイトル付け、git worktree でワークスペースを切る、セッションコストと残高のリアルタイム表示)。速い(こっちは 2017 年の MacBook Pro だ)、信頼できる、完全にカスタマイズ可能、キャッシュヒット 95-99%、UI はきれいでミニマル。客観的に見て、Reasonix や Pi よりずっといいと思う。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">16 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.13deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Professional_Price89 · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">The harness is good, unlike other harness, it wont stop or wait for user input, it even catch all errors during runtime, decide to stop the app and debug it. It also ask me to click the accept button for it to work with. The downside is very bad model.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">この harness は本当にいい。他の harness と違って、止まってユーザー入力を待ちっぱなしにならないし、実行時のエラーも全部拾って、自分でアプリを止めてデバッグすると判断する。続行には承認ボタンを押すよう求めてもくる。難点は、モデルがかなり悪いこと。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">35 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.52deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Public_Ad_5096 · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">A lot of the content in the above article has actually become outdated during the community&#x27;s analysis process. The answer isn&#x27;t that complicated… The real answer is &quot;DeepSeek v4 pro GA overfitted on DSH&#x27;s minimal mode&quot; Internal staff have also admitted this.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">上の記事の内容の多くは、コミュニティの分析が進む中で実はもう時代遅れになっている。答えはそんなに複雑じゃない……本当の答えは「DeepSeek v4 pro GA は DSH の minimal モードに過学習した」だ。内部の人間もこれを認めている。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">35 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Potential_Back_4398 · 2026-08-17</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I tried adding a plugin to DeepSeek Harness (dsh-deepseek-vision) and ran into this error: &quot;Failed to load plugins... keyed slot &#x27;settings.plugin.item&#x27; requires options.key&quot;. After that, the plugin system no longer works properly. What bothers me is the architecture: everything seems to depend on the plugin system, so a failure in one plugin can effectively break the entire ecosystem... a malformed or incompatible plugin should be isolated and disabled rather than preventing the rest of the plugin system from loading. I&#x27;ve used Hermes and Claude Code, and I haven&#x27;t experienced this kind of failure mode there.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness にプラグイン(dsh-deepseek-vision)を追加しようとしたら、こんなエラーに遭遇した:「Failed to load plugins... keyed slot &#x27;settings.plugin.item&#x27; requires options.key」。それ以降、プラグインシステム全体がまともに動かない。気になるのはアーキテクチャだ。すべてがプラグインシステムに依存しているように見えるため、1 つのプラグインの失敗が事実上エコシステム全体を壊しうる……不正または非互換のプラグインは隔離・無効化されるべきで、残りのプラグインシステムの読み込みまで妨げるべきではない。Hermes と Claude Code を使ってきたが、あちらではこの種の故障モードは経験したことがない。</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1 アップボート</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 &#8599;</a>
+  </div>
+</div></div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/voices.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/voices.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH情報局 · ai798 Lab 制作</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 公式サイト &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>データは実測取得 · 2026-08-18 時点</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="コピーしました";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

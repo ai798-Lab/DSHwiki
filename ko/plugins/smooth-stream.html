@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>smooth-stream · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness는 오픈소스 공개 6일 만에 star 0에서 149,851까지 왔어요. 이곳은 그 모든 걸음을 타임라인으로 기록해요. 연대기, 플러그인 가이드, GitHub 동향, 랭킹, 그리고 전 세계 커뮤니티의 진짜 목소리까지.">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; --font-head:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; --font-head:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../ko/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">연대기</a><a href="../deploy.html" style="white-space:nowrap;">설치</a><a href="../plugins/index.html" style="white-space:nowrap;">추천 플러그인</a><a href="../ranking.html" style="white-space:nowrap;">랭킹</a><a href="../voices.html" style="white-space:nowrap;">커뮤니티 반응</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">손글씨</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">기본</button></span><details class="langpick"><summary>한국어 &#9662;</summary><div class="langmenu"><a href="../../en/plugins/smooth-stream.html">English</a><a href="../../plugins/smooth-stream.html">简体中文</a><a href="../../zh-TW/plugins/smooth-stream.html">繁體中文</a><a href="../../ja/plugins/smooth-stream.html">日本語</a><a href="../../ko/plugins/smooth-stream.html" style="color:#8f2924;">한국어</a><a href="../../th/plugins/smooth-stream.html">ไทย</a><a href="../../es/plugins/smooth-stream.html">Español</a><a href="../../ar/plugins/smooth-stream.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
+  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; 추천 플러그인</a>
+  <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">smooth-stream</h1>
+  <h2 style="font-size:28px;">중국어권 커뮤니티가 만든 스트리밍 출력 플러그인.</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">cordis.patch.yml로 3단계 preset을 조절할 수 있어요. star 수는 많지 않지만 중국어권에서는 꽤 화제예요.</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+    <span class="mono" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(0.49deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">21 star</span>
+    
+    <span style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.43deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">경험 / 출력</span>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/Laplace-bit/dsh-smooth-stream" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,5.8 C80,5.8 160,5.1 240,5.1 C320,5.1 400,1.3 480,1.3 C560,1.3 640,4.2 720,4.2 C800,4.2 880,3.0 960,3.0 C1040,3.0 1120,1.5 1200,1.5" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
+  <div class="grid2" style="align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">설치</h3>
+      <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.10deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">DeepSeek Harness 소스 저장소, 또는 PATH에 dsh가 있을 것. pnpm 필요. 알려진 동작/함정: 시스템에서 prefers-reduced-motion이 켜져 있으면 애니메이션 없이 전체 문단이 바로 표시됨. 프레임률이 30fps 아래이고 응답이 뷰포트 밖에 있으면 페이드인이 멈췄다가 복귀 후 이어짐. 스트리밍 중에 사고 블록을 직접 열고 닫으면 자동 펼침보다 우선함. link:/file: 로 로컬 개발 설치한 경우 업데이트 버튼이 비활성화됨.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">dsh 플러그인: profile에 설치한 뒤 dsh web을 재시작하면 적용됩니다.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-smooth-stream-0">pnpm dsh plugin --profile web add dsh-smooth-stream</div><button type="button" data-copy="c-smooth-stream-0" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">dsh가 PATH에 있을 때</span></div><div style="position:relative;"><div class="cmd" id="c-smooth-stream-1">dsh plugin --profile web add dsh-smooth-stream</div><button type="button" data-copy="c-smooth-stream-1" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">실행</span></div><div style="position:relative;"><div class="cmd" id="c-smooth-stream-2">pnpm dsh web</div><button type="button" data-copy="c-smooth-stream-2" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">업데이트</span></div><div style="position:relative;"><div class="cmd" id="c-smooth-stream-3">dsh plugin --profile web update dsh-smooth-stream</div><button type="button" data-copy="c-smooth-stream-3" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">제거</span></div><div style="position:relative;"><div class="cmd" id="c-smooth-stream-4">pnpm dsh plugin --profile web remove dsh-smooth-stream</div><button type="button" data-copy="c-smooth-stream-4" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Reddit 공개 게시물의 다른 방식(github: 프로토콜로 직접 설치)</span></div><div style="position:relative;"><div class="cmd" id="c-smooth-stream-5">pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream</div><button type="button" data-copy="c-smooth-stream-5" class="copybtn">복사</button></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">전체 사용 가이드</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">dsh 소스 디렉터리에서(또는 dsh가 PATH에 있으면 아무 위치에서나) 설치 명령 실행</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">pnpm dsh web 으로 인터페이스 실행</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">Host 로그에 &quot;[dsh-smooth-stream] plugin loaded!&quot; 가 뜨면 설치 완료</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">Settings → Plugins → Plugin Configuration 에서 파라미터 조정</span></div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">config</h3><div class="cmd">在 profile 的 cordis.patch.yml 里改 preset 值：realtime（贴近模型到达速率）/ balanced（默认）/ silky（大缓冲、慢追赶）；另有 maxScrollSpeedPxPerSec（默认 1000）限制滚动速度上限。README 未给出完整 yml 片段原文。</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:21px;">특징</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">모델이 토큰을 뱉는 속도에 맞춰 텍스트를 서서히 표시. 문단이 통째로 튀어나오지 않고 Markdown 서식도 계속 유지</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">새 줄이 기존 내용을 밀어내지 않고 뷰포트 안으로 미끄러져 들어옴. 사용자가 위로 스크롤한 상태면 스크롤 위치를 존중하고 포커스를 뺏지 않음</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">사고 과정 자동 펼침(신버전은 deep diving을 항상 표시), reduced-motion과 저프레임률 강등도 지원</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <h3 style="font-size:21px;">커뮤니티 반응</h3>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.51deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/Electronic_Trash_385 · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">自动展开思考，丝滑吐字，丝滑滚动，新版已固定 deep diving
+安装方式：pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream
+欢迎点赞关注或star[玫瑰R]</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">사고 과정 자동 펼치기, 매끄러운 글자 출력, 매끄러운 스크롤. 새 버전에서는 deep diving이 고정됐어요. 설치 방법: pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream. 좋아요·팔로우·star 환영해요[장미R]</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">19 업보트</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/" target="_blank" rel="noopener">원문 &#8599;</a>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/smooth-stream.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/smooth-stream.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 공식 사이트 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>실측 데이터 · 2026-08-18 기준</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="복사됨";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

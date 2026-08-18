@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연대기 · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness는 오픈소스 공개 6일 만에 star 0에서 149,851까지 왔어요. 이곳은 그 모든 걸음을 타임라인으로 기록해요. 연대기, 플러그인 가이드, GitHub 동향, 랭킹, 그리고 전 세계 커뮤니티의 진짜 목소리까지.">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; --font-head:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; --font-head:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../ko/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="timeline.html" style="white-space:nowrap;">연대기</a><a href="deploy.html" style="white-space:nowrap;">설치</a><a href="plugins/index.html" style="white-space:nowrap;">추천 플러그인</a><a href="ranking.html" style="white-space:nowrap;">랭킹</a><a href="voices.html" style="white-space:nowrap;">커뮤니티 반응</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">손글씨</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">기본</button></span><details class="langpick"><summary>한국어 &#9662;</summary><div class="langmenu"><a href="../en/timeline.html">English</a><a href="../timeline.html">简体中文</a><a href="../zh-TW/timeline.html">繁體中文</a><a href="../ja/timeline.html">日本語</a><a href="../ko/timeline.html" style="color:#8f2924;">한국어</a><a href="../th/timeline.html">ไทย</a><a href="../es/timeline.html">Español</a><a href="../ar/timeline.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">01 / TIMELINE</div><h2 class="stitle">연대기</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">공개부터 149,851 star까지 6일 — 플러그인, 반응, 데이터를 전부 실제 일어난 날짜에 걸어 뒀어요.</div></div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">DeepSeek, Harness v0.1 개발자 프리뷰 오픈소스 공개</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">저장소가 11:56 UTC에 공개됐고, 공식 계정이 13:02 UTC에 발표 트윗을 올렸어요. MIT 라이선스로 전 세계 agent harness 개발자에게 공개됐고, Cordis 메타 프레임워크로 구동되며, 핵심 철학은 &#x27;Everything is a Plugin&#x27;이에요. 베이징대학교와 협력한 Cordis 설계 논문 「A Programming Paradigm for Spatiotemporal Composability」도 동시에 발표됐어요. 공개 약 1시간 만에 star 2만을 돌파하며, 기존 기록의 &#x27;일&#x27; 단위를 &#x27;분&#x27; 단위로 압축했어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.50deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">공식 발표 트윗 반응<span class="muted"> · </span><span class="mono">좋아요 19.8k / 답글 774</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Twitter syndication 인터페이스 직접 수집, 수집일 2026-08-18(자료 038)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">저장소 공개 시각<span class="muted"> · </span><span class="mono">2026-08-13 11:56 UTC</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 보도</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">첫 1시간 star<span class="muted"> · </span><span class="mono">약 1시간 만에 20,000 돌파, 1.5시간에 22,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 보도, KuCoin 속보(자료 020을 통한 재인용)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/deepseek_ai/status/2087887408440164663" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">원문 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/MaxForAI/status/2087899312462430468" target="_blank" rel="noopener">원문 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">V4-Pro 정식판 동시 공개, API 가격 조정은 8월 17일부터</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">Harness와 같은 날 DeepSeek-V4-Pro-0813 정식판이 발표됐어요. 100만 token 컨텍스트, 최대 384K 출력, Json Output / Tool Calls / Responses API를 지원해요. 같은 공지에서 8월 17일부터 API 가격을 대폭 조정하고 피크/오프피크 요금제를 도입한다고 예고했어요. &#x27;가격 파괴자가 더 이상 헐값이 아니다&#x27;가 그날 중국어권 미디어의 병행 화제가 됐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.03deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">V4-Pro 사양<span class="muted"> · </span><span class="mono">컨텍스트 1M / 최대 출력 384K</span></div><div class="muted" style="font-size:12px;line-height:1.6;">搜狐(써우후), 网易科技(넷이즈 테크) 보도</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">가격 조정 예고<span class="muted"> · </span><span class="mono">V4-Pro 피크 시간대 출력 6위안 → 27위안/100만 token(+350%), 8-17 적용</span></div><div class="muted" style="font-size:12px;line-height:1.6;">网易(넷이즈, 163.com), 新浪财经(시나 파이낸스) 2026-08-13 보도</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://m.sohu.com/a/1062503683_362225" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-13/detail-inineuqm9880912.d.html" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">Hacker News 736점 헤드라인, 해외 개발자의 첫날 검증대</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">공개 당일 HN 헤드라인에 올랐어요(736점, 댓글 309개). 기술파는 핫스왑 + RAII식 플러그인 생명주기 설계를 인정했고, jbellis는 &#x27;퍼스트파티 harness가 없던 마지막 주류 모델 랩이 드디어 빈칸을 채웠다&#x27;고 단언했어요. 비판은 부실한 README와 Node.js 기술 스택에 집중됐어요. The New Stack, Synced(机器之心) 등 영어·중국어 미디어가 같은 날 첫 보도를 냈고, Synced 기사는 최소 5개 플랫폼에 전재됐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.43deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">HN 화제도<span class="muted"> · </span><span class="mono">736점 / 댓글 309개</span></div><div class="muted" style="font-size:12px;line-height:1.6;">HN Algolia API 직접 수집, 수집일 2026-08-18(자료 055)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://news.ycombinator.com/item?id=49285244" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://thenewstack.io/deepseek-harness-open-source-plugins/" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.36kr.com/p/3937964598590855" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">생태계 선점 경쟁: 공개 당일 플러그인·리스트 프로젝트 집중 생성</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">awesome-dsh-plugin 추천 리스트와 커뮤니티 데스크톱 클라이언트 DSH Desktop 모두 오픈소스 공개 당일 만들어졌어요. 8월 11~14일 사이 같은 이름의 awesome 저장소 20개가 자리 선점 경쟁을 벌였고, 0xsline 버전은 공식 공개보다 2일이나 앞서 생성됐어요(비공개 테스트 생태계가 미리 움직였다는 암시죠). 공식 저장소는 Issues 없이 Discussions만 열었는데, 초기 인기 글(&#x27;독립 클라이언트 + CLI를 빨리 내달라&#x27;, 166 추천)이 플러그인 수요 지도를 그려 냈어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.33deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">awesome 선점 경쟁<span class="muted"> · </span><span class="mono">이름에 awesome+dsh가 들어간 저장소 20개, 생성일은 08-11~08-14에 집중</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub API 검색, 수집일 2026-08-18(자료 016)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">당일 생성된 프로젝트의 이후 규모<span class="muted"> · </span><span class="mono">awesome-dsh-plugin 7,572 star, DSH Desktop 11,626 star(08-18 기준)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub, 수집일 2026-08-18(자료 015, 009)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/0xsline/awesome-deepseek-harness" target="_blank" rel="noopener">원문 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions?discussions_q=sort%3Atop" target="_blank" rel="noopener">원문 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">Ollama 공식 지원: 명령어 하나로 DSH 로컬 실행</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">공개 다음 날 22:30 UTC, Ollama가 DeepSeek Harness 공식 지원을 발표했어요. `ollama launch dsh` 한 줄이면 완전히 로컬에서 실행되고, Ollama web search 플러그인이 기본 탑재되며, trajectory view로 agent의 백그라운드 동작을 관찰할 수 있어요. 대표 생태계 플레이어가 48시간 안에 먼저 손을 내민 셈이고, &#x27;DSH 로컬 프라이빗 실행&#x27; 경로의 공식 입구가 됐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.46deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">트윗 반응<span class="muted"> · </span><span class="mono">좋아요 1.0k / 답글 38</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Twitter syndication 인터페이스 직접 수집, 수집일 2026-08-18(자료 041)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">원문 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">대중화의 날: 28시간 만에 star 9.2만 돌파, 중국어권 심층 실측 붐</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">28시간 만에 star가 9.2만을 넘었어요(보도 기준. 零度解说 영상 제목 기준으로는 &#x27;오픈소스 하루 만에 star 6.8만&#x27;). QbitAI(量子位)의 심층 실측은 &#x27;dsh는 Agent 시대의 안드로이드&#x27;라는 명제를 내놓으며, 공식 내장 플러그인이 100개 이상이고 Plugin Store 입구가 이미 예약돼 있다고 밝혔어요. 零度解说, NeuralNine, AI超元域 등 중국어·영어 영상이 집중 공개되면서, DSH는 개발자 화제에서 일반 테크 대중으로 확산됐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">28시간 star<span class="muted"> · </span><span class="mono">&gt;92,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 보도</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">24시간 star(집계 기준 불일치)<span class="muted"> · </span><span class="mono">68,000(estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">零度解说(중국어 유튜브 채널) 영상 제목 기준. 12h≈50k / 28h≈92k라는 보도 기준과 차이가 있어 한쪽을 쓸 때는 명시 필요</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">공식 기본 탑재 플러그인<span class="muted"> · </span><span class="mono">100+ 개, Plugin Store 자리는 이미 예약됨</span></div><div class="muted" style="font-size:12px;line-height:1.6;">量子位(중국 AI 매체) 실측 기사(자료 058)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">零度解说 재생 수<span class="muted"> · </span><span class="mono">72,170회(4일간)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">yt-dlp 직접 수집, 수집일 2026-08-18(자료 064)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.qbitai.com/2026/08/472208.html" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">원문 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD" target="_blank" rel="noopener">원문 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">48시간 만에 star 10만 돌파: 기록 선언과 진위 논쟁</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">X 인플루언서 ℏεsam이 &#x27;48시간 안에 10만 돌파, GitHub 역대 최고 성장 저장소, OpenClaw보다 빠르다&#x27;고 선언했고, Jen Zhu는 같은 날 &#x27;3일 만에 11.4만&#x27;이라는 수치를 내놨어요. r/tech_x의 369 업보트 인기 글은 star 수 진위 대논쟁에 불을 붙였어요. &#x27;스타 조작 봇이 GitHub를 망쳤다&#x27; 대 &#x27;GitHub 사용자는 전문 개발자다&#x27;의 구도였죠. 참고: &#x27;GitHub 역사상 최고 속도&#x27;는 공식 인증도 권위 있는 제3자 인증도 없으므로, 인용할 때는 &#x27;미디어와 커뮤니티에 따르면&#x27;이라고 써야 해요.</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.40deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">48시간 star<span class="muted"> · </span><span class="mono">100,000+</span></div><div class="muted" style="font-size:12px;line-height:1.6;">ℏεsam(@Hesamation) X 게시물</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">3일 기준<span class="muted"> · </span><span class="mono">114,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Jen Zhu(@jenzhuscott) X 게시물</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">약 2일 시점 정확값<span class="muted"> · </span><span class="mono">95,386 star / 8,826 fork</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Flowtivity 분석 기사</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">논쟁 게시물 화제도<span class="muted"> · </span><span class="mono">업보트 369 / 댓글 108</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브(스냅샷 08-17), 자료 023</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/jenzhuscott/status/2088737933830521338" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/tech_x/comments/1vpbjvk/100k_github_stars_in_just_2_days_deepseek_harness/" target="_blank" rel="noopener">원문 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://flowtivity.ai/blog/deepseek-harness-open-source-agent-explained/" target="_blank" rel="noopener">원문 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">V4-Pro &#x27;토끼굴&#x27;: Minimal 모드가 곧 RL 학습 환경</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">r/DeepSeek 인기 글이 중국어 커뮤니티의 장문 분석을 번역해 옮겼어요. V4-Pro API 뒤에는 &#x27;사고 사슬 지문&#x27;이 서로 다른 여러 버전이 숨어 있는 것으로 의심되고, 가장 강한 &#x27;신급 버전&#x27;은 바로 DSH Minimal 모드에서 발굴됐다는 내용이에요. 결정적 증거는 공식 저장소의 8월 10일 commit &#x27;fix(preset): align minimal agent with RL composition&#x27;. 최다 추천 결론은 &#x27;V4 Pro GA가 DSH minimal 환경에 과적합됐다&#x27;였고, &#x27;harness가 모델 성능을 좌우하는 결정 변수&#x27;라는 명제를 경험담에서 메커니즘 차원으로 끌어올렸어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">게시물 화제도<span class="muted"> · </span><span class="mono">업보트 157 / 댓글 23</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브(스냅샷 08-16), 자료 031</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">벤치마크 점수 대조<span class="muted"> · </span><span class="mono">Minimal 99/96 vs Standard 91</span></div><div class="muted" style="font-size:12px;line-height:1.6;">게시물 내 커뮤니티 대조 실험(자료 031, 032)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/down_the_rabbit_hole_of_deepseekv4pro0813/" target="_blank" rel="noopener">원문 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">커뮤니티의 메커니즘급 돌파: dsh-anchored-standard 벤치마크 91→98/99</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">커뮤니티 개발자 xiaobright가 &#x27;토끼굴&#x27; 발견을 바탕으로 하이브리드 플러그인을 만들었어요. 첫 요청에서 모델에게 Minimal과 거의 같은 환경을 보여줘 RL로 학습된 추론 궤도에 &#x27;앵커링&#x27;한 뒤, 곧바로 완전한 Standard 도구 세트를 해제하는 방식이에요. 벤치마크 점수가 91에서 98/99로 올랐고, 통제 변인 실험(첫 요청의 도구 schema가 결정적 변수)도 함께 제시됐어요. 공개 이틀 만에 커뮤니티가 검증 가능한 메커니즘급 돌파를 만들어 냈고, &#x27;Everything is a Plugin&#x27;의 오픈소스 배당이 처음으로 실증된 셈이에요.</div>
+    <div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.14deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">네 가지 구성의 벤치마크 점수<span class="muted"> · </span><span class="mono">Standard 91 / PTC 92 / Minimal 99·96 / Anchored Standard 98·99</span></div><div class="muted" style="font-size:12px;line-height:1.6;">r/accelerate 게시물 내 대조 실험(자료 032)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">게시물 화제도<span class="muted"> · </span><span class="mono">업보트 47 / 댓글 2</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브(스냅샷 08-17)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">원문 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">4일 차, star 13.5만 돌파</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">여러 출처 교차 기준으로 4일 차에 135,042 star, 13,592 fork를 기록했어요. 비교하자면 DeepSeek 자사의 R1은 당시 star 2만까지 5.7일이 걸렸고, 순수 속도 종전 기록인 Grok-1은 약 1.2일이었는데, DSH는 같은 거리를 1시간 남짓 만에 주파했어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.32deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">4일째 star<span class="muted"> · </span><span class="mono">135,042 star / 13,592 fork(날짜는 estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">자료 020 다중 출처 교차 확인, pasqualepillitteri.it 「4일째 13.5만 돌파」</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">비교 기준<span class="muted"> · </span><span class="mono">R1은 2만 star까지 5.7일, Grok-1은 약 1.2일</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 보도</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">원문 2 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">서드파티 모델·캐시 실증: DSH는 DeepSeek만의 것이 아니다</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">r/LocalLLaMA의 한 사용자가 Qwen 3.8 27b를 DSH에 물려 10시간 연속 실행하고 &#x27;정말 놀랍다&#x27;는 실측 평가를 남겨, 모델 플러그인화의 범용성을 입증했어요. &#x27;DSH 캐시 적중률이 정말 그렇게 대단한가&#x27;라는 질문 스레드는 플러그인 실증 집결지가 됐고, 첫 플러그인 디렉터리 사이트 dshplugin.online은 Show HN에 올랐어요. 생태계가 구경에서 재현 가능한 실증으로 옮겨 가기 시작했어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.52deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">Qwen 실측 게시물<span class="muted"> · </span><span class="mono">업보트 139 / 댓글 46</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브, 자료 030</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">캐시 관련 후속 질문 스레드<span class="muted"> · </span><span class="mono">업보트 14 / 댓글 29</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브, 자료 033</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/LocalLLaMA/comments/1vpv12b/qwen_38_27b_with_dshdeepseek_harness_is_amazing/" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/deepseek_harness/" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://dshplugin.online/" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">공식 v0.1.0-rc.7 릴리스: Job Panel이 Codex와 Claude Code까지 관리</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">공식 팀이 공개 기간 중 유일하게 확인되는 release(pre-release, 12:01)를 내놨어요. 플러그인이 자체 설정 카드를 등록할 수 있고, Job Panel이 Codex와 Claude Code 하위 agent 작업을 통합 관리하며, MCP/ACP가 지속형 이미지 첨부를 지원해요. minimal 모드의 지속형 Bash 지연 같은 문제도 수정됐어요. &#x27;경쟁 harness를 하위 agent로 관리한다&#x27;는 이야기가 커뮤니티 해석에서 공식 기능이 된 순간이에요.</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.01deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">release<span class="muted"> · </span><span class="mono">v0.1.0-rc.7, 2026-08-17 12:01, Pre-release(주요 내용 원문은 github.json 참고)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub releases 페이지 직접 수집, 2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener">원문 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">API 새 가격 발효: 피크 시간 최대 3배 넘게 인상, 커뮤니티는 &#x27;pricing 롤백&#x27; 소원</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">8월 13일 예고된 가격 조정이 정식 발효됐어요. V4-Flash 피크 출력이 2→9위안, V4-Pro는 6→27위안/백만 token(+350%)이 됐고, 캐시 적중 가격 인상 폭은 기준에 따라 최대 1100%에 달해요. 동시에 피크/오프피크 요금제가 도입돼 오프피크는 50% 할인이에요. Discussions에는 &#x27;pricing 롤백&#x27; 소원 글과 &#x27;량신(梁神)은 할인해 줄까&#x27; 같은 인기 글이 올라왔고, QbitAI(量子位)의 기사 제목 &#x27;나는 그 가격 인상을 용서했다&#x27;가 중국어권의 정서를 보여주는 주석이 됐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.42deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">피크 시간대 출력 가격<span class="muted"> · </span><span class="mono">V4-Flash 2→9위안, V4-Pro 6→27위안/100만 token(+350%)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">网易(넷이즈, 163.com), 搜狐(써우후) 보도</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">최대 인상률 기준<span class="muted"> · </span><span class="mono">1100%(캐시 히트 가격: V4-Flash 0.02→0.10위안, V4-Pro 0.025→0.30위안)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">新浪财经(시나 파이낸스) 2026-08-17 보도</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">커뮤니티 반응<span class="muted"> · </span><span class="mono">Discussions #61 「pricing 롤백」 좋아요 30, #32 「梁神(량원펑)이 할인해 줄까」 좋아요 28</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub Discussions 직접 수집, 2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-17/detail-ininrkkk0123342.d.html" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/61" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">커뮤니티 첫 &#x27;필수 플러그인 리스트&#x27;와 불량 플러그인 성토</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">신생 커뮤니티 r/DeepSeekHarness에 첫 큐레이션 플러그인/skills/MCP 인덱스 글이 올라왔어요. 같은 날 &#x27;불량 플러그인 하나가 플러그인 시스템 전체를 무너뜨릴 수 있다&#x27;는 경고 글이 올라오면서, 단일 장애점이 플러그인화 아키텍처에서 처음으로 지목된 반면교사가 됐어요. 트레이딩 분석 플러그인 dsh-trading은 Show HN에 올랐고요. 생태계가 축제 분위기에서 &#x27;리스트 정리 + 흠집 찾기&#x27; 단계로 넘어갔어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">게시물 화제도<span class="muted"> · </span><span class="mono">필수 설치 목록 게시물 업보트 1, 불만 게시물 업보트 1(새 게시판 콜드 스타트라 화제도는 낮지만 공개 초기 첫 사례이고 주제 독점성 때문에 선정)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 아카이브, 자료 036, 037</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeekHarness/comments/1vr43w5/must_have_deepseek_harness_plugins/" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/maddogfinance/dsh-trading" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.18</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg></div>
+  <div style="flex-grow:1;padding-bottom:8px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">5일 만에 star 15만, topic 생태계 저장소 6,716개</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">자료실 1차 수집(GitHub API) 기준 149,856 star, 15,364 fork, watch 627이에요. topic dsh-plugin에는 이미 6,716개 저장소가 등록됐고, 1위 open-design은 88,304 star에 달하며, Volcengine의 OpenViking 같은 빅테크 프로젝트가 top 10에 진입했어요. 같은 날 저녁 무렵 저장소 페이지는 이미 151.3k를 표시했어요. 5일 만에 DSH는 발표 트윗 하나에서 데스크톱, 메모리, 비전, 디자인을 아우르는 완전한 플러그인 생태계로 자랐어요.</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">공식 저장소<span class="muted"> · </span><span class="mono">149,856 star / 15,364 fork / watch 627</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub API 1차 수집, 2026-08-18(자료 020, 001)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">당일 페이지 기준<span class="muted"> · </span><span class="mono">151.3k star / 15.6k fork / 638 watch</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub 저장소 페이지 직접 수집, 2026-08-18 추가 수집분(API 수집보다 늦은 시점)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">생태계 규모<span class="muted"> · </span><span class="mono">topic dsh-plugin 저장소 6,716개, 1위 open-design 88,304 star</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub Search API, 2026-08-18(자료 007, 008)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">원문 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">원문 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">원문 3 &#8599;</a></div>
+  </div>
+</div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/timeline.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 공식 사이트 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>실측 데이터 · 2026-08-18 기준</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="복사됨";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

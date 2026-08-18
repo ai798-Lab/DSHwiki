@@ -1,0 +1,1949 @@
+{
+ "meta": {
+  "generated_at": "2026-08-18",
+  "brand": "DSH Wiki",
+  "domain": "dshwiki.com",
+  "sources": "四路实抓:插件 README / X+Reddit 评论 / 大事记 / 官方部署文档"
+ },
+ "plugins": [
+  {
+   "id": "dsh-anchored-standard",
+   "repo_url": "https://github.com/xiaobright/dsh-anchored-standard",
+   "stars": 3423,
+   "stars_display": "3.4k",
+   "forks": "103",
+   "latest_release": null,
+   "install_commands": [
+    "# Linux/macOS（在仓库根目录执行）\ndsh_home=\"${DSH_HOME:-$HOME/.dsh}\"\nmkdir -p \"$dsh_home/.agent-presets\"\ntest ! -e \"$dsh_home/.agent-presets/anchored-standard\"\ncp -R preset \"$dsh_home/.agent-presets/anchored-standard\"",
+    "# Windows PowerShell\n$target = Join-Path $env:USERPROFILE '.dsh\\.agent-presets\\anchored-standard'\nif (Test-Path -LiteralPath $target) { throw \"Preset already exists: $target\" }\nNew-Item -ItemType Directory -Force -Path (Split-Path -Parent $target) | Out-Null\nCopy-Item -Recurse -LiteralPath '.\\preset' -Destination $target"
+   ],
+   "quickstart_steps": [
+    "克隆仓库到本地",
+    "把 preset 目录复制到 ~/.dsh/.agent-presets/anchored-standard（见安装命令）",
+    "完全重启 DeepSeek Harness",
+    "新建空白会话，选择「Anchored Standard (experimental)」预设",
+    "注意：不要把其他预设的会话切换过来混用"
+   ],
+   "config_example": null,
+   "prerequisites": "DeepSeek Harness 0.1.0-rc.5；Node.js 24。注意：README 声明因成本上涨已停止积极开发、仅维护。已知坑：工具调用失败仍会触发会话「晋升」（durable tool/call 事件已存在）；晋升时与 dev_tool_search 解锁后前缀缓存连续性会断；预设权限等同 shell 访问；缺失 bootstrap 工具时降级为全量目录仅告警。",
+   "features": [
+    "七种预设变体（base / zero-anchored / whoami / prefab / eternal-minimal / wire-think / combo），覆盖不同锚定策略",
+    "两阶段工具暴露：bootstrap 极简对 → 晋升到常驻工具目录，晋升状态经 durable events 可跨会话恢复",
+    "context-gate 插件统一控制上下文注入"
+   ],
+   "gaps": "无 release（页面明示 There aren't any releases here）；README 无独立配置文件示例（安装即复制 preset 目录）；未逐条翻 issues，已知坑来自 README 自述",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "配置 / preset"
+  },
+  {
+   "id": "open-design",
+   "repo_url": "https://github.com/nexu-io/open-design",
+   "stars": 88304,
+   "stars_display": "88.4k",
+   "forks": "10.2k",
+   "latest_release": {
+    "version": "open-design-v0.19.2",
+    "date": "2026-08-14（页面显示 14 Aug 16:17，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# 桌面应用（推荐）：从 open-design.ai 或 GitHub Releases 下载 macOS/Windows/Linux(AppImage) 安装包",
+    "od mcp install <agent>\n# <agent> = claude | codex | reasonix | raven | cursor | copilot | openclaw | antigravity | pi | vibe | hermes | cline | kimi | kiro | trae | opencode",
+    "curl -fsSL https://open-design.ai/install.sh | sh -s <agent>",
+    "# DeepSeek Harness 专用（需先装官方 dsh CLI）\nod agent setup deepseek-harness",
+    "# Docker\ngit clone https://github.com/nexu-io/open-design.git\ncd open-design/deploy\ncp .env.example .env\necho \"OD_API_TOKEN=$(openssl rand -hex 32)\" >> .env\ndocker compose up -d\n# open http://127.0.0.1:7456",
+    "# 源码运行\ngit clone https://github.com/nexu-io/open-design.git\ncd open-design\ncorepack enable && pnpm install\npnpm tools-dev run web"
+   ],
+   "quickstart_steps": [
+    "下载安装桌面应用（零配置，自动探测已装的 coding agent）",
+    "打开应用，自动加载 100+ skills、151 套设计系统与渲染模板",
+    "输入 brief：选产物类型 → 写描述 → 选设计系统和模型",
+    "看 agent 在预览窗实时流式生成",
+    "导出 HTML / PDF / PPTX / MP4 / ZIP"
+   ],
+   "config_example": "OD_ALLOWED_INTERNAL_HOSTS=<host1>,<host2>,...\n# 逗号或空白分隔的裸主机名/IP；IPv6 需加方括号如 [fd00::1]",
+   "prerequisites": "桌面版零依赖；源码/Docker 需 Node ~24、pnpm 10.33.x，另需一个 coding agent CLI。已知坑：macOS/WSL2 下系统自带 od（octal-dump）命令会遮蔽 Open Design 的 od CLI，桌面用户改用 Settings → MCP server 片段；内网 IP（RFC1918/link-local/CGNAT/云 metadata）默认被代理层 SSRF 拦截，需用 OD_ALLOWED_INTERNAL_HOSTS 显式放行。",
+   "features": [
+    "支持 27 个 coding agent（Claude Code / Codex / Cursor / dsh 等）BYOK 接入",
+    "内置 151 套品牌级设计系统、100+ 功能 skills、277 个插件",
+    "本地优先，产出真实文件，支持 HTML/PDF/PPTX/MP4 导出"
+   ],
+   "gaps": "仓库主页一次抓取显示版本 0.10.0、releases 页显示 v0.19.2，以 releases/latest 页为准；release 日期页面未显示年份，按 GitHub 当前年惯例记 2026；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "设计 / 桌面应用"
+  },
+  {
+   "id": "DeepSeek-Reasonix",
+   "repo_url": "https://github.com/esengine/DeepSeek-Reasonix",
+   "stars": 34683,
+   "stars_display": "34.7k",
+   "forks": "2.3k",
+   "latest_release": {
+    "version": "Reasonix Desktop v1.27.0",
+    "date": "2026-08-18"
+   },
+   "install_commands": [
+    "npm i -g reasonix",
+    "npm install -g reasonix\nreasonix code my-project",
+    "cd my-project\nnpx reasonix code",
+    "# 短别名\nnpm install -g dsnix\nnpx dsnix@latest code",
+    "# macOS Homebrew\nbrew install esengine/reasonix/reasonix",
+    "# 桌面版：官方下载页 macOS(.dmg/.zip) / Windows(.exe/便携.zip) / Linux(.deb/.tar.gz)",
+    "# VS Code：应用市场安装，扩展 ID SivanLiu.reasonix-agent",
+    "# 源码构建（Go 1.25+）\nmake build   # 产出 bin/reasonix(.exe)\nmake cross   # 跨平台二进制"
+   ],
+   "quickstart_steps": [
+    "确认 Node ≥ 22（macOS/Linux/Windows），全局安装或直接 npx",
+    "到 platform.deepseek.com/api_keys 申请 DeepSeek API key（付费）",
+    "首次运行粘贴 API key，之后持久保存；或运行 reasonix setup 配置 provider/model",
+    "reasonix 进入交互会话，或 reasonix run \"implement the TODOs in main.go\" 一次性执行",
+    "reasonix doctor 体检、reasonix update 升级、reasonix code --help 看全部参数"
+   ],
+   "config_example": "配置位置：~/.reasonix/config.json（全局）+ <project>/.reasonix/（项目级覆盖）；Go 版为 reasonix.toml（providers/agent/tools）。README 未给出完整配置文件示例片段。",
+   "prerequisites": "Node ≥ 22（npm 安装线）；源码构建需 Go 1.25+，桌面构建需 Node 24+ 与 pnpm 10；必须有付费 DeepSeek API key（无离线/免费选项）。已知坑：当前 npm 的 TypeScript 线（Reasonix 0.x）是 legacy、仅修 bug，主力开发已转 Go 重写（main-v2 分支）；会话中途不支持切换目录（设计如此）；只支持 DeepSeek（非多 provider）。",
+   "features": [
+    "缓存感知的上下文维护：围绕前缀缓存稳定性设计，适合长时间挂机跑任务",
+    "插件化：MCP servers + Extension Protocol v1，配置驱动（providers/agent/tools）",
+    "多形态分发：CLI/TUI、桌面应用、VS Code 扩展、单一静态二进制"
+   ],
+   "gaps": "reasonix.toml 与 ~/.reasonix/config.json 两套配置说法并存（分属 Go 版与 TS 版），README 未给完整配置示例原文；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "终端 Agent / CLI"
+  },
+  {
+   "id": "OpenViking",
+   "repo_url": "https://github.com/volcengine/OpenViking",
+   "stars": 28891,
+   "stars_display": "28.9k",
+   "forks": "2.3k",
+   "latest_release": {
+    "version": "v0.4.14",
+    "date": "2026-08-17"
+   },
+   "install_commands": [
+    "pip install openviking --upgrade",
+    "openviking-server init      # 交互式配置向导\nopenviking-server doctor    # 校验配置\nopenviking-server           # 启动服务",
+    "# 可选 VikingBot\npip install \"openviking[bot]\"\nopenviking-server --with-bot\nov chat"
+   ],
+   "quickstart_steps": [
+    "openviking-server init 跑交互式向导（配置 Volcengine/OpenAI/Kimi/GLM/Ollama 等 provider）",
+    "openviking-server doctor 校验配置",
+    "openviking-server 启动服务",
+    "用 ov CLI 管理与检索：ov status、ov add-resource https://github.com/volcengine/OpenViking、ov ls viking://resources/、ov find \"what is openviking\"",
+    "接入 agent：支持 Claude Code、Codex、Cursor、MCP 客户端、LangChain/LangGraph 等"
+   ],
+   "config_example": "配置文件位置：~/.openviking/ov.conf（由 init 向导生成）。README 未给出配置文件内容原文片段。",
+   "prerequisites": "Python 3.10+。许可证注意：主项目 AGPLv3，CLI 与 examples 为 Apache 2.0。",
+   "features": [
+    "L0（摘要）/L1（概览）/L2（细节）三级内容分层加载，按需展开省 token",
+    "检索过程可观测：保留目录浏览轨迹，便于调试与审计",
+    "会话提交后自动把用户偏好、agent 经验沉淀为长期记忆"
+   ],
+   "gaps": "ov.conf 配置内容原文未抓到（仅有路径与向导说明）；README 未列已知坑，issues 未翻；DSH 专属接入方式未在 README 摘要中单独出现（列表里是 Agent Plugins 1.0 / MCP 泛接入）",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "记忆 / 存储"
+  },
+  {
+   "id": "colleague-skill",
+   "repo_url": "https://github.com/titanwings/colleague-skill",
+   "stars": 23139,
+   "stars_display": "23.2k",
+   "forks": "2.1k",
+   "latest_release": {
+    "version": "v0.01（Pre-release，标注 demo）",
+    "date": "2026-03-30（页面显示 30 Mar 09:28，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# 自然语言安装（对任意宿主 agent 说）\nInstall the dot-skill skill for me: https://github.com/titanwings/colleague-skill",
+    "# Claude Code 项目级\nmkdir -p .claude/skills\ngit clone https://github.com/titanwings/colleague-skill .claude/skills/create-colleague",
+    "# Claude Code 全局\ngit clone https://github.com/titanwings/colleague-skill ~/.claude/skills/create-colleague",
+    "# OpenClaw\ngit clone https://github.com/titanwings/colleague-skill ~/.openclaw/workspace/skills/create-colleague",
+    "# 其他宿主手动目录：Codex ~/.codex/skills/dot-skill；DeepSeek Harness ~/.dsh/skills/dot-skill",
+    "# 依赖\npip3 install -r requirements.txt"
+   ],
+   "quickstart_steps": [
+    "在宿主 agent 里输入 /create-colleague（或 /dot-skill）启动",
+    "选角色族（同事/关系/名人），输入别名、公司层级、性格标签",
+    "选择数据源（飞书/钉钉/Slack/微信/邮件/PDF 等）导入资料",
+    "生成后用 /{slug} 命令直接调用这个「数字同事」"
+   ],
+   "config_example": null,
+   "prerequisites": "Python 3.9+；一个兼容宿主（Claude Code / OpenClaw / Codex / DeepSeek Harness 等）。已知坑（README 自述）：微信数据源目前不稳定（建议用开源工具）；Slack 免费版只能取 90 天记录；钉钉 API 不支持拉历史消息；整体仍是 beta；素材质量直接决定 Skill 质量。",
+   "features": [
+    "三大角色族：colleague（同事）/ relationship（关系）/ celebrity（名人），名人线配字幕处理研究工具链",
+    "多源数据整合：飞书、钉钉、Slack、微信、邮件、PDF",
+    "生成的 Skill 支持版本控制与回滚，跨 5 类宿主平台通用"
+   ],
+   "gaps": "release 仅有 v0.01 demo 预发布且页面未显示年份（按 GitHub 惯例记当前年）；README 未给配置文件示例；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "skill / 知识复刻"
+  },
+  {
+   "id": "EverOS",
+   "repo_url": "https://github.com/EverMind-AI/EverOS",
+   "stars": 12081,
+   "stars_display": "12.1k",
+   "forks": "893",
+   "latest_release": {
+    "version": "v1.2.3",
+    "date": "2026-08-07（页面显示 07 Aug 11:53，年份为当前年推断）"
+   },
+   "install_commands": [
+    "uv pip install everos\n# or: pip install everos",
+    "# 多模态可选\nuv pip install 'everos[multimodal]'\n# or: pip install 'everos[multimodal]'"
+   ],
+   "quickstart_steps": [
+    "everos demo 先跑演示（不需要 API key）",
+    "everos init 生成 ~/.everos/everos.toml 和 ~/.everos/ome.toml",
+    "把 OpenRouter API key 填进 everos.toml",
+    "everos server start 启动服务，curl http://127.0.0.1:8000/health 验证",
+    "通过 /api/v2/memory/add、/api/v2/memory/flush、/api/v2/memory/search 写入、落盘、检索记忆"
+   ],
+   "config_example": "# everos.toml\n[llm]\nmodel = \"openai/gpt-4.1-mini\"\napi_key = \"<OPENROUTER_API_KEY>\"\nbase_url = \"https://openrouter.ai/api/v1\"",
+   "prerequisites": "Python 3.12+；一个 OpenRouter API key。已知坑：混合检索需要 embedding provider，一键最简配置只能用 \"method\": \"keyword\"；Office 文档摄取依赖系统安装 LibreOffice；/api/v1 是遗留别名、将来会移除；缺可选能力时接口返回 HTTP 422；v1.2.3 起后台循环失败会 SIGTERM 退出进程，需 systemd/Docker/K8s 等外部重启机制。",
+   "features": [
+    "Markdown 记忆文件 + Git 版本化，本地 SQLite + LanceDB 索引，无外部数据库依赖",
+    "关键词 + 向量混合检索，支持 user/agent/app/project/session 多维正交检索",
+    "会话间记忆反思（reflection）自进化；可选多模态摄取（图片/PDF/音频/文档）；生态含 Claude Code 插件、EverMem Sync 等"
+   ],
+   "gaps": "README 未见 DSH 专属接入命令（生态列表以 Claude Code/Codex 为主）；ome.toml 内容原文未抓到；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "记忆 / 存储"
+  },
+  {
+   "id": "awesome-dsh-plugin",
+   "repo_url": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin",
+   "stars": 7572,
+   "stars_display": "7.7k",
+   "forks": "1.1k",
+   "latest_release": null,
+   "install_commands": [
+    "# 列表中的插件统一用\ndsh plugin add <插件名>",
+    "# 配套插件市场（应用内浏览+一键安装/升级）\ndsh plugin --profile web add dshmarket",
+    "# 找插件助手\ndsh plugin --profile web add dsh-find-plugin"
+   ],
+   "quickstart_steps": [
+    "打开仓库 README 按 20 个类目浏览（UI 增强/用量计费/主题/模型/记忆/视觉/语音/工作流/安全等）",
+    "选中插件后用 dsh plugin add 安装（每个插件都声明 dsh.bundle manifest）",
+    "或先装 dshmarket，在 dsh 应用内浏览器里一键安装/升级插件、切换主题",
+    "想投稿：提 PR，按 contributing.md 的审核清单走"
+   ],
+   "config_example": null,
+   "prerequisites": "DeepSeek Harness 本体（插件经 dsh plugin add 安装）。收录标准原文：\"An entry is added when the plugin installs with dsh plugin add, does what its one-line description says, sits in the right category, and is maintained. Every submission is checked against its own source before merging.\"",
+   "features": [
+    "约 800+ 插件、20 个类目全景收录（UI/计费/主题/模型/会话/记忆/工具/视觉/语音/skills/安全/远程等）",
+    "收录前逐条对照源码人工核验；仓库消失、停止维护或插件损坏会被移除（收录非永久）",
+    "配套 dshmarket 插件市场与 dsh-find-plugin 助手，构成插件分发入口"
+   ],
+   "gaps": "无 release（列表类仓库正常）；具体投稿流程细节在 contributing.md，本次未抓；「800+」为 README 摘要口径，未逐条清点",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "目录 / 清单"
+  },
+  {
+   "id": "dsh-web-ui",
+   "repo_url": "https://github.com/zhu1090093659/dsh-web-ui",
+   "stars": 4097,
+   "stars_display": "4.2k",
+   "forks": "255",
+   "latest_release": {
+    "version": "v0.1.20",
+    "date": "2026-08-17（页面显示 17 Aug 05:46，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# 全家桶（推荐）\ndsh plugin --profile web add @linxin666/dsh-web-ui-all",
+    "# 只装皮肤\ndsh plugin --profile web add @linxin666/dsh-skins",
+    "# 单装\ndsh plugin --profile web add @linxin666/dsh-liangshen\ndsh plugin --profile web add @linxin666/dsh-client-ui-task-board\ndsh plugin --profile web add @linxin666/dsh-ssh\ndsh plugin --profile web add @linxin666/dsh-tool-describe-image\ndsh plugin --profile web add @linxin666/dsh-pet\ndsh plugin --profile web add dsh-better-sidebar",
+    "# 仓库安装（开发/调试）\ngit clone https://github.com/zhu1090093659/dsh-web-ui.git\ncd dsh-web-ui\npnpm install\npnpm -r build\nnode scripts/link-profile.mjs\ndsh plugin --profile web add link:$(pwd)/packages/dsh-web-ui-all\ndsh web",
+    "# 卸载\ndsh plugin --profile web remove @linxin666/dsh-web-ui-all"
+   ],
+   "quickstart_steps": [
+    "用推荐命令装聚合包 @linxin666/dsh-web-ui-all",
+    "重启 dsh web，侧边栏出现各插件入口",
+    "Settings → Plugin Configuration 开关各插件，或进皮肤中心试穿 11 款主题（先预览后应用）"
+   ],
+   "config_example": "# 修复 pnpm 11 新版扣发导致的皮肤崩溃：profile 的 pnpm-workspace.yaml 加\nminimumReleaseAgeExclude:\n  - '@linxin666/*'\n# 以及\nnodeLinker: hoisted",
+   "prerequisites": "dsh 已装且 dsh web 可正常启动（npm 安装线无额外要求）；仓库安装需 Node.js ≥ 22 + pnpm。已知坑（README 自述）：pnpm 11 的 release-age 门槛会把 10 天内的新版 @linxin666/* 装成旧版，应用皮肤时报 ERR_MODULE_NOT_FOUND ... dsh-client-ui-skin-*（用上面的配置排除）；SSH 密码/口令明文存 ~/.dsh/dsh-ssh.json（0600），重连可能重放非幂等命令，远程输出未脱敏；Cloudflare quick tunnel 和 Tailscale Serve 不支持 SSE，手机端自动降级轮询、消息可能晚几秒；宿主停机/休眠期间错过的定时任务直接跳过不补跑。",
+   "features": [
+    "任务看板带 cron 定时调度；Git 可视化分支泳道图",
+    "手机扫码配对远程操控 + SSH 操作面板；接视觉 API 的图像理解工具",
+    "可定制鲸鱼吉祥物、实时 token 统计、11 款皮肤试穿即换，另附 DeepSeek V4 Pro 优化 agent preset"
+   ],
+   "gaps": "未翻 issues（已知坑均来自 README 自述，但相当详尽）",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "UI"
+  },
+  {
+   "id": "smooth-stream",
+   "repo_url": "https://github.com/Laplace-bit/dsh-smooth-stream",
+   "stars": 21,
+   "stars_display": "21",
+   "forks": "1",
+   "latest_release": null,
+   "install_commands": [
+    "pnpm dsh plugin --profile web add dsh-smooth-stream",
+    "# dsh 在 PATH 时\ndsh plugin --profile web add dsh-smooth-stream",
+    "# 启动\npnpm dsh web",
+    "# 更新\ndsh plugin --profile web update dsh-smooth-stream",
+    "# 卸载\npnpm dsh plugin --profile web remove dsh-smooth-stream",
+    "# Reddit 发布帖给出的另一种写法（github: 协议直装）\npnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream"
+   ],
+   "quickstart_steps": [
+    "在 dsh 源码目录（或 dsh 在 PATH 时任意位置）执行安装命令",
+    "pnpm dsh web 启动界面",
+    "看 Host 日志出现 \"[dsh-smooth-stream] plugin loaded!\" 即装好",
+    "Settings → Plugins → Plugin Configuration 里调参数"
+   ],
+   "config_example": "在 profile 的 cordis.patch.yml 里改 preset 值：realtime（贴近模型到达速率）/ balanced（默认）/ silky（大缓冲、慢追赶）；另有 maxScrollSpeedPxPerSec（默认 1000）限制滚动速度上限。README 未给出完整 yml 片段原文。",
+   "prerequisites": "DeepSeek Harness 源码仓库或 PATH 里有 dsh；pnpm。已知行为/坑：系统开了 prefers-reduced-motion 时直接整段显示、无动画；帧率低于 30fps 且回复不在视口内时暂停渐显、恢复后继续；流式期间手动开合思考块优先于自动展开；link:/file: 本地开发安装时更新按钮禁用。",
+   "features": [
+    "按模型吐字到达速率渐显文本，不突兀整段砸出，全程保持 Markdown 格式",
+    "新行滑入视口而非把内容顶走；用户上滚时尊重滚动位置不抢焦点",
+    "自动展开思考过程（新版固定展示 deep diving），并支持 reduced-motion 与低帧率降级"
+   ],
+   "gaps": "无 release；cordis.patch.yml 完整片段原文 README 未给出（只有参数表）；star 数很小属新插件正常；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "体验 / 输出"
+  },
+  {
+   "id": "token-anxiety",
+   "repo_url": "https://github.com/mov-eax-eax/dsh-token-anxiety",
+   "stars": 0,
+   "stars_display": "0",
+   "forks": "0",
+   "latest_release": {
+    "version": "v0.1",
+    "date": "2026-08-15（页面显示 15 Aug 22:44，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# 从 npm\ndsh plugin --profile web add dsh-token-anxiety",
+    "# 本地检出\ndsh plugin --profile web add /path/to/dsh-token-anxiety",
+    "# 直接 npm\nnpm install dsh-token-anxiety\nnpm install dsh-token-anxiety@0.1.0",
+    "# 手动同步价格表\ncurl -X POST http://127.0.0.1:3080/token-anxiety/pricing-sync -H \"Content-Type: application/json\" -d '{}'"
+   ],
+   "quickstart_steps": [
+    "安装后重启 dsh web 并刷新页面",
+    "在聊天输入区（composer band）找到成本 widget，hover 或点击展开",
+    "看 Overview（峰谷定价状态）、Tasks（可排序的每任务成本表）、Explain（一键归因分析哪些任务在烧钱）",
+    "价格表过期时用 pricing-sync 接口手动同步"
+   ],
+   "config_example": "默认货币 COP/USD/CNY（支持约 40 种，带地区格式化）；语言跟随 harness locale；价格数据经 host 侧 pricing-sync 接口刷新（curl 命令见安装区），重启后覆盖值合并进默认表。README 未给出配置文件片段原文。",
+   "prerequisites": "DeepSeek Harness 的 web profile；Node.js 22+。已知限制（README 自述）：只统计根会话任务，subagent 会话不出现在 widget（projection fold 按会话同步折叠）；Explain 是 host 直连路由不是 agent 轮次，分析结果不进会话日志、页面刷新即失；内置价格表是「嵌入且会过期的」，需手动同步。",
+   "features": [
+    "实时峰谷定价状态（按本地时区显示 peak/valley 窗口），直观看什么时段跑任务便宜",
+    "每任务成本可排序表格 + 一键 Explain 归因（哪些任务烧钱、为什么）",
+    "约 40 种货币、深浅色主题、中英双语，零外部依赖打包"
+   ],
+   "gaps": "star/fork 均为 0（发布仅 3 天的新插件，与 Reddit 发帖时间 2026-08-15 吻合）；无配置文件示例原文；未翻 issues；作者在 Reddit 的省钱结论（四大浪费源等）在 034 素材文档里，不属于 README 数据",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "成本 / 计费"
+  },
+  {
+   "id": "modlens",
+   "repo_url": "https://github.com/liustack/modlens",
+   "stars": 2789,
+   "stars_display": "2.8k",
+   "forks": "78",
+   "latest_release": {
+    "version": "v3.18.3",
+    "date": "2026-08-17（页面显示 17 Aug 15:46，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# DeepSeek Harness（版本号刻意写死，见坑）\nnpx -y @deepseek-ai/dsh plugin --profile web add @liustack/modlens@3.18.3",
+    "# LIUSTACK skills 线\nnpx -y skills add liustack/vibemaster -g",
+    "# 自然语言安装：把这句话发给你的 AI\nInstall and configure the modlens skill following https://github.com/liustack/modlens/blob/main/INSTALL.md, then run the health check"
+   ],
+   "quickstart_steps": [
+    "把 INSTALL.md 那句安装指令直接发给你的 agent，让它自装并跑 health check",
+    "health check 为空时配一路免费引擎（推荐 Gemini API key，3 分钟、不用信用卡）",
+    "装完直接聊天：粘贴图片或丢路径，随便问，skill 自动触发（或经「(modlens vision)」模型选择器入口）"
+   ],
+   "config_example": "modlens config set openai.baseUrl https://dashscope.aliyuncs.com/compatible-mode/v1\nmodlens config set openai.apiKey  <key>\nmodlens config set openai.model   qwen3-vl-plus\n# 其他常用项\nmodlens config set provider <name>\nmodlens config set proxy <url>\nmodlens config set reuse.codex true\nmodlens config set reuse.opencode true\nmodlens config set reuse.pi true\nmodlens config set reuse.grok true",
+   "prerequisites": "三选一：已登录的 Claude Code/Codex/OpenCode/Pi（复用其凭证）、或免费 Gemini API key（Google AI Studio）、或免费 Antigravity CLI。已知坑：安装命令刻意钉死 @3.18.3 而非 @latest——pnpm 11 会扣发 24 小时内的新版本；视觉模型被自动排除，只给纯文本模型套视觉包装；无法确认的模型保持原样以保留原生贴图行为。",
+   "features": [
+    "10 路视觉引擎（6 个内置 provider + 4 个可复用本地 agent CLI）自动故障转移链",
+    "零配置复用现有多模态凭证：无 hooks、无 wrapper、无本地代理进程、不改任何 harness 配置",
+    "原生 modlens_read_image 工具返回全文转录、阅读序版面分区、实体与关系列表的结构化 JSON"
+   ],
+   "gaps": "raw README 抓取一次返回内容却尾部报 404 状态，数据以内容为准但存疑一处；INSTALL.md 全文未抓；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "视觉 / 多模态"
+  },
+  {
+   "id": "EchoBird",
+   "repo_url": "https://github.com/edison7009/EchoBird",
+   "stars": 3063,
+   "stars_display": "3.1k",
+   "forks": "343",
+   "latest_release": {
+    "version": "v5.6.5",
+    "date": "2026-08-16（页面显示 16 Aug 01:55，年份为当前年推断）"
+   },
+   "install_commands": [
+    "# Windows (PowerShell)\nirm https://echobird.ai/install.ps1 | iex",
+    "# macOS / Linux\ncurl -fsSL https://echobird.ai/install.sh | sh",
+    "# 手动下载\nhttps://github.com/edison7009/EchoBird/releases/latest（Windows x64 / macOS arm64 / Linux x64+arm64，deb 和 fedora 格式）"
+   ],
+   "quickstart_steps": [
+    "跑对应平台的一行安装脚本（或从 releases 手动下载安装包）",
+    "打开 EchoBird，在工具列表里一键安装目标 CLI（含 DeepSeek Harness：一键安装+模型切换+启动，后台服务+浏览器 UI）",
+    "在 Model Nexus 统一配置模型（OpenAI/Anthropic/本地 LLM/API 路由器），切换时自动改写各工具原生配置文件",
+    "需要本地模型时用内置 vLLM/SGLang/llama.cpp 运行时"
+   ],
+   "config_example": null,
+   "prerequisites": "Windows / macOS / Linux（x64+arm64），Tauri + Rust 构建。许可注意：v5.0.0+ 为 MIT，更早版本仍是 AGPL-3.0-or-later；有商标/商业外观（trade dress）政策，二次分发注意。",
+   "features": [
+    "Model Nexus 统一模型配置中枢：一处配置，改写 20+ 工具的原生配置文件完成切换",
+    "DeepSeek Harness 一键安装+模型切换+启动（后台服务 + 浏览器 UI），v5.6.5 新增",
+    "内置本地 LLM 运行时（vLLM/SGLang/llama.cpp）+ AI 驱动的安装修复 Agent"
+   ],
+   "gaps": "README 无配置示例、未列已知坑（这两项为 null 非遗漏）；未翻 issues",
+   "fetched_at": "2026-08-18 10:15 CST",
+   "category_zh": "工具 / 安装器"
+  }
+ ],
+ "ranking": [
+  {
+   "name": "open-design",
+   "stars": 88304,
+   "category_zh": "设计",
+   "url": "https://github.com/nexu-io/open-design"
+  },
+  {
+   "name": "DeepSeek-Reasonix",
+   "stars": 34683,
+   "category_zh": "终端Agent/CLI",
+   "url": "https://github.com/esengine/DeepSeek-Reasonix"
+  },
+  {
+   "name": "OpenViking",
+   "stars": 28891,
+   "category_zh": "记忆/存储",
+   "url": "https://github.com/volcengine/OpenViking"
+  },
+  {
+   "name": "colleague-skill",
+   "stars": 23139,
+   "category_zh": "skill",
+   "url": "https://github.com/titanwings/colleague-skill"
+  },
+  {
+   "name": "voyager",
+   "stars": 19593,
+   "category_zh": "工具/浏览器增强",
+   "url": "https://github.com/Nagi-ovo/voyager"
+  },
+  {
+   "name": "archify",
+   "stars": 13847,
+   "category_zh": "skill",
+   "url": "https://github.com/tt-a1i/archify"
+  },
+  {
+   "name": "EverOS",
+   "stars": 12081,
+   "category_zh": "记忆/存储",
+   "url": "https://github.com/EverMind-AI/EverOS"
+  },
+  {
+   "name": "learn-harness-engineering",
+   "stars": 11852,
+   "category_zh": "教程",
+   "url": "https://github.com/walkinglabs/learn-harness-engineering"
+  },
+  {
+   "name": "deepseek-harness-desktop",
+   "stars": 11626,
+   "category_zh": "UI/客户端",
+   "url": "https://github.com/anywhere-labs/deepseek-harness-desktop"
+  },
+  {
+   "name": "awesome-dsh-plugin",
+   "stars": 7572,
+   "category_zh": "目录/清单",
+   "url": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin"
+  },
+  {
+   "name": "ouroboros",
+   "stars": 5508,
+   "category_zh": "编排/自进化",
+   "url": "https://github.com/Q00/ouroboros"
+  },
+  {
+   "name": "openpencil",
+   "stars": 5241,
+   "category_zh": "设计",
+   "url": "https://github.com/ZSeven-W/openpencil"
+  },
+  {
+   "name": "iPolloWork",
+   "stars": 4114,
+   "category_zh": "工作台/编排",
+   "url": "https://github.com/Devin-AXIS/iPolloWork"
+  },
+  {
+   "name": "dsh-web-ui",
+   "stars": 4097,
+   "category_zh": "UI",
+   "url": "https://github.com/zhu1090093659/dsh-web-ui"
+  },
+  {
+   "name": "petdex",
+   "stars": 3877,
+   "category_zh": "趣味/UI",
+   "url": "https://github.com/crafter-station/petdex"
+  },
+  {
+   "name": "mirage",
+   "stars": 3499,
+   "category_zh": "存储/文件系统",
+   "url": "https://github.com/strukto-ai/mirage"
+  },
+  {
+   "name": "dsh-anchored-standard",
+   "stars": 3423,
+   "category_zh": "配置/preset",
+   "url": "https://github.com/xiaobright/dsh-anchored-standard"
+  },
+  {
+   "name": "EchoBird",
+   "stars": 3063,
+   "category_zh": "工具/安装器",
+   "url": "https://github.com/edison7009/EchoBird"
+  },
+  {
+   "name": "Vibe-Skills",
+   "stars": 2873,
+   "category_zh": "skill/编排",
+   "url": "https://github.com/foryourhealth111-pixel/Vibe-Skills"
+  },
+  {
+   "name": "OpenBiliClaw",
+   "stars": 2839,
+   "category_zh": "内容发现Agent",
+   "url": "https://github.com/whiteguo233/OpenBiliClaw"
+  },
+  {
+   "name": "modlens",
+   "stars": 2789,
+   "category_zh": "视觉/多模态",
+   "url": "https://github.com/liustack/modlens"
+  },
+  {
+   "name": "dashi-taskboard",
+   "stars": 2289,
+   "category_zh": "UI",
+   "url": "https://github.com/chuspeeism/dashi-taskboard"
+  },
+  {
+   "name": "DSH-better-sidebar",
+   "stars": 1944,
+   "category_zh": "UI",
+   "url": "https://github.com/omdsh-dev/DSH-better-sidebar"
+  },
+  {
+   "name": "dsh-TUI",
+   "stars": 1812,
+   "category_zh": "UI/终端",
+   "url": "https://github.com/ccch1mneyyy/dsh-TUI"
+  },
+  {
+   "name": "BitFun",
+   "stars": 1770,
+   "category_zh": "客户端/运行时",
+   "url": "https://github.com/GCWing/BitFun"
+  }
+ ],
+ "timeline": [
+  {
+   "date": "2026-08-13",
+   "title": "DeepSeek 开源 Harness v0.1 开发者预览版",
+   "priority": "官方动作",
+   "description": "仓库 11:56 UTC 公开,官方账号 13:02 UTC 发布官宣推文:以 MIT 协议向全球 agent harness 开发者开源,由 Cordis 元框架驱动,核心理念「Everything is a Plugin」。同步发布与北京大学合作的 Cordis 设计论文《A Programming Paradigm for Spatiotemporal Composability》。开源约 1 小时 star 破 2 万,把以往纪录的「天」压缩成「分钟」。",
+   "key_data": [
+    {
+     "metric": "官宣推文互动",
+     "value": "19.8k 赞 / 774 回复",
+     "source": "Twitter syndication 接口实抓,采集于 2026-08-18(素材 038)"
+    },
+    {
+     "metric": "仓库公开时间",
+     "value": "2026-08-13 11:56 UTC",
+     "source": "pasqualepillitteri.it 报道"
+    },
+    {
+     "metric": "首小时 star",
+     "value": "约 1 小时破 20,000;1.5 小时 22,000",
+     "source": "pasqualepillitteri.it 报道;KuCoin 快讯(经素材 020 转述)"
+    }
+   ],
+   "source_urls": [
+    "https://x.com/deepseek_ai/status/2087887408440164663",
+    "https://github.com/deepseek-ai/deepseek-harness",
+    "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record",
+    "https://x.com/MaxForAI/status/2087899312462430468"
+   ],
+   "related_materials": [
+    "038",
+    "054",
+    "001",
+    "043",
+    "039"
+   ],
+   "attach_suggestion": "评论卡:挂素材 038 官方推文原文(英文原文+中译);可并挂 043 MaxForAI 北大论文解读作理论纵深。",
+   "id": "t01"
+  },
+  {
+   "date": "2026-08-13",
+   "title": "V4-Pro 正式版同日上线,API 调价预告落地 8 月 17 日",
+   "priority": "官方动作",
+   "description": "与 Harness 同日,DeepSeek-V4-Pro-0813 正式版发布:100 万 token 上下文、最长 384K 输出,支持 Json Output / Tool Calls / Responses API。同一公告预告 8 月 17 日起 API 大幅调价并引入峰谷定价机制,「价格屠夫不再白菜价」成为当天中文媒体的平行话题。",
+   "key_data": [
+    {
+     "metric": "V4-Pro 规格",
+     "value": "1M 上下文 / 384K 最长输出",
+     "source": "搜狐、网易科技报道"
+    },
+    {
+     "metric": "调价预告",
+     "value": "V4-Pro 峰时输出 6 元 → 27 元/百万 token(+350%),8-17 生效",
+     "source": "网易(163.com)、新浪财经 2026-08-13 报道"
+    }
+   ],
+   "source_urls": [
+    "https://www.163.com/dy/article/L485A7RT05198NMR.html",
+    "https://m.sohu.com/a/1062503683_362225",
+    "https://finance.sina.cn/2026-08-13/detail-inineuqm9880912.d.html"
+   ],
+   "related_materials": [
+    "031",
+    "058"
+   ],
+   "attach_suggestion": "数据卡:调价前后价目对比表(与 08-17 生效节点共用一张卡)。",
+   "id": "t02"
+  },
+  {
+   "date": "2026-08-13",
+   "title": "Hacker News 736 分头条,海外开发者首日过堂",
+   "priority": "社区爆点",
+   "description": "发布当天冲上 HN 头条(736 分、309 评论)。技术派认可热插拔+RAII 式插件生命周期设计,jbellis 断言「最后一家没有第一方 harness 的主流模型实验室补齐了」;质疑集中在 README 简陋和 Node.js 技术栈。The New Stack、机器之心等中英媒体同日发出首批报道,机器之心稿被至少 5 家平台转载。",
+   "key_data": [
+    {
+     "metric": "HN 热度",
+     "value": "736 分 / 309 条评论",
+     "source": "HN Algolia API 实抓,采集于 2026-08-18(素材 055)"
+    }
+   ],
+   "source_urls": [
+    "https://news.ycombinator.com/item?id=49285244",
+    "https://thenewstack.io/deepseek-harness-open-source-plugins/",
+    "https://www.36kr.com/p/3937964598590855"
+   ],
+   "related_materials": [
+    "055",
+    "051",
+    "057",
+    "046",
+    "047"
+   ],
+   "attach_suggestion": "评论卡:挂 lxdlam「热插拔+RAII 式生命周期」技术定性与 jbellis「最后一家实验室」行业判断两条 HN 评论。",
+   "id": "t03"
+  },
+  {
+   "date": "2026-08-13",
+   "title": "生态抢跑:发布当天插件与清单项目集中创建",
+   "priority": "生态里程碑",
+   "description": "awesome-dsh-plugin 精选清单与社区桌面客户端 DSH Desktop 都在开源当天创建;8-11~14 间冒出 20 个 awesome 同名仓库打卡位战,0xsline 版甚至早于官方公开 2 天创建(暗示内测生态提前动员)。官方只开 Discussions 不开 Issues,首批热帖(「早点出独立客户端+CLI」166 赞)画出了插件需求地图。",
+   "key_data": [
+    {
+     "metric": "awesome 卡位战",
+     "value": "名称含 awesome+dsh 的仓库 20 个,创建日集中在 08-11~08-14",
+     "source": "GitHub API 搜索,采集于 2026-08-18(素材 016)"
+    },
+    {
+     "metric": "当日创建项目后续规模",
+     "value": "awesome-dsh-plugin 7,572 star;DSH Desktop 11,626 star(至 08-18)",
+     "source": "GitHub,采集于 2026-08-18(素材 015、009)"
+    }
+   ],
+   "source_urls": [
+    "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin",
+    "https://github.com/anywhere-labs/deepseek-harness-desktop",
+    "https://github.com/0xsline/awesome-deepseek-harness",
+    "https://github.com/deepseek-ai/deepseek-harness/discussions?discussions_q=sort%3Atop"
+   ],
+   "related_materials": [
+    "015",
+    "016",
+    "009",
+    "019"
+   ],
+   "attach_suggestion": "插件卡:挂 awesome-dsh-plugin 与 DSH Desktop 两张插件卡(均在精选 12 之内/相邻)。",
+   "id": "t04"
+  },
+  {
+   "date": "2026-08-14",
+   "title": "Ollama 官方接入:一条命令本地跑 DSH",
+   "priority": "生态里程碑",
+   "description": "开源次日 22:30 UTC,Ollama 官方宣布支持 DeepSeek Harness:`ollama launch dsh` 即可完全本地运行,预装 Ollama web search 插件,可用 trajectory view 观察 agent 后台。头部生态玩家 48 小时内主动接入,是「本地私有化跑 DSH」这条路径的官方入口。",
+   "key_data": [
+    {
+     "metric": "推文互动",
+     "value": "1.0k 赞 / 38 回复",
+     "source": "Twitter syndication 接口实抓,采集于 2026-08-18(素材 041)"
+    }
+   ],
+   "source_urls": [
+    "https://x.com/ollama/status/2088392765021528319"
+   ],
+   "related_materials": [
+    "041"
+   ],
+   "attach_suggestion": "插件卡:Ollama web search 预装插件 + trajectory view;卡内嵌官方 4K 演示视频(media/ 已下载)。",
+   "id": "t05"
+  },
+  {
+   "date": "2026-08-14",
+   "title": "破圈日:28 小时破 9.2 万 star,中文深度实测潮",
+   "priority": "社区爆点",
+   "description": "28 小时 star 超 9.2 万(报道口径;零度解说视频标题口径为「开源一天狂揽 6.8 万星」)。量子位深度实测提出「dsh 是 Agent 时代的安卓」,披露官方内置 100+ 插件、Plugin Store 入口已预留;零度解说、NeuralNine、AI超元域等中英文视频集中上线,DSH 从程序员话题破圈到泛科技人群。",
+   "key_data": [
+    {
+     "metric": "28 小时 star",
+     "value": ">92,000",
+     "source": "pasqualepillitteri.it 报道"
+    },
+    {
+     "metric": "24 小时 star(口径不一)",
+     "value": "68,000(estimated)",
+     "source": "零度解说视频标题口径,与 12h≈50k / 28h≈92k 的报道口径存在差异,取其一需注明",
+     "basis": "estimated:仅视频标题自述,无独立采集佐证"
+    },
+    {
+     "metric": "官方内置插件",
+     "value": "100+ 个,Plugin Store 已预留",
+     "source": "量子位实测文(素材 058)"
+    },
+    {
+     "metric": "零度解说播放",
+     "value": "72,170 次(4 天)",
+     "source": "yt-dlp 实抓,采集于 2026-08-18(素材 064)"
+    }
+   ],
+   "source_urls": [
+    "https://www.qbitai.com/2026/08/472208.html",
+    "https://www.youtube.com/watch?v=5G_afoTB1gs",
+    "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record",
+    "https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD"
+   ],
+   "related_materials": [
+    "058",
+    "064",
+    "063",
+    "066",
+    "059",
+    "052"
+   ],
+   "attach_suggestion": "评论卡:量子位「Agent 时代的安卓 vs Codex 的 iPhone」金句卡(注明出处)。",
+   "id": "t06"
+  },
+  {
+   "date": "2026-08-15",
+   "title": "48 小时破 10 万 star:纪录宣告与真假之争",
+   "priority": "生态里程碑",
+   "description": "X 博主 ℏεsam 宣告「48 小时内破 10 万,GitHub 增长最快仓库,比 OpenClaw 还快」,Jen Zhu 同日给出「3 天 11.4 万」口径。r/tech_x 369 赞热帖同步引爆星数真假大讨论:「刷星机器人毁了 GitHub」对阵「GitHub 用户是专业程序员」。注意:「GitHub 史上最快」并无官方或权威第三方认证,引用应写「媒体与社区称」。",
+   "key_data": [
+    {
+     "metric": "48 小时 star",
+     "value": "100,000+",
+     "source": "ℏεsam(@Hesamation)X 帖"
+    },
+    {
+     "metric": "3 天口径",
+     "value": "114,000",
+     "source": "Jen Zhu(@jenzhuscott)X 帖"
+    },
+    {
+     "metric": "约 2 天精确值",
+     "value": "95,386 star / 8,826 fork",
+     "source": "Flowtivity 分析文"
+    },
+    {
+     "metric": "争议帖热度",
+     "value": "369 赞 / 108 评论",
+     "source": "arctic-shift 存档(快照 08-17),素材 023"
+    }
+   ],
+   "source_urls": [
+    "https://x.com/Hesamation/status/2088766395676848558",
+    "https://x.com/jenzhuscott/status/2088737933830521338",
+    "https://www.reddit.com/r/tech_x/comments/1vpbjvk/100k_github_stars_in_just_2_days_deepseek_harness/",
+    "https://flowtivity.ai/blog/deepseek-harness-open-source-agent-explained/"
+   ],
+   "related_materials": [
+    "020",
+    "023"
+   ],
+   "attach_suggestion": "数据卡:star 增长曲线(1.5h 2.2万 → 48h 10万 → 5天 15万),曲线下加「纪录无官方认证/星数真实性有争议」注脚。",
+   "id": "t07"
+  },
+  {
+   "date": "2026-08-15",
+   "title": "V4-Pro「兔子洞」:Minimal 模式就是 RL 训练环境",
+   "priority": "社区爆点",
+   "description": "r/DeepSeek 热帖转译中文社区长文:V4-Pro API 背后疑似藏着多个「思维链指纹」不同的版本,最强的「神级版本」正是从 DSH Minimal 模式里挖出来的;关键证据是官方仓库 8 月 10 日 commit「fix(preset): align minimal agent with RL composition」。高赞结论「V4 Pro GA 在 DSH minimal 环境上过拟合」,把「harness 是模型发挥的决定变量」从经验推到机制层。",
+   "key_data": [
+    {
+     "metric": "帖子热度",
+     "value": "157 赞 / 23 评论",
+     "source": "arctic-shift 存档(快照 08-16),素材 031"
+    },
+    {
+     "metric": "基准分对照",
+     "value": "Minimal 99/96 vs Standard 91",
+     "source": "帖内社区对照实验(素材 031、032)"
+    }
+   ],
+   "source_urls": [
+    "https://www.reddit.com/r/DeepSeek/comments/1votndx/down_the_rabbit_hole_of_deepseekv4pro0813/"
+   ],
+   "related_materials": [
+    "031",
+    "026",
+    "033"
+   ],
+   "attach_suggestion": "评论卡:挂 u/Public_Ad_5096「过拟合」高赞评论链 + commit 截图(attachments/ 已存)。",
+   "id": "t08"
+  },
+  {
+   "date": "2026-08-15",
+   "title": "社区机制级突破:dsh-anchored-standard 基准 91→98/99",
+   "priority": "生态里程碑",
+   "description": "社区作者 xiaobright 基于「兔子洞」发现做出混合插件:首轮请求向模型呈现与 Minimal 几乎相同的环境,把它「锚定」到 RL 训练出的推理轨道,随后解锁完整 Standard 工具集——基准分从 91 拉到 98/99,并配有控制变量实验(首轮工具 schema 是决定性变量)。开源两天,社区就做出可验证的机制级突破,「Everything is a Plugin」的开源红利首次被实证。",
+   "key_data": [
+    {
+     "metric": "四配置基准分",
+     "value": "Standard 91 / PTC 92 / Minimal 99·96 / Anchored Standard 98·99",
+     "source": "r/accelerate 帖内对照实验(素材 032)"
+    },
+    {
+     "metric": "帖子热度",
+     "value": "47 赞 / 2 评论",
+     "source": "arctic-shift 存档(快照 08-17)"
+    }
+   ],
+   "source_urls": [
+    "https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/"
+   ],
+   "related_materials": [
+    "032",
+    "031"
+   ],
+   "attach_suggestion": "插件卡:dsh-anchored-standard(精选 12 头号种子),卡内配四配置分数表小数据卡。",
+   "id": "t09"
+  },
+  {
+   "date": "2026-08-16",
+   "title": "第 4 天 star 破 13.5 万",
+   "priority": "生态里程碑",
+   "description": "多来源交叉口径:第 4 天 135,042 star、13,592 fork。作为参照:DeepSeek 自家 R1 当年用 5.7 天才到 2 万 star,纯速度前纪录 Grok-1 约 1.2 天,DSH 用 1 小时出头走完同样路程。",
+   "key_data": [
+    {
+     "metric": "第 4 天 star",
+     "value": "135,042 star / 13,592 fork(日期 estimated)",
+     "source": "素材 020 多来源交叉;pasqualepillitteri.it「第 4 天破 13.5 万」",
+     "basis": "estimated:「第 4 天」按发布日为第 1 天推算落在 08-16,来源未给出精确时间戳"
+    },
+    {
+     "metric": "参照系",
+     "value": "R1 到 2 万 star 用 5.7 天;Grok-1 约 1.2 天",
+     "source": "pasqualepillitteri.it 报道"
+    }
+   ],
+   "source_urls": [
+    "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record",
+    "https://x.com/Hesamation/status/2088766395676848558"
+   ],
+   "related_materials": [
+    "020",
+    "001"
+   ],
+   "attach_suggestion": "数据卡:star 里程碑序列表(github.json 的 star_milestones 直接渲染)。",
+   "id": "t10"
+  },
+  {
+   "date": "2026-08-16",
+   "title": "第三方模型与缓存实证:DSH 不只属于 DeepSeek",
+   "priority": "社区爆点",
+   "description": "r/LocalLLaMA 网友用 Qwen 3.8 27b 配 DSH 连跑 10 小时,实测「太惊艳」,印证模型插件化的通用性;「DSH 缓存命中率真有那么神吗」追问楼变成插件实证集中营;首个插件目录站 dshplugin.online 登上 Show HN。生态开始从围观转向可复现的实证。",
+   "key_data": [
+    {
+     "metric": "Qwen 实测帖",
+     "value": "139 赞 / 46 评论",
+     "source": "arctic-shift 存档,素材 030"
+    },
+    {
+     "metric": "缓存追问楼",
+     "value": "14 赞 / 29 评论",
+     "source": "arctic-shift 存档,素材 033"
+    }
+   ],
+   "source_urls": [
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vpv12b/qwen_38_27b_with_dshdeepseek_harness_is_amazing/",
+    "https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/deepseek_harness/",
+    "https://dshplugin.online/"
+   ],
+   "related_materials": [
+    "030",
+    "033",
+    "017"
+   ],
+   "attach_suggestion": "评论卡:Qwen 10 小时实测节选(「第三方模型也能吃到 harness 红利」角度)。",
+   "id": "t11"
+  },
+  {
+   "date": "2026-08-17",
+   "title": "官方发布 v0.1.0-rc.7:Job Panel 纳管 Codex 与 Claude Code",
+   "priority": "官方动作",
+   "description": "官方放出发布期内唯一可见的 release(pre-release,12:01):插件可注册自己的设置卡、Job Panel 统一管理 Codex 与 Claude Code 子 agent 任务、MCP/ACP 支持持久图片附件,并修复 minimal 模式持久化 Bash 延迟等问题。「把竞品 harness 当子 agent 管起来」从社区解读变成了官方功能。",
+   "key_data": [
+    {
+     "metric": "release",
+     "value": "v0.1.0-rc.7,2026-08-17 12:01,Pre-release(要点原文见 github.json)",
+     "source": "GitHub releases 页实抓,2026-08-18"
+    }
+   ],
+   "source_urls": [
+    "https://github.com/deepseek-ai/deepseek-harness/releases"
+   ],
+   "related_materials": [
+    "040",
+    "005"
+   ],
+   "attach_suggestion": "数据卡:rc.7 更新要点清单;可并挂 040 elie「DSH 能把 Claude Code 和 Codex 当子 agent 调用」评论卡形成呼应。",
+   "id": "t12"
+  },
+  {
+   "date": "2026-08-17",
+   "title": "API 新价格生效:峰时最高涨幅超 3 倍,社区许愿「回滚 pricing」",
+   "priority": "官方动作",
+   "description": "8-13 预告的调价正式生效:V4-Flash 峰时输出 2→9 元、V4-Pro 6→27 元/百万 token(+350%),缓存命中价涨幅按口径最高达 1100%;同时引入峰谷定价,谷时 5 折。Discussions 里「回滚 pricing」许愿帖、「梁神会打折吗」成为热帖;量子位标题「我原谅它涨价了」成了中文圈情绪注脚。",
+   "key_data": [
+    {
+     "metric": "峰时输出价",
+     "value": "V4-Flash 2→9 元、V4-Pro 6→27 元/百万 token(+350%)",
+     "source": "网易(163.com)、搜狐报道"
+    },
+    {
+     "metric": "最高涨幅口径",
+     "value": "1100%(缓存命中价:V4-Flash 0.02→0.10 元、V4-Pro 0.025→0.30 元)",
+     "source": "新浪财经 2026-08-17 报道"
+    },
+    {
+     "metric": "社区反应",
+     "value": "Discussions #61「回滚 pricing」30 赞、#32「梁神会打折吗」28 赞",
+     "source": "GitHub Discussions 实抓,2026-08-18"
+    }
+   ],
+   "source_urls": [
+    "https://finance.sina.cn/2026-08-17/detail-ininrkkk0123342.d.html",
+    "https://www.163.com/dy/article/L485A7RT05198NMR.html",
+    "https://github.com/deepseek-ai/deepseek-harness/discussions/61"
+   ],
+   "related_materials": [
+    "019",
+    "058"
+   ],
+   "attach_suggestion": "数据卡:调价前后价目对比表(峰/谷/缓存三行);可并挂 Discussions 许愿帖评论卡增加活人感。",
+   "id": "t13"
+  },
+  {
+   "date": "2026-08-17",
+   "title": "社区首份「必装插件清单」与坏插件吐槽",
+   "priority": "社区爆点",
+   "description": "r/DeepSeekHarness 新社区出现第一份 curated 插件/skills/MCP 索引帖;同日吐槽帖警告「一个坏插件能带崩整个插件系统」,单点故障成为插件化架构第一个被点名的反面案例;交易分析插件 dsh-trading 登上 Show HN。生态从狂欢进入「沉淀清单+开始挑刺」的阶段。",
+   "key_data": [
+    {
+     "metric": "帖子热度",
+     "value": "必装清单帖 1 赞、吐槽帖 1 赞(新板块冷启动,热度低但为发布期首例,选入因话题独占性)",
+     "source": "arctic-shift 存档,素材 036、037"
+    }
+   ],
+   "source_urls": [
+    "https://www.reddit.com/r/DeepSeekHarness/comments/1vr43w5/must_have_deepseek_harness_plugins/",
+    "https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/",
+    "https://github.com/maddogfinance/dsh-trading"
+   ],
+   "related_materials": [
+    "037",
+    "036"
+   ],
+   "attach_suggestion": "插件卡:必装清单选品与本站「精选 12 插件」互链;吐槽帖做小评论卡放争议侧。",
+   "id": "t14"
+  },
+  {
+   "date": "2026-08-18",
+   "title": "5 天 15 万 star,topic 生态 6,716 仓库",
+   "priority": "生态里程碑",
+   "description": "素材库一手采集(GitHub API):149,856 star、15,364 fork、watch 627;topic dsh-plugin 已收录 6,716 个仓库,第一名 open-design 达 88,304 star,火山引擎 OpenViking 等大厂项目进入 top 10。当日晚些时候仓库页面已显示 151.3k。5 天时间,DSH 从一条官宣推文长成覆盖桌面端、记忆、视觉、设计的完整插件生态。",
+   "key_data": [
+    {
+     "metric": "官方仓库",
+     "value": "149,856 star / 15,364 fork / watch 627",
+     "source": "GitHub API 一手采集,2026-08-18(素材 020、001)"
+    },
+    {
+     "metric": "当日页面口径",
+     "value": "151.3k star / 15.6k fork / 638 watch",
+     "source": "GitHub 仓库页实抓,2026-08-18 本次补抓(晚于 API 采集)"
+    },
+    {
+     "metric": "生态规模",
+     "value": "topic dsh-plugin 6,716 个仓库;top1 open-design 88,304 star",
+     "source": "GitHub Search API,2026-08-18(素材 007、008)"
+    }
+   ],
+   "source_urls": [
+    "https://github.com/deepseek-ai/deepseek-harness",
+    "https://github.com/topics/dsh-plugin",
+    "https://github.com/nexu-io/open-design"
+   ],
+   "related_materials": [
+    "001",
+    "007",
+    "008",
+    "020"
+   ],
+   "attach_suggestion": "数据卡:GitHub 观察模块主数据卡(star/fork/生态规模三联),作为时间轴收尾与 GitHub 观察模块的衔接点。",
+   "id": "t15"
+  }
+ ],
+ "comments": [
+  {
+   "id": "c01",
+   "platform": "reddit",
+   "author": "u/stealthispost",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 47,
+   "original": "**Anchored Standard** (xiaobright/dsh-anchored-standard) does a clever hybrid: 1. First model request: presents V4 Pro with essentially the same environment as Minimal... 2. As soon as it makes its first real tool call/reply, it unlocks the full Standard toolset... The author found that the tool schema on that first request appears to be the decisive variable.",
+   "zh": "Anchored Standard(xiaobright/dsh-anchored-standard)做了一个聪明的混合方案:1. 第一次模型请求时,给 V4 Pro 呈现与 Minimal 基本相同的环境……2. 一旦发生第一次真实工具调用/回复,就解锁完整的 Standard 工具集……作者发现,第一次请求携带的工具 schema 似乎是决定性变量。",
+   "url": "https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/",
+   "related_plugin": "dsh-anchored-standard",
+   "sentiment": "positive",
+   "note": "帖子正文节选(r/accelerate)。帖内基准数据:Standard 91 / PTC 92 / Minimal 99·96 / Anchored Standard 98·99"
+  },
+  {
+   "id": "c02",
+   "platform": "reddit",
+   "author": "u/for4f",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 4,
+   "original": "the anchored standard result is the one that got me. 98/99 with the full toolset handed back after the first call kills the 'fewer tools = fewer mistakes' explanation, which was the obvious alternative. so it really does come down to what the model sees at init. kinda fits the RL story though. train a model inside one specific scaffold and it'll behave best inside that scaffold, first message included.",
+   "zh": "最让我震撼的就是 anchored standard 的结果。第一次调用之后就把完整工具集还回去,居然还能拿到 98/99 分,这直接干掉了『工具越少=错误越少』这个最顺手的解释。所以关键真的就在于模型初始化时看到了什么。这也符合 RL(强化学习)的逻辑:模型在某个特定脚手架里训练出来,它就会在那个脚手架里表现最好,第一条消息也不例外。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/",
+   "related_plugin": "dsh-anchored-standard",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c03",
+   "platform": "reddit",
+   "author": "u/somerussianbear",
+   "date": "2026-08-16",
+   "likes_or_upvotes": 9,
+   "original": "I saw the dsh-anchored-standard plugin yesterday, the popularity of this thing and what it promised, and decided to give it a try on porting the approach to a Pi extension, cause I really like that harness and wouldn't like to have a harness just for DeepSeek. It works, I managed to replicate the whole thing. All thinking uses \"We ...\", as flagged by xiaobright as being the trace of a superior version of DeepSeek v4 Pro.",
+   "zh": "我昨天看到了 dsh-anchored-standard 插件,看它的热度和承诺的效果,决定把这套思路移植成 Pi 扩展试试,因为我很喜欢那个 harness,不想为 DeepSeek 单独养一个。它有效,我完整复现了整件事。所有思考都以『We ...』开头——正如 xiaobright 标记的那样,这是某个更强版本 DeepSeek V4 Pro 的痕迹。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/",
+   "related_plugin": "dsh-anchored-standard",
+   "sentiment": "positive",
+   "note": "『God-mode』讨论帖正文节选;楼主同时报告思维链中出现『幽灵提醒』(自己没说过的话出现在 CoT 里)的异常现象"
+  },
+  {
+   "id": "c04",
+   "platform": "reddit",
+   "author": "u/ZveirX",
+   "date": "2026-08-16",
+   "likes_or_upvotes": 1,
+   "original": "It's a gacha with the model as it is overfit to it. I have seen Bilibili experiments with it, minimal prompt, no system prompt, and even in minimal it often drops the \"let me\". There is just so many vocabulary the model has been trained on that it's inevitable that at times it begins to output distinctive patterns not akin to its original chain of thought—that's Entropy.",
+   "zh": "这就是在跟一个过拟合的模型抽卡。我看过 Bilibili 上的实验:极简提示词、无系统提示词,即使在 minimal 下它也经常丢掉『let me』开头。模型训练过的语料实在太多,时不时输出一些不同于原始思维链的独特模式是不可避免的——这就是熵。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/",
+   "related_plugin": "dsh-anchored-standard",
+   "sentiment": "mixed",
+   "note": "对『锚定』机制的怀疑派:认为效果像抽卡、不稳定"
+  },
+  {
+   "id": "c05",
+   "platform": "reddit",
+   "author": "u/PolychromeMan",
+   "date": "2026-08-16",
+   "likes_or_upvotes": 1,
+   "original": "Awesome. To be honest, I had to get ChatGpt to give me an explainer on this, but now that I have vague idea of what is discussed here...very interesting. A lot of my enthusiasm for AI development involves how the open-source community can use it, as opposed to more sealed off products released by frontier developers, so it's neat to see interesting potential that is more open-source friendly.",
+   "zh": "太棒了。说实话我得先让 ChatGPT 给我讲解一遍,不过现在大概明白这里在讨论什么了……非常有意思。我对 AI 发展的热情很大一部分就在于开源社区能怎么用它,而不是前沿厂商那些封得死死的产品,所以看到这种对开源更友好的潜力真的很好。",
+   "url": "https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/",
+   "related_plugin": "dsh-anchored-standard",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c06",
+   "platform": "x",
+   "author": "@itsolelehmann",
+   "date": "2026-07-14",
+   "likes_or_upvotes": 249,
+   "original": "lol someone already open-sourced Claude Design\n\nit's called Open Design, already has 78,000+ github stars.\n\nthe local app is free and runs on your computer.\n\nyou can power its canvas with claude code, codex, cursor, gemini, or 20+ other coding agents.\n\nthe biggest advantage = how",
+   "zh": "笑死,已经有人把 Claude Design 开源了。它叫 Open Design,GitHub 星数已经 78,000+。本地应用免费,跑在你自己的电脑上。画布可以用 claude code、codex、cursor、gemini 或 20 多个其他编码 agent 来驱动。最大的优势 = 用量的计算方式……(正文被接口截断)",
+   "url": "https://x.com/itsolelehmann/status/2077172643946725647",
+   "related_plugin": "open-design",
+   "sentiment": "positive",
+   "note": "长帖,syndication 接口截断于『the biggest advantage = how』"
+  },
+  {
+   "id": "c07",
+   "platform": "x",
+   "author": "@iam_elias1",
+   "date": "2026-05-16",
+   "likes_or_upvotes": 151,
+   "original": "Someone just open sourced Claude Design.\n\nThey called it Open Design.\n\nIt crossed 20,000 GitHub stars in 6 days.\n\nHere is the full story of what happened — and why it matters.",
+   "zh": "有人刚把 Claude Design 开源了。他们叫它 Open Design。6 天之内破了 20,000 GitHub star。以下是事情的完整经过——以及它为什么重要。",
+   "url": "https://x.com/iam_elias1/status/2055639752997851490",
+   "related_plugin": "open-design",
+   "sentiment": "positive",
+   "note": "thread 首帖,后续为项目始末长文"
+  },
+  {
+   "id": "c08",
+   "platform": "x",
+   "author": "@so_ainsight",
+   "date": "2026-05-01",
+   "likes_or_upvotes": 95,
+   "original": "これは神。\n\nClaude Designのオープンソース版が公開されました。名前は Open Design。\nすでに、GitHubで8,000スター超え。Anthropicのサブスクにも縛られません。\n\n・テキストひと言でUIプロトタイプを自動生成\n・Linear / Stripe / Vercel / Notion など71種のブランド級デザインシステム同梱",
+   "zh": "这是神作。Claude Design 的开源版发布了,名字叫 Open Design。GitHub 上已超过 8,000 星,而且不被 Anthropic 的订阅绑死。・一句话文本自动生成 UI 原型 ・内置 Linear / Stripe / Vercel / Notion 等 71 套品牌级设计系统",
+   "url": "https://x.com/so_ainsight/status/2050062774802563425",
+   "related_plugin": "open-design",
+   "sentiment": "positive",
+   "note": "原文为日语"
+  },
+  {
+   "id": "c09",
+   "platform": "x",
+   "author": "@KKaWSB",
+   "date": "2026-05-16",
+   "likes_or_upvotes": 12,
+   "original": "免费开源的设计物料神器，5 月 GitHub 单月增速第一：\n\nnexu-io/open-design——一个本地跑的 Claude Design 开源替代。\n\n5 月单月涨 16,804 颗 star。\n\n它的定位是：你给任何一个 coding agent 一个设计需求，agent 调用 Open Design 直接产出——",
+   "zh": "(原文即中文)免费开源的设计物料神器,5 月 GitHub 单月增速第一:nexu-io/open-design——一个本地跑的 Claude Design 开源替代。5 月单月涨 16,804 颗 star。它的定位是:你给任何一个 coding agent 一个设计需求,agent 调用 Open Design 直接产出——(正文被接口截断)",
+   "url": "https://x.com/KKaWSB/status/2055641921033294248",
+   "related_plugin": "open-design",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c10",
+   "platform": "x",
+   "author": "@teortaxesTex",
+   "date": "2026-05-24",
+   "likes_or_upvotes": 151,
+   "original": "DeepSeek-Reasonix\nNow this is the kind of harness I can get behind!\nBuilt for the poor API users, all around cache hits\neven has a GUI (wrapper) already\n@victor207755822 take ideas or collaborate idk",
+   "zh": "DeepSeek-Reasonix——这才是我能支持的那种 harness!为穷 API 用户打造,一切围绕缓存命中,甚至已经有 GUI(壳)了。@victor207755822 要不要取取经或者合作一下。",
+   "url": "https://x.com/teortaxesTex/status/2058413941689041219",
+   "related_plugin": "DeepSeek-Reasonix",
+   "sentiment": "positive",
+   "note": "Teortaxes 是英文圈知名 DeepSeek 观察者"
+  },
+  {
+   "id": "c11",
+   "platform": "x",
+   "author": "@huangjinbo",
+   "date": "2026-06-16",
+   "likes_or_upvotes": 102,
+   "original": "Reasonix 真的很优秀，不要被它的项目名字（DeepSeek-Reasonix）所误导了，只要中转站支持 OpenAI-compatible 都可以支持...再次推荐。主要是它的技能、记忆、Hooks、MCP等功能都很好用...它被我用于替代OpenCode 了",
+   "zh": "(原文即中文)Reasonix 真的很优秀,不要被它的项目名字(DeepSeek-Reasonix)所误导了,只要中转站支持 OpenAI-compatible 都可以支持……再次推荐。主要是它的技能、记忆、Hooks、MCP 等功能都很好用……它被我用于替代 OpenCode 了",
+   "url": "https://x.com/huangjinbo/status/2066787187191058697",
+   "related_plugin": "DeepSeek-Reasonix",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c12",
+   "platform": "reddit",
+   "author": "u/Lucifer812",
+   "date": "2026-08-11",
+   "likes_or_upvotes": 67,
+   "original": "Missing reasonx",
+   "zh": "缺了 reasonx。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31gdra/",
+   "related_plugin": "DeepSeek-Reasonix",
+   "sentiment": "positive",
+   "note": "8 大 harness 横评帖(307 赞)下的最高赞评论,评论区多人刷屏求测 Reasonix,楼主随后回复『可以加进基准』"
+  },
+  {
+   "id": "c13",
+   "platform": "reddit",
+   "author": "u/cheddarboiii",
+   "date": "2026-08-16",
+   "likes_or_upvotes": 7,
+   "original": "I am using it with the tui plugin which was added 2 days ago or so. It is great comparing to reasonix as it handles permissions much better and in general output seems to be more concise and def more consistent.",
+   "zh": "我在用两天前左右刚加的 tui 插件(指 DSH)。跟 reasonix 比好太多了:权限处理好得多,输出整体也更简洁、明显更稳定。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/comment/p3zjnsm/",
+   "related_plugin": "DeepSeek-Reasonix",
+   "sentiment": "negative",
+   "note": "评论主体在夸 DSH 的 tui 插件,对照对象是 Reasonix(权限处理被点名不如 DSH)"
+  },
+  {
+   "id": "c14",
+   "platform": "reddit",
+   "author": "u/Cold_Tree190",
+   "date": "2026-08-11",
+   "likes_or_upvotes": 6,
+   "original": "Are these reasonx bots? All 3 posted in the same minute, all have low karma, and I've genuinely never heard of reasonx before now lol",
+   "zh": "这些是 reasonx 的机器人吗?三条评论同一分钟发出,karma 都很低,而且说真的,我在这之前从没听说过 reasonx,哈哈。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vli5uf/comment/p31j3q1/",
+   "related_plugin": "DeepSeek-Reasonix",
+   "sentiment": "negative",
+   "note": "对 Reasonix 社区刷屏的水军质疑;同帖有人回应『我用 Reasonix,我不是机器人』"
+  },
+  {
+   "id": "c15",
+   "platform": "x",
+   "author": "@TeksEdge",
+   "date": "2026-03-19",
+   "likes_or_upvotes": 940,
+   "original": "Just saw this GitHub project 🛡️ OpenViking is skyrocketing 📈. This could be the best memory manager for @openclaw! 👀\n\n✅ OpenViking (volcengine/OpenViking) is an open-source project released by ByteDance's cloud division, Volcengine.\n\nIt's exploding in popularity and could",
+   "zh": "刚看到这个 GitHub 项目:OpenViking 正在暴涨。它可能是 @openclaw 最好的记忆管理器!OpenViking(volcengine/OpenViking)是字节跳动云部门火山引擎发布的开源项目。它的人气正在爆发……(正文被接口截断)",
+   "url": "https://x.com/TeksEdge/status/2034672484059095263",
+   "related_plugin": "OpenViking",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c16",
+   "platform": "x",
+   "author": "@socialwithaayan",
+   "date": "2026-03-14",
+   "likes_or_upvotes": 222,
+   "original": "BREAKING: ByteDance open-sourced something the AI agent ecosystem has needed for a long time.\n\nA proper context database built specifically for agents.\n\nOpenViking manages everything an always-on agent needs to function at a high level:\n\n→ Memory that persists and evolves across",
+   "zh": "突发:字节跳动开源了一个 AI agent 生态早就需要的东西——一个专为 agent 打造的正经上下文数据库。OpenViking 管理一个常驻 agent 高水平运转所需的一切:→ 跨会话持久并自进化的记忆……(正文被接口截断)",
+   "url": "https://x.com/socialwithaayan/status/2032855096518914411",
+   "related_plugin": "OpenViking",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c17",
+   "platform": "x",
+   "author": "@filippkowalski",
+   "date": "2026-03-19",
+   "likes_or_upvotes": 6,
+   "original": "It's fascinating to watch how ideas evolve \n\nThis is very promising and I think for one of my projects I will switch from RAG to OpenViking",
+   "zh": "看着这些想法演化真的很有意思。这个项目非常有前景,我打算把我其中一个项目从 RAG 切换到 OpenViking。",
+   "url": "https://x.com/filippkowalski/status/2034726026555642210",
+   "related_plugin": "OpenViking",
+   "sentiment": "positive",
+   "note": "开发者的真实迁移意向(RAG → OpenViking)"
+  },
+  {
+   "id": "c18",
+   "platform": "x",
+   "author": "@SuguruKun_ai",
+   "date": "2026-04-12",
+   "likes_or_upvotes": 2121,
+   "original": "中国のAI界隈、レベルが違いすぎた。\n「同僚をAIに蒸留するツール」がバズってる、、、\n\ncolleague.skill っていうOSSで\n同僚のチャット履歴、業務文書、メールを集めて\nAIにその人の仕事のやり方を学習させる。\n\nつまり退職しても\n「デジタルな同僚」が残り続ける。\n\nGitHub 9,000スター超え。",
+   "zh": "中国 AI 圈,水平完全不在一个次元。『把同事蒸馏进 AI 的工具』火了……一个叫 colleague.skill 的开源项目:收集同事的聊天记录、业务文档、邮件,让 AI 学会那个人的工作方式。也就是说,就算人离职了,『数字同事』会一直留下来。GitHub 星数已超 9,000,发布才一周。",
+   "url": "https://x.com/SuguruKun_ai/status/2043312353404743756",
+   "related_plugin": "colleague-skill",
+   "sentiment": "positive",
+   "note": "原文为日语;日本 AI 圈头部账号的破圈转述"
+  },
+  {
+   "id": "c19",
+   "platform": "x",
+   "author": "@Gorden_Sun",
+   "date": "2026-03-30",
+   "likes_or_upvotes": 500,
+   "original": "同事.Skill：把你的同事蒸馏成Skill\n把同事的技能与性格蒸馏成 AI Skill，让它替他工作。建议改名叫“同事Kill”，成为Skill后就可以Kill掉了。",
+   "zh": "(原文即中文)同事.Skill:把你的同事蒸馏成 Skill。把同事的技能与性格蒸馏成 AI Skill,让它替他工作。建议改名叫『同事Kill』,成为 Skill 后就可以 Kill 掉了。",
+   "url": "https://x.com/Gorden_Sun/status/2038607975804514442",
+   "related_plugin": "colleague-skill",
+   "sentiment": "mixed",
+   "note": "推荐的同时讽刺其伦理面(『炼完就可以裁了』),是该项目争议叙事的代表帖"
+  },
+  {
+   "id": "c20",
+   "platform": "x",
+   "author": "@poezhao0605",
+   "date": "2026-04-07",
+   "likes_or_upvotes": 62,
+   "original": "A viral GitHub project in China called \"同事.skill\" (Colleague.skill) turns a departing coworker's chat logs, docs, and emails into an AI skill that mimics how they work. Spinoffs appeared overnight: Boss.skill, Mentor.skill, Crush.skill, even Immortality.skill.\n\nThe joke landed",
+   "zh": "中国一个爆火的 GitHub 项目『同事.skill』,能把离职同事的聊天记录、文档和邮件变成一个模仿其工作方式的 AI skill。衍生项目一夜之间冒出来:老板.skill、导师.skill、暗恋对象.skill,甚至永生.skill。这个梗成了。",
+   "url": "https://x.com/poezhao0605/status/2041377478808379439",
+   "related_plugin": "colleague-skill",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c21",
+   "platform": "reddit",
+   "author": "u/Kwigg",
+   "date": "2026-04-22",
+   "likes_or_upvotes": 5,
+   "original": "Looks like we've gone full circle from roleplaying -> coding/useful stuff -> roleplaying again. From my experience, (I still use SillyTavern like it's 2023) making the ai do a persona while also trying to be a coder/etc. is stacking tasks on top of each other which makes it worse at both.",
+   "zh": "看来我们绕了一整圈:从角色扮演→写代码/干正事→又回到角色扮演。以我的经验(我到现在还在用 SillyTavern,跟 2023 年一样),让 AI 一边扮演人设一边写代码,等于把任务叠在一起,两头都会变差。",
+   "url": "https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohkqkaj/",
+   "related_plugin": "colleague-skill",
+   "sentiment": "negative",
+   "note": "对『人设+干活』双层架构有效性的质疑"
+  },
+  {
+   "id": "c22",
+   "platform": "reddit",
+   "author": "u/fallingdowndizzyvr",
+   "date": "2026-04-22",
+   "likes_or_upvotes": 0,
+   "original": "I would read up on this. It's not roleplaying per se. It is doing something useful. Check out that github and the dev alludes to it. \"Your colleague quit, leaving behind a mountain of unmaintained docs?\" ... That's using this to do useful stuff. Since it effectively gives you a digital twin of your coworker to do useful stuff with.",
+   "zh": "建议先了解一下。这不完全是角色扮演,它是在干有用的事。看看那个 GitHub 仓库,开发者也点到了:『你的同事离职了,留下一座没人维护的文档山?』……这就是用它干实事,它实际上给了你一个可以一起干活的同事数字分身。",
+   "url": "https://www.reddit.com/r/LocalLLaMA/comments/1ssaup8/comment/ohlgp82/",
+   "related_plugin": "colleague-skill",
+   "sentiment": "positive",
+   "note": "对楼上质疑的正面回应(节选)"
+  },
+  {
+   "id": "c23",
+   "platform": "x",
+   "author": "@berryxia",
+   "date": "2026-04-14",
+   "likes_or_upvotes": 55,
+   "original": "恭喜！EverMind 打磨已久的超级更新终于上线！\n\n一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源！\n\n1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent\n\n2. EvoAgentBench：开源中立基准，专测",
+   "zh": "(原文即中文)恭喜!EverMind 打磨已久的超级更新终于上线!一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源!1. EverOS:全新一站式开源库,内置多个 Methods、Benchmarks 和 Usecases,用户直接用现成组件魔改出自己的 Agent 2. EvoAgentBench:开源中立基准……(正文被接口截断)",
+   "url": "https://x.com/berryxia/status/2044054552639627375",
+   "related_plugin": "EverOS",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c24",
+   "platform": "x",
+   "author": "@yhslgg",
+   "date": "2026-07-07",
+   "likes_or_upvotes": 6,
+   "original": "AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS，10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。\n\n一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff，pip 一条命令装好。",
+   "zh": "(原文即中文)AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS,10300 个 Star,把这件事做成了一堆你能打开的 .md 文件,本地跑,不依赖任何托管服务。一句话:给 AI Agent 装一个本地优先的持久记忆层,存的是 Markdown 文件,能读、能改、能 git diff,pip 一条命令装好。",
+   "url": "https://x.com/yhslgg/status/2074395375088410906",
+   "related_plugin": "EverOS",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c25",
+   "platform": "x",
+   "author": "@fkysly",
+   "date": "2026-08-13",
+   "likes_or_upvotes": 3,
+   "original": "DeepSeek Harness awesome plugins · 插件精选列表\n#DeepSeek #DeepSeekHarness\n\ncc @tianyi",
+   "zh": "(原文即中英混排)DeepSeek Harness awesome plugins·插件精选列表 #DeepSeek #DeepSeekHarness cc @tianyi",
+   "url": "https://x.com/fkysly/status/2087904592189378865",
+   "related_plugin": "awesome-dsh-plugin",
+   "sentiment": "positive",
+   "note": "DSH 开源当天向 DeepSeek 团队成员 @tianyi 转发推荐 awesome-dsh-plugin 清单仓库,8 条回复"
+  },
+  {
+   "id": "c26",
+   "platform": "x",
+   "author": "@NFT_Chen",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 278,
+   "original": "🔥插件推荐：DeepSeek Harness必装！10大高星实用插件盘点（按GitHub Star排序）\n\nDeepSeek刚开源的Harness生态起飞了！界面丑？没视觉？迁移麻烦？这些插件全给你解决！按GitHub Star精选，数据截至今天，直接抄作业👇\n\n1️⃣dsh-web-ui ⭐1312",
+   "zh": "(原文即中文)插件推荐:DeepSeek Harness 必装!10 大高星实用插件盘点(按 GitHub Star 排序)。DeepSeek 刚开源的 Harness 生态起飞了!界面丑?没视觉?迁移麻烦?这些插件全给你解决!按 GitHub Star 精选,数据截至今天,直接抄作业。1️⃣ dsh-web-ui ⭐1312……(正文被接口截断)",
+   "url": "https://x.com/NFT_Chen/status/2088551277408247867",
+   "related_plugin": "dsh-web-ui",
+   "sentiment": "positive",
+   "note": "10 大必装插件盘点 thread,dsh-web-ui 排第 1;后续条目含 modlens(⭐1274)等"
+  },
+  {
+   "id": "c27",
+   "platform": "x",
+   "author": "@geekbb",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 84,
+   "original": "一堆为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。\n\n1⃣ 为 DeepSeek Harness 生态打造的现代化桌面端体验，让 DSH 用户获得更顺畅的本地操作界面。\n\n2⃣ DeepSeek Harness Web UI 的插件与皮肤合集，涵盖任务面板、Git",
+   "zh": "(原文即中文)一堆为 DeepSeek Harness 生态打造的现代化桌面端体验,让 DSH 用户获得更顺畅的本地操作界面。……2⃣ DeepSeek Harness Web UI 的插件与皮肤合集,涵盖任务面板、Git……(正文被接口截断)",
+   "url": "https://x.com/geekbb/status/2088467402082414731",
+   "related_plugin": "dsh-web-ui",
+   "sentiment": "positive",
+   "note": "生态盘点帖,第 2 条即 dsh-web-ui(Web UI 插件与皮肤合集),附 4 张产品截图"
+  },
+  {
+   "id": "c28",
+   "platform": "reddit",
+   "author": "u/Electronic_Trash_385",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 19,
+   "original": "自动展开思考，丝滑吐字，丝滑滚动，新版已固定 deep diving\n安装方式：pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream\n欢迎点赞关注或star[玫瑰R]",
+   "zh": "(原文即中文)自动展开思考,丝滑吐字,丝滑滚动,新版已固定 deep diving。安装方式:pnpm dsh plugin --profile web add github:Laplace-bit/dsh-smooth-stream。欢迎点赞关注或 star[玫瑰R]",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vp5x27/dshplugin_dshsmoothstream_无级丝滑渲染/",
+   "related_plugin": "smooth-stream",
+   "sentiment": "positive",
+   "note": "开发者自荐发布帖(附演示视频),中文直发 r/DeepSeek,0 评论;非第三方评价"
+  },
+  {
+   "id": "c29",
+   "platform": "reddit",
+   "author": "u/Snoo_57113",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 11,
+   "original": "I made a plugin (Token anxiety) for the deepseek harness 0.1 that shows the cost per task, the peak hours and how much a task would cost after the hike... As tips to reduce your bill I found that open research questions, typos, not being specific in the prompts and bugs in toolcalling make up 50%+ of the tokens.",
+   "zh": "我给 DeepSeek Harness 0.1 做了个插件(Token anxiety):显示每任务成本、峰值时段、涨价后同任务要花多少钱……省钱心得:开放式研究问题、打错字、prompt 不具体、工具调用 bug,加起来占了 50% 以上的 token。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vph1ig/deepseek_harness_dsh_plugin_to_show_the_cost_per/",
+   "related_plugin": "token-anxiety",
+   "sentiment": "positive",
+   "note": "开发者自荐发布帖(节选),0 评论;非第三方评价。帖内另有『PRO 只留最难问题』『慎用 subagents』等省钱建议"
+  },
+  {
+   "id": "c30",
+   "platform": "x",
+   "author": "@hqmank",
+   "date": "2026-08-05",
+   "likes_or_upvotes": 411,
+   "original": "Gave DeepSeek vision with one skill.\n\nnpx -y skills add liustack/modlens\n\nRepo link 👇",
+   "zh": "用一个 skill 就给 DeepSeek 装上了视觉。npx -y skills add liustack/modlens 仓库链接👇",
+   "url": "https://x.com/hqmank/status/2084998933731008639",
+   "related_plugin": "modlens",
+   "sentiment": "positive",
+   "note": "第三方开发者实测推荐,20 条回复"
+  },
+  {
+   "id": "c31",
+   "platform": "x",
+   "author": "@wefoundcc",
+   "date": "2026-05-21",
+   "likes_or_upvotes": 5,
+   "original": "EchoBird 是一个开源桌面工具，专门把 AI Agent 的部署门槛往下压。\n\n它主打三个“一键”：安装 Claude Code / OpenClaw 等 Agent、给不同 Agent 切换模型、在本地部署 GGUF / HuggingFace 模型。Windows、macOS、Linux 都有包，MIT 免费。\n\n适合已经在用 Codex、Cursor、Claude",
+   "zh": "(原文即中文)EchoBird 是一个开源桌面工具,专门把 AI Agent 的部署门槛往下压。它主打三个『一键』:安装 Claude Code / OpenClaw 等 Agent、给不同 Agent 切换模型、在本地部署 GGUF / HuggingFace 模型。Windows、macOS、Linux 都有包,MIT 免费。适合已经在用 Codex、Cursor、Claude……(正文被接口截断)",
+   "url": "https://x.com/wefoundcc/status/2057447819447795996",
+   "related_plugin": "EchoBird",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c32",
+   "platform": "x",
+   "author": "@dlimeng192048",
+   "date": "2026-06-18",
+   "likes_or_upvotes": 0,
+   "original": "60% of users quit at setup. EchoBird is a GUI that installs & runs Claude Code, Codex, Aider, OpenClaw, and more—configure models once, use everywhere. No terminal, no config hell. Open-source, cross-platform. Too good to be true? #Claude #Codex #OpenClaw #EchoBird",
+   "zh": "60% 的用户倒在安装配置这一步。EchoBird 是一个 GUI,能安装并运行 Claude Code、Codex、Aider、OpenClaw 等——模型配置一次,到处能用。不用终端,没有配置地狱。开源、跨平台。好得不像真的?",
+   "url": "https://x.com/dlimeng192048/status/2067517409519378683",
+   "related_plugin": "EchoBird",
+   "sentiment": "positive",
+   "note": "0 赞低热度帖,收录以补足 EchoBird 样本;语气偏推介"
+  },
+  {
+   "id": "c33",
+   "platform": "x",
+   "author": "@Hesamation",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 2338,
+   "original": "DeepSeek Harness is now the fastest growing GitHub repo, passing 100K stars in under 48 hours, even faster than OpenClaw.\n\nvery positive community reaction:\n> unusually well designed architecture with tools, session log, agent loop, subagents, all being replaceable plugins\n> UI",
+   "zh": "DeepSeek Harness 现在是增长最快的 GitHub 仓库,不到 48 小时破 10 万星,比 OpenClaw 还快。社区反响非常正面:> 架构设计出奇地好——工具、会话日志、agent 循环、子 agent 全都是可替换的插件 > UI……(正文被接口截断)",
+   "url": "https://x.com/Hesamation/status/2088766395676848558",
+   "related_plugin": "dsh-core",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c34",
+   "platform": "x",
+   "author": "@eliebakouch",
+   "date": "2026-08-13",
+   "likes_or_upvotes": 1250,
+   "original": "amazing release. it's a web UI with multiple harnesses inside it, you can spawn claude code and codex agent through their SDK\n\n\"deepseek harness\" supports different \"modes\" by default (which are harnesses): code mode with programmatic tool calling (in typescript), bash+edit",
+   "zh": "非常出色的发布。它是一个内嵌多个 harness 的 Web UI,你可以通过 SDK 生成(spawn)Claude Code 和 Codex agent。DeepSeek Harness 默认支持多种『模式』(本质就是不同的 harness):带程序化工具调用(TypeScript)的 code mode、bash+edit……(正文被接口截断)",
+   "url": "https://x.com/eliebakouch/status/2087904176357437820",
+   "related_plugin": "dsh-core",
+   "sentiment": "positive",
+   "note": "Hugging Face 研究工程师,官宣约 1 小时后的上手解读"
+  },
+  {
+   "id": "c35",
+   "platform": "x",
+   "author": "@jenzhuscott",
+   "date": "2026-08-13",
+   "likes_or_upvotes": 386,
+   "original": "DeepSeek Harness v0.1's Cordis-powered design is probably one of the cleanest expressions of agent architecture I've seen: every capability - model adapters, tool registries, session logs, sandboxes, orchestration loops, and even the UI a is a 1st class plugin w typed services,",
+   "zh": "DeepSeek Harness v0.1 基于 Cordis 的设计,可能是我见过的 agent 架构中最干净的表达之一:每一项能力——模型适配器、工具注册表、会话日志、沙箱、编排循环、甚至 UI——都是带类型化服务(typed services)的一等公民插件……(正文被接口截断)",
+   "url": "https://x.com/jenzhuscott/status/2087895376594694481",
+   "related_plugin": "dsh-core",
+   "sentiment": "positive"
+  },
+  {
+   "id": "c36",
+   "platform": "x",
+   "author": "@elliotchen100",
+   "date": "2026-08-02",
+   "likes_or_upvotes": 55,
+   "original": "最近 DeepSeek 和 K3 的发布，让大家开始认真看 Agent benchmark 后面的 harness。\n\nKarpathy 这条正好补上了另一半：harness 并不是换一套 prompt 和工具，就能无限放大模型。前提是环境能够把结果反馈给 Agent。\n\n写代码有 compiler、tests 和 logs。\n\n但在动态的 3D 世界里，Opus 5",
+   "zh": "(原文即中文)最近 DeepSeek 和 K3 的发布,让大家开始认真看 Agent benchmark 后面的 harness。Karpathy 这条正好补上了另一半:harness 并不是换一套 prompt 和工具,就能无限放大模型。前提是环境能够把结果反馈给 Agent。写代码有 compiler、tests 和 logs。但在动态的 3D 世界里,Opus 5……(正文被接口截断)",
+   "url": "https://x.com/elliotchen100/status/2083761260932559112",
+   "related_plugin": "dsh-core",
+   "sentiment": "mixed",
+   "note": "开源前 11 天的冷静视角:harness 有效的前提是环境反馈回路,67 条回复"
+  },
+  {
+   "id": "c37",
+   "platform": "reddit",
+   "author": "u/214d",
+   "date": "2026-08-13",
+   "likes_or_upvotes": 16,
+   "original": "It's so awesome, I love it. I've already created 3 plugins (auto title sessions, git worktree a workspace, show session cost and balance in real time). Fast (I am on a 2017 MacBook Pro), reliable, fully customizable, 95-99% cache hit, really nice and minimalist UI). I objectively think it's way better than Reasonix and Pi",
+   "zh": "太好用了,我爱了。我已经写了 3 个插件(会话自动命名、git worktree 开工作区、实时显示会话成本和余额)。快(我用的是 2017 款 MacBook Pro)、可靠、完全可定制、95-99% 缓存命中、UI 又好看又极简。客观说,我觉得它比 Reasonix 和 Pi 好得多。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vnpt5n/comment/p3jgf3x/",
+   "related_plugin": "dsh-core",
+   "sentiment": "positive",
+   "note": "上手当天自写 3 个插件的实证,是『插件门槛低』最常被引用的样本"
+  },
+  {
+   "id": "c38",
+   "platform": "reddit",
+   "author": "u/Professional_Price89",
+   "date": "2026-08-13",
+   "likes_or_upvotes": 35,
+   "original": "The harness is good, unlike other harness, it wont stop or wait for user input, it even catch all errors during runtime, decide to stop the app and debug it. It also ask me to click the accept button for it to work with. The downside is very bad model.",
+   "zh": "这个 harness 是真的好:不像别的 harness,它不会停下来干等用户输入,运行时的错误它全能接住,还会自己决定停掉应用去 debug,也会让我点确认按钮才继续。缺点是(配套的)模型很差。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vnfz2l/comment/p3h6b12/",
+   "related_plugin": "dsh-core",
+   "sentiment": "mixed"
+  },
+  {
+   "id": "c39",
+   "platform": "reddit",
+   "author": "u/Public_Ad_5096",
+   "date": "2026-08-15",
+   "likes_or_upvotes": 35,
+   "original": "A lot of the content in the above article has actually become outdated during the community's analysis process. The answer isn't that complicated… The real answer is \"DeepSeek v4 pro GA overfitted on DSH's minimal mode\" Internal staff have also admitted this.",
+   "zh": "上文很多内容在社区的分析过程中其实已经过时了。答案没那么复杂……真正的答案是:『DeepSeek V4 Pro GA 在 DSH 的 minimal 模式上过拟合了』。内部员工也承认了这一点。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sn3ul/",
+   "related_plugin": "dsh-core",
+   "sentiment": "negative",
+   "note": "『V4 Pro 兔子洞』帖(157 赞)最高赞评论;同一作者补充『它把其他所有环境下的表现都变成了彻底的白痴』"
+  },
+  {
+   "id": "c40",
+   "platform": "reddit",
+   "author": "u/Potential_Back_4398",
+   "date": "2026-08-17",
+   "likes_or_upvotes": 1,
+   "original": "I tried adding a plugin to DeepSeek Harness (dsh-deepseek-vision) and ran into this error: \"Failed to load plugins... keyed slot 'settings.plugin.item' requires options.key\". After that, the plugin system no longer works properly. What bothers me is the architecture: everything seems to depend on the plugin system, so a failure in one plugin can effectively break the entire ecosystem... a malformed or incompatible plugin should be isolated and disabled rather than preventing the rest of the plugin system from loading. I've used Hermes and Claude Code, and I haven't experienced this kind of failure mode there.",
+   "zh": "我给 DeepSeek Harness 装 dsh-deepseek-vision 插件时报错:『Failed to load plugins... keyed slot \"settings.plugin.item\" requires options.key』,之后整个插件系统都不正常了。让我难受的是架构:一切似乎都依赖插件系统,一个插件出错就能实际上搞垮整个生态……格式错误或不兼容的插件应该被隔离禁用,而不是阻断其余插件加载。我用过 Hermes 和 Claude Code,从没碰到过这种失败模式。",
+   "url": "https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/",
+   "related_plugin": "dsh-core",
+   "sentiment": "negative",
+   "note": "『一个坏插件带崩整个插件系统』——目前最具体的架构层吐槽,发布第 4 天;帖子正文节选"
+  }
+ ],
+ "github": {
+  "meta": {
+   "module": "GitHub 观察",
+   "repo": "deepseek-ai/deepseek-harness",
+   "repo_url": "https://github.com/deepseek-ai/deepseek-harness",
+   "description": "DeepSeek Harness: Everything is a Plugin.",
+   "collected_at": "2026-08-18",
+   "note": "同日存在两个 star 口径:素材库 GitHub API 一手采集 149,856(较早),本次仓库页实抓 151.3k(较晚)。建站时建议主用 API 精确值、括注页面最新值。"
+  },
+  "repo_snapshot": {
+   "stars_api": 149856,
+   "forks_api": 15364,
+   "watchers_api": 627,
+   "stars_page_latest": 151300,
+   "forks_page_latest": 15600,
+   "watchers_page_latest": 638,
+   "topic_dsh_plugin_repos": 6716,
+   "source": "API 值:GitHub API 一手采集 2026-08-18(素材 020/001/007);页面值:仓库页 WebFetch 实抓 2026-08-18"
+  },
+  "star_milestones": [
+   {
+    "date": "2026-08-13",
+    "label": "仓库公开(11:56 UTC)",
+    "stars": 0,
+    "evidence": "报道",
+    "source": "pasqualepillitteri.it",
+    "url": "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record"
+   },
+   {
+    "date": "2026-08-13",
+    "label": "约 1 小时",
+    "stars": 20000,
+    "evidence": "报道",
+    "source": "pasqualepillitteri.it(「1 小时出头破 2 万」)",
+    "url": "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record"
+   },
+   {
+    "date": "2026-08-13",
+    "label": "1.5 小时",
+    "stars": 22000,
+    "evidence": "报道(转述)",
+    "source": "KuCoin 快讯,经素材 020 转述,原快讯未直接存档",
+    "url": "https://x.com/Hesamation/status/2088766395676848558"
+   },
+   {
+    "date": "2026-08-13",
+    "label": "12 小时",
+    "stars": 50000,
+    "evidence": "报道",
+    "source": "pasqualepillitteri.it(「first twelve hours ~50,000」)",
+    "url": "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record"
+   },
+   {
+    "date": "2026-08-14",
+    "label": "24 小时(口径不一)",
+    "stars": 68000,
+    "evidence": "estimated",
+    "source": "零度解说视频标题「开源一天狂揽 6.8 万星」;与 12h≈5 万/28h≈9.2 万的报道口径之间存在差异,依据仅为视频标题自述",
+    "url": "https://www.youtube.com/watch?v=5G_afoTB1gs"
+   },
+   {
+    "date": "2026-08-14",
+    "label": "28 小时",
+    "stars": 92000,
+    "evidence": "报道",
+    "source": "pasqualepillitteri.it(「by twenty-eight hours over 92,000」)",
+    "url": "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record"
+   },
+   {
+    "date": "2026-08-15",
+    "label": "约 2 天",
+    "stars": 95386,
+    "forks": 8826,
+    "evidence": "报道",
+    "source": "Flowtivity 分析文",
+    "url": "https://flowtivity.ai/blog/deepseek-harness-open-source-agent-explained/"
+   },
+   {
+    "date": "2026-08-15",
+    "label": "48 小时内",
+    "stars": 100000,
+    "evidence": "社区宣告",
+    "source": "ℏεsam(@Hesamation)X 帖:「fastest growing GitHub repo, passing 100K stars in under 48 hours」;注意「史上最快」无 GitHub 官方认证",
+    "url": "https://x.com/Hesamation/status/2088766395676848558"
+   },
+   {
+    "date": "2026-08-15",
+    "label": "3 天口径",
+    "stars": 114000,
+    "evidence": "社区宣告",
+    "source": "Jen Zhu(@jenzhuscott)X 帖:「114k stars within 3 days」(发帖时间按推文 ID 推算为 08-15 深夜 UTC)",
+    "url": "https://x.com/jenzhuscott/status/2088737933830521338"
+   },
+   {
+    "date": "2026-08-16",
+    "label": "第 4 天(日期 estimated)",
+    "stars": 135042,
+    "forks": 13592,
+    "evidence": "报道(转述)+estimated 日期",
+    "source": "素材 020 多来源交叉「第 4 天 135,042 star / 13,592 fork」;pasqualepillitteri.it「by the fourth day past 135,000」。日期按发布日为第 1 天推算落在 08-16,来源未给精确时间戳",
+    "url": "https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record"
+   },
+   {
+    "date": "2026-08-18",
+    "label": "第 5~6 天(素材库采集)",
+    "stars": 149856,
+    "forks": 15364,
+    "watchers": 627,
+    "evidence": "实抓",
+    "source": "GitHub API 一手采集(素材 020/001)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness"
+   },
+   {
+    "date": "2026-08-18",
+    "label": "当日页面最新",
+    "stars": 151300,
+    "forks": 15600,
+    "watchers": 638,
+    "evidence": "实抓",
+    "source": "GitHub 仓库页 WebFetch 实抓(本次补抓,晚于 API 采集数小时)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness"
+   }
+  ],
+  "latest_release": {
+   "tag": "v0.1.0-rc.7",
+   "git_tag": "dsh-v0.1.0-rc.7",
+   "date": "2026-08-17",
+   "time": "12:01",
+   "prerelease": true,
+   "is_only_visible_release": true,
+   "source": "GitHub releases 页 + tags 页 WebFetch 实抓,2026-08-18",
+   "url": "https://github.com/deepseek-ai/deepseek-harness/releases",
+   "notes_verbatim": {
+    "New Features": [
+     "Enable plugins to register their own settings cards",
+     "Manage Codex and Claude Code subagent tasks through the Job Panel",
+     "Add durable image attachments to MCP and ACP, with nested image forwarding in PTC Mode"
+    ],
+    "Bug Fixes": [
+     "Fix persistent Bash latency in minimal mode",
+     "Fix stack overflows in large-history pagination",
+     "Preserve sessions after max-token truncation",
+     "Fix Safari composer cursor misalignment",
+     "Upgrade to node-pty 1.2 beta for broader PTY compatibility"
+    ],
+    "Improvements": [
+     "Refine the Cordis dynamic plugin panel",
+     "Add `low` reasoning effort for DeepSeek models; `high` remains the default",
+     "Rename the English `Code mode` preset to `PTC mode`",
+     "Add collapsible question cards with draft preservation"
+    ]
+   },
+   "gap_note": "releases 页与 tags 页均只显示 rc.7 一条;rc.1~rc.6 的发布日期不可见,发布节奏无法还原(缺口,如需可后续用 GitHub API tags/commits 补)。"
+  },
+  "top_discussions": [
+   {
+    "rank": 1,
+    "number": 172,
+    "title": "建议早点出独立客户端+CLI,并出支持vscode的插件!",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/172",
+    "upvotes": 166,
+    "replies": 50,
+    "category": "General",
+    "source": "Discussions 列表页 WebFetch 实抓,2026-08-18"
+   },
+   {
+    "rank": 2,
+    "number": 1797,
+    "title": "Welcome to DeepSeek Harness Community(官方欢迎帖,置顶)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/1797",
+    "upvotes": 50,
+    "replies": 62,
+    "category": "Announcements",
+    "source": "Discussions 列表页 WebFetch 实抓,2026-08-18"
+   },
+   {
+    "rank": 3,
+    "number": 1115,
+    "title": "强烈建议尽快建立官方的插件市场",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/1115",
+    "upvotes": 43,
+    "replies": 17,
+    "category": "Ideas",
+    "source": "Discussions 列表页 WebFetch 实抓,2026-08-18"
+   }
+  ],
+  "discussions_extra": [
+   {
+    "number": 45,
+    "title": "来给CIL端。来个TUI",
+    "upvotes": 31,
+    "replies": 2,
+    "category": "Ideas"
+   },
+   {
+    "number": 61,
+    "title": "都是来打卡的是吧,那我来许个愿吧:回滚pricing",
+    "upvotes": 30,
+    "replies": 12,
+    "category": "General"
+   },
+   {
+    "number": 32,
+    "title": "梁神后面会打折或者开coding plan吗",
+    "upvotes": 28,
+    "replies": 8,
+    "category": "General"
+   },
+   {
+    "number": 320,
+    "title": "Agent 预设的系统提示词支持中文",
+    "upvotes": 21,
+    "replies": 6,
+    "category": "Ideas"
+   },
+   {
+    "number": 329,
+    "title": "玩梗帖(68 回复)",
+    "upvotes": null,
+    "replies": 68,
+    "category": "General"
+   }
+  ]
+ },
+ "deploy": {
+  "requirements": {
+   "os": null,
+   "memory": null,
+   "runtime": {
+    "readme_wording": "Install `Node.js`, then run: npx @deepseek-ai/dsh web",
+    "readme_node_version": null,
+    "package_json_engines_node": "^22.19.0 || >=24.0.0",
+    "package_json_packageManager": "pnpm@11.7.0",
+    "root_package": "@deepseek-ai/dsh-root 0.1.0-rc.7",
+    "engines_source_url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/master/package.json"
+   },
+   "linux_build_tools_note": "官方未写,但社区讨论(#1772/#49/#897)证实 Linux 上 node-pty 原生模块需本地编译:Debian 需 build-essential,Arch 需 base-devel,g++ 需支持 gnu++20(GCC 10+)",
+   "status_warning": "DeepSeek Harness is currently in _developer preview_ and is iterating rapidly. THERE WILL BE COMPATIBILITY-BREAKING CHANGES.(README 原文)"
+  },
+  "install_methods": [
+   {
+    "name": "npx 直接运行(官方 README 首选)",
+    "commands": [
+     "npx @deepseek-ai/dsh web"
+    ],
+    "recommended": true,
+    "notes": "README 原文:Install `Node.js`, then run: `npx @deepseek-ai/dsh web`;默认在 http://127.0.0.1:3080 打开 Web UI",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness#run"
+   },
+   {
+    "name": "源码运行(pnpm)",
+    "commands": [
+     "git clone https://github.com/deepseek-ai/deepseek-harness.git",
+     "cd deepseek-harness",
+     "pnpm install",
+     "pnpm run build",
+     "pnpm dsh web"
+    ],
+    "recommended": false,
+    "notes": "README『Run from source』一节;需 pnpm(仓库锁定 pnpm@11.7.0)",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness#run"
+   },
+   {
+    "name": "Ollama 集成(本地/私有化)",
+    "commands": [
+     "ollama launch dsh"
+    ],
+    "recommended": false,
+    "notes": "Ollama 官方 2026-08-14 宣布支持,原文:\"Run it completely in your own environment. It comes with Ollama's web search pre-installed.\";属生态方官方渠道,非 DeepSeek README 所列",
+    "source_url": "https://x.com/ollama/status/2088392765021528319"
+   },
+   {
+    "name": "npm 全局安装(社区用法,官方 README 未列)",
+    "commands": [
+     "npm install -g @deepseek-ai/dsh",
+     "dsh web"
+    ],
+    "recommended": false,
+    "notes": "仅见于社区讨论(#1772/#897/#1219),Linux 上易触发 node-pty 编译问题;非官方文档口径,慎写入教程正文",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/discussions/1219"
+   }
+  ],
+  "model_config": {
+   "api": {
+    "deepseek_key": "Web UI 内 Settings → Models,在 DeepSeek 卡片填入 API key(来自 https://platform.deepseek.com/ )并保存;官方原文:\"The model route becomes usable immediately without restarting the server\"(保存即生效,无需重启)",
+    "key_storage": "providers.md 原文:\"Keys are write-only. The page receives a redacted descriptor after saving, never the literal secret. The key is stored in `$DSH_HOME/.credentials.yaml`\";模型定义存 $DSH_HOME/settings.yaml",
+    "catalog_providers": [
+     "Anthropic",
+     "OpenAI",
+     "Bedrock",
+     "Vertex",
+     "Azure",
+     "Codex"
+    ],
+    "catalog_config": "Add provider → 选厂商 → 填 API key → 保存;Bedrock/Vertex/Azure/Codex 分别用 AWS 凭证+region、ADC project、api-version、OAuth",
+    "env_var": "凭证可用环境变量注入(配置示例中的 apiKeyEnv 字段,如 GATEWAY_API_KEY)",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/providers.md"
+   },
+   "local": {
+    "custom_openai_compatible": "Add a custom provider:填 Provider ID(小写、永久)、显示名、base URL、API 协议、凭证、至少一个模型;支持 Fetch available models 调 OpenAI 兼容 GET /models 自动拉模型列表,不支持的端点手动填模型名",
+    "ollama": "ollama launch dsh 一条命令完全本地运行,预装 Ollama web search 插件(Ollama 官方口径)",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/providers.md"
+   }
+  },
+  "launch": {
+   "web_ui": {
+    "command": "npx @deepseek-ai/dsh web",
+    "alias": "dsh web 是 dsh --profile web 的别名",
+    "default_address": "http://127.0.0.1:3080",
+    "first_run_flow": "① Settings → Models 填 DeepSeek API key → ② Choose workspace 选工作目录(官方原文:\"The session composer remains unavailable until a workspace is selected\") → ③ 开会话发任务",
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md"
+   },
+   "terminal": {
+    "headless": "dsh --profile headless \"job\" — 官方描述:\"Run one fresh persisted session, print the final answer, and exit\"",
+    "profile": "dsh --profile <name> — \"Boot the named profile under $DSH_HOME/profiles/<name>\";web/headless 两个 profile 首次使用自动从模板初始化,其他 profile 须经 dsh plugin 创建",
+    "plugin_mgmt": "dsh plugin --profile <name> <pnpm args> — 把 pnpm 参数转发到 profile 目录管理插件",
+    "flags": [
+     "--port",
+     "--resume",
+     "--patch",
+     "--dump-default-config",
+     "--dump-config",
+     "--help"
+    ],
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/README.md"
+   },
+   "modes": {
+    "list": [
+     {
+      "name_zh": "标准模式",
+      "name_en": "Standard",
+      "dir": "standard",
+      "official_desc_zh": "功能完整的编码 Agent,支持文件编辑、Shell、文件与网页检索、Skills、计划、目标、子代理和工作流。"
+     },
+     {
+      "name_zh": "PTC 模式",
+      "name_en": "Code",
+      "dir": "code",
+      "official_desc_zh": "具备标准模式的全部能力,并通过 Code Mode SDK 呈现工具,让模型用一个 TypeScript 程序组合多步操作。"
+     },
+     {
+      "name_zh": "极简模式",
+      "name_en": "Minimal",
+      "dir": "minimal",
+      "official_desc_zh": "仅提供持久 bash 与 str_replace_editor 的双工具编码 Agent。"
+     },
+     {
+      "name_zh": "创造模式",
+      "name_en": "Creator",
+      "dir": "cordis",
+      "official_desc_zh": "用于创建自定义 Agent preset:具备标准模式的全部能力,并提供运行时检查、插件实验和 preset 创作指导。"
+     }
+    ],
+    "definition_location": "apps/cli/config/agent-presets/ 下四个目录(code/cordis/minimal/standard),preset 定义文件官方直接用中文撰写",
+    "how_to_switch": null,
+    "source_url": "https://github.com/deepseek-ai/deepseek-harness/tree/master/apps/cli/config/agent-presets"
+   }
+  },
+  "upgrade_uninstall": {
+   "upgrade": null,
+   "uninstall": null,
+   "note": "README、apps/cli/README.md、docs 用户指南均未提供升级/卸载命令(逐一核对为 ABSENT);社区讨论中出现过清 npx 缓存的做法(rm -rf ~/.npm/_npx,见 #49/#897),属排障手段非官方升级流程"
+  },
+  "official_presets": {
+   "agent_presets": "四种官方运行模式即四个 agent preset,见 launch.modes;preset 是按 cordis.yml 组合的每会话插件树(packages/preset README:\"An agent preset is a directory holding one agent.cordis.yml\")",
+   "official_skills_check": "量子位点名的 4 个官方 Skills 已在仓库核实:.agents/skills/ 目录下确有 dsh-code-review、dsh-find-simplifications、dsh-doc-standards、dsh-prose-standard,且同目录共 11 个 skill(另有 dsh-archive-agent-notes、dsh-doc-site-sync、dsh-merging-stacked-prs、dsh-pre-push-checks、dsh-translate-docs、dsh-trim-cot-leakage、record-browser-gif);注意该目录形态上是仓库自用 agent skills,官方文档未见『内置 4 官方 Skills』的成文表述",
+   "builtin_plugins_check": "『100+ 内置插件』为量子位口径,官方材料未核实到确数;官方 packages/ 目录实数 47 个能力包(每包内含若干插件),官方落地页仅说 \"Plugins provide every agent capability, including models, tools, skills, sessions, sandboxes, storage, loops, scheduling, and the UI\"",
+   "enable_method": null,
+   "plugin_discovery": "官方指定社区插件发现渠道:GitHub topic dsh-plugin(https://github.com/topics/dsh-plugin);Plugin Store 官方页面未见入口",
+   "source_urls": [
+    "https://github.com/deepseek-ai/deepseek-harness/tree/master/.agents/skills",
+    "https://github.com/deepseek-ai/deepseek-harness/tree/master/packages",
+    "https://deepseek.com/harness/en/"
+   ]
+  },
+  "common_issues": [
+   {
+    "title": "npx 无法安装 | npm 也无法安装 (#1772,已解答)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/1772",
+    "solution": "楼主自答(2026-08-16):Debian 未装 build-essential 导致 node-pty 原生模块编译失败;apt 安装 build-essential 后安装成功"
+   },
+   {
+    "title": "在ArchLinux上无法安装 (#49,18 评论)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/49",
+    "solution": "高赞解法:① pacman -Syu base-devel 装编译工具;② 改用 Bun:bun add --global @deepseek-ai/dsh(node-pty 在 Bun 白名单内);③ 坚持 npm 则清缓存后放行构建脚本:rm -rf ~/.npm/_npx && npx --allow-scripts=node-pty @deepseek-ai/dsh@0.1.0-rc.6 web;另一方案:npm config set allow-scripts=@deepseek-ai/dsh-subprocess-local,koffi,node-pty,@google/genai,protobufjs --location=user"
+   },
+   {
+    "title": "命令行方式安装不成功 (#897,10 评论)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/897",
+    "solution": "社区诊断:系统默认 g++ 9.4.0 不支持 -std=gnu++20(需 GCC 10+);解法:先清 npx 缓存,再 CC=gcc-11 CXX=g++-11 npm install -g @deepseek-ai/dsh 后 dsh web"
+   },
+   {
+    "title": "npm 全局安装后 dsh web 启动失败:node-pty 原生模块 pty.node 缺失 (#1219)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/1219",
+    "solution": "根因:node-pty v1.1.0 无 Linux x64 (Node 24/ABI 137) 预编译产物,npm 安装脚本静默失败;手工绕过:进入 node-pty 目录执行 npx node-gyp rebuild 生成缺失的 pty.node;帖内无官方回复(0 回复)"
+   },
+   {
+    "title": "dsh安装插件时报错 Ignored build scripts (#2230)",
+    "url": "https://github.com/deepseek-ai/deepseek-harness/discussions/2230",
+    "solution": "未抓取到解法详情(1 评论,未深入核对);现象与 pnpm 默认忽略依赖构建脚本的安全策略相关,可与 #49 的 allow-scripts 方案互参——此条解法待补"
+   }
+  ],
+  "fetched_at": "2026-08-18",
+  "gaps": [
+   "系统要求:官方 README/落地页/quickstart 均未写 OS、内存要求;Node 最低版本 README 未标注,仅 package.json engines 给出 ^22.19.0 || >=24.0.0",
+   "升级与卸载命令:官方全部文档未提供,填 null",
+   "四种模式的用户侧切换/启用步骤:官方文档未见成文说明(packages/preset README 明确 ABSENT),推断在 Web UI 建会话时选择,但无官方原文佐证,填 null",
+   "『100+ 内置插件』:量子位口径,官方无确数;官方 packages/ 仅可数出 47 个能力包",
+   "Plugin Store(插件商店):量子位称『入口已预留』,官方落地页与 README 未见任何入口",
+   "官方 Skills 启用方法:仓库 .agents/skills 有 11 个 skill,但用户如何在自己会话中启用这些 skill,官方用户文档未说明",
+   "DeepSeek API 的具体模型名与 base URL:providers.md 只讲 UI 卡片操作,未列模型名/端点",
+   "$DSH_HOME 默认路径:文档未说明",
+   "docs 站导航抓取失败(JS 渲染,只返回页面标题),installation 独立页是否存在未确认",
+   "#2230 插件安装报错的具体解法未抓到",
+   "天机阁 X Article《DeepSeek Harness 一文入门,附小白安装教程》正文需登录态,未抓取(本地素材 049 已记录此缺口)"
+  ]
+ },
+ "archive": {
+  "count": 68,
+  "path": "archive/"
+ }
+}

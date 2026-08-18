@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>추천 플러그인 · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness는 오픈소스 공개 6일 만에 star 0에서 149,851까지 왔어요. 이곳은 그 모든 걸음을 타임라인으로 기록해요. 연대기, 플러그인 가이드, GitHub 동향, 랭킹, 그리고 전 세계 커뮤니티의 진짜 목소리까지.">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; --font-head:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; --font-head:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../ko/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">연대기</a><a href="../deploy.html" style="white-space:nowrap;">설치</a><a href="../plugins/index.html" style="white-space:nowrap;">추천 플러그인</a><a href="../ranking.html" style="white-space:nowrap;">랭킹</a><a href="../voices.html" style="white-space:nowrap;">커뮤니티 반응</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">손글씨</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">기본</button></span><details class="langpick"><summary>한국어 &#9662;</summary><div class="langmenu"><a href="../../en/plugins/index.html">English</a><a href="../../plugins/index.html">简体中文</a><a href="../../zh-TW/plugins/index.html">繁體中文</a><a href="../../ja/plugins/index.html">日本語</a><a href="../../ko/plugins/index.html" style="color:#8f2924;">한국어</a><a href="../../th/plugins/index.html">ไทย</a><a href="../../es/plugins/index.html">Español</a><a href="../../ar/plugins/index.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">03 / PLUGINS</div><h2 class="stitle">추천 플러그인</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">설치할 가치가 있는 플러그인 12개. 각각 설치 명령어, 사용법, 실제 평판까지 담았어요.</div></div><div class="grid2"><a href="dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.37deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">dsh-anchored-standard</span>
+    <span class="mono muted" style="font-size:12px;">3,423 star</span>
+  </div>
+  <h3 style="font-size:20px;">미니멀로 시작해, 풀 화력으로.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">2단계 preset이에요. 초반엔 미니멀 모드로 노이즈를 줄이고, 중반에 표준 도구 전체 세트로 자동 전환해요. 커뮤니티 대조 실험에서 벤치마크 점수를 91에서 98로 끌어올렸어요. 참고: 작성자는 적극적인 개발을 중단한 상태예요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-dsh-anchored-standard" style="font-size:12.5px;">dsh_home=&quot;${DSH_HOME:-$HOME/.dsh}&quot;</div>
+    <span data-copy="l-dsh-anchored-standard" class="copybtn">복사</span>
+  </div>
+</a><a href="open-design.html" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.29deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">open-design</span>
+    <span class="mono muted" style="font-size:12px;">88,304 star</span>
+  </div>
+  <h3 style="font-size:20px;">dsh를 당신의 디자인 엔진으로.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">오픈소스판 Claude Design이자 로컬 우선 데스크톱 앱이에요. dsh에 연결하면 텍스트로 고치는 대로 실시간으로 결과물이 나와요. 생태계에서 가장 큰 프로젝트예요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-open-design" style="font-size:12.5px;">od mcp install &lt;agent&gt;</div>
+    <span data-copy="l-open-design" class="copybtn">복사</span>
+  </div>
+</a><a href="DeepSeek-Reasonix.html" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(0.56deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">DeepSeek-Reasonix</span>
+    <span class="mono muted" style="font-size:12px;">34,683 star</span>
+  </div>
+  <h3 style="font-size:20px;">DeepSeek 네이티브 터미널 코딩 Agent.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">프리픽스 캐시 안정성을 중심으로 설계돼 장시간 무인 작업 실행이 가능해요. npm TypeScript 라인은 이미 legacy이고, 주력 개발은 Go로 옮겨 갔어요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-DeepSeek-Reasonix" style="font-size:12.5px;">npm i -g reasonix</div>
+    <span data-copy="l-DeepSeek-Reasonix" class="copybtn">복사</span>
+  </div>
+</a><a href="OpenViking.html" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(-0.11deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">OpenViking</span>
+    <span class="mono muted" style="font-size:12px;">28,891 star</span>
+  </div>
+  <h3 style="font-size:20px;">Volcengine이 만든 Agent 컨텍스트 데이터베이스.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">메모리, 지식 RAG, Skills를 통합 관리해요. L0/L1/L2 3단계 검색으로 token을 아끼고, 빅테크가 뒷받침하는 프로젝트예요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-OpenViking" style="font-size:12.5px;">pip install openviking --upgrade</div>
+    <span data-copy="l-OpenViking" class="copybtn">복사</span>
+  </div>
+</a><a href="colleague-skill.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.01deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">colleague-skill</span>
+    <span class="mono muted" style="font-size:12px;">23,139 star</span>
+  </div>
+  <h3 style="font-size:20px;">퇴사한 동료, 디지털로 재고용.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">선배의 문서, 코드 스타일, 말버릇까지 담아 &#x27;그 사람처럼 일하는&#x27; Skill로 만들어요. 이른바 디지털 생명 1.0, 생태계 전체에서 화제성 1위 프로젝트예요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-colleague-skill" style="font-size:12.5px;">Install the dot-skill skill for me: https://github.com/titanwings/colleague-skill</div>
+    <span data-copy="l-colleague-skill" class="copybtn">복사</span>
+  </div>
+</a><a href="EverOS.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.46deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">EverOS</span>
+    <span class="mono muted" style="font-size:12px;">12,081 star</span>
+  </div>
+  <h3 style="font-size:20px;">하나의 메모리, 어디서든 통용.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">휴대용 메모리 레이어예요. 로컬 우선, Markdown 네이티브로, 여러 agent 앱이 스스로 진화하는 메모리 하나를 공유해요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-EverOS" style="font-size:12.5px;">uv pip install everos</div>
+    <span data-copy="l-EverOS" class="copybtn">복사</span>
+  </div>
+</a><a href="awesome-dsh-plugin.html" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(-0.52deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">awesome-dsh-plugin</span>
+    <span class="mono muted" style="font-size:12px;">7,572 star</span>
+  </div>
+  <h3 style="font-size:20px;">플러그인 찾기는 여기서부터.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">소스 코드를 사람이 직접 검증한 추천 플러그인 디렉터리예요. 약 800+개 플러그인을 20개 카테고리로 정리했고, 플러그인 마켓 dshmarket도 함께 운영돼요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-awesome-dsh-plugin" style="font-size:12.5px;">dsh plugin add &lt;插件名&gt;</div>
+    <span data-copy="l-awesome-dsh-plugin" class="copybtn">복사</span>
+  </div>
+</a><a href="dsh-web-ui.html" style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.52deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">dsh-web-ui</span>
+    <span class="mono muted" style="font-size:12px;">4,097 star</span>
+  </div>
+  <h3 style="font-size:20px;">dsh에 얼굴을 달다.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">Web UI 플러그인 풀 패키지예요. 작업 보드, Git 그래프, 모바일 원격, 스킨 센터까지 — 그래픽 인터페이스가 필요하면 이걸 설치하세요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-dsh-web-ui" style="font-size:12.5px;">dsh plugin --profile web add @linxin666/dsh-web-ui-all</div>
+    <span data-copy="l-dsh-web-ui" class="copybtn">복사</span>
+  </div>
+</a><a href="smooth-stream.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.05deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">smooth-stream</span>
+    <span class="mono muted" style="font-size:12px;">21 star</span>
+  </div>
+  <h3 style="font-size:20px;">중국어권 커뮤니티가 만든 스트리밍 출력 플러그인.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">cordis.patch.yml로 3단계 preset을 조절할 수 있어요. star 수는 많지 않지만 중국어권에서는 꽤 화제예요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-smooth-stream" style="font-size:12.5px;">pnpm dsh plugin --profile web add dsh-smooth-stream</div>
+    <span data-copy="l-smooth-stream" class="copybtn">복사</span>
+  </div>
+</a><a href="token-anxiety.html" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.04deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">token-anxiety</span>
+    <span class="mono muted" style="font-size:12px;">0 star</span>
+  </div>
+  <h3 style="font-size:20px;">비용 불안, 그 자리에서 해소.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">비용을 실시간으로 계산해요. Explain 명령어가 token이 어디에 쓰였는지 건건이 설명해 주고, 가격표는 curl 한 줄로 동기화돼요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-token-anxiety" style="font-size:12.5px;">dsh plugin --profile web add dsh-token-anxiety</div>
+    <span data-copy="l-token-anxiety" class="copybtn">복사</span>
+  </div>
+</a><a href="modlens.html" style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.00deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">modlens</span>
+    <span class="mono muted" style="font-size:12px;">2,789 star</span>
+  </div>
+  <h3 style="font-size:20px;">텍스트 전용 모델에 눈을 달다.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">dsh 최초의 비전 플러그인이에요. 이미지 한 장을 붙여 넣으면 구조화된 JSON 증거를 바로 돌려주고, 10개 엔진 페일오버를 지원해요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-modlens" style="font-size:12.5px;">npx -y @deepseek-ai/dsh plugin --profile web add @liustack/modlens@3.18.3</div>
+    <span data-copy="l-modlens" class="copybtn">복사</span>
+  </div>
+</a><a href="EchoBird.html" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.00deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">EchoBird</span>
+    <span class="mono muted" style="font-size:12px;">3,063 star</span>
+  </div>
+  <h3 style="font-size:20px;">원클릭 설치와 모델 전환기.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">Claude Code, Codex, dsh 같은 CLI의 설치와 전환을 한곳에서 관리해요. 비개발자 입문용으로 첫손에 꼽혀요.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="l-EchoBird" style="font-size:12.5px;">irm https://echobird.ai/install.ps1 | iex</div>
+    <span data-copy="l-EchoBird" class="copybtn">복사</span>
+  </div>
+</a></div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/index.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 공식 사이트 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>실측 데이터 · 2026-08-18 기준</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="복사됨";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

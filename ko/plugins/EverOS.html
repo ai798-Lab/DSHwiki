@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EverOS · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness는 오픈소스 공개 6일 만에 star 0에서 149,851까지 왔어요. 이곳은 그 모든 걸음을 타임라인으로 기록해요. 연대기, 플러그인 가이드, GitHub 동향, 랭킹, 그리고 전 세계 커뮤니티의 진짜 목소리까지.">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; --font-head:"Gaegu", "Nanum Pen Script", "Apple SD Gothic Neo", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; --font-head:"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../ko/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">연대기</a><a href="../deploy.html" style="white-space:nowrap;">설치</a><a href="../plugins/index.html" style="white-space:nowrap;">추천 플러그인</a><a href="../ranking.html" style="white-space:nowrap;">랭킹</a><a href="../voices.html" style="white-space:nowrap;">커뮤니티 반응</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">손글씨</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">기본</button></span><details class="langpick"><summary>한국어 &#9662;</summary><div class="langmenu"><a href="../../en/plugins/EverOS.html">English</a><a href="../../plugins/EverOS.html">简体中文</a><a href="../../zh-TW/plugins/EverOS.html">繁體中文</a><a href="../../ja/plugins/EverOS.html">日本語</a><a href="../../ko/plugins/EverOS.html" style="color:#8f2924;">한국어</a><a href="../../th/plugins/EverOS.html">ไทย</a><a href="../../es/plugins/EverOS.html">Español</a><a href="../../ar/plugins/EverOS.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
+  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; 추천 플러그인</a>
+  <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">EverOS</h1>
+  <h2 style="font-size:28px;">하나의 메모리, 어디서든 통용.</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">휴대용 메모리 레이어예요. 로컬 우선, Markdown 네이티브로, 여러 agent 앱이 스스로 진화하는 메모리 하나를 공유해요.</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+    <span class="mono" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.09deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">12,081 star</span>
+    <span class="mono" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">v1.2.3</span>
+    <span style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.50deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">메모리 / 스토리지</span>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,4.9 C80,4.9 160,5.1 240,5.1 C320,5.1 400,5.1 480,5.1 C560,5.1 640,4.4 720,4.4 C800,4.4 880,5.5 960,5.5 C1040,5.5 1120,5.7 1200,5.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
+  <div class="grid2" style="align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">설치</h3>
+      <div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.54deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">Python 3.12+, OpenRouter API key 하나. 알려진 함정: 하이브리드 검색에는 embedding provider가 필요해서 원클릭 최소 구성에서는 &quot;method&quot;: &quot;keyword&quot; 만 쓸 수 있음. Office 문서 수집은 시스템에 설치된 LibreOffice에 의존. /api/v1 은 레거시 별칭으로 향후 제거 예정. 선택 기능이 빠져 있으면 API가 HTTP 422를 반환. v1.2.3부터는 백그라운드 루프가 실패하면 SIGTERM으로 프로세스가 종료되므로 systemd/Docker/K8s 같은 외부 재시작 장치가 필요.</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">Python 패키지: pip 또는 uv로 설치한 뒤 함께 제공되는 명령을 실행합니다.</div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="position:relative;"><div class="cmd" id="c-EverOS-0">uv pip install everos
+# or: pip install everos</div><button type="button" data-copy="c-EverOS-0" class="copybtn">복사</button></div></div><div class="insblock" data-os="" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">멀티모달 선택 사항</span></div><div style="position:relative;"><div class="cmd" id="c-EverOS-1">uv pip install &#x27;everos[multimodal]&#x27;
+# or: pip install &#x27;everos[multimodal]&#x27;</div><button type="button" data-copy="c-EverOS-1" class="copybtn">복사</button></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">전체 사용 가이드</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">everos demo 로 데모 먼저 실행(API key 불필요)</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">everos init 으로 ~/.everos/everos.toml 과 ~/.everos/ome.toml 생성</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">OpenRouter API key를 everos.toml 에 입력</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">everos server start 로 서비스 시작 후 curl http://127.0.0.1:8000/health 로 확인</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">05</span><span style="font-size:15px;line-height:1.8;">/api/v2/memory/add, /api/v2/memory/flush, /api/v2/memory/search 로 메모리를 기록, 저장, 검색</span></div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;"><h3 style="font-size:21px;">config</h3><div class="cmd"># everos.toml
+[llm]
+model = &quot;openai/gpt-4.1-mini&quot;
+api_key = &quot;&lt;OPENROUTER_API_KEY&gt;&quot;
+base_url = &quot;https://openrouter.ai/api/v1&quot;</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:21px;">특징</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">Markdown 메모리 파일 + Git 버전 관리, 로컬 SQLite + LanceDB 인덱스, 외부 데이터베이스 의존 없음</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">키워드 + 벡터 하이브리드 검색, user/agent/app/project/session 다차원 직교 검색 지원</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">세션 간 메모리 반추(reflection)를 통한 자기 진화. 멀티모달 수집(이미지/PDF/오디오/문서)은 선택 기능. 생태계에는 Claude Code 플러그인, EverMem Sync 등이 포함</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <h3 style="font-size:21px;">커뮤니티 반응</h3>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.11deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@berryxia · 2026-04-14</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">恭喜！EverMind 打磨已久的超级更新终于上线！
+
+一站式 Agent 创建、测试、集成平台 EverOS + 新基准 EvoAgentBench 全部开源！
+
+1. EverOS：全新一站式开源库，内置多个 Methods、Benchmarks 和 Usecases，用户直接用现成组件魔改出自己的 Agent
+
+2. EvoAgentBench：开源中立基准，专测</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">축하해요! EverMind가 오래 다듬어 온 초대형 업데이트가 드디어 공개됐어요! 올인원 Agent 생성·테스트·통합 플랫폼 EverOS + 새 벤치마크 EvoAgentBench가 전부 오픈소스로! 1. EverOS: 완전히 새로운 올인원 오픈소스 라이브러리로, 여러 Methods, Benchmarks, Usecases를 내장해 사용자가 기성 컴포넌트로 자신만의 Agent를 바로 개조할 수 있어요 2. EvoAgentBench: 오픈소스 중립 벤치마크로, 전문적으로… (본문이 여기서 잘림)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">55 좋아요</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/berryxia/status/2044054552639627375" target="_blank" rel="noopener">원문 &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.57deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@yhslgg · 2026-07-07</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">AI Agent 的记忆通常是黑盒——你不知道它记了什么、存在哪、能不能直接改——EverOS，10300 个 Star，把这件事做成了一堆你能打开的 .md 文件，本地跑，不依赖任何托管服务。
+
+一句话：给 AI Agent 装一个本地优先的持久记忆层，存的是 Markdown 文件，能读、能改、能 git diff，pip 一条命令装好。</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">AI Agent의 메모리는 보통 블랙박스예요. 뭘 기억했는지, 어디에 저장되는지, 직접 고칠 수 있는지 알 수 없죠. star 10,300개의 EverOS는 이걸 직접 열어 볼 수 있는 .md 파일 뭉치로 만들었어요. 로컬에서 돌아가고 어떤 호스팅 서비스에도 의존하지 않아요. 한 줄 요약: AI Agent에 로컬 우선 지속 메모리 레이어를 달아 주는 것. Markdown 파일로 저장돼 읽고, 고치고, git diff까지 되고, pip 명령어 한 줄로 설치돼요.</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">6 좋아요</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/yhslgg/status/2074395375088410906" target="_blank" rel="noopener">원문 &#8599;</a>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/EverOS.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/EverOS.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 소식통 · ai798 Lab 제작</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 공식 사이트 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>실측 데이터 · 2026-08-18 기준</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="복사됨";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

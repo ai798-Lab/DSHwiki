@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-TW" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大事記 · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness 開源六天，從 0 到 149,851 star。這裡按時間軸記錄它的每一步：大事記、外掛教學、GitHub 動態、排行榜，以及全球社群的真實聲音。">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Long+Cang&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; --font-head:"HanziPen SC", "Long Cang", "Xingkai SC", "KaiTi", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"PingFang TC", "Hiragino Sans CNS", "Microsoft JhengHei", "Noto Sans TC", sans-serif; --font-head:"PingFang TC", "Hiragino Sans CNS", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../zh-TW/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="timeline.html" style="white-space:nowrap;">大事記</a><a href="deploy.html" style="white-space:nowrap;">部署</a><a href="plugins/index.html" style="white-space:nowrap;">外掛精選</a><a href="ranking.html" style="white-space:nowrap;">排行榜</a><a href="voices.html" style="white-space:nowrap;">評論牆</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">手寫</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">易讀</button></span><details class="langpick"><summary>繁體中文 &#9662;</summary><div class="langmenu"><a href="../en/timeline.html">English</a><a href="../timeline.html">简体中文</a><a href="../zh-TW/timeline.html" style="color:#8f2924;">繁體中文</a><a href="../ja/timeline.html">日本語</a><a href="../ko/timeline.html">한국어</a><a href="../th/timeline.html">ไทย</a><a href="../es/timeline.html">Español</a><a href="../ar/timeline.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:40px;"></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">01 / TIMELINE</div><h2 class="stitle">大事記</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">六天，從發布到 149,851 star——外掛、評論與數據，都掛在它們發生的那一天。</div></div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">DeepSeek 開源 Harness v0.1 開發者預覽版</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">儲存庫 11:56 UTC 公開，官方帳號 13:02 UTC 發出官方宣告推文：以 MIT 授權向全球 agent harness 開發者開源，由 Cordis 元框架驅動，核心理念“Everything is a Plugin”。同步發布與北京大學合作的 Cordis 設計論文《A Programming Paradigm for Spatiotemporal Composability》。開源約 1 小時 star 破 2 萬，把以往紀錄的“天”壓縮成“分鐘”。</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.50deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">官方宣告推文互動<span class="muted"> · </span><span class="mono">19.8k 讚 / 774 回覆</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Twitter syndication 介面實際抓取，採集於 2026-08-18（素材 038)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">儲存庫公開時間<span class="muted"> · </span><span class="mono">2026-08-13 11:56 UTC</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 報導</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">首小時 star<span class="muted"> · </span><span class="mono">約 1 小時破 20,000;1.5 小時 22,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 報導；KuCoin 快訊（經素材 020 轉述）</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/deepseek_ai/status/2087887408440164663" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">原文 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/MaxForAI/status/2087899312462430468" target="_blank" rel="noopener">原文 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">V4-Pro 正式版同日上線，API 調價預告 8 月 17 日生效</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">與 Harness 同日，DeepSeek-V4-Pro-0813 正式版發布：100 萬 token 上下文、最長 384K 輸出，支援 Json Output / Tool Calls / Responses API。同一份公告預告 8 月 17 日起 API 大幅調價並引入尖離峰定價機制，“價格屠夫不再白菜價”成為當天中文媒體的平行話題。</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.03deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">V4-Pro 規格<span class="muted"> · </span><span class="mono">1M 上下文 / 384K 最長輸出</span></div><div class="muted" style="font-size:12px;line-height:1.6;">搜狐、網易科技報導</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">調價預告<span class="muted"> · </span><span class="mono">V4-Pro 尖峰時段輸出 6 元 → 27 元/百萬 token(+350%),8-17 生效</span></div><div class="muted" style="font-size:12px;line-height:1.6;">網易(163.com)、新浪財經 2026-08-13 報導</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://m.sohu.com/a/1062503683_362225" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-13/detail-inineuqm9880912.d.html" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">Hacker News 736 分頭條，海外開發者首日大考</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">發布當天衝上 HN 頭條(736 分、309 則留言）。技術派認可熱插拔+RAII 式外掛生命週期設計，jbellis 斷言“最後一家沒有第一方 harness 的主流模型實驗室補齊了”;質疑集中在 README 過於簡陋和 Node.js 技術堆疊。The New Stack、機器之心等中英媒體同日發出首批報導，機器之心稿被至少 5 家平台轉載。</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.43deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">HN 熱度<span class="muted"> · </span><span class="mono">736 分 / 309 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">HN Algolia API 實際抓取，採集於 2026-08-18（素材 055)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://news.ycombinator.com/item?id=49285244" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://thenewstack.io/deepseek-harness-open-source-plugins/" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.36kr.com/p/3937964598590855" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">生態系搶跑：發布當天外掛與清單專案密集建立</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">awesome-dsh-plugin 精選清單與社群桌面用戶端 DSH Desktop 都在開源當天建立；8-11~14 之間冒出 20 個 awesome 同名儲存庫的卡位戰，0xsline 版甚至比官方公開早 2 天建立（暗示內測生態提前動員）。官方只開 Discussions 不開 Issues,首批熱門貼文(“早點出獨立用戶端+CLI”166 個讚）畫出了外掛需求地圖。</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.33deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">awesome 卡位戰<span class="muted"> · </span><span class="mono">名稱含 awesome+dsh 的儲存庫 20 個，建立日期集中在 08-11~08-14</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub API 搜尋，採集於 2026-08-18（素材 016)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">當日建立專案的後續規模<span class="muted"> · </span><span class="mono">awesome-dsh-plugin 7,572 star;DSH Desktop 11,626 star（至 08-18)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub,採集於 2026-08-18（素材 015、009)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/0xsline/awesome-deepseek-harness" target="_blank" rel="noopener">原文 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions?discussions_q=sort%3Atop" target="_blank" rel="noopener">原文 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">Ollama 官方串接：一行指令在本機跑 DSH</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">開源次日 22:30 UTC,Ollama 官方宣布支援 DeepSeek Harness:`ollama launch dsh` 即可完全在本機執行，預裝 Ollama web search 外掛，可用 trajectory view 觀察 agent 後台。重量級生態系玩家 48 小時內主動串接，是“本機私有化跑 DSH”這條路徑的官方入口。</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.46deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">推文互動<span class="muted"> · </span><span class="mono">1.0k 讚 / 38 回覆</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Twitter syndication 介面實際抓取，採集於 2026-08-18（素材 041)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">原文 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">紅出同溫層：28 小時破 9.2 萬 star,中文深度實測潮</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">28 小時 star 超過 9.2 萬（報導的說法；零度解說影片標題的說法是“開源一天狂攬 6.8 萬星”)。量子位深度實測提出“dsh 是 Agent 時代的 Android”,披露官方內建 100+ 外掛、Plugin Store 入口已預留；零度解說、NeuralNine、AI超元域等中英文影片密集上線，DSH 從工程師話題擴散到泛科技族群。</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">28 小時 star<span class="muted"> · </span><span class="mono">&gt;92,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 報導</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">24 小時 star（說法不一）<span class="muted"> · </span><span class="mono">68,000(estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">零度解說（中文 YouTube 頻道）影片標題的說法，與 12h≈50k / 28h≈92k 的報導說法存在差異，擇一引用時需註明</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">官方內建外掛<span class="muted"> · </span><span class="mono">100+ 個，Plugin Store 已預留</span></div><div class="muted" style="font-size:12px;line-height:1.6;">量子位（中國科技媒體）實測文（素材 058)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">零度解說播放量<span class="muted"> · </span><span class="mono">72,170 次(4 天）</span></div><div class="muted" style="font-size:12px;line-height:1.6;">yt-dlp 實際抓取，採集於 2026-08-18（素材 064)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.qbitai.com/2026/08/472208.html" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">原文 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD" target="_blank" rel="noopener">原文 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">48 小時破 10 萬 star:紀錄宣告與真假之爭</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">X 創作者 ℏεsam 宣告“48 小時內破 10 萬，GitHub 成長最快儲存庫，比 OpenClaw 還快”,Jen Zhu 同日給出“3 天 11.4 萬”的說法。r/tech_x 369 推熱門貼文同步引爆星數真假大論戰：“刷星機器人毀了 GitHub”對上“GitHub 使用者是專業工程師”。注意：“GitHub 史上最快”並無官方或權威第三方認證，引用時應寫“媒體與社群稱”。</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.40deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">48 小時 star<span class="muted"> · </span><span class="mono">100,000+</span></div><div class="muted" style="font-size:12px;line-height:1.6;">ℏεsam(@Hesamation)X 貼文</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">3 天說法<span class="muted"> · </span><span class="mono">114,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Jen Zhu(@jenzhuscott)X 貼文</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">約 2 天的精確值<span class="muted"> · </span><span class="mono">95,386 star / 8,826 fork</span></div><div class="muted" style="font-size:12px;line-height:1.6;">Flowtivity 分析文</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">爭議貼文熱度<span class="muted"> · </span><span class="mono">369 讚 / 108 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔（快照 08-17),素材 023</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/jenzhuscott/status/2088737933830521338" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/tech_x/comments/1vpbjvk/100k_github_stars_in_just_2_days_deepseek_harness/" target="_blank" rel="noopener">原文 3 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://flowtivity.ai/blog/deepseek-harness-open-source-agent-explained/" target="_blank" rel="noopener">原文 4 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">V4-Pro“兔子洞”:Minimal 模式就是 RL 訓練環境</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">r/DeepSeek 熱門貼文轉譯中文社群長文：V4-Pro API 背後疑似藏著多個“思維鏈指紋”不同的版本，最強的“神級版本”正是從 DSH Minimal 模式裡挖出來的；關鍵證據是官方儲存庫 8 月 10 日的 commit“fix(preset): align minimal agent with RL composition”。高讚結論“V4 Pro GA 在 DSH minimal 環境上過擬合”,把“harness 是模型發揮的決定變數”從經驗推進到機制層。</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">貼文熱度<span class="muted"> · </span><span class="mono">157 讚 / 23 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔（快照 08-16),素材 031</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">基準分對照<span class="muted"> · </span><span class="mono">Minimal 99/96 vs Standard 91</span></div><div class="muted" style="font-size:12px;line-height:1.6;">貼文內社群對照實驗（素材 031、032)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/down_the_rabbit_hole_of_deepseekv4pro0813/" target="_blank" rel="noopener">原文 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">社群機制級突破：dsh-anchored-standard 基準 91→98/99</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">社群作者 xiaobright 基於“兔子洞”發現做出混合外掛：首輪請求向模型呈現與 Minimal 幾乎相同的環境，把它“錨定”到 RL 訓練出的推理軌道，隨後解鎖完整 Standard 工具集——基準分數從 91 拉到 98/99,並附上控制變因實驗（首輪工具 schema 是決定性變數）。開源才兩天，社群就做出可驗證的機制級突破，“Everything is a Plugin”的開源紅利首次被實證。</div>
+    <div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.14deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">四種設定的基準分<span class="muted"> · </span><span class="mono">Standard 91 / PTC 92 / Minimal 99·96 / Anchored Standard 98·99</span></div><div class="muted" style="font-size:12px;line-height:1.6;">r/accelerate 貼文內對照實驗（素材 032)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">貼文熱度<span class="muted"> · </span><span class="mono">47 讚 / 2 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔（快照 08-17)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">原文 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">第 4 天 star 破 13.5 萬</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">多方來源交叉比對：第 4 天 135,042 star、13,592 fork。作為參照：DeepSeek 自家 R1 當年花了 5.7 天才到 2 萬 star,純速度前紀錄 Grok-1 約 1.2 天，DSH 用 1 個多小時就走完同樣路程。</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.32deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">第 4 天 star<span class="muted"> · </span><span class="mono">135,042 star / 13,592 fork（日期 estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">素材 020 多來源交叉比對；pasqualepillitteri.it“第 4 天破 13.5 萬”</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">參照基準<span class="muted"> · </span><span class="mono">R1 達到 2 萬 star 花了 5.7 天；Grok-1 約 1.2 天</span></div><div class="muted" style="font-size:12px;line-height:1.6;">pasqualepillitteri.it 報導</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">原文 2 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">第三方模型與快取實證：DSH 不只屬於 DeepSeek</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">r/LocalLLaMA 網友用 Qwen 3.8 27b 搭配 DSH 連跑 10 小時，實測“太驚豔”,印證模型外掛化的通用性；“DSH 快取命中率真有那麼神嗎”的追問討論串變成外掛實證集中營；首個外掛目錄站 dshplugin.online 登上 Show HN。生態系開始從圍觀轉向可重現的實證。</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.52deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">Qwen 實測貼文<span class="muted"> · </span><span class="mono">139 讚 / 46 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔，素材 030</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">快取追問討論串<span class="muted"> · </span><span class="mono">14 讚 / 29 則留言</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔，素材 033</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/LocalLLaMA/comments/1vpv12b/qwen_38_27b_with_dshdeepseek_harness_is_amazing/" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/deepseek_harness/" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://dshplugin.online/" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">官方發布 v0.1.0-rc.7:Job Panel 納管 Codex 與 Claude Code</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">官方放出發布期內唯一可見的 release(pre-release,12:01):外掛可註冊自己的設定卡、Job Panel 統一管理 Codex 與 Claude Code 子 agent 任務、MCP/ACP 支援持久圖片附件，並修復 minimal 模式持久化 Bash 延遲等問題。“把競品 harness 當子 agent 管起來”從社群解讀變成了官方功能。</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.01deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">release<span class="muted"> · </span><span class="mono">v0.1.0-rc.7,2026-08-17 12:01,Pre-release（重點原文見 github.json)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub releases 頁實際抓取，2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener">原文 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">API 新價格生效：尖峰時段最高漲幅超過 3 倍，社群許願“回滾 pricing”</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">8-13 預告的調價正式生效：V4-Flash 尖峰輸出 2→9 元、V4-Pro 6→27 元/百萬 token(+350%),快取命中價格漲幅依不同計算方式最高達 1100%;同時引入尖離峰定價，離峰時段 5 折。Discussions 裡“回滾 pricing”許願文、“梁神會打折嗎”成為熱門貼文；量子位標題“我原諒它漲價了”成了中文圈的情緒註腳。</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.42deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">尖峰時段輸出價<span class="muted"> · </span><span class="mono">V4-Flash 2→9 元、V4-Pro 6→27 元/百萬 token(+350%)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">網易(163.com)、搜狐報導</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">最高漲幅說法<span class="muted"> · </span><span class="mono">1100%（快取命中價：V4-Flash 0.02→0.10 元、V4-Pro 0.025→0.30 元）</span></div><div class="muted" style="font-size:12px;line-height:1.6;">新浪財經 2026-08-17 報導</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">社群反應<span class="muted"> · </span><span class="mono">Discussions #61“回滾 pricing”30 讚、#32“梁神會打折嗎”28 讚</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub Discussions 實際抓取，2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-17/detail-ininrkkk0123342.d.html" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/61" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">社群首份“必裝外掛清單”與壞外掛吐槽</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">r/DeepSeekHarness 新社群出現第一份 curated 外掛/skills/MCP 索引貼文；同日吐槽文警告“一個壞外掛能拖垮整個外掛系統”,單點故障成為外掛化架構第一個被點名的負面案例；交易分析外掛 dsh-trading 登上 Show HN。生態系從狂歡進入“沉澱清單+開始挑毛病”的階段。</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">貼文熱度<span class="muted"> · </span><span class="mono">必裝清單貼文 1 讚、吐槽貼文 1 讚（新板塊冷啟動，熱度低但為發布期首例，因話題獨佔性而選入）</span></div><div class="muted" style="font-size:12px;line-height:1.6;">arctic-shift 存檔，素材 036、037</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeekHarness/comments/1vr43w5/must_have_deepseek_harness_plugins/" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/maddogfinance/dsh-trading" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.18</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg></div>
+  <div style="flex-grow:1;padding-bottom:8px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">5 天 15 萬 star,topic 生態系 6,716 個儲存庫</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:680px;">素材庫第一手採集(GitHub API):149,856 star、15,364 fork、watch 627;topic dsh-plugin 已收錄 6,716 個儲存庫，第一名 open-design 達 88,304 star,火山引擎 OpenViking 等大廠專案進入 top 10。當天稍晚儲存庫頁面已顯示 151.3k。5 天時間，DSH 從一則官方宣告推文長成涵蓋桌面應用、記憶、視覺、設計的完整外掛生態系。</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">官方儲存庫<span class="muted"> · </span><span class="mono">149,856 star / 15,364 fork / watch 627</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub API 第一手採集，2026-08-18（素材 020、001)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">當日頁面說法<span class="muted"> · </span><span class="mono">151.3k star / 15.6k fork / 638 watch</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub 儲存庫頁實際抓取，2026-08-18 本次補抓（晚於 API 採集）</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">生態系規模<span class="muted"> · </span><span class="mono">topic dsh-plugin 6,716 個儲存庫；top1 open-design 88,304 star</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub Search API,2026-08-18（素材 007、008)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">原文 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">原文 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">原文 3 &#8599;</a></div>
+  </div>
+</div></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/timeline.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/timeline.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · DSH 情報站 · ai798 Lab 出品</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">DeepSeek 官網 &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>數據實際抓取 · 截至 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="已複製";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

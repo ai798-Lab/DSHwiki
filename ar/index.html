@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSH Wiki · مرصد DSH</title>
+<meta name="description" content="ستة أيام على انطلاق DeepSeek Harness مفتوح المصدر، ومن الصفر إلى 149,851 star. هنا نوثّق كل خطوة على الخط الزمني: أبرز الأحداث، شروح الإضافات، تحرّكات">
+<link rel="icon" type="image/svg+xml" href="../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+Arabic:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Noto Naskh Arabic", "Geeza Pro", serif; --font-head:"Aref Ruqaa", "Noto Naskh Arabic", serif; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif; --font-head:"Noto Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../ar/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="timeline.html" style="white-space:nowrap;">أبرز الأحداث</a><a href="deploy.html" style="white-space:nowrap;">التثبيت</a><a href="plugins/index.html" style="white-space:nowrap;">إضافات مختارة</a><a href="ranking.html" style="white-space:nowrap;">الترتيب</a><a href="voices.html" style="white-space:nowrap;">جدار التعليقات</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">خط اليد</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">عادي</button></span><details class="langpick"><summary>العربية &#9662;</summary><div class="langmenu"><a href="../en/index.html">English</a><a href="../index.html">简体中文</a><a href="../zh-TW/index.html">繁體中文</a><a href="../ja/index.html">日本語</a><a href="../ko/index.html">한국어</a><a href="../th/index.html">ไทย</a><a href="../es/index.html">Español</a><a href="../ar/index.html" style="color:#8f2924;">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:76px;padding-bottom:56px;display:flex;flex-direction:column;gap:36px;">
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <div class="mono muted" style="font-size:13px;letter-spacing:0.14em;">DEEPSEEK HARNESS · التوثيق الكامل للمنظومة</div>
+    <div style="align-self:flex-start;display:flex;flex-direction:column;gap:2px;">
+      <h1 style="font-size:clamp(40px, 8.5vw, 76px);letter-spacing:0.03em;">كل شيء إضافة.</h1>
+      <svg viewBox="0 0 460 16" preserveAspectRatio="none" style="width:min(440px,100%);height:15px;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6,10 C90,4.5 190,12.5 290,7.5 C355,4.5 415,9.5 454,6.8" fill="none" stroke="#8f2924" stroke-width="5" stroke-linecap="round" opacity="0.85"></path>
+      </svg>
+    </div>
+    <div style="font-size:17px;line-height:1.95;max-width:660px;">ستة أيام على انطلاق DeepSeek Harness مفتوح المصدر، ومن الصفر إلى 149,851 star. هنا نوثّق كل خطوة على الخط الزمني: أبرز الأحداث، شروح الإضافات، تحرّكات GitHub، قوائم الترتيب، وأصوات حقيقية من المجتمع حول العالم.</div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px;">
+      <a href="deploy.html" style="background:#151515;color:#f5f1e8;padding:13px 28px;border-radius:225px 15px 255px 25px / 25px 255px 15px 225px;transform:rotate(0.24deg);font-size:17px;">تثبيت سريع &#8594;</a>
+      <a href="deploy.html#guide" style="border:1.7px solid #151515;padding:11px 26px;border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;transform:rotate(-0.14deg);font-size:17px;">دليل الاستخدام</a>
+      <a href="https://www.deepseek.com" target="_blank" rel="noopener" style="border-bottom:1.6px solid #151515;padding-bottom:2px;">موقع DeepSeek الرسمي &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="border-bottom:1.6px solid #151515;padding-bottom:2px;">مستودع GitHub &#8599;</a>
+    </div>
+  </div>
+  <div>
+    <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.9 C80,3.9 160,2.6 240,2.6 C320,2.6 400,5.9 480,5.9 C560,5.9 640,5.3 720,5.3 C800,5.3 880,3.5 960,3.5 C1040,3.5 1120,5.2 1200,5.2" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+    <div class="statgrid"><div style="padding:22px 20px;display:flex;flex-direction:column;gap:6px;"><div class="mono" style="font-size:34px;">149,851</div><div class="muted" style="font-size:14px;">star للمستودع الرسمي على GitHub</div></div><div style="padding:22px 20px;display:flex;flex-direction:column;gap:6px;"><div class="mono" style="font-size:34px;">30</div><div class="muted" style="font-size:14px;">إضافة مفهرسة من المنظومة</div></div><div style="padding:22px 20px;display:flex;flex-direction:column;gap:6px;"><div class="mono" style="font-size:34px;">12</div><div class="muted" style="font-size:14px;">مراجعة معمّقة لإضافات مختارة</div></div><div style="padding:22px 20px;display:flex;flex-direction:column;gap:6px;"><div class="mono" style="font-size:34px;">68</div><div class="muted" style="font-size:14px;">مصدر أوّلي بقراءة وافية</div></div></div>
+    <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:6px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,2.9 C80,2.9 160,3.7 240,3.7 C320,3.7 400,5.2 480,5.2 C560,5.2 640,4.6 720,4.6 C800,4.6 880,3.0 960,3.0 C1040,3.0 1120,4.6 1200,4.6" fill="none" stroke="#151515" stroke-width="1.2" stroke-linecap="round" opacity="0.4" vector-effect="non-scaling-stroke"></path></svg>
+  </div>
+  <div class="mono muted" style="font-size:11px;letter-spacing:0.05em;">بيانات مرصودة فعليًا · حتى 2026-08-18</div>
+</div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">01 / TIMELINE</div><h2 class="stitle">أبرز الأحداث</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">ستة أيام من الإطلاق إلى 149,851 star — الإضافات والتعليقات والبيانات، كلٌّ معلّق على اليوم الذي حدث فيه.</div></div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">DeepSeek يفتح مصدر Harness v0.1 بنسخة معاينة للمطوّرين</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">أصبح المستودع عامًا في الساعة 11:56 UTC، ونشر الحساب الرسمي تغريدة الإعلان في 13:02 UTC: إتاحة المشروع برخصة MIT لمطوّري agent harness حول العالم، مدفوعًا بالإطار الفوقي Cordis، وبفلسفة جوهرية عنوانها «Everything is a Plugin». وصدرت بالتزامن ورقة تصميم Cordis بالتعاون مع جامعة بكين بعنوان «A Programming Paradigm for Spatiotemporal Composability». خلال نحو ساعة واحدة تجاوز المستودع 20 ألف star، ليختصر أرقامًا قياسية كانت تُحسب بـ «الأيام» إلى «دقائق».</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.50deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل تغريدة الإعلان الرسمي<span class="muted"> · </span><span class="mono">19.8k إعجاب / 774 ردًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي عبر واجهة Twitter syndication، جُمع في 2026-08-18 (المادة 038)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">وقت إتاحة المستودع للعموم<span class="muted"> · </span><span class="mono">2026-08-13 11:56 UTC</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقرير pasqualepillitteri.it</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">star في الساعة الأولى<span class="muted"> · </span><span class="mono">تجاوز 20,000 خلال نحو ساعة واحدة؛ و22,000 خلال 1.5 ساعة</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقرير pasqualepillitteri.it؛ وخبر عاجل من KuCoin (منقول عبر المادة 020)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/deepseek_ai/status/2087887408440164663" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">إطلاق النسخة الرسمية V4-Pro في اليوم نفسه، وتحديد 17 أغسطس موعدًا لتعديل أسعار API</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">في يوم إطلاق Harness نفسه صدرت النسخة الرسمية DeepSeek-V4-Pro-0813: سياق يبلغ مليون token، وإخراج يصل إلى 384K، مع دعم Json Output / Tool Calls / Responses API. وتضمّن الإعلان ذاته تمهيدًا لرفع كبير في أسعار API اعتبارًا من 17 أغسطس مع اعتماد تسعير الذروة والوفرة، لتصبح عبارة «جزّار الأسعار لم يعد رخيصًا» موضوعًا موازيًا في الإعلام الصيني ذلك اليوم.</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 20px 225px 20px / 20px 225px 20px 255px; transform:rotate(0.03deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">مواصفات V4-Pro<span class="muted"> · </span><span class="mono">سياق 1M / إخراج أقصى 384K</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقريرا 搜狐 (سوهو) و网易科技 (قسم التقنية في نتييز)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">إشعار مسبق بتعديل الأسعار<span class="muted"> · </span><span class="mono">إخراج V4-Pro في وقت الذروة من 6 يوان إلى 27 يوان لكل مليون token ‏(+350%)، يسري في 8-17</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقريرا 网易 ‏(163.com) و新浪财经 (سينا للاقتصاد) بتاريخ 2026-08-13</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://m.sohu.com/a/1062503683_362225" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-13/detail-inineuqm9880912.d.html" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">صدارة Hacker News بـ 736 نقطة: امتحان اليوم الأول أمام مطوّري الخارج</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">تصدّر المشروع Hacker News يوم الإطلاق (736 نقطة و309 تعليقات). أشاد التقنيون بتصميم التبديل الفوري ودورة حياة الإضافات بأسلوب RAII، وحسم jbellis الأمر بقوله: «آخر مختبر نماذج رئيسي بلا harness من الطرف الأول سدّ الفجوة أخيرًا»؛ بينما تركّزت الانتقادات على بساطة README المفرطة واعتماد Node.js. وفي اليوم نفسه نشرت The New Stack وSynced (机器之心) وغيرهما أولى التغطيات بالإنجليزية والصينية، وأعيد نشر تقرير Synced في 5 منصات على الأقل.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.43deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل HN<span class="muted"> · </span><span class="mono">736 نقطة / 309 تعليقات</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي عبر HN Algolia API، جُمع في 2026-08-18 (المادة 055)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://news.ycombinator.com/item?id=49285244" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://thenewstack.io/deepseek-harness-open-source-plugins/" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.36kr.com/p/3937964598590855" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.13</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">سباق مبكر في المنظومة: إنشاء مكثّف لمشاريع الإضافات والقوائم يوم الإطلاق</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">قائمة المختارات awesome-dsh-plugin وعميل سطح المكتب المجتمعي DSH Desktop أُنشئا كلاهما في يوم فتح المصدر نفسه؛ وبين 11 و14 أغسطس ظهر 20 مستودعًا باسم awesome في سباق لحجز المواقع، بل إن نسخة 0xsline أُنشئت قبل يومين من الإعلان الرسمي (ما يلمّح إلى تعبئة مسبقة لمنظومة اختبار داخلي). الفريق الرسمي فتح Discussions فقط دون Issues، وأولى المنشورات الساخنة («أصدروا عميلًا مستقلًا + CLI مبكرًا» بـ 166 تأييدًا) رسمت خريطة الطلب على الإضافات.</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(0.33deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">سباق حجز اسم awesome<span class="muted"> · </span><span class="mono">20 مستودعًا تحمل أسماؤها awesome+dsh، وتواريخ إنشائها متركزة بين 08-11 و08-14</span></div><div class="muted" style="font-size:12px;line-height:1.6;">بحث عبر GitHub API، جُمع في 2026-08-18 (المادة 016)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">حجم المشاريع المُنشأة في ذلك اليوم لاحقًا<span class="muted"> · </span><span class="mono">‏awesome-dsh-plugin بـ 7,572 star؛ وDSH Desktop بـ 11,626 star (حتى 08-18)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub، جُمع في 2026-08-18 (المادتان 015 و009)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/anywhere-labs/deepseek-harness-desktop" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/0xsline/awesome-deepseek-harness" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">دعم رسمي من Ollama: أمر واحد لتشغيل DSH محليًا</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">في اليوم التالي للإطلاق عند 22:30 UTC أعلنت Ollama رسميًا دعم DeepSeek Harness: يكفي الأمر `ollama launch dsh` لتشغيله محليًا بالكامل، مع إضافة Ollama web search مثبّتة مسبقًا، وإمكانية مراقبة عمل الوكيل في الخلفية عبر trajectory view. انضمام لاعب كبير في المنظومة طوعًا خلال 48 ساعة جعل هذا هو المدخل الرسمي لمسار «تشغيل DSH محليًا وبخصوصية كاملة».</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.46deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل التغريدة<span class="muted"> · </span><span class="mono">1.0k إعجاب / 38 ردًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي عبر واجهة Twitter syndication، جُمع في 2026-08-18 (المادة 041)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/ollama/status/2088392765021528319" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.14</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">يوم كسر الحدود: 92 ألف star خلال 28 ساعة وموجة مراجعات صينية معمّقة</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">تجاوز عدد الـ star ‏92 ألفًا خلال 28 ساعة (وفق التغطيات الإعلامية؛ بينما عنوان فيديو قناة 零度解说 يقول «68 ألف نجمة في يوم واحد من فتح المصدر»). مراجعة QbitAI (量子位) المعمّقة طرحت مقولة «dsh هو أندرويد عصر الوكلاء»، وكشفت أن الإصدار الرسمي يضم 100+ إضافة مدمجة وأن مدخل Plugin Store محجوز سلفًا؛ وتزامنت فيديوهات بالصينية والإنجليزية من 零度解说 وNeuralNine وAI超元域 وغيرها، لينتقل DSH من نقاش المبرمجين إلى جمهور التقنية العام.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">star خلال 28 ساعة<span class="muted"> · </span><span class="mono">&gt;92,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقرير pasqualepillitteri.it</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">star خلال 24 ساعة (المعايير غير موحّدة)<span class="muted"> · </span><span class="mono">68,000(estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">بحسب عنوان فيديو 零度解说 (قناة شرح صينية)، ويختلف عن معيار التقارير 12h≈50k / 28h≈92k؛ وعند اعتماد أحد المعيارين يجب التنويه</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">الإضافات الرسمية المدمجة<span class="muted"> · </span><span class="mono">أكثر من 100 إضافة، مع تخصيص مسبق لـ Plugin Store</span></div><div class="muted" style="font-size:12px;line-height:1.6;">مقال الاختبار العملي من 量子位 (منصة تقنية صينية) (المادة 058)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">مشاهدات 零度解说<span class="muted"> · </span><span class="mono">72,170 مشاهدة (خلال 4 أيام)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي عبر yt-dlp، جُمع في 2026-08-18 (المادة 064)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.qbitai.com/2026/08/472208.html" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.youtube.com/watch?v=5G_afoTB1gs" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">تجاوز 100 ألف star في 48 ساعة: إعلان الرقم القياسي والجدل حول صحته</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">أعلن المدوّن ℏεsam على X: «تجاوز 100 ألف خلال 48 ساعة، أسرع مستودعات GitHub نموًا، أسرع حتى من OpenClaw»، بينما قدّمت Jen Zhu في اليوم نفسه رقم «114 ألفًا في 3 أيام». وفي r/tech_x أشعل منشور بـ 369 تأييدًا جدلًا واسعًا حول صدقية الأرقام: «روبوتات النجوم المزيفة دمّرت GitHub» في مواجهة «مستخدمو GitHub مبرمجون محترفون». تنبيه: لا يوجد توثيق رسمي أو من طرف ثالث موثوق لعبارة «الأسرع في تاريخ GitHub»، والصياغة الدقيقة عند الاقتباس هي «بحسب الإعلام والمجتمع».</div>
+    <div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.40deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">star خلال 48 ساعة<span class="muted"> · </span><span class="mono">100,000+</span></div><div class="muted" style="font-size:12px;line-height:1.6;">منشور ℏεsam ‏(@Hesamation) على X</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">معيار الثلاثة أيام<span class="muted"> · </span><span class="mono">114,000</span></div><div class="muted" style="font-size:12px;line-height:1.6;">منشور Jen Zhu ‏(@jenzhuscott) على X</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">القيمة الدقيقة عند نحو يومين<span class="muted"> · </span><span class="mono">95,386 star / 8,826 fork</span></div><div class="muted" style="font-size:12px;line-height:1.6;">مقال تحليلي من Flowtivity</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل المنشور المثير للجدل<span class="muted"> · </span><span class="mono">369 إعجابًا / 108 تعليقات</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift (لقطة 08-17)، المادة 023</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/jenzhuscott/status/2088737933830521338" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/tech_x/comments/1vpbjvk/100k_github_stars_in_just_2_days_deepseek_harness/" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">«جحر الأرنب» في V4-Pro: وضع Minimal هو نفسه بيئة تدريب RL</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">منشور ساخن في r/DeepSeek ترجم مقالًا مطوّلًا من المجتمع الصيني: خلف API الخاص بـ V4-Pro تختبئ على ما يبدو نسخ متعددة تختلف «بصمات سلسلة تفكيرها»، وأقواها — «النسخة الإلهية» — استُخرجت تحديدًا من وضع Minimal في DSH؛ والدليل الحاسم commit في المستودع الرسمي بتاريخ 10 أغسطس: «fix(preset): align minimal agent with RL composition». الخلاصة الأعلى تأييدًا: «V4 Pro GA مفرط التكيّف مع بيئة DSH minimal»، وهي نقلت مقولة «الـ harness متغيّر حاسم في أداء النموذج» من التجربة إلى مستوى الآلية.</div>
+    <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.20deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل المنشور<span class="muted"> · </span><span class="mono">157 إعجابًا / 23 تعليقًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift (لقطة 08-16)، المادة 031</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">مقارنة درجات الاختبار المعياري<span class="muted"> · </span><span class="mono">Minimal 99/96 vs Standard 91</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تجربة مقارنة مجتمعية داخل المنشور (المادتان 031 و032)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/down_the_rabbit_hole_of_deepseekv4pro0813/" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.15</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">اختراق مجتمعي على مستوى الآلية: dsh-anchored-standard يرفع المعيار من 91 إلى 98/99</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">استنادًا إلى اكتشاف «جحر الأرنب»، بنى المطوّر المجتمعي xiaobright إضافة هجينة: الطلب الأول يعرض على النموذج بيئة تكاد تطابق Minimal لـ «تثبيته» على مسار الاستدلال الذي درّبه عليه RL، ثم تُفتح مجموعة أدوات Standard كاملة — فقفزت درجة المعيار من 91 إلى 98/99، مع تجربة ضبط متغيّرات تُظهر أن tool schema في الطلب الأول هو المتغيّر الحاسم. بعد يومين فقط من فتح المصدر أنجز المجتمع اختراقًا قابلًا للتحقق على مستوى الآلية، لتثبت عمليًا ولأول مرة عوائد انفتاح «Everything is a Plugin».</div>
+    <div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.14deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">درجات الاختبار المعياري لأربع تهيئات<span class="muted"> · </span><span class="mono">Standard 91 / PTC 92 / Minimal 99·96 / Anchored Standard 98·99</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تجربة مقارنة داخل منشور على r/accelerate (المادة 032)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل المنشور<span class="muted"> · </span><span class="mono">47 إعجابًا / 2 تعليق</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift (لقطة 08-17)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">اليوم الرابع: تجاوز 135 ألف star</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">أرقام متقاطعة من مصادر عدة: في اليوم الرابع 135,042 star و13,592 fork. للمقارنة: نموذج R1 من DeepSeek نفسها احتاج وقتها 5.7 أيام ليبلغ 20 ألف star، والرقم القياسي السابق في السرعة الخالصة كان لـ Grok-1 بنحو 1.2 يوم، بينما قطع DSH المسافة نفسها في ساعة ونيّف.</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.32deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">star في اليوم الرابع<span class="muted"> · </span><span class="mono">135,042 star / 13,592 fork (التاريخ: estimated)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقاطع مصادر متعددة في المادة 020؛ وpasqualepillitteri.it: «تجاوز 135 ألفًا في اليوم الرابع»</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">إطار المقارنة<span class="muted"> · </span><span class="mono">استغرق R1 مدة 5.7 أيام ليبلغ 20 ألف star؛ وGrok-1 نحو 1.2 يوم</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقرير pasqualepillitteri.it</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://pasqualepillitteri.it/en/news/11573/deepseek-harness-fastest-github-stars-record" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.16</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">شهادات النماذج الخارجية وأدلة التخزين المؤقت: DSH ليس حكرًا على DeepSeek</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">في r/LocalLLaMA شغّل أحد المستخدمين Qwen 3.8 27b مع DSH عشر ساعات متواصلة ووصف النتيجة بأنها «مذهلة»، مؤكّدًا عمومية مبدأ «النموذج إضافة»؛ وتحوّل منشور «هل معدل إصابة التخزين المؤقت في DSH بهذه الروعة فعلًا؟» إلى معرض أدلة عملية للإضافات؛ وصعد أول موقع دليل إضافات dshplugin.online إلى Show HN. بدأت المنظومة تتحوّل من المشاهدة إلى التحقق القابل للتكرار.</div>
+    <div style="border:1.7px solid #151515; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; transform:rotate(-0.52deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">منشور الاختبار العملي لـ Qwen<span class="muted"> · </span><span class="mono">139 إعجابًا / 46 تعليقًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift، المادة 030</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">سلسلة أسئلة المتابعة حول الـ cache<span class="muted"> · </span><span class="mono">14 إعجابًا / 29 تعليقًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift، المادة 033</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/LocalLLaMA/comments/1vpv12b/qwen_38_27b_with_dshdeepseek_harness_is_amazing/" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vpqkgi/deepseek_harness/" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://dshplugin.online/" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">الإصدار الرسمي v0.1.0-rc.7: لوحة Job Panel تدير Codex وClaude Code</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">أطلق الفريق الرسمي الإصدار الوحيد المرئي خلال فترة الإطلاق (pre-release، الساعة 12:01): يمكن للإضافات تسجيل بطاقات إعداداتها الخاصة، ولوحة Job Panel تدير موحّدةً مهام وكلاء Codex وClaude Code الفرعيين، مع دعم MCP/ACP لمرفقات الصور الدائمة، وإصلاح مشكلات منها تأخر Bash الدائم في وضع minimal. وهكذا تحوّلت فكرة «إدارة harness المنافسين كوكلاء فرعيين» من قراءة مجتمعية إلى ميزة رسمية.</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.01deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">release<span class="muted"> · </span><span class="mono">v0.1.0-rc.7، ‏2026-08-17 12:01، ‏Pre-release (النقاط الأساسية بنصها الأصلي في github.json)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي من صفحة GitHub releases، 2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">سريان أسعار API الجديدة: زيادة تفوق 3 أضعاف في الذروة، والمجتمع يتمنى «التراجع عن التسعير»</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">دخل التعديل المعلن في 13 أغسطس حيّز التنفيذ: إخراج V4-Flash في الذروة من 2 إلى 9 يوانات، وV4-Pro من 6 إلى 27 يوانًا لكل مليون token (+350%)، وارتفاع سعر إصابة التخزين المؤقت بلغ بحسب بعض الحسابات 1100%؛ مع اعتماد تسعير الذروة والوفرة وخصم 50% وقت الوفرة. امتلأت Discussions بمنشورات أمنيات «التراجع عن التسعير» و«هل سيمنحنا Liang العظيم خصمًا؟»، وصار عنوان QbitAI «سامحتُه على رفع الأسعار» تعليقًا معبّرًا عن مزاج الأوساط الصينية.</div>
+    <div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.42deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">سعر الإخراج في وقت الذروة<span class="muted"> · </span><span class="mono">V4-Flash من 2 إلى 9 يوان، وV4-Pro من 6 إلى 27 يوان لكل مليون token ‏(+350%)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقريرا 网易 ‏(163.com) و搜狐 (سوهو)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">معيار أعلى نسبة زيادة<span class="muted"> · </span><span class="mono">1100% (سعر إصابة الـ cache: V4-Flash من 0.02 إلى 0.10 يوان، وV4-Pro من 0.025 إلى 0.30 يوان)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">تقرير 新浪财经 (سينا للاقتصاد) بتاريخ 2026-08-17</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل المجتمع<span class="muted"> · </span><span class="mono">‏Discussions #61 «التراجع عن pricing» بـ 30 إعجابًا، و#32 «هل سيمنح 梁神 (لقب مؤسس DeepSeek) خصمًا؟» بـ 28 إعجابًا</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي من GitHub Discussions، 2026-08-18</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://finance.sina.cn/2026-08-17/detail-ininrkkk0123342.d.html" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.163.com/dy/article/L485A7RT05198NMR.html" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/61" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.17</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg><div style="width:1.6px;flex-grow:1;background:repeating-linear-gradient(to bottom,#151515 0 5px,transparent 5px 11px);opacity:0.5;"></div></div>
+  <div style="flex-grow:1;padding-bottom:46px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">أول «قائمة إضافات لا غنى عنها» من المجتمع وأولى شكاوى الإضافات الرديئة</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">في المجتمع الجديد r/DeepSeekHarness ظهر أول منشور فهرسة منسّق للإضافات والـ skills وMCP؛ وفي اليوم نفسه حذّر منشور ساخط من أن «إضافة رديئة واحدة قد تُسقط نظام الإضافات بأكمله»، لتصبح نقطة الفشل الواحدة أول عيب يُشار إليه بالاسم في العمارة القائمة على الإضافات؛ وصعدت إضافة تحليل التداول dsh-trading إلى Show HN. انتقلت المنظومة من الاحتفال إلى مرحلة «توثيق القوائم وبدء النقد».</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">تفاعل المنشور<span class="muted"> · </span><span class="mono">منشور قائمة «لا غنى عنها» بإعجاب واحد، ومنشور الشكوى بإعجاب واحد (بداية باردة لقسم جديد؛ التفاعل منخفض لكنه أول حالة في فترة الإطلاق، واختير لتفرّد موضوعه)</span></div><div class="muted" style="font-size:12px;line-height:1.6;">أرشيف arctic-shift، المادتان 036 و037</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeekHarness/comments/1vr43w5/must_have_deepseek_harness_plugins/" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://www.reddit.com/r/DeepSeek/comments/1vqxp2d/deepseek_harness_one_broken_plugin_can_take_down/" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/maddogfinance/dsh-trading" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div><div class="tlrow">
+  <div class="mono" style="width:52px;flex-shrink:0;text-align:end;font-size:15px;padding-top:2px;">08.18</div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;gap:6px;padding-top:6px;"><svg viewBox="0 0 12 12" style="width:10px;height:10px;display:block;flex-shrink:0;" xmlns="http://www.w3.org/2000/svg"><path d="M6,1.2 C8.6,1.2 10.8,3.4 10.8,6 C10.8,8.8 8.4,10.8 5.8,10.8 C3.2,10.8 1.2,8.6 1.2,5.9 C1.2,3.3 3.4,1.2 6,1.2 Z" fill="#151515"></path></svg></div>
+  <div style="flex-grow:1;padding-bottom:8px;display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:23px;">150 ألف star في 5 أيام، ومنظومة الـ topic تضم 6,716 مستودعًا</h3>
+    <div style="font-size:15px;line-height:1.9;max-width:660px;">رصد مباشر لمكتبة المصادر عبر GitHub API: ‏149,856 star و15,364 fork و627 watch؛ وسم dsh-plugin يضم 6,716 مستودعًا، يتصدرها open-design بـ 88,304 star، مع دخول مشاريع الشركات الكبرى مثل OpenViking من Volcengine قائمة العشرة الأوائل. وفي وقت لاحق من اليوم نفسه كانت صفحة المستودع تعرض 151.3k. خلال 5 أيام نما DSH من تغريدة إعلان واحدة إلى منظومة إضافات متكاملة تغطي سطح المكتب والذاكرة والرؤية والتصميم.</div>
+    <div style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(0.38deg); padding:16px 20px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;max-width:640px;"><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">المستودع الرسمي<span class="muted"> · </span><span class="mono">149,856 star / 15,364 fork / watch 627</span></div><div class="muted" style="font-size:12px;line-height:1.6;">جمع أوّلي عبر GitHub API، 2026-08-18 (المادتان 020 و001)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">معيار صفحة ذلك اليوم<span class="muted"> · </span><span class="mono">151.3k star / 15.6k fork / 638 watch</span></div><div class="muted" style="font-size:12px;line-height:1.6;">رصد فعلي من صفحة مستودع GitHub، رصد تكميلي في 2026-08-18 (بعد الجمع عبر API)</div></div><div style="display:flex;flex-direction:column;gap:2px;"><div style="font-size:14.5px;line-height:1.7;">حجم المنظومة<span class="muted"> · </span><span class="mono">‏topic dsh-plugin: 6,716 مستودعًا؛ والأول open-design بـ 88,304 star</span></div><div class="muted" style="font-size:12px;line-height:1.6;">GitHub Search API، 2026-08-18 (المادتان 007 و008)</div></div></div><div style="display:flex;gap:14px;flex-wrap:wrap;"><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">النص الأصلي 1 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/topics/dsh-plugin" target="_blank" rel="noopener">النص الأصلي 2 &#8599;</a><a class="mono muted" style="font-size:11px;border-bottom:1px solid #5f5b54;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">النص الأصلي 3 &#8599;</a></div>
+  </div>
+</div></div><div class="wrap" style="padding-top:10px;"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,6.6 C80,6.6 160,6.3 240,6.3 C320,6.3 400,4.2 480,4.2 C560,4.2 640,6.4 720,6.4 C800,6.4 880,2.2 960,2.2 C1040,2.2 1120,3.7 1200,3.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">02 / DEPLOY</div><h2 class="stitle">التثبيت والانطلاق</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">من الصفر إلى التشغيل في أربع خطوات. جميع الأوامر مطابَقة بندًا ببند مع README الرسمي.</div></div><div class="grid2" style="align-items:stretch;"><div><div style="display:flex;gap:22px;padding:20px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">01</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">تثبيت CLI</h3><div class="muted" style="font-size:15px;line-height:1.75;">أمر npx واحد يشغّله مباشرة على macOS وLinux وWindows، ويكفي Node 22.19+.</div></div></div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:6px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.5 C80,3.5 160,3.9 240,3.9 C320,3.9 400,2.5 480,2.5 C560,2.5 640,5.9 720,5.9 C800,5.9 880,0.8 960,0.8 C1040,0.8 1120,3.8 1200,3.8" fill="none" stroke="#151515" stroke-width="1.2" stroke-linecap="round" opacity="0.35" vector-effect="non-scaling-stroke"></path></svg><div style="display:flex;gap:22px;padding:20px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">02</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">ربط النموذج</h3><div class="muted" style="font-size:15px;line-height:1.75;">أدخل مفتاح DeepSeek API، أو اربطه بـ Ollama لتستخدم النموذج الذي تشغّله محليًا.</div></div></div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:6px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.2 C80,3.2 160,5.9 240,5.9 C320,5.9 400,1.9 480,1.9 C560,1.9 640,3.0 720,3.0 C800,3.0 880,1.8 960,1.8 C1040,1.8 1120,4.3 1200,4.3" fill="none" stroke="#151515" stroke-width="1.2" stroke-linecap="round" opacity="0.35" vector-effect="non-scaling-stroke"></path></svg><div style="display:flex;gap:22px;padding:20px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">03</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">التشغيل</h3><div class="muted" style="font-size:15px;line-height:1.75;">ابدأ العمل من الطرفية مباشرة؛ وإن لم تكن من محبي سطر الأوامر، فالأمر dsh web يفتح واجهة المتصفح.</div></div></div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:6px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,4.8 C80,4.8 160,4.3 240,4.3 C320,4.3 400,5.2 480,5.2 C560,5.2 640,1.0 720,1.0 C800,1.0 880,1.5 960,1.5 C1040,1.5 1120,1.7 1200,1.7" fill="none" stroke="#151515" stroke-width="1.2" stroke-linecap="round" opacity="0.35" vector-effect="non-scaling-stroke"></path></svg><div style="display:flex;gap:22px;padding:20px 4px;align-items:baseline;"><div class="mono" style="width:30px;flex-shrink:0;font-size:14px;">04</div><div style="display:flex;flex-direction:column;gap:5px;"><h3 style="font-size:19px;">تثبيت أول إضافة</h3><div class="muted" style="font-size:15px;line-height:1.75;">اختر إضافة من القائمة المختارة وثبّتها — من هنا تبدأ، فكل شيء إضافة.</div></div></div></div><div class="cmd" style="padding:26px 30px;font-size:13px;transform:rotate(0.22deg);">npx @deepseek-ai/dsh web
+pnpm dsh plugin --profile web add dsh-smooth-stream</div></div><div class="grid3" style="margin-top:24px;"><a href="deploy.html#m0" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.56deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:5px;"><div class="mono" style="font-size:13.5px;">تجربة سريعة &#8594;</div><div class="muted" style="font-size:13px;">تشغيل فوري عبر npx دون تثبيت، الخيار الرسمي الأول</div></a><a href="deploy.html#m1" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(0.28deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:5px;"><div class="mono" style="font-size:13.5px;">التثبيت من المصدر &#8594;</div><div class="muted" style="font-size:13px;">استنسخ (clone) المستودع وابنِ بـ pnpm، للتعديل والتجريب بحرية</div></a><a href="deploy.html#m2" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.09deg); padding:18px 22px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:5px;"><div class="mono" style="font-size:13.5px;">دليل الاستخدام الكامل &#8594;</div><div class="muted" style="font-size:13px;">من إعداد النموذج إلى تثبيت الإضافات، كل شيء في مقال واحد</div></a></div></div><div class="wrap" style="padding-top:10px;"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,2.2 C80,2.2 160,4.1 240,4.1 C320,4.1 400,3.8 480,3.8 C560,3.8 640,4.4 720,4.4 C800,4.4 880,3.8 960,3.8 C1040,3.8 1120,6.1 1200,6.1" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">03 / PLUGINS</div><h2 class="stitle">إضافات مختارة</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">12 إضافة تستحق التثبيت، لكل منها أمر التثبيت وطريقة الاستخدام وآراء حقيقية من المستخدمين.</div></div><div class="grid2"><a href="plugins/dsh-anchored-standard.html" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.34deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">dsh-anchored-standard</span>
+    <span class="mono muted" style="font-size:12px;">3,423 star</span>
+  </div>
+  <h3 style="font-size:20px;">توجيه بأبسط بيئة أولًا، ثم كامل الترسانة.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">preset من مرحلتين: يبدأ بوضع بسيط جدًا لخفض الضوضاء، ثم يتحول تلقائيًا في منتصف الجلسة إلى مجموعة الأدوات القياسية الكاملة؛ تجارب المجتمع المقارنة رفعت درجة المعيار من 91 إلى 98. تنبيه: توقّف المؤلف عن التطوير النشط.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-dsh-anchored-standard" style="font-size:12.5px;">dsh_home=&quot;${DSH_HOME:-$HOME/.dsh}&quot;</div>
+    <span data-copy="k-dsh-anchored-standard" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">إعدادات / preset</span>
+    
+  </div>
+</a><a href="plugins/open-design.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.35deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">open-design</span>
+    <span class="mono muted" style="font-size:12px;">88,304 star</span>
+  </div>
+  <h3 style="font-size:20px;">اجعل dsh محرّك التصميم الخاص بك.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">نسخة مفتوحة المصدر من Claude Design، تطبيق سطح مكتب يعمل محليًا أولًا. بعد ربطه بـ dsh تتحول تعديلاتك النصية إلى صور لحظيًا، وهو أكبر مشروع في المنظومة.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-open-design" style="font-size:12.5px;">od mcp install &lt;agent&gt;</div>
+    <span data-copy="k-open-design" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">التصميم / تطبيق سطح مكتب</span>
+    
+  </div>
+</a><a href="plugins/DeepSeek-Reasonix.html" style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.08deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">DeepSeek-Reasonix</span>
+    <span class="mono muted" style="font-size:12px;">34,683 star</span>
+  </div>
+  <h3 style="font-size:20px;">وكيل البرمجة في الطرفية الأصيل من DeepSeek.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">مصمّم حول استقرار التخزين المؤقت للبادئة، ويصلح لتشغيل مهام طويلة دون إشراف. خط npm/TypeScript أصبح legacy، والتطوير الرئيسي انتقل إلى Go.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-DeepSeek-Reasonix" style="font-size:12.5px;">npm i -g reasonix</div>
+    <span data-copy="k-DeepSeek-Reasonix" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">وكيل طرفية / CLI</span>
+    
+  </div>
+</a><a href="plugins/OpenViking.html" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.01deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">OpenViking</span>
+    <span class="mono muted" style="font-size:12px;">28,891 star</span>
+  </div>
+  <h3 style="font-size:20px;">قاعدة بيانات سياق للوكلاء من Volcengine.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">إدارة موحّدة للذاكرة ومعرفة RAG والـ Skills، مع استرجاع ثلاثي الطبقات L0/L1/L2 يوفّر الـ token، وبدعم من شركة كبرى.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-OpenViking" style="font-size:12.5px;">pip install openviking --upgrade</div>
+    <span data-copy="k-OpenViking" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">الذاكرة / التخزين</span>
+    
+  </div>
+</a><a href="plugins/colleague-skill.html" style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.00deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">colleague-skill</span>
+    <span class="mono muted" style="font-size:12px;">23,139 star</span>
+  </div>
+  <h3 style="font-size:20px;">زميلك المستقيل يعود إلى العمل رقميًا.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">يحوّل وثائق زميلك السابق وأسلوبه البرمجي وعباراته المعتادة إلى skill «يعمل مثله تمامًا» — ما يسمّى الحياة الرقمية 1.0، وهو المشروع الأكثر إثارة للنقاش في المنظومة كلها.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-colleague-skill" style="font-size:12.5px;">Install the dot-skill skill for me: https://github.com/titanwings/colleague-skill</div>
+    <span data-copy="k-colleague-skill" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">skill / استنساخ المعرفة</span>
+    
+  </div>
+</a><a href="plugins/EverOS.html" style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.08deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">EverOS</span>
+    <span class="mono muted" style="font-size:12px;">12,081 star</span>
+  </div>
+  <h3 style="font-size:20px;">ذاكرة واحدة تعمل في كل مكان.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">طبقة ذاكرة محمولة: محلية أولًا ومبنية على Markdown، وذاكرة واحدة ذاتية التطور تتشاركها تطبيقات الوكلاء المختلفة.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-EverOS" style="font-size:12.5px;">uv pip install everos</div>
+    <span data-copy="k-EverOS" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">الذاكرة / التخزين</span>
+    
+  </div>
+</a><a href="plugins/awesome-dsh-plugin.html" style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(0.05deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">awesome-dsh-plugin</span>
+    <span class="mono muted" style="font-size:12px;">7,572 star</span>
+  </div>
+  <h3 style="font-size:20px;">البحث عن الإضافات يبدأ من هنا.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">دليل مختارات للإضافات بمراجعة بشرية للشيفرة المصدرية: نحو 800+ إضافة في 20 فئة، مع سوق الإضافات المرافق dshmarket.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-awesome-dsh-plugin" style="font-size:12.5px;">dsh plugin add &lt;插件名&gt;</div>
+    <span data-copy="k-awesome-dsh-plugin" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">أدلة / قوائم</span>
+    
+  </div>
+</a><a href="plugins/dsh-web-ui.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.28deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">dsh-web-ui</span>
+    <span class="mono muted" style="font-size:12px;">4,097 star</span>
+  </div>
+  <h3 style="font-size:20px;">امنح dsh وجهًا.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">حزمة إضافات Web UI متكاملة: لوحة مهام، ومخطط Git، وتحكّم عن بُعد من الهاتف، ومركز سمات — إن أردت واجهة رسومية فثبّت هذه.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-dsh-web-ui" style="font-size:12.5px;">dsh plugin --profile web add @linxin666/dsh-web-ui-all</div>
+    <span data-copy="k-dsh-web-ui" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">UI</span>
+    
+  </div>
+</a><a href="plugins/smooth-stream.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.16deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">smooth-stream</span>
+    <span class="mono muted" style="font-size:12px;">21 star</span>
+  </div>
+  <h3 style="font-size:20px;">إضافة الإخراج المتدفق من المجتمع الصيني.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">ثلاثة مستويات preset قابلة للضبط عبر cordis.patch.yml؛ عدد الـ star ليس كبيرًا، لكن النقاش حولها في الأوساط الصينية واسع.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-smooth-stream" style="font-size:12.5px;">pnpm dsh plugin --profile web add dsh-smooth-stream</div>
+    <span data-copy="k-smooth-stream" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">تجربة الاستخدام / الإخراج</span>
+    <span class="seal" style="font-size:13px;border:1.5px solid #8f2924;padding:1px 10px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">اختيار المحرّرين</span>
+  </div>
+</a><a href="plugins/token-anxiety.html" style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.21deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">token-anxiety</span>
+    <span class="mono muted" style="font-size:12px;">0 star</span>
+  </div>
+  <h3 style="font-size:20px;">قلق التكاليف يُعالَج في مكانه.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">حساب فوري للتكلفة، وأمر Explain يشرح وجهة كل token، مع مزامنة جدول الأسعار بأمر curl واحد.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-token-anxiety" style="font-size:12.5px;">dsh plugin --profile web add dsh-token-anxiety</div>
+    <span data-copy="k-token-anxiety" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">التكلفة / الفوترة</span>
+    <span class="seal" style="font-size:13px;border:1.5px solid #8f2924;padding:1px 10px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">اختيار المحرّرين</span>
+  </div>
+</a><a href="plugins/modlens.html" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.38deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">modlens</span>
+    <span class="mono muted" style="font-size:12px;">2,789 star</span>
+  </div>
+  <h3 style="font-size:20px;">امنح النموذج النصّي البحت عينًا ترى.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">أول إضافة رؤية لـ dsh: ألصق صورة لتحصل مباشرة على أدلة JSON منظّمة، مع تحويل تلقائي عند الفشل عبر 10 محركات.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-modlens" style="font-size:12.5px;">npx -y @deepseek-ai/dsh plugin --profile web add @liustack/modlens@3.18.3</div>
+    <span data-copy="k-modlens" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">الرؤية / تعدد الوسائط</span>
+    <span class="seal" style="font-size:13px;border:1.5px solid #8f2924;padding:1px 10px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">اختيار المحرّرين</span>
+  </div>
+</a><a href="plugins/EchoBird.html" style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.08deg); padding:24px 28px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;">
+    <span class="mono" style="font-size:14.5px;">EchoBird</span>
+    <span class="mono muted" style="font-size:12px;">3,063 star</span>
+  </div>
+  <h3 style="font-size:20px;">مثبّت بنقرة واحدة ومبدّل نماذج.</h3>
+  <div class="muted" style="font-size:14px;line-height:1.8;">إدارة موحّدة لتثبيت وتبديل أدوات CLI مثل Claude Code وCodex وdsh — الخيار الأول لغير المبرمجين.</div>
+  <div style="position:relative;">
+    <div class="cmd" id="k-EchoBird" style="font-size:12.5px;">irm https://echobird.ai/install.ps1 | iex</div>
+    <span data-copy="k-EchoBird" class="copybtn">نسخ</span>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <span class="muted" style="font-size:13px;">أدوات / مثبّت</span>
+    
+  </div>
+</a></div><a href="plugins/index.html" style="border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px; transform:rotate(-0.19deg); padding:16px; background:rgba(250,247,239,0.55); display:flex;justify-content:center;margin-top:24px;font-size:16px;">استعراض كل الإضافات المختارة الـ 12 &#8594;</a></div><div class="wrap" style="padding-top:10px;"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,5.3 C80,5.3 160,4.7 240,4.7 C320,4.7 400,6.2 480,6.2 C560,6.2 640,1.9 720,1.9 C800,1.9 880,3.0 960,3.0 C1040,3.0 1120,5.1 1200,5.1" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">04 / GITHUB</div><h2 class="stitle">رصد GitHub</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">حركة star والإصدارات ونقاشات المجتمع في المستودع الرسمي.</div></div><div class="grid3">
+  <div style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(-0.22deg); padding:24px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:14px;">
+    <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">STAR</div>
+    <svg viewBox="0 0 280 120" style="width:100%;height:auto;" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="10,110 33,97 57,96 80,78 104,67 127,52 151,49 174,47 198,38 221,24 245,15 268,14" fill="none" stroke="#151515" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></polyline>
+    </svg>
+    <div class="mono muted" style="font-size:11px;display:flex;justify-content:space-between;"><span>08.13</span><span>08.18 · 149,856</span></div>
+  </div>
+  <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(-0.23deg); padding:24px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+    <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">RELEASE</div>
+    <div class="mono" style="font-size:22px;">v0.1.0-rc.7</div>
+    
+    <a class="mono" style="font-size:12px;margin-top:auto;" href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener">جميع الـ Releases &#8599;</a>
+  </div>
+  <div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.17deg); padding:24px 26px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:12px;">
+    <div class="mono muted" style="font-size:12px;letter-spacing:0.08em;">DISCUSSION</div>
+    <h3 style="font-size:18px;line-height:1.6;">نقترح إصدار تطبيق عميل مستقل وCLI في وقت مبكر، مع إضافة تدعم vscode!</h3>
+    <a class="mono muted" style="font-size:11px;margin-top:auto;" href="https://github.com/deepseek-ai/deepseek-harness/discussions/172" target="_blank" rel="noopener">50 &#8599;</a>
+  </div>
+</div></div><div class="wrap" style="padding-top:10px;"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,5.2 C80,5.2 160,5.7 240,5.7 C320,5.7 400,5.9 480,5.9 C560,5.9 640,3.0 720,3.0 C800,3.0 880,1.4 960,1.4 C1040,1.4 1120,1.8 1200,1.8" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">05 / RANKING</div><h2 class="stitle">قائمة الترتيب</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">إضافات المنظومة مرتّبة حسب star، بعد استبعاد المشاريع ضعيفة الصلة المتطفّلة على الـ topic. أعداد star مرصودة بتاريخ 2026-08-18.</div></div><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">01</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener">open-design</a>
+    <span class="muted" style="font-size:12px;">التصميم</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.9 C30.0,7.1 70.0,6.9 100.0,7.1" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">88,304</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.1 C80,3.1 160,5.0 240,5.0 C320,5.0 400,2.7 480,2.7 C560,2.7 640,1.7 720,1.7 C800,1.7 880,4.3 960,4.3 C1040,4.3 1120,1.9 1200,1.9" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">02</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">DeepSeek-Reasonix</a>
+    <span class="muted" style="font-size:12px;">وكيل طرفية / CLI</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.4 C11.8,6.6 27.5,7.4 39.3,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">34,683</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,4.7 C80,4.7 160,3.8 240,3.8 C320,3.8 400,3.8 480,3.8 C560,3.8 640,5.5 720,5.5 C800,5.5 880,1.9 960,1.9 C1040,1.9 1120,4.6 1200,4.6" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">03</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">OpenViking</a>
+    <span class="muted" style="font-size:12px;">الذاكرة / التخزين</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.5 C9.8,6.6 22.9,7.5 32.7,6.6" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">28,891</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,2.8 C80,2.8 160,5.5 240,5.5 C320,5.5 400,3.8 480,3.8 C560,3.8 640,6.3 720,6.3 C800,6.3 880,2.1 960,2.1 C1040,2.1 1120,5.0 1200,5.0" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">04</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">colleague-skill</a>
+    <span class="muted" style="font-size:12px;">skill</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.2 C7.9,6.8 18.3,7.2 26.2,6.8" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">23,139</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.7 C80,3.7 160,2.2 240,2.2 C320,2.2 400,2.7 480,2.7 C560,2.7 640,3.8 720,3.8 C800,3.8 880,4.3 960,4.3 C1040,4.3 1120,3.7 1200,3.7" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">05</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/Nagi-ovo/voyager" target="_blank" rel="noopener">voyager</a>
+    <span class="muted" style="font-size:12px;">أدوات / تحسين المتصفح</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.0 C6.7,7.0 15.5,7.0 22.2,7.0" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">19,593</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,0.9 C80,0.9 160,4.0 240,4.0 C320,4.0 400,2.2 480,2.2 C560,2.2 640,1.8 720,1.8 C800,1.8 880,0.9 960,0.9 C1040,0.9 1120,3.4 1200,3.4" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">06</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">archify</a>
+    <span class="muted" style="font-size:12px;">skill</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.4 C4.7,7.5 11.0,6.4 15.7,7.5" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">13,847</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,6.1 C80,6.1 160,6.8 240,6.8 C320,6.8 400,4.6 480,4.6 C560,4.6 640,5.0 720,5.0 C800,5.0 880,3.5 960,3.5 C1040,3.5 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">07</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/EverMind-AI/EverOS" target="_blank" rel="noopener">EverOS</a>
+    <span class="muted" style="font-size:12px;">الذاكرة / التخزين</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,6.7 C4.1,7.2 9.6,6.7 13.7,7.2" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">12,081</div>
+</div><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:5px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,6.0 C80,6.0 160,6.5 240,6.5 C320,6.5 400,5.4 480,5.4 C560,5.4 640,4.8 720,4.8 C800,4.8 880,3.4 960,3.4 C1040,3.4 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.1" stroke-linecap="round" opacity="0.28" vector-effect="non-scaling-stroke"></path></svg><div class="rkrow">
+  <div class="mono rknum" style="font-size:14px;">08</div>
+  <div class="rkname">
+    <a class="mono" style="font-size:14px;overflow-wrap:anywhere;" href="https://github.com/walkinglabs/learn-harness-engineering" target="_blank" rel="noopener">learn-harness-engineering</a>
+    <span class="muted" style="font-size:12px;">دروس تعليمية</span>
+  </div>
+  <div class="rkbar"><svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:13px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M0.6,7.3 C4.0,6.7 9.4,7.3 13.4,6.7" fill="none" stroke="#151515" stroke-width="9" stroke-linecap="round" opacity="0.9"></path></svg></div>
+  <div class="mono rkstar" style="font-size:13px;">11,852</div>
+</div><a href="ranking.html" style="border:1.7px solid #151515; border-radius:225px 25px 255px 35px / 35px 255px 25px 225px; transform:rotate(-0.25deg); padding:16px; background:rgba(250,247,239,0.55); display:flex;justify-content:center;margin-top:24px;font-size:16px;">الترتيب الكامل للإضافات &#8594;</a></div><div class="wrap" style="padding-top:10px;"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,4.5 C80,4.5 160,6.1 240,6.1 C320,6.1 400,6.2 480,6.2 C560,6.2 640,4.4 720,4.4 C800,4.4 880,6.8 960,6.8 C1040,6.8 1120,5.0 1200,5.0" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div><div class="wrap" style="padding-top:24px;padding-bottom:64px;"><div class="sechead"><div style="display:flex;flex-direction:column;gap:10px;"><div class="num">06 / VOICES</div><h2 class="stitle">جدار التعليقات</h2></div><div class="muted" style="font-size:15px;max-width:520px;padding-bottom:6px;">أصوات حقيقية من X وReddit حول DSH وإضافاته، مع رابط النص الأصلي لكل تعليق.</div></div><div class="grid3" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:225px 20px 255px 30px / 30px 255px 20px 225px; transform:rotate(0.31deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@Hesamation · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek Harness is now the fastest growing GitHub repo, passing 100K stars in under 48 hours, even faster than OpenClaw.
+
+very positive community reaction:
+&gt; unusually well designed architecture with tools, session log, agent loop, subagents, all being replaceable plugins
+&gt; UI</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">DeepSeek Harness هو الآن أسرع مستودعات GitHub نموًا، إذ تجاوز 100 ألف star في أقل من 48 ساعة، أسرع حتى من OpenClaw. ردة فعل المجتمع إيجابية جدًا: &gt; عمارة مصممة ببراعة غير معتادة، فالأدوات وسجل الجلسة وحلقة الوكيل والوكلاء الفرعيون كلها إضافات قابلة للاستبدال &gt; الواجهة (النص مقتطع في المصدر)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">2338 إعجاب</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/Hesamation/status/2088766395676848558" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:30px 225px 20px 255px / 255px 20px 225px 30px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:12px 255px 12px 225px / 225px 12px 255px 12px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@eliebakouch · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">amazing release. it&#x27;s a web UI with multiple harnesses inside it, you can spawn claude code and codex agent through their SDK
+
+&quot;deepseek harness&quot; supports different &quot;modes&quot; by default (which are harnesses): code mode with programmatic tool calling (in typescript), bash+edit</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">إصدار مذهل. إنه واجهة ويب تضم عدة harness بداخلها، ويمكنك توليد وكلاء Claude Code وCodex عبر SDK كل منهما. يدعم «DeepSeek Harness» افتراضيًا «أوضاعًا» مختلفة (هي في الحقيقة harness مختلفة): وضع code باستدعاء أدوات برمجي (بـ TypeScript)، وbash+edit (النص مقتطع في المصدر)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1250 إعجاب</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/eliebakouch/status/2087904176357437820" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.44deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">X</span>
+    <span class="mono muted" style="font-size:11px;">@jenzhuscott · 2026-08-13</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">DeepSeek Harness v0.1&#x27;s Cordis-powered design is probably one of the cleanest expressions of agent architecture I&#x27;ve seen: every capability - model adapters, tool registries, session logs, sandboxes, orchestration loops, and even the UI a is a 1st class plugin w typed services,</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">تصميم DeepSeek Harness v0.1 المدفوع بـ Cordis ربما يكون من أنقى تعبيرات عمارة الوكلاء التي رأيتها: كل قدرة — محوّلات النماذج وسجلات الأدوات وسجلات الجلسات والبيئات المعزولة وحلقات التنسيق وحتى الواجهة — إضافة من الدرجة الأولى بخدمات منمّطة الأنواع، (النص مقتطع في المصدر)</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">386 إعجاب</span>
+    <a class="mono muted" style="font-size:11px;" href="https://x.com/jenzhuscott/status/2087895376594694481" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/stealthispost · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">**Anchored Standard** (xiaobright/dsh-anchored-standard) does a clever hybrid: 1. First model request: presents V4 Pro with essentially the same environment as Minimal... 2. As soon as it makes its first real tool call/reply, it unlocks the full Standard toolset... The author found that the tool schema on that first request appears to be the decisive variable.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">يقوم Anchored Standard ‏(xiaobright/dsh-anchored-standard) بمزيج ذكي: 1. في أول طلب للنموذج يعرض على V4 Pro بيئة مطابقة تقريبًا لوضع Minimal... 2. وبمجرد أول استدعاء أداة أو رد حقيقي، يفتح مجموعة أدوات Standard كاملة... ووجد المؤلف أن tool schema في ذلك الطلب الأول يبدو المتغيّر الحاسم.</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">47 تأييد</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/for4f · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">the anchored standard result is the one that got me. 98/99 with the full toolset handed back after the first call kills the &#x27;fewer tools = fewer mistakes&#x27; explanation, which was the obvious alternative. so it really does come down to what the model sees at init. kinda fits the RL story though. train a model inside one specific scaffold and it&#x27;ll behave best inside that scaffold, first message included.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">نتيجة anchored standard هي التي أدهشتني فعلًا. تحقيق 98/99 مع إعادة مجموعة الأدوات كاملة بعد الاستدعاء الأول يقضي على تفسير «أدوات أقل = أخطاء أقل» الذي كان البديل البديهي. إذن المسألة فعلًا في ما يراه النموذج عند التهيئة. وهذا ينسجم مع منطق RL: درِّب نموذجًا داخل سقالة محددة وسيقدّم أفضل أداء داخل تلك السقالة، بما في ذلك الرسالة الأولى.</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">4 تأييد</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.45deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/somerussianbear · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I saw the dsh-anchored-standard plugin yesterday, the popularity of this thing and what it promised, and decided to give it a try on porting the approach to a Pi extension, cause I really like that harness and wouldn&#x27;t like to have a harness just for DeepSeek. It works, I managed to replicate the whole thing. All thinking uses &quot;We ...&quot;, as flagged by xiaobright as being the trace of a superior version of DeepSeek v4 Pro.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">رأيت إضافة dsh-anchored-standard أمس، ومع شعبيتها وما تعِد به قررت تجربة نقل الفكرة إلى امتداد لـ Pi، لأنني أحب ذلك الـ harness كثيرًا ولا أريد harness خاصًا بـ DeepSeek وحده. الطريقة تعمل، ونجحت في استنساخ الأمر بالكامل. كل التفكير يبدأ بـ «We ...» — وهو ما وسمه xiaobright بوصفه أثر نسخة متفوّقة من DeepSeek v4 Pro.</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">9 تأييد</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">النص الأصلي &#8599;</a>
+  </div>
+</div></div><a href="voices.html" style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(-0.36deg); padding:16px; background:rgba(250,247,239,0.55); display:flex;justify-content:center;margin-top:24px;font-size:16px;">جدار التعليقات &#8594;</a></div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../en/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../zh-TW/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../ja/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../ko/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../th/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../es/index.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../ar/index.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · مرصد DSH · من إنتاج ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">موقع DeepSeek الرسمي &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>بيانات مرصودة فعليًا · حتى 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="تم النسخ";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

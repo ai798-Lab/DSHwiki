@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="th" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dsh-anchored-standard · DSH Wiki</title>
+<meta name="description" content="DeepSeek Harness เปิดซอร์สได้ 6 วัน จาก 0 พุ่งถึง 149,851 star ที่นี่บันทึกทุกก้าวของมันไว้บนไทม์ไลน์: เหตุการณ์สำคัญ คู่มือปลั๊กอิน ความเคลื่อนไหวบน ">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/dshwiki-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/dshwiki-mark-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/dshwiki-mark-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;600&family=Noto+Sans+Thai:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script>try{var m=localStorage.getItem("dshwiki-font");if(m)document.documentElement.dataset.font=m;}catch(e){}</script>
+<style>
+  * { box-sizing: border-box; }
+  :root { --font-body:"Itim", "Mali", "Thonburi", cursive; --font-head:"Itim", "Mali", "Thonburi", cursive; }
+  /* 易读模式:换成系统无衬线体,行高略收,字号略降 */
+  html[data-font="clean"] { --font-body:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; --font-head:"Noto Sans Thai", "Sukhumvit Set", Thonburi, sans-serif; }
+  body { margin:0; background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; font-family:var(--font-body);
+         color:#151515; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.8; }
+  html[data-font="clean"] body { font-size:15.5px; line-height:1.75; }
+  h1,h2,h3 { font-family:var(--font-head); font-weight:400; margin:0; line-height:1.25; }
+  html[data-font="clean"] h1, html[data-font="clean"] h2, html[data-font="clean"] h3 { font-weight:600; }
+  .topbar { position:sticky; top:0; z-index:40;
+             background:#f5f1e8 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0.05 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>") repeat; }
+  .langpick { position:relative; }
+  .langpick > summary { list-style:none; cursor:pointer; border:1.5px solid #151515;
+                         padding:3px 13px; border-radius:255px 12px 225px 12px / 12px 225px 12px 255px; font-size:14px;
+                         font-family:var(--font-body); white-space:nowrap; }
+  .langpick > summary::-webkit-details-marker { display:none; }
+  .langmenu { position:absolute; inset-inline-end:0; top:calc(100% + 8px); z-index:50;
+               background:#f5f1e8; border:1.7px solid #151515; border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;
+               padding:10px 12px; display:flex; flex-direction:column; gap:3px; min-width:158px; }
+  .langmenu a { padding:3px 8px; white-space:nowrap; font-size:16px; }
+  .fsw { display:inline-flex; gap:6px; }
+  .fsw button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                 background:transparent; border:1.5px solid #151515; padding:3px 12px; }
+  .fsw button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  .copybtn { position:absolute; inset-inline-end:8px; inset-block-start:8px; font-family:var(--font-body);
+              font-size:13px; padding:3px 10px; cursor:pointer; background:#f5f1e8; color:#151515;
+              border:1.4px solid #f5f1e8; border-radius:255px 10px 225px 10px / 10px 225px 10px 255px; opacity:0.82; }
+  .copybtn:hover { opacity:1; }
+  .ostabs { display:flex; gap:8px; flex-wrap:wrap; }
+  .ostabs button { font-family:var(--font-body); font-size:14px; color:#151515; cursor:pointer;
+                    background:transparent; border:1.5px solid #151515; padding:3px 13px;
+                    border-radius:22px 225px 12px 255px / 255px 12px 225px 22px; }
+  .ostabs button[aria-pressed="true"] { background:#151515; color:#f5f1e8; }
+  a { color:#151515; text-decoration:none; }
+  a:hover { color:#8f2924; }
+  ::selection { background:#151515; color:#f5f1e8; }
+  .mono { font-family:'IBM Plex Mono', monospace; }
+  .wrap { max-width:1200px; margin:0 auto; padding:0 32px; }
+  .cmd { font-family:'IBM Plex Mono', monospace; font-size:13px; background:#151515; color:#f5f1e8;
+          padding:12px 16px; border-radius:35px 225px 25px 255px / 255px 25px 225px 35px; white-space:pre-wrap;
+          overflow-wrap:anywhere; line-height:1.7; direction:ltr; text-align:left; }
+  .muted { color:#5f5b54; }
+  .seal { color:#8f2924; }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  /* grid 子项默认 min-width:auto,内含长命令时会撑破容器导致整页横向溢出 */
+  .grid2 > *, .grid3 > * { min-width:0; }
+  .statgrid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .tlrow { display:flex; gap:26px; }
+  .tlrow > * { min-width:0; }
+  .rkrow { display:flex; align-items:center; gap:18px; padding:13px 0; }
+  .rknum { width:32px; flex-shrink:0; }
+  .rkname { width:280px; flex-shrink:0; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .rkbar { flex-grow:1; min-width:60px; }
+  .rkstar { width:82px; flex-shrink:0; text-align:end; }
+  @media (max-width: 700px) {
+    .rkname { width:auto; flex:1 1 auto; }
+    .rkbar { display:none; }
+    .rkrow { gap:12px; }
+  }
+  .sechead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+              flex-wrap:wrap; margin:0 0 40px 0; }
+  .num { font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; color:#5f5b54; }
+  .stitle { font-size:clamp(27px, 6vw, 40px); }
+  @media (max-width: 900px) {
+    body { font-size:16px; }
+    .grid2, .grid3 { grid-template-columns:1fr; }
+    .statgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .wrap { padding:0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tlrow { gap:14px; }
+    .sechead { margin-bottom:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap" style="padding-top:14px;padding-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="../../th/index.html" style="display:flex;align-items:center;gap:13px;">
+      <img src="../../assets/brand/dshwiki-mark.svg" alt="DSH Wiki" style="width:44px;height:44px;display:block;flex-shrink:0;">
+      <span style="font-size:27px;letter-spacing:0.04em;font-family:var(--font-head);">DSH Wiki</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:24px;font-size:18px;flex-wrap:wrap;"><a href="../timeline.html" style="white-space:nowrap;">ไทม์ไลน์</a><a href="../deploy.html" style="white-space:nowrap;">ติดตั้ง</a><a href="../plugins/index.html" style="white-space:nowrap;">ปลั๊กอินคัดสรร</a><a href="../ranking.html" style="white-space:nowrap;">อันดับ</a><a href="../voices.html" style="white-space:nowrap;">เสียงจากชุมชน</a><span class="fsw" role="group"><button type="button" data-font="hand" aria-pressed="true" style="border-radius:15px 255px 15px 225px / 225px 15px 255px 15px;">ลายมือ</button><button type="button" data-font="clean" aria-pressed="false" style="border-radius:30px 225px 20px 255px / 255px 20px 225px 30px;">มาตรฐาน</button></span><details class="langpick"><summary>ไทย &#9662;</summary><div class="langmenu"><a href="../../en/plugins/dsh-anchored-standard.html">English</a><a href="../../plugins/dsh-anchored-standard.html">简体中文</a><a href="../../zh-TW/plugins/dsh-anchored-standard.html">繁體中文</a><a href="../../ja/plugins/dsh-anchored-standard.html">日本語</a><a href="../../ko/plugins/dsh-anchored-standard.html">한국어</a><a href="../../th/plugins/dsh-anchored-standard.html" style="color:#8f2924;">ไทย</a><a href="../../es/plugins/dsh-anchored-standard.html">Español</a><a href="../../ar/plugins/dsh-anchored-standard.html">العربية</a></div></details></div>
+  </div>
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.3 C80,1.3 160,4.2 240,4.2 C320,4.2 400,3.2 480,3.2 C560,3.2 640,1.5 720,1.5 C800,1.5 880,0.9 960,0.9 C1040,0.9 1120,2.7 1200,2.7" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg>
+</div>
+
+<div class="wrap" style="padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:18px;">
+  <a class="mono muted" style="font-size:12px;" href="../plugins/index.html">&#8592; ปลั๊กอินคัดสรร</a>
+  <h1 class="mono" style="font-size:34px;font-family:'IBM Plex Mono', monospace;">dsh-anchored-standard</h1>
+  <h2 style="font-size:28px;">เริ่มด้วยโหมดมินิมอล แล้วปล่อยของเต็มกำลัง</h2>
+  <div style="font-size:16px;line-height:1.95;max-width:680px;">preset สองจังหวะ: ช่วงแรกใช้โหมดมินิมอลเพื่อกดสัญญาณรบกวน แล้วสลับไปใช้ชุดเครื่องมือมาตรฐานเต็มรูปแบบกลางทาง การทดลองเทียบผลของชุมชนดันคะแนน benchmark จาก 91 ขึ้นเป็น 98 หมายเหตุ: ผู้เขียนหยุดพัฒนาต่อแล้ว</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+    <span class="mono" style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.20deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:12.5px;">3,423 star</span>
+    
+    <span style="border:1.7px solid #151515; border-radius:25px 255px 25px 225px / 225px 25px 255px 25px; transform:rotate(0.03deg); padding:7px 15px; background:rgba(250,247,239,0.55); font-size:14px;">ตั้งค่า / preset</span>
+    <a class="mono" style="font-size:13px;border-bottom:1.6px solid #151515;padding-bottom:2px;" href="https://github.com/xiaobright/dsh-anchored-standard" target="_blank" rel="noopener">GitHub &#8599;</a>
+  </div>
+</div>
+<div class="wrap"><svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:8px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,1.5 C80,1.5 160,1.6 240,1.6 C320,1.6 400,2.6 480,2.6 C560,2.6 640,1.9 720,1.9 C800,1.9 880,4.0 960,4.0 C1040,4.0 1120,1.4 1200,1.4" fill="none" stroke="#151515" stroke-width="1.8" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"></path></svg></div>
+<div class="wrap" style="padding-top:34px;padding-bottom:56px;display:flex;flex-direction:column;gap:44px;">
+  <div class="grid2" style="align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">การติดตั้ง</h3>
+      <div style="border:1.7px solid #151515; border-radius:225px 15px 255px 25px / 25px 255px 15px 225px; transform:rotate(0.05deg); padding:14px 20px; background:rgba(250,247,239,0.55); "><div style="display:flex;flex-direction:column;gap:3px;padding:9px 0;"><div class="mono muted" style="font-size:11px;letter-spacing:0.05em;"></div><div style="font-size:14.5px;line-height:1.8;">DeepSeek Harness 0.1.0-rc.5; Node.js 24 หมายเหตุ: README ระบุว่าหยุดพัฒนาเชิงรุกแล้วเพราะต้นทุนสูงขึ้น เหลือเพียงการดูแลรักษา จุดที่ต้องระวัง: การเรียกทูลที่ล้มเหลวก็ยังทำให้เซสชัน「เลื่อนขั้น」(เพราะอีเวนต์ durable tool/call เกิดขึ้นไปแล้ว); ตอนเลื่อนขั้นและตอนปลดล็อก dev_tool_search ความต่อเนื่องของ prefix cache จะขาด; สิทธิ์ของ preset เทียบเท่าการเข้าถึง shell; เมื่อไม่มีทูล bootstrap จะถอยไปใช้ไดเรกทอรีแบบเต็มพร้อมเตือนเท่านั้น</div></div></div><div class="muted" style="font-size:14.5px;line-height:1.8;">preset: คัดลอกโฟลเดอร์ preset ไปยังไดเรกทอรี preset ของ dsh รีสตาร์ท dsh ใหม่ทั้งหมด แล้วเลือกใช้ในเซสชัน</div><div class="ostabs"><button type="button" data-os="all" aria-pressed="true">ทั้งหมด</button><button type="button" data-os="macOS" aria-pressed="false">macOS</button><button type="button" data-os="Linux" aria-pressed="false">Linux</button><button type="button" data-os="Windows" aria-pressed="false">Windows</button></div><div class="insblocks" style="display:flex;flex-direction:column;gap:18px;"><div class="insblock" data-os="macOS Linux" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Linux/macOS (รันในไดเรกทอรีรากของ repo)</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">macOS</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:10px 255px 10px 225px / 225px 10px 255px 10px;white-space:nowrap;">Linux</span></div><div style="position:relative;"><div class="cmd" id="c-dsh-anchored-standard-0">dsh_home=&quot;${DSH_HOME:-$HOME/.dsh}&quot;
+mkdir -p &quot;$dsh_home/.agent-presets&quot;
+test ! -e &quot;$dsh_home/.agent-presets/anchored-standard&quot;
+cp -R preset &quot;$dsh_home/.agent-presets/anchored-standard&quot;</div><button type="button" data-copy="c-dsh-anchored-standard-0" class="copybtn">คัดลอก</button></div></div><div class="insblock" data-os="Windows" style="display:flex;flex-direction:column;gap:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;line-height:1.6;">Windows PowerShell</span><span class="mono" style="font-size:11px;border:1.3px solid #5f5b54;color:#5f5b54;padding:1px 8px;border-radius:255px 10px 225px 10px / 10px 225px 10px 255px;white-space:nowrap;">Windows</span></div><div style="position:relative;"><div class="cmd" id="c-dsh-anchored-standard-1">$target = Join-Path $env:USERPROFILE &#x27;.dsh\.agent-presets\anchored-standard&#x27;
+if (Test-Path -LiteralPath $target) { throw &quot;Preset already exists: $target&quot; }
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $target) | Out-Null
+Copy-Item -Recurse -LiteralPath &#x27;.\preset&#x27; -Destination $target</div><button type="button" data-copy="c-dsh-anchored-standard-1" class="copybtn">คัดลอก</button></div></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <h3 style="font-size:21px;">คู่มือใช้งานฉบับเต็ม</h3>
+      <div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">01</span><span style="font-size:15px;line-height:1.8;">โคลนรีโปมาไว้ที่เครื่อง</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">02</span><span style="font-size:15px;line-height:1.8;">คัดลอกโฟลเดอร์ preset ไปที่ ~/.dsh/.agent-presets/anchored-standard (ดูคำสั่งติดตั้ง)</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">03</span><span style="font-size:15px;line-height:1.8;">รีสตาร์ท DeepSeek Harness ใหม่ทั้งหมด</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">04</span><span style="font-size:15px;line-height:1.8;">สร้างเซสชันเปล่าใหม่ แล้วเลือก preset「Anchored Standard (experimental)」</span></div><div style="display:flex;gap:16px;align-items:baseline;padding:11px 0;"><span class="mono" style="width:26px;flex-shrink:0;font-size:13px;">05</span><span style="font-size:15px;line-height:1.8;">ข้อควรระวัง: อย่าสลับเซสชันจาก preset อื่นมาใช้ปนกัน</span></div>
+    </div>
+  </div>
+  
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <h3 style="font-size:21px;">คุณสมบัติ</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">preset เจ็ดแบบ (base / zero-anchored / whoami / prefab / eternal-minimal / wire-think / combo) ครอบคลุมกลยุทธ์การยึดโยง (anchoring) ที่ต่างกัน</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">เปิดเผยทูลสองระยะ: เริ่มจากคู่ทูลขั้นต่ำแบบ bootstrap → เลื่อนขั้นไปเป็นไดเรกทอรีทูลแบบอยู่ถาวร สถานะการเลื่อนขั้นกู้คืนข้ามเซสชันได้ผ่าน durable events</span></div><div style="display:flex;gap:12px;align-items:baseline;"><span class="seal">·</span><span style="font-size:15px;line-height:1.8;">ปลั๊กอิน context-gate ควบคุมการฉีดคอนเท็กซ์แบบรวมศูนย์</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <h3 style="font-size:21px;">กำแพงความเห็น</h3>
+    <div class="grid2" style="align-items:start;"><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(-0.28deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:225px 12px 255px 22px / 22px 255px 12px 225px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/stealthispost · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">**Anchored Standard** (xiaobright/dsh-anchored-standard) does a clever hybrid: 1. First model request: presents V4 Pro with essentially the same environment as Minimal... 2. As soon as it makes its first real tool call/reply, it unlocks the full Standard toolset... The author found that the tool schema on that first request appears to be the decisive variable.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">Anchored Standard (xiaobright/dsh-anchored-standard) ทำลูกผสมที่ฉลาดมาก: 1. คำขอแรกไปยังโมเดล: แสดงสภาพแวดล้อมที่แทบเหมือนกับ Minimal ให้ V4 Pro เห็น… 2. ทันทีที่มันเรียกใช้เครื่องมือหรือตอบกลับจริงครั้งแรก มันก็ปลดล็อกชุดเครื่องมือ Standard เต็มรูปแบบ… ผู้เขียนพบว่า schema ของเครื่องมือในคำขอรอบแรกดูจะเป็นตัวแปรชี้ขาด</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">47 อัปโหวต</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/deepseek_harness_being_opensource_is_allowing_the/" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 25px 225px 25px / 25px 225px 25px 255px; transform:rotate(-0.05deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:22px 225px 12px 255px / 255px 12px 225px 22px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/for4f · 2026-08-15</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">the anchored standard result is the one that got me. 98/99 with the full toolset handed back after the first call kills the &#x27;fewer tools = fewer mistakes&#x27; explanation, which was the obvious alternative. so it really does come down to what the model sees at init. kinda fits the RL story though. train a model inside one specific scaffold and it&#x27;ll behave best inside that scaffold, first message included.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">ผลของ anchored standard คืออันที่โดนใจผมที่สุด ได้ 98/99 ทั้งที่คืนชุดเครื่องมือเต็มให้หลังการเรียกครั้งแรก มันหักล้างคำอธิบายแบบ “เครื่องมือน้อยลง = ผิดพลาดน้อยลง” ซึ่งเป็นคำอธิบายทางเลือกที่ชัดที่สุด สรุปแล้วมันขึ้นอยู่กับว่าโมเดลเห็นอะไรตอนเริ่มต้นจริง ๆ ซึ่งก็เข้ากับเรื่อง RL อยู่นะ ฝึกโมเดลในโครงนั่งร้านแบบไหน มันก็จะทำงานได้ดีที่สุดในโครงนั่งร้านแบบนั้น รวมถึงข้อความแรกด้วย</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">4 อัปโหวต</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1votndx/comment/p3sne73/" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:255px 15px 225px 15px / 15px 225px 15px 255px; transform:rotate(0.45deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/somerussianbear · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">I saw the dsh-anchored-standard plugin yesterday, the popularity of this thing and what it promised, and decided to give it a try on porting the approach to a Pi extension, cause I really like that harness and wouldn&#x27;t like to have a harness just for DeepSeek. It works, I managed to replicate the whole thing. All thinking uses &quot;We ...&quot;, as flagged by xiaobright as being the trace of a superior version of DeepSeek v4 Pro.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">เมื่อวานผมเห็นปลั๊กอิน dsh-anchored-standard ดูจากกระแสและสิ่งที่มันสัญญาไว้ เลยตัดสินใจลองพอร์ตแนวทางนี้ไปเป็นส่วนขยายของ Pi เพราะผมชอบ harness ตัวนั้นมาก และไม่อยากมี harness ไว้ใช้กับ DeepSeek อย่างเดียว มันได้ผลจริง ผมทำซ้ำได้ทั้งกระบวนการ การคิดทั้งหมดขึ้นต้นด้วย “We ...” ตรงตามที่ xiaobright ชี้ว่าเป็นร่องรอยของ DeepSeek v4 Pro เวอร์ชันที่เหนือกว่า</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">9 อัปโหวต</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/about_the_godmode_released_by_dshanchoredstandard/" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:20px 255px 20px 225px / 225px 20px 255px 20px; transform:rotate(0.33deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/ZveirX · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">It&#x27;s a gacha with the model as it is overfit to it. I have seen Bilibili experiments with it, minimal prompt, no system prompt, and even in minimal it often drops the &quot;let me&quot;. There is just so many vocabulary the model has been trained on that it&#x27;s inevitable that at times it begins to output distinctive patterns not akin to its original chain of thought—that&#x27;s Entropy.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">มันคือการสุ่มกาชากับโมเดลที่โอเวอร์ฟิตกับมันอยู่แล้ว ผมเคยเห็นการทดลองบน Bilibili ทั้งพรอมป์แบบมินิมอลและแบบไม่มี system prompt แม้แต่ในโหมด minimal มันก็มักจะทิ้งคำว่า “let me” ไป โมเดลถูกฝึกด้วยคลังคำมหาศาลจนเลี่ยงไม่ได้ที่บางครั้งมันจะเริ่มพ่นรูปแบบเฉพาะตัวที่ไม่เหมือนสายความคิดดั้งเดิมของมัน — นั่นแหละคือเอนโทรปี</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1 อัปโหวต</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/DeepSeek/comments/1vpwgqy/comment/p411oj1/" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div><div style="border:1.7px solid #151515; border-radius:25px 225px 15px 255px / 255px 15px 225px 25px; transform:rotate(-0.20deg); padding:20px 24px; background:rgba(250,247,239,0.55); display:flex;flex-direction:column;gap:11px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono" style="font-size:11px;letter-spacing:0.06em;border:1.5px solid #151515;padding:3px 11px;border-radius:255px 12px 225px 12px / 12px 225px 12px 255px;">Reddit</span>
+    <span class="mono muted" style="font-size:11px;">u/PolychromeMan · 2026-08-16</span>
+  </div>
+  <div style="font-size:15px;line-height:1.8;direction:ltr;text-align:start;">Awesome. To be honest, I had to get ChatGpt to give me an explainer on this, but now that I have vague idea of what is discussed here...very interesting. A lot of my enthusiasm for AI development involves how the open-source community can use it, as opposed to more sealed off products released by frontier developers, so it&#x27;s neat to see interesting potential that is more open-source friendly.</div>
+  <div class="muted" style="font-size:14px;line-height:1.75;">เยี่ยมมาก บอกตามตรงว่าผมต้องให้ ChatGpt อธิบายเรื่องนี้ให้ฟังก่อน แต่พอเริ่มพอเข้าใจคร่าว ๆ ว่าที่นี่กำลังคุยอะไรกัน…ก็น่าสนใจมาก ความตื่นเต้นของผมต่อการพัฒนา AI ส่วนใหญ่อยู่ที่ว่าชุมชนโอเพนซอร์สจะเอามันไปใช้ได้อย่างไร ไม่ใช่ผลิตภัณฑ์ที่ปิดตายจากผู้พัฒนาแนวหน้า เลยรู้สึกดีที่ได้เห็นศักยภาพน่าสนใจที่เป็นมิตรกับโอเพนซอร์สมากกว่า</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <span class="mono muted" style="font-size:11px;">1 อัปโหวต</span>
+    <a class="mono muted" style="font-size:11px;" href="https://www.reddit.com/r/accelerate/comments/1vpcvce/comment/p415ekt/" target="_blank" rel="noopener">ต้นฉบับ &#8599;</a>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<div style="margin-top:24px;">
+  <svg viewBox="0 0 1200 8" preserveAspectRatio="none" style="width:100%;height:7px;display:block;" xmlns="http://www.w3.org/2000/svg"><path d="M2,3.4 C80,3.4 160,5.4 240,5.4 C320,5.4 400,2.8 480,2.8 C560,2.8 640,3.4 720,3.4 C800,3.4 880,7.0 960,7.0 C1040,7.0 1120,7.0 1200,7.0" fill="none" stroke="#151515" stroke-width="1.5" stroke-linecap="round" opacity="0.5" vector-effect="non-scaling-stroke"></path></svg>
+  <div class="wrap" style="padding-top:22px;padding-bottom:16px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:15px;"><a href="../../en/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">English</a><a href="../../plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">简体中文</a><a href="../../zh-TW/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">繁體中文</a><a href="../../ja/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">日本語</a><a href="../../ko/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">한국어</a><a href="../../th/plugins/dsh-anchored-standard.html" style="border-bottom:1.6px solid #8f2924;color:#8f2924;padding-bottom:1px;white-space:nowrap;">ไทย</a><a href="../../es/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">Español</a><a href="../../ar/plugins/dsh-anchored-standard.html" style="color:#5f5b54;padding-bottom:1px;white-space:nowrap;">العربية</a></div>
+  <div class="wrap mono muted" style="padding-bottom:30px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:0.05em;">
+    <div>DSH Wiki · ศูนย์ข่าวกรอง DSH · ผลิตโดย ai798 Lab</div>
+    <div style="display:flex;gap:18px;">
+      <a href="https://www.deepseek.com" class="muted">เว็บไซต์ทางการ DeepSeek &#8599;</a>
+      <a href="https://github.com/deepseek-ai/deepseek-harness" class="muted">GitHub &#8599;</a>
+    </div>
+    <div>ข้อมูลเก็บจริง · ณ วันที่ 2026-08-18</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  function apply(m){
+    root.dataset.font=m;
+    try{localStorage.setItem("dshwiki-font",m);}catch(e){}
+    document.querySelectorAll(".fsw button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.dataset.font===m ? "true" : "false");
+    });
+  }
+  apply(root.dataset.font||"hand");
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest?ev.target.closest(".fsw button"):null;
+    if(b){apply(b.dataset.font);return;}
+    var o=ev.target.closest?ev.target.closest(".ostabs button"):null;
+    if(o){
+      var wrap=o.closest(".ostabs").parentNode, want=o.dataset.os;
+      wrap.querySelectorAll(".ostabs button").forEach(function(x){
+        x.setAttribute("aria-pressed", x===o ? "true" : "false");
+      });
+      wrap.querySelectorAll(".insblock").forEach(function(bl){
+        var tags=(bl.dataset.os||"").split(" ").filter(Boolean);
+        bl.style.display=(want==="all"||tags.length===0||tags.indexOf(want)>=0)?"flex":"none";
+      });
+      return;
+    }
+    var c=ev.target.closest?ev.target.closest("[data-copy]"):null;
+    if(c){
+      ev.preventDefault(); ev.stopPropagation();
+      var code=document.getElementById(c.dataset.copy);
+      if(!code)return;
+      var text=code.innerText, done=function(){
+        var old=c.textContent; c.textContent="คัดลอกแล้ว";
+        setTimeout(function(){c.textContent=old;},1400);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,function(){});
+      }else{
+        var t=document.createElement("textarea");t.value=text;document.body.appendChild(t);
+        t.select();try{document.execCommand("copy");done();}catch(e){}document.body.removeChild(t);
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
